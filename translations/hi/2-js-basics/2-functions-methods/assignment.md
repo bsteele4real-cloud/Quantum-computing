@@ -1,0 +1,73 @@
+# Functions के साथ मज़ा
+
+## निर्देश
+
+इस असाइनमेंट में, आप JavaScript functions, parameters, default values, और return statements के बारे में आपने जो सीखा है उसे मजबूत करने के लिए विभिन्न प्रकार के functions बनाने का अभ्यास करेंगे।
+
+`functions-practice.js` नाम की एक JavaScript फ़ाइल बनाएँ और निम्नलिखित functions को लागू करें:
+
+### भाग 1: बुनियादी Functions
+1. **`sayHello` नाम का एक function बनाएँ** जो कोई parameter न ले और बस "Hello!" को console में लॉग करे।
+
+2. **`introduceYourself` नाम का एक function बनाएँ** जो एक `name` parameter ले और console में "Hi, my name is [name]" जैसा संदेश लॉग करे।
+
+### भाग 2: Default Parameters के साथ Functions
+3. **`greetPerson` नाम का एक function बनाएँ** जो दो parameters ले: `name` (आवश्यक) और `greeting` (वैकल्पिक, डिफ़ॉल्ट "Hello" है)। यह function console में "[greeting], [name]!" जैसा संदेश लॉग करे।
+
+### भाग 3: Values Return करने वाले Functions
+4. **`addNumbers` नाम का एक function बनाएँ** जो दो parameters (`num1` और `num2`) ले और उनका योग वापस करे।
+
+5. **`createFullName` नाम का एक function बनाएँ** जो `firstName` और `lastName` parameters ले और पूर्ण नाम एक ही string में वापस करे।
+
+### भाग 4: सबको एक साथ मिलाएँ
+6. **`calculateTip` नाम का एक function बनाएँ** जो दो parameters ले: `billAmount` (आवश्यक) और `tipPercentage` (वैकल्पिक, डिफ़ॉल्ट 15)। यह function टिप राशि की गणना करे और वापस करे।
+
+### भाग 5: अपने Functions का परीक्षण करें
+अपने प्रत्येक function का परीक्षण करने के लिए function कॉल जोड़ें और परिणामों को `console.log()` के माध्यम से प्रदर्शित करें।
+
+**उदाहरण परीक्षण कॉल:**
+```javascript
+// यहां अपने कार्यों का परीक्षण करें
+sayHello();
+introduceYourself("Sarah");
+greetPerson("Alex");
+greetPerson("Maria", "Hi");
+
+const sum = addNumbers(5, 3);
+console.log(`The sum is: ${sum}`);
+
+const fullName = createFullName("John", "Doe");
+console.log(`Full name: ${fullName}`);
+
+const tip = calculateTip(50);
+console.log(`Tip for $50 bill: $${tip}`);
+```
+
+## मूल्यांकन मानदंड
+
+| मानदंड | उत्कृष्ट | पर्याप्त | सुधार की आवश्यकता |
+| -------- | --------- | -------- | ----------------- |
+| **Function निर्माण** | सभी 6 functions सही सिंटैक्स और नामकरण नियमों के साथ सही ढंग से लागू किए गए हैं | 4-5 functions सही प्रकार से लागू किए गए हैं, कुछ सिंटैक्स की छोटी गलतियाँ हो सकती हैं | 3 या उससे कम functions लागू किए गए हैं या गंभीर सिंटैक्स त्रुटियाँ हैं |
+| **Parameters और Default मान** | आवश्यक parameters, वैकल्पिक parameters, और default मानों का सही उपयोग किया गया है | parameters सही ढंग से उपयोग किए गए हैं लेकिन default मानों में समस्या हो सकती है | parameter का गलत या अनुपस्थित प्रयोग |
+| **Return मान** | जिन functions को मान लौटाना चाहिए वे सही तरीके से करते हैं, और जिनको नहीं करना चाहिए वे केवल क्रियाएं करते हैं | अधिकांश return मान सही हैं, कुछ छोटी गलतियाँ हैं | return स्टेटमेंट्स में महत्वपूर्ण समस्याएँ हैं |
+| **कोड गुणवत्ता** | साफ, अच्छी तरह व्यवस्थित कोड, अर्थपूर्ण वैरिएबल नामों और उचित इंडेंटेशन के साथ | कोड काम करता है लेकिन बेहतर व्यवस्थित या साफ किया जा सकता है | कोड पढ़ने में कठिन या खराब संरचित है |
+| **परीक्षण** | सभी functions को उपयुक्त function कॉल से परीक्षण किया गया है और परिणाम स्पष्ट रूप से प्रदर्शित किए गए हैं | अधिकांश functions का पर्याप्त परीक्षण किया गया है | functions का सीमित या गलत परीक्षण |
+
+## बोनस चुनौतियाँ (वैकल्पिक)
+
+यदि आप खुद को और चुनौती देना चाहते हैं:
+
+1. **अपने किसी एक function का arrow function वर्शन बनाएँ**
+2. **एक ऐसा function बनाएँ जो दूसरे function को parameter के रूप में स्वीकार करता हो** (जैसे कि सेटटाइमआउट के उदाहरण)
+3. **इनपुट मान्यकरण जोड़ें** ताकि आपके functions गलत इनपुट को सही तरीके से संभाल सकें
+
+---
+
+> 💡 **संकेत**: याद रखें, अपने ब्राउज़र के डेवलपर कंसोल (F12) को खोलें ताकि आप अपने `console.log()` स्टेटमेंट्स का आउटपुट देख सकें!
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**अस्वीकरण**:  
+यह दस्तावेज़ AI अनुवाद सेवा [Co-op Translator](https://github.com/Azure/co-op-translator) का उपयोग करके अनुवादित किया गया है। जबकि हम सटीकता के लिए प्रयासरत हैं, कृपया ध्यान रखें कि स्वचालित अनुवादों में त्रुटियाँ या गलतियाँ हो सकती हैं। मूल दस्तावेज़ अपनी मूल भाषा में ही आधिकारिक स्रोत माना जाना चाहिए। महत्वपूर्ण जानकारी के लिए पेशेवर मानव अनुवाद की अनुशंसा की जाती है। इस अनुवाद के उपयोग से उत्पन्न किसी भी गलतफहमी या गलत व्याख्या के लिए हम उत्तरदायी नहीं हैं।
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

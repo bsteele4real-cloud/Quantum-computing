@@ -1,0 +1,286 @@
+# البرمجة القائمة على الأحداث - بناء لعبة الكتابة
+
+```mermaid
+journey
+    title Your Typing Game Development Journey
+    section Foundation
+      Plan game structure: 3: Student
+      Design user interface: 4: Student
+      Setup HTML elements: 4: Student
+    section Functionality
+      Handle user input: 4: Student
+      Track timing: 5: Student
+      Calculate accuracy: 5: Student
+    section Features
+      Add visual feedback: 5: Student
+      Implement game logic: 5: Student
+      Polish experience: 5: Student
+```
+
+## المقدمة
+
+هناك شيء يعرفه كل مطور ولكنه نادرًا ما يتحدث عنه: الكتابة بسرعة هي قوة خارقة! 🚀 فكر في الأمر - كلما كنت أسرع في نقل أفكارك من عقلك إلى محرر الكود، زادت قدرتك على الإبداع. إنه مثل وجود خط مباشر بين أفكارك والشاشة.
+
+```mermaid
+pie title Game Features
+    "Real-time Feedback" : 25
+    "Performance Tracking" : 20
+    "Interactive UI" : 20
+    "Timer System" : 15
+    "Quote Management" : 10
+    "Results Display" : 10
+```
+
+هل تريد معرفة واحدة من أفضل الطرق لتحسين هذه المهارة؟ لقد خمنت ذلك - سنقوم ببناء لعبة!
+
+```mermaid
+flowchart LR
+    A[Player starts game] --> B[Random quote displayed]
+    B --> C[Player types characters]
+    C --> D{Character correct?}
+    D -->|Yes| E[Green highlight]
+    D -->|No| F[Red highlight]
+    E --> G[Update accuracy]
+    F --> G
+    G --> H{Quote complete?}
+    H -->|No| C
+    H -->|Yes| I[Calculate WPM]
+    I --> J[Display results]
+    J --> K[Play again?]
+    K -->|Yes| B
+    K -->|No| L[Game over]
+    
+    style A fill:#e1f5fe
+    style D fill:#fff3e0
+    style E fill:#e8f5e8
+    style F fill:#ffebee
+    style I fill:#f3e5f5
+```
+
+> لنقم معًا بإنشاء لعبة كتابة رائعة!
+
+هل أنت مستعد لتوظيف كل مهارات JavaScript وHTML وCSS التي تعلمتها؟ سنقوم ببناء لعبة كتابة ستتحداك بعبارات عشوائية من المحقق الأسطوري [شيرلوك هولمز](https://en.wikipedia.org/wiki/Sherlock_Holmes). ستقوم اللعبة بتتبع مدى سرعتك ودقتك في الكتابة - وصدقني، إنها أكثر إدمانًا مما قد تتصور!
+
+```mermaid
+mindmap
+  root((Typing Game Development))
+    User Interface
+      Input Elements
+      Visual Feedback
+      Responsive Design
+      Accessibility
+    Game Logic
+      Quote Selection
+      Timer Management
+      Accuracy Tracking
+      Score Calculation
+    Event Handling
+      Keyboard Input
+      Button Clicks
+      Real-time Updates
+      Game State Changes
+    Performance Metrics
+      Words Per Minute
+      Character Accuracy
+      Error Tracking
+      Progress Display
+    User Experience
+      Immediate Feedback
+      Clear Instructions
+      Engaging Content
+      Achievement System
+```
+
+![demo](../../../4-typing-game/images/demo.gif)
+
+## ما الذي تحتاج إلى معرفته
+
+```mermaid
+flowchart TD
+    A[User Action] --> B{Event Type?}
+    B -->|Key Press| C[Keyboard Event]
+    B -->|Button Click| D[Mouse Event]
+    B -->|Timer| E[Time Event]
+    
+    C --> F[Check Character]
+    D --> G[Start/Reset Game]
+    E --> H[Update Timer]
+    
+    F --> I{Correct?}
+    I -->|Yes| J[Highlight Green]
+    I -->|No| K[Highlight Red]
+    
+    J --> L[Update Score]
+    K --> L
+    L --> M[Check Game State]
+    
+    G --> N[Generate New Quote]
+    H --> O[Display Time]
+    
+    M --> P{Game Complete?}
+    P -->|Yes| Q[Show Results]
+    P -->|No| R[Continue Game]
+    
+    style A fill:#e1f5fe
+    style F fill:#e8f5e8
+    style I fill:#fff3e0
+    style Q fill:#f3e5f5
+```
+
+قبل أن نبدأ، تأكد من أنك مرتاح مع هذه المفاهيم (لا تقلق إذا كنت بحاجة إلى مراجعة سريعة - كلنا مررنا بذلك!):
+
+- إنشاء إدخال نصي وأزرار التحكم
+- CSS وتعيين الأنماط باستخدام الفئات  
+- أساسيات JavaScript
+  - إنشاء مصفوفة
+  - إنشاء رقم عشوائي
+  - الحصول على الوقت الحالي
+
+إذا شعرت أن أيًا من هذه المفاهيم غير واضحة، فلا بأس بذلك! أحيانًا تكون أفضل طريقة لتثبيت معرفتك هي القفز إلى مشروع واكتشاف الأمور أثناء العمل.
+
+### 🔄 **تقييم تربوي**
+**تقييم الأساسيات**: قبل بدء التطوير، تأكد من فهمك:
+- ✅ كيفية عمل نماذج HTML وعناصر الإدخال
+- ✅ الفئات في CSS والتنسيق الديناميكي
+- ✅ مستمعي الأحداث ومعالجيها في JavaScript
+- ✅ التلاعب بالمصفوفات والاختيار العشوائي
+- ✅ قياس الوقت وإجراء الحسابات
+
+**اختبار سريع ذاتي**: هل يمكنك شرح كيفية عمل هذه المفاهيم معًا في لعبة تفاعلية؟
+- **الأحداث** تُطلق عند تفاعل المستخدمين مع العناصر
+- **المعالجات** تعالج هذه الأحداث وتحدث حالة اللعبة
+- **CSS** يوفر ردود فعل بصرية لتفاعلات المستخدم
+- **الوقت** يتيح قياس الأداء وتقدم اللعبة
+
+```mermaid
+quadrantChart
+    title Typing Game Skills Development
+    x-axis Beginner --> Expert
+    y-axis Static --> Interactive
+    quadrant-1 Advanced Games
+    quadrant-2 Real-time Apps
+    quadrant-3 Basic Pages
+    quadrant-4 Interactive Sites
+    
+    HTML Forms: [0.3, 0.2]
+    CSS Styling: [0.4, 0.3]
+    Event Handling: [0.7, 0.8]
+    Game Logic: [0.8, 0.9]
+    Performance Tracking: [0.9, 0.7]
+```
+
+## لنبدأ ببناء اللعبة!
+
+[إنشاء لعبة كتابة باستخدام البرمجة القائمة على الأحداث](./typing-game/README.md)
+
+### ⚡ **ما يمكنك القيام به في الدقائق الخمس القادمة**
+- [ ] افتح وحدة التحكم في المتصفح وجرب الاستماع لأحداث لوحة المفاتيح باستخدام `addEventListener`
+- [ ] أنشئ صفحة HTML بسيطة تحتوي على حقل إدخال واختبر الكشف عن الكتابة
+- [ ] تدرب على معالجة النصوص بمقارنة النص المكتوب بالنص المستهدف
+- [ ] جرب استخدام `setTimeout` لفهم وظائف التوقيت
+
+### 🎯 **ما يمكنك تحقيقه خلال الساعة القادمة**
+- [ ] أكمل اختبار ما بعد الدرس وافهم البرمجة القائمة على الأحداث
+- [ ] قم ببناء نسخة أساسية من لعبة الكتابة مع التحقق من الكلمات
+- [ ] أضف ردود فعل بصرية للكتابة الصحيحة والخاطئة
+- [ ] قم بتنفيذ نظام تسجيل بسيط يعتمد على السرعة والدقة
+- [ ] قم بتصميم لعبتك باستخدام CSS لجعلها جذابة بصريًا
+
+### 📅 **تطوير اللعبة خلال أسبوع**
+- [ ] أكمل لعبة الكتابة بالكامل مع جميع الميزات والتحسينات
+- [ ] أضف مستويات صعوبة مع تعقيد الكلمات المتفاوت
+- [ ] قم بتنفيذ تتبع إحصائيات المستخدم (الكلمات في الدقيقة، الدقة مع مرور الوقت)
+- [ ] أضف تأثيرات صوتية ورسوم متحركة لتحسين تجربة المستخدم
+- [ ] اجعل لعبتك متجاوبة مع الأجهزة المحمولة التي تعمل باللمس
+- [ ] شارك لعبتك عبر الإنترنت واجمع آراء المستخدمين
+
+### 🌟 **تطوير تفاعلي خلال شهر**
+- [ ] قم ببناء ألعاب متعددة تستكشف أنماط تفاعل مختلفة
+- [ ] تعلم عن حلقات الألعاب وإدارة الحالة وتحسين الأداء
+- [ ] ساهم في مشاريع تطوير الألعاب مفتوحة المصدر
+- [ ] أتقن مفاهيم التوقيت المتقدمة والرسوم المتحركة السلسة
+- [ ] أنشئ ملفًا شخصيًا يعرض تطبيقات تفاعلية متنوعة
+- [ ] قم بتوجيه الآخرين المهتمين بتطوير الألعاب والتفاعل مع المستخدم
+
+## 🎯 جدول زمني لإتقان لعبة الكتابة
+
+```mermaid
+timeline
+    title Game Development Learning Progression
+    
+    section Setup (10 minutes)
+        Project Structure: HTML foundation
+                         : CSS styling setup
+                         : JavaScript file creation
+        
+    section User Interface (20 minutes)
+        Interactive Elements: Input fields
+                            : Button controls
+                            : Display areas
+                            : Responsive layout
+        
+    section Event Handling (25 minutes)
+        User Interaction: Keyboard events
+                        : Mouse events
+                        : Real-time feedback
+                        : State management
+        
+    section Game Logic (30 minutes)
+        Core Functionality: Quote generation
+                          : Character comparison
+                          : Accuracy calculation
+                          : Timer implementation
+        
+    section Performance Tracking (35 minutes)
+        Metrics & Analytics: WPM calculation
+                           : Error tracking
+                           : Progress visualization
+                           : Results display
+        
+    section Polish & Enhancement (45 minutes)
+        User Experience: Visual feedback
+                       : Sound effects
+                       : Animations
+                       : Accessibility features
+        
+    section Advanced Features (1 week)
+        Extended Functionality: Difficulty levels
+                              : Leaderboards
+                              : Custom quotes
+                              : Multiplayer options
+        
+    section Professional Skills (1 month)
+        Game Development: Performance optimization
+                        : Code architecture
+                        : Testing strategies
+                        : Deployment patterns
+```
+
+### 🛠️ ملخص أدوات تطوير اللعبة
+
+بعد إكمال هذا المشروع، ستتقن:
+- **البرمجة القائمة على الأحداث**: واجهات مستخدم تفاعلية تستجيب للإدخال
+- **ردود الفعل الفورية**: تحديثات بصرية وأداء فورية
+- **قياس الأداء**: أنظمة توقيت وتسجيل دقيقة
+- **إدارة حالة اللعبة**: التحكم في تدفق التطبيق وتجربة المستخدم
+- **التصميم التفاعلي**: إنشاء تجارب مستخدم جذابة وممتعة
+- **واجهات برمجة التطبيقات الحديثة**: استخدام قدرات المتصفح للتفاعلات الغنية
+- **أنماط الوصول**: تصميم شامل لجميع المستخدمين
+
+**التطبيقات الواقعية**: هذه المهارات تنطبق مباشرة على:
+- **تطبيقات الويب**: أي واجهة تفاعلية أو لوحة تحكم
+- **البرامج التعليمية**: منصات التعلم وأدوات تقييم المهارات
+- **أدوات الإنتاجية**: محررات النصوص، بيئات التطوير، وبرامج التعاون
+- **صناعة الألعاب**: ألعاب المتصفح والترفيه التفاعلي
+- **تطوير الأجهزة المحمولة**: واجهات تعمل باللمس ومعالجة الإيماءات
+
+**المستوى التالي**: أنت جاهز لاستكشاف أطر الألعاب المتقدمة، أنظمة اللعب متعددة اللاعبين في الوقت الفعلي، أو التطبيقات التفاعلية المعقدة!
+
+## الشكر
+
+كتبه بكل ♥️ بواسطة [كريستوفر هاريسون](http://www.twitter.com/geektrainer)
+
+---
+
+**إخلاء المسؤولية**:  
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسيرات خاطئة تنشأ عن استخدام هذه الترجمة.

@@ -1,0 +1,659 @@
+# Проект расширения для браузера, часть 2: Вызов API, использование локального хранилища
+
+```mermaid
+journey
+    title Your API Integration & Storage Journey
+    section Foundation
+      Setup DOM references: 3: Student
+      Add event listeners: 4: Student
+      Handle form submission: 4: Student
+    section Data Management
+      Implement local storage: 4: Student
+      Build API calls: 5: Student
+      Handle async operations: 5: Student
+    section User Experience
+      Add error handling: 5: Student
+      Create loading states: 4: Student
+      Polish interactions: 5: Student
+```
+
+## Тест перед лекцией
+
+[Тест перед лекцией](https://ff-quizzes.netlify.app/web/quiz/25)
+
+## Введение
+
+Помните расширение для браузера, которое вы начали создавать? Сейчас у вас есть симпатичная форма, но она пока статична. Сегодня мы оживим её, подключив к реальным данным и добавив возможность запоминания.
+
+Вспомните компьютеры управления миссией Аполлон — они не просто отображали фиксированную информацию. Они постоянно обменивались данными с космическим кораблем, обновляли телеметрическую информацию и запоминали важные параметры миссии. Именно такое динамическое поведение мы будем создавать сегодня. Ваше расширение будет подключаться к интернету, получать реальные данные об окружающей среде и запоминать ваши настройки для следующего использования.
+
+Интеграция с API может показаться сложной, но на самом деле это просто обучение вашего кода взаимодействию с другими сервисами. Независимо от того, получаете ли вы данные о погоде, ленты социальных сетей или информацию о выбросах углекислого газа, как мы будем делать сегодня, всё сводится к установлению этих цифровых связей. Мы также изучим, как браузеры могут сохранять информацию — аналогично тому, как библиотеки используют карточные каталоги для запоминания местоположения книг.
+
+К концу этого урока у вас будет расширение для браузера, которое получает реальные данные, сохраняет пользовательские настройки и обеспечивает плавный пользовательский опыт. Давайте начнем!
+
+```mermaid
+mindmap
+  root((Dynamic Extensions))
+    DOM Manipulation
+      Element Selection
+      Event Handling
+      State Management
+      UI Updates
+    Local Storage
+      Data Persistence
+      Key-Value Pairs
+      Session Management
+      User Preferences
+    API Integration
+      HTTP Requests
+      Authentication
+      Data Parsing
+      Error Handling
+    Async Programming
+      Promises
+      Async/Await
+      Error Catching
+      Non-blocking Code
+    User Experience
+      Loading States
+      Error Messages
+      Smooth Transitions
+      Data Validation
+```
+
+✅ Следуйте пронумерованным сегментам в соответствующих файлах, чтобы узнать, куда вставлять ваш код.
+
+## Настройка элементов для манипуляции в расширении
+
+Прежде чем ваш JavaScript сможет манипулировать интерфейсом, ему нужны ссылки на конкретные HTML-элементы. Это как телескоп, который нужно направить на определенные звезды — прежде чем Галилей смог изучить спутники Юпитера, он должен был найти и сфокусироваться на самом Юпитере.
+
+В вашем файле `index.js` мы создадим переменные `const`, которые будут содержать ссылки на каждый важный элемент формы. Это похоже на то, как ученые маркируют свое оборудование — вместо того, чтобы каждый раз искать его по всей лаборатории, они могут напрямую получить доступ к нужному.
+
+```mermaid
+flowchart LR
+    A[JavaScript Code] --> B[document.querySelector]
+    B --> C[CSS Selectors]
+    C --> D[HTML Elements]
+    
+    D --> E[".form-data"]
+    D --> F[".region-name"]
+    D --> G[".api-key"]
+    D --> H[".loading"]
+    D --> I[".errors"]
+    D --> J[".result-container"]
+    
+    E --> K[Form Element]
+    F --> L[Input Field]
+    G --> M[Input Field]
+    H --> N[UI Element]
+    I --> O[UI Element]
+    J --> P[UI Element]
+    
+    style A fill:#e1f5fe
+    style D fill:#e8f5e8
+    style K fill:#fff3e0
+    style L fill:#fff3e0
+    style M fill:#fff3e0
+```
+
+```javascript
+// form fields
+const form = document.querySelector('.form-data');
+const region = document.querySelector('.region-name');
+const apiKey = document.querySelector('.api-key');
+
+// results
+const errors = document.querySelector('.errors');
+const loading = document.querySelector('.loading');
+const results = document.querySelector('.result-container');
+const usage = document.querySelector('.carbon-usage');
+const fossilfuel = document.querySelector('.fossil-fuel');
+const myregion = document.querySelector('.my-region');
+const clearBtn = document.querySelector('.clear-btn');
+```
+
+**Что делает этот код:**
+- **Захватывает** элементы формы с помощью `document.querySelector()` с использованием CSS-селекторов
+- **Создает** ссылки на поля ввода для названия региона и ключа API
+- **Устанавливает** соединения с элементами отображения результатов для данных о выбросах углекислого газа
+- **Настраивает** доступ к элементам интерфейса, таким как индикаторы загрузки и сообщения об ошибках
+- **Сохраняет** ссылки на элементы в переменных `const` для удобного повторного использования в коде
+
+## Добавление обработчиков событий
+
+Теперь мы сделаем так, чтобы ваше расширение реагировало на действия пользователя. Обработчики событий — это способ вашего кода следить за взаимодействиями пользователя. Представьте их как операторов в ранних телефонных станциях — они слушали входящие звонки и соединяли нужные линии, когда кто-то хотел позвонить.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Form
+    participant JavaScript
+    participant API
+    participant Storage
+    
+    User->>Form: Fills out region/API key
+    User->>Form: Clicks submit
+    Form->>JavaScript: Triggers submit event
+    JavaScript->>JavaScript: handleSubmit(e)
+    JavaScript->>Storage: Save user preferences
+    JavaScript->>API: Fetch carbon data
+    API->>JavaScript: Returns data
+    JavaScript->>Form: Update UI with results
+    
+    User->>Form: Clicks clear button
+    Form->>JavaScript: Triggers click event
+    JavaScript->>Storage: Clear saved data
+    JavaScript->>Form: Reset to initial state
+```
+
+```javascript
+form.addEventListener('submit', (e) => handleSubmit(e));
+clearBtn.addEventListener('click', (e) => reset(e));
+init();
+```
+
+**Понимание этих концепций:**
+- **Присоединяет** обработчик события отправки к форме, который срабатывает, когда пользователь нажимает Enter или кнопку отправки
+- **Соединяет** обработчик события клика с кнопкой очистки для сброса формы
+- **Передает** объект события `(e)` в функции-обработчики для дополнительного контроля
+- **Вызывает** функцию `init()` сразу для настройки начального состояния вашего расширения
+
+✅ Обратите внимание на сокращенный синтаксис стрелочных функций, используемый здесь. Этот современный подход в JavaScript выглядит более лаконично, чем традиционные выражения функций, но оба работают одинаково хорошо!
+
+### 🔄 **Педагогическая проверка**
+**Понимание обработки событий**: Перед переходом к инициализации убедитесь, что вы можете:
+- ✅ Объяснить, как `addEventListener` связывает действия пользователя с функциями JavaScript
+- ✅ Понять, почему мы передаем объект события `(e)` в функции-обработчики
+- ✅ Различать события `submit` и `click`
+- ✅ Описать, когда запускается функция `init()` и почему
+
+**Быстрый тест**: Что произойдет, если вы забудете `e.preventDefault()` при отправке формы?
+*Ответ: Страница перезагрузится, потеряв все состояние JavaScript и прервав пользовательский опыт.*
+
+## Создание функций инициализации и сброса
+
+Давайте создадим логику инициализации для вашего расширения. Функция `init()` похожа на навигационную систему корабля, проверяющую свои приборы — она определяет текущее состояние и соответственно настраивает интерфейс. Она проверяет, использовал ли кто-то ваше расширение ранее, и загружает его предыдущие настройки.
+
+Функция `reset()` предоставляет пользователям возможность начать с чистого листа — как ученые сбрасывают свои приборы между экспериментами, чтобы обеспечить чистоту данных.
+
+```javascript
+function init() {
+	// Check if user has previously saved API credentials
+	const storedApiKey = localStorage.getItem('apiKey');
+	const storedRegion = localStorage.getItem('regionName');
+
+	// Set extension icon to generic green (placeholder for future lesson)
+	// TODO: Implement icon update in next lesson
+
+	if (storedApiKey === null || storedRegion === null) {
+		// First-time user: show the setup form
+		form.style.display = 'block';
+		results.style.display = 'none';
+		loading.style.display = 'none';
+		clearBtn.style.display = 'none';
+		errors.textContent = '';
+	} else {
+		// Returning user: load their saved data automatically
+		displayCarbonUsage(storedApiKey, storedRegion);
+		results.style.display = 'none';
+		form.style.display = 'none';
+		clearBtn.style.display = 'block';
+	}
+}
+
+function reset(e) {
+	e.preventDefault();
+	// Clear stored region to allow user to choose a new location
+	localStorage.removeItem('regionName');
+	// Restart the initialization process
+	init();
+}
+```
+
+**Разберем, что здесь происходит:**
+- **Извлекает** сохраненный ключ API и регион из локального хранилища браузера
+- **Проверяет**, является ли пользователь новым (нет сохраненных данных) или возвращающимся
+- **Отображает** форму настройки для новых пользователей и скрывает другие элементы интерфейса
+- **Автоматически загружает** сохраненные данные для возвращающихся пользователей и показывает опцию сброса
+- **Управляет** состоянием пользовательского интерфейса на основе доступных данных
+
+**Ключевые концепции локального хранилища:**
+- **Сохраняет** данные между сессиями браузера (в отличие от session storage)
+- **Хранит** данные в виде пар ключ-значение с использованием `getItem()` и `setItem()`
+- **Возвращает** `null`, если данные для указанного ключа отсутствуют
+- **Предоставляет** простой способ запоминания пользовательских предпочтений и настроек
+
+> 💡 **Понимание хранилища браузера**: [LocalStorage](https://developer.mozilla.org/docs/Web/API/Window/localStorage) — это как дать вашему расширению постоянную память. Представьте, как древняя Александрийская библиотека хранила свитки — информация оставалась доступной, даже когда ученые уходили и возвращались.
+>
+> **Основные характеристики:**
+> - **Сохраняет** данные даже после закрытия браузера
+> - **Выживает** после перезагрузки компьютера и сбоев браузера
+> - **Предоставляет** значительное пространство для хранения пользовательских настроек
+> - **Обеспечивает** мгновенный доступ без задержек сети
+
+Вы можете просмотреть сохраненные данные, открыв инструменты разработчика браузера (F12), перейдя на вкладку **Application** и развернув раздел **Local Storage**.
+
+```mermaid
+stateDiagram-v2
+    [*] --> CheckStorage: Extension starts
+    CheckStorage --> FirstTime: No stored data
+    CheckStorage --> Returning: Data found
+    
+    FirstTime --> ShowForm: Display setup form
+    ShowForm --> UserInput: User enters data
+    UserInput --> SaveData: Store in localStorage
+    SaveData --> FetchAPI: Get carbon data
+    
+    Returning --> LoadData: Read from localStorage
+    LoadData --> FetchAPI: Get carbon data
+    
+    FetchAPI --> ShowResults: Display data
+    ShowResults --> UserAction: User interacts
+    
+    UserAction --> Reset: Clear button clicked
+    UserAction --> ShowResults: View data
+    
+    Reset --> ClearStorage: Remove saved data
+    ClearStorage --> FirstTime: Back to setup
+```
+
+![Панель локального хранилища](../../../../translated_images/ru/localstorage.472f8147b6a3f8d1.webp)
+
+> ⚠️ **Соображения безопасности**: В производственных приложениях хранение ключей API в LocalStorage представляет собой риск для безопасности, так как JavaScript может получить доступ к этим данным. Для учебных целей этот подход подходит, но в реальных приложениях следует использовать безопасное серверное хранилище для конфиденциальных данных.
+
+## Обработка отправки формы
+
+Теперь мы разберем, что происходит, когда кто-то отправляет вашу форму. По умолчанию браузеры перезагружают страницу при отправке формы, но мы перехватим это поведение, чтобы создать более плавный пользовательский опыт.
+
+Этот подход напоминает, как центр управления миссией обрабатывает связь с космическими кораблями — вместо того, чтобы сбрасывать всю систему для каждой передачи, они поддерживают непрерывную работу, обрабатывая новую информацию.
+
+Создайте функцию, которая захватывает событие отправки формы и извлекает ввод пользователя:
+
+```javascript
+function handleSubmit(e) {
+	e.preventDefault();
+	setUpUser(apiKey.value, region.value);
+}
+```
+
+**В приведенном выше коде мы:**
+- **Предотвращаем** стандартное поведение отправки формы, которое обновляет страницу
+- **Извлекаем** значения, введенные пользователем, из полей ключа API и региона
+- **Передаем** данные формы в функцию `setUpUser()` для обработки
+- **Сохраняем** поведение одностраничного приложения, избегая перезагрузки страницы
+
+✅ Помните, что ваши поля ввода HTML-формы включают атрибут `required`, поэтому браузер автоматически проверяет, чтобы пользователи указали и ключ API, и регион, прежде чем эта функция начнет работать.
+
+## Настройка пользовательских предпочтений
+
+Функция `setUpUser` отвечает за сохранение учетных данных пользователя и выполнение первого вызова API. Это создает плавный переход от настройки к отображению результатов.
+
+```javascript
+function setUpUser(apiKey, regionName) {
+	// Save user credentials for future sessions
+	localStorage.setItem('apiKey', apiKey);
+	localStorage.setItem('regionName', regionName);
+	
+	// Update UI to show loading state
+	loading.style.display = 'block';
+	errors.textContent = '';
+	clearBtn.style.display = 'block';
+	
+	// Fetch carbon usage data with user's credentials
+	displayCarbonUsage(apiKey, regionName);
+}
+```
+
+**Шаг за шагом, вот что происходит:**
+- **Сохраняет** ключ API и название региона в локальном хранилище для будущего использования
+- **Отображает** индикатор загрузки, чтобы информировать пользователей о процессе получения данных
+- **Очищает** предыдущие сообщения об ошибках с экрана
+- **Показывает** кнопку очистки, чтобы пользователи могли сбросить свои настройки позже
+- **Инициирует** вызов API для получения реальных данных о выбросах углекислого газа
+
+Эта функция обеспечивает плавный пользовательский опыт, управляя как сохранением данных, так и обновлением интерфейса в одном согласованном действии.
+
+## Отображение данных о выбросах углекислого газа
+
+Теперь мы подключим ваше расширение к внешним источникам данных через API. Это преобразует ваше расширение из автономного инструмента в нечто, что может получать информацию в реальном времени из интернета.
+
+**Понимание API**
+
+[API](https://www.webopedia.com/TERM/A/API.html) — это способ, которым разные приложения взаимодействуют друг с другом. Представьте их как телеграфную систему, которая соединяла удаленные города в XIX веке — операторы отправляли запросы на удаленные станции и получали ответы с запрошенной информацией. Каждый раз, когда вы проверяете социальные сети, задаете вопрос голосовому помощнику или используете приложение для доставки, API обеспечивают эти обмены данными.
+
+```mermaid
+flowchart TD
+    A[Your Extension] --> B[HTTP Request]
+    B --> C[CO2 Signal API]
+    C --> D{Valid Request?}
+    D -->|Yes| E[Query Database]
+    D -->|No| F[Return Error]
+    E --> G[Carbon Data]
+    G --> H[JSON Response]
+    H --> I[Your Extension]
+    F --> I
+    I --> J[Update UI]
+    
+    subgraph "API Request"
+        K[Headers: auth-token]
+        L[Parameters: countryCode]
+        M[Method: GET]
+    end
+    
+    subgraph "API Response"
+        N[Carbon Intensity]
+        O[Fossil Fuel %]
+        P[Timestamp]
+    end
+    
+    style C fill:#e8f5e8
+    style G fill:#fff3e0
+    style I fill:#e1f5fe
+```
+
+**Основные концепции REST API:**
+- **REST** расшифровывается как "Representational State Transfer"
+- **Использует** стандартные HTTP-методы (GET, POST, PUT, DELETE) для взаимодействия с данными
+- **Возвращает** данные в предсказуемых форматах, обычно JSON
+- **Предоставляет** последовательные URL-адреса для различных типов запросов
+
+✅ [API CO2 Signal](https://www.co2signal.com/), который мы будем использовать, предоставляет данные о выбросах углекислого газа в реальном времени из электрических сетей по всему миру. Это помогает пользователям понять экологическое воздействие их потребления электроэнергии!
+
+> 💡 **Понимание асинхронного JavaScript**: [`async` keyword](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/async_function) позволяет вашему коду выполнять несколько операций одновременно. Когда вы запрашиваете данные с сервера, вы не хотите, чтобы всё ваше расширение зависло — это было бы как остановка всех операций управления воздушным движением в ожидании ответа одного самолета.
+>
+> **Основные преимущества:**
+> - **Сохраняет** отзывчивость расширения во время загрузки данных
+> - **Позволяет** другому коду продолжать выполнение во время сетевых запросов
+> - **Улучшает** читаемость кода по сравнению с традиционными шаблонами обратного вызова
+> - **Обеспечивает** элегантную обработку ошибок для сетевых проблем
+
+Вот короткое видео о `async`:
+
+[![Async и Await для управления обещаниями](https://img.youtube.com/vi/YwmlRkrxvkk/0.jpg)](https://youtube.com/watch?v=YwmlRkrxvkk "Async и Await для управления обещаниями")
+
+> 🎥 Нажмите на изображение выше, чтобы посмотреть видео о async/await.
+
+### 🔄 **Педагогическая проверка**
+**Понимание асинхронного программирования**: Перед тем как углубиться в функцию API, убедитесь, что вы понимаете:
+- ✅ Почему мы используем `async/await`, а не блокируем всё расширение
+- ✅ Как блоки `try/catch` элегантно обрабатывают сетевые ошибки
+- ✅ Разницу между синхронными и асинхронными операциями
+- ✅ Почему вызовы API могут завершиться неудачей и как с этим справляться
+
+**Связь с реальным миром**: Подумайте о следующих примерах асинхронности:
+- **Заказ еды**: Вы не ждете на кухне — вы получаете чек и продолжаете заниматься другими делами
+- **Отправка писем**: Ваше приложение для электронной почты не зависает при отправке — вы можете писать новые письма
+- **Загрузка веб-страниц**: Изображения загружаются постепенно, пока вы уже можете читать текст
+
+**Поток аутентификации API**:
+```mermaid
+sequenceDiagram
+    participant Ext as Extension
+    participant API as CO2 Signal API
+    participant DB as Database
+    
+    Ext->>API: Request with auth-token
+    API->>API: Validate token
+    API->>DB: Query carbon data
+    DB->>API: Return data
+    API->>Ext: JSON response
+    Ext->>Ext: Update UI
+```
+
+Создайте функцию для получения и отображения данных о выбросах углекислого газа:
+
+```javascript
+// Modern fetch API approach (no external dependencies needed)
+async function displayCarbonUsage(apiKey, region) {
+	try {
+		// Fetch carbon intensity data from CO2 Signal API
+		const response = await fetch('https://api.co2signal.com/v1/latest', {
+			method: 'GET',
+			headers: {
+				'auth-token': apiKey,
+				'Content-Type': 'application/json'
+			},
+			// Add query parameters for the specific region
+			...new URLSearchParams({ countryCode: region }) && {
+				url: `https://api.co2signal.com/v1/latest?countryCode=${region}`
+			}
+		});
+
+		// Check if the API request was successful
+		if (!response.ok) {
+			throw new Error(`API request failed: ${response.status}`);
+		}
+
+		const data = await response.json();
+		const carbonData = data.data;
+
+		// Calculate rounded carbon intensity value
+		const carbonIntensity = Math.round(carbonData.carbonIntensity);
+
+		// Update the user interface with fetched data
+		loading.style.display = 'none';
+		form.style.display = 'none';
+		myregion.textContent = region.toUpperCase();
+		usage.textContent = `${carbonIntensity} grams (grams CO₂ emitted per kilowatt hour)`;
+		fossilfuel.textContent = `${carbonData.fossilFuelPercentage.toFixed(2)}% (percentage of fossil fuels used to generate electricity)`;
+		results.style.display = 'block';
+
+		// TODO: calculateColor(carbonIntensity) - implement in next lesson
+
+	} catch (error) {
+		console.error('Error fetching carbon data:', error);
+		
+		// Show user-friendly error message
+		loading.style.display = 'none';
+		results.style.display = 'none';
+		errors.textContent = 'Sorry, we couldn\'t fetch data for that region. Please check your API key and region code.';
+	}
+}
+```
+
+**Разберем, что здесь происходит:**
+- **Использует** современный API `fetch()` вместо внешних библиотек, таких как Axios, для более чистого кода без зависимостей
+- **Реализует** правильную проверку ошибок с помощью `response.ok`, чтобы рано обнаруживать сбои API
+- **Обрабатывает** асинхронные операции с помощью `async/await` для более читаемого потока кода
+- **Аутентифицирует** с API CO2 Signal, используя заголовок `auth-token`
+- **Парсит** данные JSON-ответа и извлекает информацию о выбросах углекислого газа
+- **Обновляет** несколько элементов интерфейса с отформатированными данными об окружающей среде
+- **Предоставляет** удобные для пользователя сообщения об ошибках при сбоях вызовов API
+
+**Основные современные концепции JavaScript, продемонстрированные здесь:**
+- **Шаблонные строки** с синтаксисом `${}` для чистого форматирования строк
+- **Обработка ошибок** с помощью блоков try/catch для надежных приложений
+- **Асинхронный/ожидающий** шаблон для элегантной обработки сетевых запросов
+- **Деструктуризация объектов** для извлечения конкретных данных из ответов API
+- **Цепочка методов** для множественных манипуляций с DOM
+
+✅ Эта функция демонстрирует несколько важных концепций веб-разработки — взаимодействие с внешними серверами, обработку аутентификации, обработку данных, обновление интерфейсов и элегантное управление ошибками. Это фундаментальные навыки, которые профессиональные разработчики используют регулярно.
+
+```mermaid
+flowchart TD
+    A[Start API Call] --> B[Fetch Request]
+    B --> C{Network Success?}
+    C -->|No| D[Network Error]
+    C -->|Yes| E{Response OK?}
+    E -->|No| F[API Error]
+    E -->|Yes| G[Parse JSON]
+    G --> H{Valid Data?}
+    H -->|No| I[Data Error]
+    H -->|Yes| J[Update UI]
+    
+    D --> K[Show Error Message]
+    F --> K
+    I --> K
+    J --> L[Hide Loading]
+    K --> L
+    
+    style A fill:#e1f5fe
+    style J fill:#e8f5e8
+    style K fill:#ffebee
+    style L fill:#f3e5f5
+```
+
+### 🔄 **Педагогическая проверка**
+**Полное понимание системы**: Убедитесь, что вы освоили весь поток:
+- ✅ Как ссылки на DOM позволяют JavaScript управлять интерфейсом
+- ✅ Почему локальное хранилище создает устойчивость между сессиями браузера
+- ✅ Как async/await делает вызовы API без замораживания расширения
+- ✅ Что происходит, когда вызовы API завершаются неудачей и как обрабатываются ошибки
+- ✅ Почему пользовательский опыт включает состояния загрузки и сообщения об ошибках
+
+🎉 **Что вы достигли:** Вы создали расширение для браузера, которое:
+- **Подключается** к интернету и получает реальные данные об окружающей среде
+- **Сохраняет** пользовательские настройки между сессиями
+- **Элегантно обрабатывает** ошибки, вместо того чтобы зависать
+- **Обеспечивает** плавный, профессиональный пользовательский опыт
+
+Протестируйте свою работу, запустив `npm run build` и обновив ваше расширение в браузере. Теперь у вас есть функциональный трекер углеродного следа. В следующем уроке мы добавим динамическую функциональность значков, чтобы завершить расширение.
+
+---
+
+## Вызов GitHub Copilot Agent 🚀
+
+Используйте режим Agent, чтобы выполнить следующий вызов:
+**Описание:** Улучшите расширение для браузера, добавив улучшения обработки ошибок и функции для повышения удобства использования. Этот вызов поможет вам попрактиковаться в работе с API, локальным хранилищем и манипуляцией DOM с использованием современных шаблонов JavaScript.
+
+**Задание:** Создайте улучшенную версию функции displayCarbonUsage, которая включает: 1) Механизм повторных попыток для неудачных вызовов API с экспоненциальной задержкой, 2) Проверку ввода кода региона перед выполнением вызова API, 3) Анимацию загрузки с индикаторами прогресса, 4) Кэширование ответов API в localStorage с временными метками истечения (кэш на 30 минут), и 5) Функцию отображения исторических данных из предыдущих вызовов API. Также добавьте комментарии в стиле JSDoc для TypeScript, чтобы документировать все параметры функции и типы возвращаемых данных.
+
+Узнайте больше о [режиме агента](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) здесь.
+
+## 🚀 Вызов
+
+Расширьте свои знания об API, изучив множество браузерных API, доступных для веб-разработки. Выберите один из этих браузерных API и создайте небольшую демонстрацию:
+
+- [Geolocation API](https://developer.mozilla.org/docs/Web/API/Geolocation_API) - Получение текущего местоположения пользователя
+- [Notification API](https://developer.mozilla.org/docs/Web/API/Notifications_API) - Отправка уведомлений на рабочий стол
+- [HTML Drag and Drop API](https://developer.mozilla.org/docs/Web/API/HTML_Drag_and_Drop_API) - Создание интерактивных интерфейсов с перетаскиванием
+- [Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API) - Расширенные техники работы с локальным хранилищем
+- [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) - Современная альтернатива XMLHttpRequest
+
+**Вопросы для исследования:**
+- Какие реальные проблемы решает этот API?
+- Как API обрабатывает ошибки и крайние случаи?
+- Какие существуют соображения безопасности при использовании этого API?
+- Насколько широко поддерживается этот API в разных браузерах?
+
+После исследования определите, какие характеристики делают API удобным для разработчиков и надежным.
+
+## Викторина после лекции
+
+[Викторина после лекции](https://ff-quizzes.netlify.app/web/quiz/26)
+
+## Обзор и самостоятельное изучение
+
+Вы узнали о LocalStorage и API в этом уроке, оба инструмента очень полезны для профессионального веб-разработчика. Можете ли вы подумать о том, как эти две вещи работают вместе? Подумайте, как вы бы спроектировали веб-сайт, который будет хранить элементы для использования API.
+
+### ⚡ **Что можно сделать за следующие 5 минут**
+- [ ] Откройте вкладку Application в DevTools и изучите localStorage на любом сайте
+- [ ] Создайте простую HTML-форму и протестируйте проверку формы в браузере
+- [ ] Попробуйте сохранить и извлечь данные, используя localStorage в консоли браузера
+- [ ] Проверьте данные формы, отправляемые через вкладку Network
+
+### 🎯 **Что можно сделать за час**
+- [ ] Пройдите викторину после урока и разберитесь с концепцией обработки форм
+- [ ] Создайте форму для расширения браузера, которая сохраняет пользовательские настройки
+- [ ] Реализуйте проверку формы на стороне клиента с полезными сообщениями об ошибках
+- [ ] Попрактикуйтесь в использовании chrome.storage API для сохранения данных расширения
+- [ ] Создайте пользовательский интерфейс, который реагирует на сохраненные настройки пользователя
+
+### 📅 **Ваш недельный проект по созданию расширения**
+- [ ] Завершите полнофункциональное расширение для браузера с функционалом формы
+- [ ] Освойте различные варианты хранения: локальное, синхронизированное и сессионное хранилище
+- [ ] Реализуйте расширенные функции формы, такие как автозаполнение и проверка
+- [ ] Добавьте функционал импорта/экспорта данных пользователя
+- [ ] Тщательно протестируйте ваше расширение в разных браузерах
+- [ ] Улучшите пользовательский интерфейс и обработку ошибок вашего расширения
+
+### 🌟 **Ваш месячный путь к мастерству работы с Web API**
+- [ ] Создайте сложные приложения, используя различные браузерные API для хранения данных
+- [ ] Изучите шаблоны разработки с приоритетом оффлайн-режима
+- [ ] Внесите вклад в проекты с открытым исходным кодом, связанные с сохранением данных
+- [ ] Освойте разработку с учетом конфиденциальности и соответствие требованиям GDPR
+- [ ] Создайте повторно используемые библиотеки для обработки форм и управления данными
+- [ ] Делитесь знаниями о веб-API и разработке расширений
+
+## 🎯 Ваш график освоения разработки расширений
+
+```mermaid
+timeline
+    title API Integration & Storage Learning Progression
+    
+    section DOM Fundamentals (15 minutes)
+        Element References: querySelector mastery
+                          : Event listener setup
+                          : State management basics
+        
+    section Local Storage (20 minutes)
+        Data Persistence: Key-value storage
+                        : Session management
+                        : User preference handling
+                        : Storage inspection tools
+        
+    section Form Handling (25 minutes)
+        User Input: Form validation
+                  : Event prevention
+                  : Data extraction
+                  : UI state transitions
+        
+    section API Integration (35 minutes)
+        External Communication: HTTP requests
+                              : Authentication patterns
+                              : JSON data parsing
+                              : Response handling
+        
+    section Async Programming (40 minutes)
+        Modern JavaScript: Promise handling
+                         : Async/await patterns
+                         : Error management
+                         : Non-blocking operations
+        
+    section Error Handling (30 minutes)
+        Robust Applications: Try/catch blocks
+                           : User-friendly messages
+                           : Graceful degradation
+                           : Debugging techniques
+        
+    section Advanced Patterns (1 week)
+        Professional Development: Caching strategies
+                                : Rate limiting
+                                : Retry mechanisms
+                                : Performance optimization
+        
+    section Production Skills (1 month)
+        Enterprise Features: Security best practices
+                           : API versioning
+                           : Monitoring & logging
+                           : Scalable architecture
+```
+
+### 🛠️ Резюме вашего инструментария для Full-Stack разработки
+
+После завершения этого урока у вас есть:
+- **Мастерство работы с DOM**: Точное выделение и манипуляция элементами
+- **Экспертность в хранении данных**: Управление постоянными данными с помощью localStorage
+- **Интеграция API**: Получение данных в реальном времени и аутентификация
+- **Асинхронное программирование**: Неблокирующие операции с использованием современного JavaScript
+- **Обработка ошибок**: Надежные приложения, которые корректно справляются с ошибками
+- **Удобство использования**: Состояния загрузки, проверка данных и плавные взаимодействия
+- **Современные шаблоны**: Fetch API, async/await и функции ES6+
+
+**Профессиональные навыки, которые вы приобрели:** Вы реализовали шаблоны, используемые в:
+- **Веб-приложениях**: Одностраничные приложения с внешними источниками данных
+- **Мобильной разработке**: Приложения, работающие с API и поддерживающие оффлайн-режим
+- **Программном обеспечении для ПК**: Приложения на Electron с постоянным хранилищем
+- **Корпоративных системах**: Аутентификация, кэширование и обработка ошибок
+- **Современных фреймворках**: Шаблоны управления данными в React/Vue/Angular
+
+**Следующий уровень:** Вы готовы изучать такие продвинутые темы, как стратегии кэширования, соединения WebSocket в реальном времени или сложное управление состоянием!
+
+## Задание
+
+[Примите API](assignment.md)
+
+---
+
+**Отказ от ответственности**:  
+Этот документ был переведен с использованием сервиса автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Хотя мы стремимся к точности, пожалуйста, учитывайте, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его родном языке следует считать авторитетным источником. Для получения критически важной информации рекомендуется профессиональный перевод человеком. Мы не несем ответственности за любые недоразумения или неправильные интерпретации, возникающие в результате использования данного перевода.

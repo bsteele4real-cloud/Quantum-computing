@@ -1,0 +1,32 @@
+# Extensia de browser Carbon Trigger: Cod finalizat
+
+Construiește o extensie de browser care utilizează API-ul CO2 Signal de la tmrow pentru a urmări consumul de energie și pentru a afișa, ca un memento, cât de intens este consumul de energie în regiunea ta. Folosind această extensie în mod ad-hoc, poți lua decizii informate cu privire la activitățile tale pe baza acestor informații.
+
+![extension screenshot](../../../../../translated_images/ro/extension-screenshot.0e7f5bfa110e92e3.webp)
+
+## Introducere
+
+Este necesar să ai [npm](https://npmjs.com) instalat. Descarcă o copie a acestui cod într-un folder de pe computerul tău.
+
+Instalează toate pachetele necesare.
+
+```
+npm install
+```
+
+Construiește extensia folosind webpack.
+
+```
+npm run build
+```
+
+Pentru a instala pe Edge, găsește panoul „Extensii” din meniul „trei puncte” din colțul din dreapta sus al browserului. De acolo, selectează „Load Unpacked” pentru a încărca noua extensie. Când apare promptul, deschide folderul „dist” și extensia va fi încărcată. Pentru utilizare, vei avea nevoie de o cheie API pentru CO2 Signal ([obține una aici prin email](https://www.co2signal.com/) - introdu adresa ta de email în caseta de pe această pagină) și de [codul corespunzător regiunii tale](http://api.electricitymap.org/v3/zones) de pe [Electricity Map](https://www.electricitymap.org/map) (de exemplu, pentru Boston, folosește 'US-NEISO').
+
+![installing](../../../../../translated_images/ro/install-on-edge.78634f02842c4828.webp)
+
+După ce introduci cheia API și regiunea în interfața extensiei, punctul colorat afișat în bara extensiei browserului se va schimba pentru a reflecta consumul de energie din regiunea ta. Acesta îți va indica ce tip de activități care necesită energie sunt potrivite în acel moment. Conceptul acestui sistem de „puncte” mi-a fost inspirat de extensia [Energy Lollipop](https://energylollipop.com/) pentru emisiile din California.
+
+---
+
+**Declinare de responsabilitate**:  
+Acest document a fost tradus folosind serviciul de traducere AI [Co-op Translator](https://github.com/Azure/co-op-translator). Deși ne străduim să asigurăm acuratețea, vă rugăm să rețineți că traducerile automate pot conține erori sau inexactități. Documentul original în limba sa natală ar trebui considerat sursa autoritară. Pentru informații critice, se recomandă traducerea profesională realizată de un specialist uman. Nu ne asumăm responsabilitatea pentru eventualele neînțelegeri sau interpretări greșite care pot apărea din utilizarea acestei traduceri.

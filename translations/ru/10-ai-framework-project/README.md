@@ -1,0 +1,1146 @@
+# Фреймворк для ИИ
+
+Чувствуете себя подавленным, пытаясь создать приложения на основе ИИ с нуля? Вы не одиноки! Фреймворки для ИИ — это как швейцарский нож для разработки ИИ: мощные инструменты, которые экономят время и избавляют от головной боли при создании интеллектуальных приложений. Представьте себе фреймворк для ИИ как хорошо организованную библиотеку: он предоставляет готовые компоненты, стандартизированные API и умные абстракции, чтобы вы могли сосредоточиться на решении задач, а не на деталях реализации.
+
+В этом уроке мы рассмотрим, как такие фреймворки, как LangChain, могут превратить сложные задачи интеграции ИИ в чистый и понятный код. Вы узнаете, как справляться с реальными вызовами, такими как отслеживание разговоров, реализация вызова инструментов и управление различными моделями ИИ через единый интерфейс.
+
+К концу урока вы будете знать, когда стоит использовать фреймворки вместо прямых вызовов API, как эффективно применять их абстракции и как создавать приложения на основе ИИ, готовые к использованию в реальном мире. Давайте узнаем, что фреймворки для ИИ могут сделать для ваших проектов.
+
+## ⚡ Что можно сделать за следующие 5 минут
+
+**Быстрый старт для занятых разработчиков**
+
+```mermaid
+flowchart LR
+    A[⚡ 5 minutes] --> B[Install LangChain]
+    B --> C[Create ChatOpenAI client]
+    C --> D[Send first prompt]
+    D --> E[See framework power]
+```
+
+- **Минута 1**: Установите LangChain: `pip install langchain langchain-openai`
+- **Минута 2**: Настройте ваш GitHub токен и импортируйте клиент ChatOpenAI
+- **Минута 3**: Создайте простой разговор с системными и пользовательскими сообщениями
+- **Минута 4**: Добавьте базовый инструмент (например, функцию сложения) и посмотрите, как ИИ вызывает инструмент
+- **Минута 5**: Оцените разницу между прямыми вызовами API и абстракцией фреймворка
+
+**Код для быстрого теста**:
+```python
+from langchain_openai import ChatOpenAI
+from langchain_core.messages import SystemMessage, HumanMessage
+
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini"
+)
+
+response = llm.invoke([
+    SystemMessage(content="You are a helpful coding assistant"),
+    HumanMessage(content="Explain Python functions briefly")
+])
+print(response.content)
+```
+
+**Почему это важно**: За 5 минут вы увидите, как фреймворки для ИИ превращают сложную интеграцию ИИ в простые вызовы методов. Это основа, которая поддерживает производственные приложения на основе ИИ.
+
+## Почему стоит выбрать фреймворк?
+
+Итак, вы готовы создать приложение на основе ИИ — это здорово! Но вот в чем дело: у вас есть несколько различных путей, которые вы можете выбрать, и у каждого из них есть свои плюсы и минусы. Это как выбирать между ходьбой, велосипедом или машиной, чтобы добраться до места — все они приведут вас к цели, но опыт (и усилия) будут совершенно разными.
+
+Давайте разберем три основных способа интеграции ИИ в ваши проекты:
+
+| Подход | Преимущества | Лучше всего подходит для | Особенности |
+|--------|--------------|--------------------------|-------------|
+| **Прямые HTTP-запросы** | Полный контроль, отсутствие зависимостей | Простые запросы, изучение основ | Более многословный код, ручная обработка ошибок |
+| **Интеграция SDK** | Меньше шаблонного кода, оптимизация под конкретные модели | Приложения с одной моделью | Ограничено конкретными провайдерами |
+| **Фреймворки для ИИ** | Унифицированный API, встроенные абстракции | Приложения с несколькими моделями, сложные рабочие процессы | Кривая обучения, возможная чрезмерная абстракция |
+
+### Преимущества фреймворков на практике
+
+```mermaid
+graph TD
+    A[Your Application] --> B[AI Framework]
+    B --> C[OpenAI GPT]
+    B --> D[Anthropic Claude]
+    B --> E[GitHub Models]
+    B --> F[Local Models]
+    
+    B --> G[Built-in Tools]
+    G --> H[Memory Management]
+    G --> I[Conversation History]
+    G --> J[Function Calling]
+    G --> K[Error Handling]
+```
+
+**Почему фреймворки важны:**
+- **Объединяют** нескольких провайдеров ИИ в одном интерфейсе
+- **Автоматически управляют** памятью разговоров
+- **Предоставляют** готовые инструменты для распространенных задач, таких как встраивание и вызов функций
+- **Управляют** обработкой ошибок и логикой повторных попыток
+- **Превращают** сложные рабочие процессы в понятные вызовы методов
+
+> 💡 **Полезный совет**: Используйте фреймворки при переключении между различными моделями ИИ или создании сложных функций, таких как агенты, память или вызов инструментов. Используйте прямые API, когда изучаете основы или создаете простые, узконаправленные приложения.
+
+**Итог**: Как выбор между специализированными инструментами мастера и полноценной мастерской, все зависит от того, какой инструмент лучше подходит для задачи. Фреймворки отлично подходят для сложных приложений с богатым функционалом, а прямые API — для простых случаев использования.
+
+## 🗺️ Ваш путь к мастерству в разработке фреймворков для ИИ
+
+```mermaid
+journey
+    title From Raw APIs to Production AI Applications
+    section Framework Foundations
+      Understand abstraction benefits: 4: You
+      Master LangChain basics: 6: You
+      Compare approaches: 7: You
+    section Conversation Systems
+      Build chat interfaces: 5: You
+      Implement memory patterns: 7: You
+      Handle streaming responses: 8: You
+    section Advanced Features
+      Create custom tools: 6: You
+      Master structured output: 8: You
+      Build document systems: 8: You
+    section Production Applications
+      Combine all features: 7: You
+      Handle error scenarios: 8: You
+      Deploy complete systems: 9: You
+```
+
+**Цель вашего пути**: К концу этого урока вы освоите разработку приложений на основе фреймворков для ИИ и сможете создавать сложные, готовые к производству приложения, сопоставимые с коммерческими помощниками на основе ИИ.
+
+## Введение
+
+В этом уроке мы научимся:
+
+- Использовать общий фреймворк для ИИ.
+- Решать распространенные проблемы, такие как разговоры в чате, использование инструментов, память и контекст.
+- Использовать это для создания приложений на основе ИИ.
+
+## 🧠 Экосистема разработки фреймворков для ИИ
+
+```mermaid
+mindmap
+  root((AI Frameworks))
+    Abstraction Benefits
+      Code Simplification
+        Unified APIs
+        Built-in Error Handling
+        Consistent Patterns
+        Reduced Boilerplate
+      Multi-Model Support
+        Provider Agnostic
+        Easy Switching
+        Fallback Options
+        Cost Optimization
+    Core Components
+      Conversation Management
+        Message Types
+        Memory Systems
+        Context Tracking
+        History Persistence
+      Tool Integration
+        Function Calling
+        API Connections
+        Custom Tools
+        Workflow Automation
+    Advanced Features
+      Structured Output
+        Pydantic Models
+        JSON Schemas
+        Type Safety
+        Validation Rules
+      Document Processing
+        Embeddings
+        Vector Stores
+        Similarity Search
+        RAG Systems
+    Production Patterns
+      Application Architecture
+        Modular Design
+        Error Boundaries
+        Async Operations
+        State Management
+      Deployment Strategies
+        Scalability
+        Monitoring
+        Performance
+        Security
+```
+
+**Основной принцип**: Фреймворки для ИИ абстрагируют сложность, предоставляя мощные абстракции для управления разговорами, интеграции инструментов и обработки документов, что позволяет разработчикам создавать сложные приложения на основе ИИ с чистым и поддерживаемым кодом.
+
+## Ваш первый запрос к ИИ
+
+Давайте начнем с основ, создав ваше первое приложение на основе ИИ, которое отправляет вопрос и получает ответ. Как Архимед, открывший принцип вытеснения в своей ванне, иногда самые простые наблюдения приводят к самым мощным открытиям — и фреймворки делают эти открытия доступными.
+
+### Настройка LangChain с моделями GitHub
+
+Мы будем использовать LangChain для подключения к моделям GitHub, что довольно круто, потому что это дает вам бесплатный доступ к различным моделям ИИ. Лучшая часть? Вам нужно всего лишь несколько простых параметров конфигурации, чтобы начать:
+
+```python
+from langchain_openai import ChatOpenAI
+import os
+
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini",
+)
+
+# Send a simple prompt
+response = llm.invoke("What's the capital of France?")
+print(response.content)
+```
+
+**Давайте разберем, что здесь происходит:**
+- **Создается** клиент LangChain с использованием класса `ChatOpenAI` — это ваш шлюз к ИИ!
+- **Настраивается** подключение к моделям GitHub с вашим токеном аутентификации
+- **Указывается**, какую модель ИИ использовать (`gpt-4o-mini`) — представьте, что вы выбираете своего помощника ИИ
+- **Отправляется** ваш вопрос с помощью метода `invoke()` — здесь происходит магия
+- **Извлекается** и отображается ответ — и voilà, вы общаетесь с ИИ!
+
+> 🔧 **Примечание по настройке**: Если вы используете GitHub Codespaces, вам повезло — `GITHUB_TOKEN` уже настроен! Работаете локально? Не переживайте, вам просто нужно создать персональный токен доступа с нужными разрешениями.
+
+**Ожидаемый результат:**
+```text
+The capital of France is Paris.
+```
+
+```mermaid
+sequenceDiagram
+    participant App as Your Python App
+    participant LC as LangChain
+    participant GM as GitHub Models
+    participant AI as GPT-4o-mini
+    
+    App->>LC: llm.invoke("What's the capital of France?")
+    LC->>GM: HTTP request with prompt
+    GM->>AI: Process prompt
+    AI->>GM: Generated response
+    GM->>LC: Return response
+    LC->>App: response.content
+```
+
+## Создание разговорного ИИ
+
+Первый пример демонстрирует основы, но это всего лишь один обмен — вы задаете вопрос, получаете ответ, и на этом все. В реальных приложениях вы хотите, чтобы ваш ИИ запоминал, о чем вы говорили, как Ватсон и Холмс строили свои расследования на основе предыдущих разговоров.
+
+Вот где LangChain становится особенно полезным. Он предоставляет различные типы сообщений, которые помогают структурировать разговоры и позволяют придать вашему ИИ индивидуальность. Вы будете создавать чат-опыт, который сохраняет контекст и характер.
+
+### Понимание типов сообщений
+
+Думайте о типах сообщений как о разных "ролях", которые участники играют в разговоре. LangChain использует различные классы сообщений, чтобы отслеживать, кто что говорит:
+
+| Тип сообщения | Назначение | Пример использования |
+|---------------|------------|----------------------|
+| `SystemMessage` | Определяет личность и поведение ИИ | "Вы полезный помощник по программированию" |
+| `HumanMessage` | Представляет ввод пользователя | "Объясните, как работают функции" |
+| `AIMessage` | Сохраняет ответы ИИ | Предыдущие ответы ИИ в разговоре |
+
+### Создание вашего первого разговора
+
+Давайте создадим разговор, где наш ИИ принимает определенную роль. Пусть он воплотит капитана Пикарда — персонажа, известного своей дипломатической мудростью и лидерством:
+
+```python
+messages = [
+    SystemMessage(content="You are Captain Picard of the Starship Enterprise"),
+    HumanMessage(content="Tell me about you"),
+]
+```
+
+**Разбор настройки разговора:**
+- **Устанавливает** роль и личность ИИ через `SystemMessage`
+- **Предоставляет** начальный запрос пользователя через `HumanMessage`
+- **Создает** основу для многократного обмена сообщениями
+
+Полный код для этого примера выглядит так:
+
+```python
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_openai import ChatOpenAI
+import os
+
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini",
+)
+
+messages = [
+    SystemMessage(content="You are Captain Picard of the Starship Enterprise"),
+    HumanMessage(content="Tell me about you"),
+]
+
+
+# works
+response  = llm.invoke(messages)
+print(response.content)
+```
+
+Вы должны увидеть результат, похожий на:
+
+```text
+I am Captain Jean-Luc Picard, the commanding officer of the USS Enterprise (NCC-1701-D), a starship in the United Federation of Planets. My primary mission is to explore new worlds, seek out new life and new civilizations, and boldly go where no one has gone before. 
+
+I believe in the importance of diplomacy, reason, and the pursuit of knowledge. My crew is diverse and skilled, and we often face challenges that test our resolve, ethics, and ingenuity. Throughout my career, I have encountered numerous species, grappled with complex moral dilemmas, and have consistently sought peaceful solutions to conflicts.
+
+I hold the ideals of the Federation close to my heart, believing in the importance of cooperation, understanding, and respect for all sentient beings. My experiences have shaped my leadership style, and I strive to be a thoughtful and just captain. How may I assist you further?
+```
+
+Чтобы сохранить непрерывность разговора (вместо сброса контекста каждый раз), вам нужно продолжать добавлять ответы в список сообщений. Как устные традиции, которые сохраняли истории через поколения, этот подход создает долговременную память:
+
+```python
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_openai import ChatOpenAI
+import os
+
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini",
+)
+
+messages = [
+    SystemMessage(content="You are Captain Picard of the Starship Enterprise"),
+    HumanMessage(content="Tell me about you"),
+]
+
+
+# works
+response  = llm.invoke(messages)
+
+print(response.content)
+
+print("---- Next ----")
+
+messages.append(response)
+messages.append(HumanMessage(content="Now that I know about you, I'm Chris, can I be in your crew?"))
+
+response  = llm.invoke(messages)
+
+print(response.content)
+
+```
+
+Довольно круто, правда? Что здесь происходит, так это то, что мы вызываем LLM дважды — сначала только с нашими первоначальными двумя сообщениями, а затем снова с полной историей разговора. Это как если бы ИИ действительно следил за нашим чатом!
+
+Когда вы выполните этот код, вы получите второй ответ, который будет звучать примерно так:
+
+```text
+Welcome aboard, Chris! It's always a pleasure to meet those who share a passion for exploration and discovery. While I cannot formally offer you a position on the Enterprise right now, I encourage you to pursue your aspirations. We are always in need of talented individuals with diverse skills and backgrounds. 
+
+If you are interested in space exploration, consider education and training in the sciences, engineering, or diplomacy. The values of curiosity, resilience, and teamwork are crucial in Starfleet. Should you ever find yourself on a starship, remember to uphold the principles of the Federation: peace, understanding, and respect for all beings. Your journey can lead you to remarkable adventures, whether in the stars or on the ground. Engage!
+```
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant App
+    participant LangChain
+    participant AI
+    
+    User->>App: "Tell me about you"
+    App->>LangChain: [SystemMessage, HumanMessage]
+    LangChain->>AI: Formatted conversation
+    AI->>LangChain: Captain Picard response
+    LangChain->>App: AIMessage object
+    App->>User: Display response
+    
+    Note over App: Add AIMessage to conversation
+    
+    User->>App: "Can I join your crew?"
+    App->>LangChain: [SystemMessage, HumanMessage, AIMessage, HumanMessage]
+    LangChain->>AI: Full conversation context
+    AI->>LangChain: Contextual response
+    LangChain->>App: New AIMessage
+    App->>User: Display contextual response
+```
+
+Я приму это за "возможно" ;)
+
+## Потоковые ответы
+
+Замечали, как ChatGPT "печатает" свои ответы в реальном времени? Это потоковая передача в действии. Как наблюдать за работой искусного каллиграфа — видеть, как символы появляются штрих за штрихом, а не материализуются мгновенно — потоковая передача делает взаимодействие более естественным и обеспечивает немедленную обратную связь.
+
+### Реализация потоковой передачи с LangChain
+
+```python
+from langchain_openai import ChatOpenAI
+import os
+
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini",
+    streaming=True
+)
+
+# Stream the response
+for chunk in llm.stream("Write a short story about a robot learning to code"):
+    print(chunk.content, end="", flush=True)
+```
+
+**Почему потоковая передача крута:**
+- **Показывает** контент по мере его создания — больше никакого неловкого ожидания!
+- **Создает** ощущение, что что-то действительно происходит
+- **Кажется** быстрее, даже если технически это не так
+- **Позволяет** пользователям начать чтение, пока ИИ еще "думает"
+
+> 💡 **Совет по пользовательскому опыту**: Потоковая передача особенно полезна, когда вы работаете с длинными ответами, такими как объяснения кода, творческое письмо или подробные учебные материалы. Ваши пользователи оценят возможность видеть прогресс вместо того, чтобы смотреть на пустой экран!
+
+### 🎯 Педагогическая проверка: преимущества абстракции фреймворков
+
+**Пауза и размышление**: Вы только что испытали мощь абстракций фреймворков для ИИ. Сравните то, что вы узнали, с прямыми вызовами API из предыдущих уроков.
+
+**Быстрая самооценка**:
+- Можете ли вы объяснить, как LangChain упрощает управление разговорами по сравнению с ручным отслеживанием сообщений?
+- В чем разница между методами `invoke()` и `stream()`, и когда вы бы использовали каждый из них?
+- Как система типов сообщений фреймворка улучшает организацию кода?
+
+**Связь с реальным миром**: Шаблоны абстракции, которые вы изучили (типы сообщений, интерфейсы потоковой передачи, память разговоров), используются в каждом крупном приложении на основе ИИ — от интерфейса ChatGPT до помощи в кодировании GitHub Copilot. Вы осваиваете те же архитектурные шаблоны, которые используют профессиональные команды разработчиков ИИ.
+
+**Вопрос для размышления**: Как бы вы спроектировали абстракцию фреймворка для работы с различными провайдерами моделей ИИ (OpenAI, Anthropic, Google) через единый интерфейс? Учитывайте преимущества и недостатки.
+
+## Шаблоны запросов
+
+Шаблоны запросов работают как риторические структуры, используемые в классической ораторской практике — подумайте, как Цицерон адаптировал свои речевые модели для разных аудиторий, сохраняя при этом одну и ту же убедительную основу. Они позволяют создавать повторно используемые запросы, где вы можете заменять различные части информации, не переписывая все с нуля. Как только вы настроите шаблон, вам нужно просто заполнить переменные нужными значениями.
+
+### Создание повторно используемых запросов
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+
+# Define a template for code explanations
+template = ChatPromptTemplate.from_messages([
+    ("system", "You are an expert programming instructor. Explain concepts clearly with examples."),
+    ("human", "Explain {concept} in {language} with a practical example for {skill_level} developers")
+])
+
+# Use the template with different values
+questions = [
+    {"concept": "functions", "language": "JavaScript", "skill_level": "beginner"},
+    {"concept": "classes", "language": "Python", "skill_level": "intermediate"},
+    {"concept": "async/await", "language": "JavaScript", "skill_level": "advanced"}
+]
+
+for question in questions:
+    prompt = template.format_messages(**question)
+    response = llm.invoke(prompt)
+    print(f"Topic: {question['concept']}\n{response.content}\n---\n")
+```
+
+**Почему вам понравится использовать шаблоны:**
+- **Обеспечивает** единообразие запросов во всем вашем приложении
+- **Больше никакой** путаницы со строками — только чистые, простые переменные
+- **Ваш ИИ** ведет себя предсказуемо, потому что структура остается неизменной
+- **Обновления** становятся проще — измените шаблон один раз, и он исправлен везде
+
+## Структурированный вывод
+
+Когда-нибудь вас раздражало, что ответы ИИ приходят в виде неструктурированного текста? Структурированный вывод — это как научить ваш ИИ следовать систематическому подходу, который использовал Линней для классификации биологических видов — организованный, предсказуемый и удобный для работы. Вы можете запросить JSON, определенные структуры данных или любой нужный вам формат.
+
+### Определение схем вывода
+
+```python
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.output_parsers import JsonOutputParser
+from pydantic import BaseModel, Field
+
+class CodeReview(BaseModel):
+    score: int = Field(description="Code quality score from 1-10")
+    strengths: list[str] = Field(description="List of code strengths")
+    improvements: list[str] = Field(description="List of suggested improvements")
+    overall_feedback: str = Field(description="Summary feedback")
+
+# Set up the parser
+parser = JsonOutputParser(pydantic_object=CodeReview)
+
+# Create prompt with format instructions
+prompt = ChatPromptTemplate.from_messages([
+    ("system", "You are a code reviewer. {format_instructions}"),
+    ("human", "Review this code: {code}")
+])
+
+# Format the prompt with instructions
+chain = prompt | llm | parser
+
+# Get structured response
+code_sample = """
+def calculate_average(numbers):
+    return sum(numbers) / len(numbers)
+"""
+
+result = chain.invoke({
+    "code": code_sample,
+    "format_instructions": parser.get_format_instructions()
+})
+
+print(f"Score: {result['score']}")
+print(f"Strengths: {', '.join(result['strengths'])}")
+```
+
+**Почему структурированный вывод — это прорыв:**
+- **Больше никакой** догадки о формате ответа — он всегда будет предсказуемым
+- **Легко интегрируется** с вашими базами данных и API без лишней работы
+- **Обнаруживает** странные ответы ИИ до того, как они сломают ваше приложение
+- **Делает** ваш код чище, потому что вы точно знаете, с чем работаете
+
+## Вызов инструментов
+
+Теперь мы подошли к одной из самых мощных функций: инструменты. Это то, как вы даете вашему ИИ практические возможности, выходящие за рамки простого разговора. Как средневековые гильдии разрабатывали специализированные инструменты для конкретных ремесел, вы можете снабдить ваш ИИ целенаправленными инструментами. Вы описываете доступные инструменты, и когда кто-то запрашивает что-то подходящее, ваш ИИ может выполнить действие.
+
+### Использование Python
+
+Давайте добавим несколько инструментов следующим образом:
+
+```python
+from typing_extensions import Annotated, TypedDict
+
+class add(TypedDict):
+    """Add two integers."""
+
+    # Annotations must have the type and can optionally include a default value and description (in that order).
+    a: Annotated[int, ..., "First integer"]
+    b: Annotated[int, ..., "Second integer"]
+
+tools = [add]
+
+functions = {
+    "add": lambda a, b: a + b
+}
+```
+
+Что здесь происходит? Мы создаем чертеж для инструмента под названием `add`. Наследуя от `TypedDict` и используя типы `Annotated` для `a` и `b`, мы даем LLM четкое представление о том, что делает этот инструмент и что ему нужно. Словарь `functions` — это как наш ящик с инструментами, который говорит нашему коду, что именно делать, когда ИИ решает использовать определенный инструмент.
+
+Давайте посмотрим, как мы вызываем LLM с этим инструментом:
+
+```python
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini",
+)
+
+llm_with_tools = llm.bind_tools(tools)
+```
+
+Здесь мы вызываем `bind_tools` с массивом `tools`, и таким образом LLM `llm_with_tools` теперь знает об этом инструменте.
+
+Чтобы использовать этот новый LLM, мы можем написать следующий код:
+
+```python
+query = "What is 3 + 12?"
+
+res = llm_with_tools.invoke(query)
+if(res.tool_calls):
+    for tool in res.tool_calls:
+        print("TOOL CALL: ", functions[tool["name"]](../../../10-ai-framework-project/**tool["args"]))
+print("CONTENT: ",res.content)
+```
+
+Теперь, когда мы вызываем `invoke` на этом новом LLM, который имеет инструменты, возможно, свойство `tool_calls` будет заполнено. Если это так, любой идентифицированный инструмент имеет свойства `name` и `args`, которые идентифицируют, какой инструмент следует вызвать и с какими аргументами. Полный код выглядит так:
+
+```python
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_openai import ChatOpenAI
+import os
+from typing_extensions import Annotated, TypedDict
+
+class add(TypedDict):
+    """Add two integers."""
+
+    # Annotations must have the type and can optionally include a default value and description (in that order).
+    a: Annotated[int, ..., "First integer"]
+    b: Annotated[int, ..., "Second integer"]
+
+tools = [add]
+
+functions = {
+    "add": lambda a, b: a + b
+}
+
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini",
+)
+
+llm_with_tools = llm.bind_tools(tools)
+
+query = "What is 3 + 12?"
+
+res = llm_with_tools.invoke(query)
+if(res.tool_calls):
+    for tool in res.tool_calls:
+        print("TOOL CALL: ", functions[tool["name"]](../../../10-ai-framework-project/**tool["args"]))
+print("CONTENT: ",res.content)
+```
+
+Запустив этот код, вы должны увидеть результат, похожий на:
+
+```text
+TOOL CALL:  15
+CONTENT: 
+```
+
+ИИ рассмотрел "Что такое 3 + 12" и распознал это как задачу для инструмента `add`. Как искусный библиотекарь знает, к какой справке обратиться в зависимости от типа вопроса, он сделал это определение, исходя из названия инструмента, его описания и спецификаций полей. Результат 15 получен из выполнения инструмента через наш словарь `functions`:
+
+```python
+print("TOOL CALL: ", functions[tool["name"]](../../../10-ai-framework-project/**tool["args"]))
+```
+
+### Более интересный инструмент, который вызывает веб-API
+Добавление чисел демонстрирует концепцию, но настоящие инструменты обычно выполняют более сложные операции, такие как вызов веб-API. Давайте расширим наш пример, чтобы AI мог получать контент из интернета — подобно тому, как телеграфисты когда-то соединяли удаленные точки:
+
+```python
+class joke(TypedDict):
+    """Tell a joke."""
+
+    # Annotations must have the type and can optionally include a default value and description (in that order).
+    category: Annotated[str, ..., "The joke category"]
+
+def get_joke(category: str) -> str:
+    response = requests.get(f"https://api.chucknorris.io/jokes/random?category={category}", headers={"Accept": "application/json"})
+    if response.status_code == 200:
+        return response.json().get("value", f"Here's a {category} joke!")
+    return f"Here's a {category} joke!"
+
+functions = {
+    "add": lambda a, b: a + b,
+    "joke": lambda category: get_joke(category)
+}
+
+query = "Tell me a joke about animals"
+
+# the rest of the code is the same
+```
+
+Теперь, если вы запустите этот код, вы получите ответ, похожий на:
+
+```text
+TOOL CALL:  Chuck Norris once rode a nine foot grizzly bear through an automatic car wash, instead of taking a shower.
+CONTENT:  
+```
+
+```mermaid
+flowchart TD
+    A[User Query: "Tell me a joke about animals"] --> B[LangChain Analysis]
+    B --> C{Tool Available?}
+    C -->|Yes| D[Select joke tool]
+    C -->|No| E[Generate direct response]
+    
+    D --> F[Extract Parameters]
+    F --> G[Call joke(category="animals")]
+    G --> H[API Request to chucknorris.io]
+    H --> I[Return joke content]
+    I --> J[Display to user]
+    
+    E --> K[AI-generated response]
+    K --> J
+    
+    subgraph "Tool Definition Layer"
+        L[TypedDict Schema]
+        M[Function Implementation]
+        N[Parameter Validation]
+    end
+    
+    D --> L
+    F --> N
+    G --> M
+```
+
+Вот полный код:
+
+```python
+from langchain_openai import ChatOpenAI
+import requests
+import os
+from typing_extensions import Annotated, TypedDict
+
+class add(TypedDict):
+    """Add two integers."""
+
+    # Annotations must have the type and can optionally include a default value and description (in that order).
+    a: Annotated[int, ..., "First integer"]
+    b: Annotated[int, ..., "Second integer"]
+
+class joke(TypedDict):
+    """Tell a joke."""
+
+    # Annotations must have the type and can optionally include a default value and description (in that order).
+    category: Annotated[str, ..., "The joke category"]
+
+tools = [add, joke]
+
+def get_joke(category: str) -> str:
+    response = requests.get(f"https://api.chucknorris.io/jokes/random?category={category}", headers={"Accept": "application/json"})
+    if response.status_code == 200:
+        return response.json().get("value", f"Here's a {category} joke!")
+    return f"Here's a {category} joke!"
+
+functions = {
+    "add": lambda a, b: a + b,
+    "joke": lambda category: get_joke(category)
+}
+
+llm = ChatOpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="openai/gpt-4o-mini",
+)
+
+llm_with_tools = llm.bind_tools(tools)
+
+query = "Tell me a joke about animals"
+
+res = llm_with_tools.invoke(query)
+if(res.tool_calls):
+    for tool in res.tool_calls:
+        # print("TOOL CALL: ", tool)
+        print("TOOL CALL: ", functions[tool["name"]](../../../10-ai-framework-project/**tool["args"]))
+print("CONTENT: ",res.content)
+```
+
+## Встраивание и обработка документов
+
+Встраивания представляют собой одно из самых изящных решений в современной AI. Представьте, что вы можете взять любой текст и преобразовать его в числовые координаты, которые отражают его смысл. Именно это делают встраивания — они превращают текст в точки в многомерном пространстве, где схожие концепции группируются вместе. Это похоже на создание системы координат для идей, напоминающей то, как Менделеев организовал периодическую таблицу по атомным свойствам.
+
+### Создание и использование встраиваний
+
+```python
+from langchain_openai import OpenAIEmbeddings
+from langchain_community.vectorstores import FAISS
+from langchain_community.document_loaders import TextLoader
+from langchain.text_splitter import CharacterTextSplitter
+
+# Initialize embeddings
+embeddings = OpenAIEmbeddings(
+    api_key=os.environ["GITHUB_TOKEN"],
+    base_url="https://models.github.ai/inference",
+    model="text-embedding-3-small"
+)
+
+# Load and split documents
+loader = TextLoader("documentation.txt")
+documents = loader.load()
+
+text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
+texts = text_splitter.split_documents(documents)
+
+# Create vector store
+vectorstore = FAISS.from_documents(texts, embeddings)
+
+# Perform similarity search
+query = "How do I handle user authentication?"
+similar_docs = vectorstore.similarity_search(query, k=3)
+
+for doc in similar_docs:
+    print(f"Relevant content: {doc.page_content[:200]}...")
+```
+
+### Загрузчики документов для различных форматов
+
+```python
+from langchain_community.document_loaders import (
+    PyPDFLoader,
+    CSVLoader,
+    JSONLoader,
+    WebBaseLoader
+)
+
+# Load different document types
+pdf_loader = PyPDFLoader("manual.pdf")
+csv_loader = CSVLoader("data.csv")
+json_loader = JSONLoader("config.json")
+web_loader = WebBaseLoader("https://example.com/docs")
+
+# Process all documents
+all_documents = []
+for loader in [pdf_loader, csv_loader, json_loader, web_loader]:
+    docs = loader.load()
+    all_documents.extend(docs)
+```
+
+**Что можно делать с встраиваниями:**
+- **Создавать** поиск, который действительно понимает ваш запрос, а не просто сопоставляет ключевые слова
+- **Разрабатывать** AI, который может отвечать на вопросы о ваших документах
+- **Создавать** рекомендательные системы, предлагающие действительно релевантный контент
+- **Автоматически** организовывать и классифицировать ваш контент
+
+```mermaid
+flowchart LR
+    A[Documents] --> B[Text Splitter]
+    B --> C[Create Embeddings]
+    C --> D[Vector Store]
+    
+    E[User Query] --> F[Query Embedding]
+    F --> G[Similarity Search]
+    G --> D
+    D --> H[Relevant Documents]
+    H --> I[AI Response]
+    
+    subgraph "Vector Space"
+        J[Document A: [0.1, 0.8, 0.3...]]
+        K[Document B: [0.2, 0.7, 0.4...]]
+        L[Query: [0.15, 0.75, 0.35...]]
+    end
+    
+    C --> J
+    C --> K
+    F --> L
+    G --> J
+    G --> K
+```
+
+## Создание полноценного AI-приложения
+
+Теперь мы интегрируем все, что вы узнали, в комплексное приложение — помощник для программирования, который может отвечать на вопросы, использовать инструменты и сохранять память о беседе. Как печатный станок, который объединил существующие технологии (подвижный шрифт, чернила, бумагу и пресс) в нечто преобразующее, мы объединим наши AI-компоненты в нечто практичное и полезное.
+
+### Пример полного приложения
+
+```python
+from langchain_openai import ChatOpenAI, OpenAIEmbeddings
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.messages import HumanMessage, SystemMessage, AIMessage
+from langchain_community.vectorstores import FAISS
+from typing_extensions import Annotated, TypedDict
+import os
+import requests
+
+class CodingAssistant:
+    def __init__(self):
+        self.llm = ChatOpenAI(
+            api_key=os.environ["GITHUB_TOKEN"],
+            base_url="https://models.github.ai/inference",
+            model="openai/gpt-4o-mini"
+        )
+        
+        self.conversation_history = [
+            SystemMessage(content="""You are an expert coding assistant. 
+            Help users learn programming concepts, debug code, and write better software.
+            Use tools when needed and maintain a helpful, encouraging tone.""")
+        ]
+        
+        # Define tools
+        self.setup_tools()
+    
+    def setup_tools(self):
+        class web_search(TypedDict):
+            """Search for programming documentation or examples."""
+            query: Annotated[str, "Search query for programming help"]
+        
+        class code_formatter(TypedDict):
+            """Format and validate code snippets."""
+            code: Annotated[str, "Code to format"]
+            language: Annotated[str, "Programming language"]
+        
+        self.tools = [web_search, code_formatter]
+        self.llm_with_tools = self.llm.bind_tools(self.tools)
+    
+    def chat(self, user_input: str):
+        # Add user message to conversation
+        self.conversation_history.append(HumanMessage(content=user_input))
+        
+        # Get AI response
+        response = self.llm_with_tools.invoke(self.conversation_history)
+        
+        # Handle tool calls if any
+        if response.tool_calls:
+            for tool_call in response.tool_calls:
+                tool_result = self.execute_tool(tool_call)
+                print(f"🔧 Tool used: {tool_call['name']}")
+                print(f"📊 Result: {tool_result}")
+        
+        # Add AI response to conversation
+        self.conversation_history.append(response)
+        
+        return response.content
+    
+    def execute_tool(self, tool_call):
+        tool_name = tool_call['name']
+        args = tool_call['args']
+        
+        if tool_name == 'web_search':
+            return f"Found documentation for: {args['query']}"
+        elif tool_name == 'code_formatter':
+            return f"Formatted {args['language']} code: {args['code'][:50]}..."
+        
+        return "Tool execution completed"
+
+# Usage example
+assistant = CodingAssistant()
+
+print("🤖 Coding Assistant Ready! Type 'quit' to exit.\n")
+
+while True:
+    user_input = input("You: ")
+    if user_input.lower() == 'quit':
+        break
+    
+    response = assistant.chat(user_input)
+    print(f"🤖 Assistant: {response}\n")
+```
+
+**Архитектура приложения:**
+
+```mermaid
+graph TD
+    A[User Input] --> B[Coding Assistant]
+    B --> C[Conversation Memory]
+    B --> D[Tool Detection]
+    B --> E[LLM Processing]
+    
+    D --> F[Web Search Tool]
+    D --> G[Code Formatter Tool]
+    
+    E --> H[Response Generation]
+    F --> H
+    G --> H
+    
+    H --> I[User Interface]
+    H --> C
+```
+
+**Ключевые функции, которые мы реализовали:**
+- **Запоминает** весь ваш разговор для сохранения контекста
+- **Выполняет действия** через вызов инструментов, а не только ведет беседу
+- **Следует** предсказуемым шаблонам взаимодействия
+- **Управляет** обработкой ошибок и сложными рабочими процессами автоматически
+
+### 🎯 Педагогическая проверка: Архитектура AI для производства
+
+**Понимание архитектуры**: Вы создали полноценное AI-приложение, которое объединяет управление беседой, вызов инструментов и структурированные рабочие процессы. Это представляет собой разработку AI-приложений уровня производства.
+
+**Ключевые освоенные концепции**:
+- **Архитектура на основе классов**: Организованная, поддерживаемая структура AI-приложения
+- **Интеграция инструментов**: Пользовательская функциональность, выходящая за рамки беседы
+- **Управление памятью**: Сохранение контекста беседы
+- **Обработка ошибок**: Надежное поведение приложения
+
+**Связь с индустрией**: Шаблоны архитектуры, которые вы реализовали (классы для беседы, системы инструментов, управление памятью), — это те же самые шаблоны, которые используются в корпоративных AI-приложениях, таких как AI-помощник Slack, GitHub Copilot и Microsoft Copilot. Вы строите с профессиональным уровнем архитектурного мышления.
+
+**Вопрос для размышления**: Как бы вы расширили это приложение для работы с несколькими пользователями, постоянного хранения данных или интеграции с внешними базами данных? Учитывайте проблемы масштабируемости и управления состоянием.
+
+## Задание: Создайте собственного AI-помощника для изучения
+
+**Цель**: Создать AI-приложение, которое помогает студентам изучать программирование, предоставляя объяснения, примеры кода и интерактивные викторины.
+
+### Требования
+
+**Основные функции (обязательные):**
+1. **Интерфейс для общения**: Реализуйте систему чата, которая сохраняет контекст между несколькими вопросами
+2. **Образовательные инструменты**: Создайте как минимум два инструмента для обучения:
+   - Инструмент для объяснения кода
+   - Генератор викторин по концепциям
+3. **Персонализированное обучение**: Используйте системные сообщения для адаптации ответов к различным уровням навыков
+4. **Форматирование ответов**: Реализуйте структурированный вывод для вопросов викторины
+
+### Этапы реализации
+
+**Шаг 1: Настройте вашу среду**
+```bash
+pip install langchain langchain-openai
+```
+
+**Шаг 2: Базовая функциональность чата**
+- Создайте класс `StudyAssistant`
+- Реализуйте память беседы
+- Добавьте конфигурацию личности для образовательной поддержки
+
+**Шаг 3: Добавьте образовательные инструменты**
+- **Объяснитель кода**: Разбивает код на понятные части
+- **Генератор викторин**: Создает вопросы о концепциях программирования
+- **Трекер прогресса**: Отслеживает изученные темы
+
+**Шаг 4: Расширенные функции (опционально)**
+- Реализуйте потоковые ответы для улучшения пользовательского опыта
+- Добавьте загрузку документов для включения учебных материалов
+- Создайте встраивания для поиска контента на основе сходства
+
+### Критерии оценки
+
+| Функция | Отлично (4) | Хорошо (3) | Удовлетворительно (2) | Требует доработки (1) |
+|---------|-------------|------------|-----------------------|-----------------------|
+| **Поток беседы** | Естественные, контекстуально осведомленные ответы | Хорошее сохранение контекста | Базовая беседа | Нет памяти между обменами |
+| **Интеграция инструментов** | Несколько полезных инструментов, работающих безупречно | 2+ инструмента реализованы корректно | 1-2 базовых инструмента | Инструменты не работают |
+| **Качество кода** | Чистый, хорошо документированный, с обработкой ошибок | Хорошая структура, частичная документация | Базовая функциональность работает | Плохая структура, без обработки ошибок |
+| **Образовательная ценность** | Действительно полезно для обучения, адаптивно | Хорошая поддержка обучения | Базовые объяснения | Ограниченная образовательная ценность |
+
+### Пример структуры кода
+
+```python
+class StudyAssistant:
+    def __init__(self, skill_level="beginner"):
+        # Initialize LLM, tools, and conversation memory
+        pass
+    
+    def explain_code(self, code, language):
+        # Tool: Explain how code works
+        pass
+    
+    def generate_quiz(self, topic, difficulty):
+        # Tool: Create practice questions
+        pass
+    
+    def chat(self, user_input):
+        # Main conversation interface
+        pass
+
+# Example usage
+assistant = StudyAssistant(skill_level="intermediate")
+response = assistant.chat("Explain how Python functions work")
+```
+
+**Дополнительные задачи:**
+- Добавьте возможность голосового ввода/вывода
+- Реализуйте веб-интерфейс с использованием Streamlit или Flask
+- Создайте базу знаний из учебных материалов с использованием встраиваний
+- Добавьте отслеживание прогресса и персонализированные пути обучения
+
+## 📈 Ваш таймлайн освоения разработки AI-фреймворков
+
+```mermaid
+timeline
+    title Production AI Framework Development Journey
+    
+    section Framework Foundations
+        Understanding Abstractions
+            : Master framework vs API decisions
+            : Learn LangChain core concepts
+            : Implement message type systems
+        
+        Basic Integration
+            : Connect to AI providers
+            : Handle authentication
+            : Manage configuration
+    
+    section Conversation Systems
+        Memory Management
+            : Build conversation history
+            : Implement context tracking
+            : Handle session persistence
+        
+        Advanced Interactions
+            : Master streaming responses
+            : Create prompt templates
+            : Implement structured output
+    
+    section Tool Integration
+        Custom Tool Development
+            : Design tool schemas
+            : Implement function calling
+            : Handle external APIs
+        
+        Workflow Automation
+            : Chain multiple tools
+            : Create decision trees
+            : Build agent behaviors
+    
+    section Production Applications
+        Complete System Architecture
+            : Combine all framework features
+            : Implement error boundaries
+            : Create maintainable code
+        
+        Enterprise Readiness
+            : Handle scalability concerns
+            : Implement monitoring
+            : Build deployment strategies
+```
+
+**🎓 Этап завершения обучения**: Вы успешно освоили разработку AI-фреймворков, используя те же инструменты и шаблоны, которые питают современные AI-приложения. Эти навыки представляют собой передовой уровень разработки AI-приложений и готовят вас к созданию интеллектуальных систем корпоративного уровня.
+
+**🔄 Следующий уровень возможностей**:
+- Готовы изучать продвинутые архитектуры AI (агенты, мультиагентные системы)
+- Подготовлены к созданию систем RAG с векторными базами данных
+- Оснащены для создания мультимодальных AI-приложений
+- Заложен фундамент для масштабирования и оптимизации AI-приложений
+
+## Резюме
+
+🎉 Теперь вы освоили основы разработки AI-фреймворков и научились создавать сложные AI-приложения с использованием LangChain. Как завершение комплексного обучения, вы приобрели значительный набор навыков. Давайте подведем итоги.
+
+### Чему вы научились
+
+**Основные концепции фреймворка:**
+- **Преимущества фреймворков**: Понимание, когда выбирать фреймворки вместо прямых вызовов API
+- **Основы LangChain**: Настройка и конфигурация подключений AI-моделей
+- **Типы сообщений**: Использование `SystemMessage`, `HumanMessage` и `AIMessage` для структурированных бесед
+
+**Расширенные функции:**
+- **Вызов инструментов**: Создание и интеграция пользовательских инструментов для расширенных возможностей AI
+- **Память беседы**: Сохранение контекста между несколькими обменами
+- **Потоковые ответы**: Реализация доставки ответов в реальном времени
+- **Шаблоны подсказок**: Создание повторно используемых, динамических подсказок
+- **Структурированный вывод**: Обеспечение согласованных, анализируемых ответов AI
+- **Встраивания**: Создание семантического поиска и возможностей обработки документов
+
+**Практические приложения:**
+- **Создание полноценных приложений**: Объединение нескольких функций в готовые к производству приложения
+- **Обработка ошибок**: Реализация надежного управления ошибками и проверки
+- **Интеграция инструментов**: Создание пользовательских инструментов, расширяющих возможности AI
+
+### Основные выводы
+
+> 🎯 **Запомните**: AI-фреймворки, такие как LangChain, — это ваши лучшие друзья, скрывающие сложность и наполненные функциями. Они идеальны, когда вам нужна память беседы, вызов инструментов или работа с несколькими AI-моделями без потери рассудка.
+
+**Рамки принятия решений для интеграции AI:**
+
+```mermaid
+flowchart TD
+    A[AI Integration Need] --> B{Simple single query?}
+    B -->|Yes| C[Direct API calls]
+    B -->|No| D{Need conversation memory?}
+    D -->|No| E[SDK Integration]
+    D -->|Yes| F{Need tools or complex features?}
+    F -->|No| G[Framework with basic setup]
+    F -->|Yes| H[Full framework implementation]
+    
+    C --> I[HTTP requests, minimal dependencies]
+    E --> J[Provider SDK, model-specific]
+    G --> K[LangChain basic chat]
+    H --> L[LangChain with tools, memory, agents]
+```
+
+### Куда двигаться дальше?
+
+**Начните создавать прямо сейчас:**
+- Возьмите эти концепции и создайте что-то, что вас вдохновляет!
+- Экспериментируйте с различными AI-моделями через LangChain — это как игровая площадка для AI-моделей
+- Создавайте инструменты, которые решают реальные проблемы, с которыми вы сталкиваетесь в работе или проектах
+
+**Готовы к следующему уровню?**
+- **AI-агенты**: Создавайте AI-системы, которые могут планировать и выполнять сложные задачи самостоятельно
+- **RAG (Retrieval-Augmented Generation)**: Объединяйте AI с вашими собственными базами знаний для сверхмощных приложений
+- **Мультимодальный AI**: Работайте с текстом, изображениями и аудио одновременно — возможности безграничны!
+- **Развертывание в производстве**: Узнайте, как масштабировать ваши AI-приложения и мониторить их в реальном мире
+
+**Присоединяйтесь к сообществу:**
+- Сообщество LangChain отлично подходит для того, чтобы быть в курсе событий и изучать лучшие практики
+- GitHub Models предоставляет доступ к передовым возможностям AI — идеально для экспериментов
+- Продолжайте практиковаться с различными сценариями использования — каждый проект научит вас чему-то новому
+
+Теперь у вас есть знания для создания интеллектуальных, разговорных приложений, которые могут помогать людям решать реальные проблемы. Как мастера эпохи Возрождения, которые сочетали художественное видение с техническим мастерством, вы теперь можете объединить возможности AI с практическим применением. Вопрос в том: что вы создадите? 🚀
+
+## Челлендж GitHub Copilot Agent 🚀
+
+Используйте режим агента, чтобы выполнить следующий челлендж:
+
+**Описание:** Создайте продвинутого AI-помощника для проверки кода, который объединяет несколько функций LangChain, включая вызов инструментов, структурированный вывод и память беседы, чтобы предоставлять комплексную обратную связь по отправленным кодам.
+
+**Задание:** Создайте класс CodeReviewAssistant, который реализует:
+1. Инструмент для анализа сложности кода и предложения улучшений
+2. Инструмент для проверки кода на соответствие лучшим практикам
+3. Структурированный вывод с использованием моделей Pydantic для согласованного формата обзора
+4. Память беседы для отслеживания сеансов проверки
+5. Основной интерфейс чата, который может обрабатывать отправку кода и предоставлять подробные, практические рекомендации
+
+Помощник должен уметь проверять код на нескольких языках программирования, сохранять контекст между несколькими отправками кода в одном сеансе и предоставлять как итоговые оценки, так и подробные предложения по улучшению.
+
+Узнайте больше о [режиме агента](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) здесь.
+
+---
+
+**Отказ от ответственности**:  
+Этот документ был переведен с использованием сервиса автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Хотя мы стремимся к точности, пожалуйста, учитывайте, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его родном языке следует считать авторитетным источником. Для получения критически важной информации рекомендуется профессиональный перевод человеком. Мы не несем ответственности за любые недоразумения или неправильные интерпретации, возникающие в результате использования данного перевода.

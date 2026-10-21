@@ -1,0 +1,2386 @@
+# Создание чат-ассистента с ИИ
+
+Помните, как в «Звездном пути» команда корабля могла просто поговорить с компьютером, задавая сложные вопросы и получая вдумчивые ответы? То, что казалось чистой научной фантастикой в 1960-х годах, теперь можно создать с помощью веб-технологий, которые вы уже знаете.
+
+В этом уроке мы создадим чат-ассистента с искусственным интеллектом, используя HTML, CSS, JavaScript и интеграцию с серверной частью. Вы узнаете, как те же навыки, которые вы изучаете, могут быть использованы для подключения к мощным ИИ-сервисам, способным понимать контекст и генерировать осмысленные ответы.
+
+Представьте ИИ как доступ к огромной библиотеке, которая не только находит информацию, но и синтезирует её в связные ответы, адаптированные к вашим конкретным вопросам. Вместо того чтобы искать среди тысяч страниц, вы получаете прямые, контекстуальные ответы.
+
+Интеграция осуществляется через знакомые веб-технологии, работающие вместе. HTML создаёт интерфейс чата, CSS отвечает за визуальный дизайн, JavaScript управляет взаимодействием с пользователем, а серверный API связывает всё это с ИИ-сервисами. Это похоже на то, как разные секции оркестра работают вместе, чтобы создать симфонию.
+
+Мы фактически строим мост между естественным человеческим общением и машинной обработкой. Вы изучите как техническую реализацию интеграции ИИ-сервисов, так и шаблоны дизайна, которые делают взаимодействие интуитивным.
+
+К концу этого урока интеграция ИИ будет казаться не загадочным процессом, а ещё одним API, с которым вы можете работать. Вы поймёте основные шаблоны, которые лежат в основе приложений, таких как ChatGPT и Claude, используя те же принципы веб-разработки, которые вы изучаете.
+
+## ⚡ Что можно сделать за следующие 5 минут
+
+**Быстрый старт для занятых разработчиков**
+
+```mermaid
+flowchart LR
+    A[⚡ 5 minutes] --> B[Get GitHub token]
+    B --> C[Test AI playground]
+    C --> D[Copy Python code]
+    D --> E[See AI responses]
+```
+
+- **Минута 1**: Зайдите на [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) и создайте персональный токен доступа
+- **Минута 2**: Протестируйте взаимодействие с ИИ прямо в интерфейсе Playground
+- **Минута 3**: Нажмите на вкладку "Code" и скопируйте фрагмент кода на Python
+- **Минута 4**: Запустите код локально с вашим токеном: `GITHUB_TOKEN=your_token python test.py`
+- **Минута 5**: Посмотрите, как ваш первый ответ от ИИ генерируется из вашего собственного кода
+
+**Код для быстрого теста**:
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key="your_token_here"
+)
+
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Hello AI!"}],
+    model="openai/gpt-4o-mini"
+)
+
+print(response.choices[0].message.content)
+```
+
+**Почему это важно**: За 5 минут вы ощутите магию программного взаимодействия с ИИ. Это фундаментальный строительный блок, который лежит в основе каждого ИИ-приложения, которым вы пользуетесь.
+
+Вот как будет выглядеть ваш готовый проект:
+
+![Интерфейс чат-приложения, показывающий разговор между пользователем и ИИ-ассистентом](../../../translated_images/ru/screenshot.0a1ee0d123df681b.webp)
+
+## 🗺️ Ваш путь обучения разработке приложений с ИИ
+
+```mermaid
+journey
+    title From Web Development to AI Integration
+    section Understanding AI Foundations
+      Discover generative AI concepts: 4: You
+      Explore GitHub Models platform: 6: You
+      Master AI parameters and prompts: 8: You
+    section Backend Integration
+      Build Python API server: 5: You
+      Implement AI function calls: 7: You
+      Handle async operations: 8: You
+    section Frontend Development
+      Create modern chat interface: 6: You
+      Master real-time interactions: 8: You
+      Build responsive user experience: 9: You
+    section Professional Application
+      Deploy complete AI system: 7: You
+      Optimize performance patterns: 8: You
+      Create production-ready app: 9: You
+```
+
+**Цель вашего пути**: К концу этого урока вы создадите полноценное приложение с поддержкой ИИ, используя те же технологии и шаблоны, которые лежат в основе современных ИИ-ассистентов, таких как ChatGPT, Claude и Google Bard.
+
+## Понимание ИИ: от загадки к мастерству
+
+Прежде чем погрузиться в код, давайте разберёмся, с чем мы работаем. Если вы уже использовали API, то знаете базовый принцип: отправить запрос, получить ответ.
+
+API ИИ работают по схожей структуре, но вместо извлечения заранее сохранённых данных из базы данных они генерируют новые ответы на основе шаблонов, изученных из огромных объёмов текста. Это похоже на разницу между каталогом библиотеки и знающим библиотекарем, который может синтезировать информацию из множества источников.
+
+### Что такое «генеративный ИИ» на самом деле?
+
+Вспомните, как Розеттский камень позволил учёным понять египетские иероглифы, находя шаблоны между известными и неизвестными языками. Модели ИИ работают аналогично — они находят шаблоны в огромных объёмах текста, чтобы понять, как работает язык, а затем используют эти шаблоны для генерации подходящих ответов на новые вопросы.
+
+**Давайте разберём это на простом примере:**
+- **Традиционная база данных**: Как запросить свидетельство о рождении — вы каждый раз получаете один и тот же документ
+- **Поисковая система**: Как попросить библиотекаря найти книги о кошках — он покажет вам, что доступно
+- **Генеративный ИИ**: Как спросить знающего друга о кошках — он расскажет вам интересные вещи своими словами, адаптируясь к вашим запросам
+
+```mermaid
+graph LR
+    A[Your Question] --> B[AI Model]
+    B --> C[Pattern Recognition]
+    C --> D[Content Generation]
+    D --> E[Contextual Response]
+    
+    F[Training Data<br/>Books, Articles, Web] --> B
+```
+
+### Как обучаются модели ИИ (упрощённая версия)
+
+Модели ИИ обучаются на огромных наборах данных, содержащих тексты из книг, статей и разговоров. В процессе они выявляют шаблоны:
+- Как структурируются мысли в письменной речи
+- Какие слова часто встречаются вместе
+- Как обычно протекают разговоры
+- Контекстуальные различия между формальной и неформальной речью
+
+**Это похоже на то, как археологи расшифровывают древние языки**: они анализируют тысячи примеров, чтобы понять грамматику, словарный запас и культурный контекст, в конечном итоге становясь способными интерпретировать новые тексты, используя изученные шаблоны.
+
+### Почему GitHub Models?
+
+Мы используем GitHub Models по довольно практичной причине — он предоставляет доступ к корпоративному уровню ИИ без необходимости настраивать собственную инфраструктуру ИИ (а это, поверьте, сейчас не то, чем вы хотите заниматься!). Это как использовать API погоды вместо того, чтобы пытаться предсказать погоду самостоятельно, устанавливая метеостанции повсюду.
+
+Это, по сути, «ИИ как услуга», и самое лучшее? Начать можно бесплатно, так что вы можете экспериментировать, не беспокоясь о больших расходах.
+
+```mermaid
+graph LR
+    A[Frontend Chat UI] --> B[Your Backend API]
+    B --> C[GitHub Models API]
+    C --> D[AI Model Processing]
+    D --> C
+    C --> B
+    B --> A
+```
+
+Мы будем использовать GitHub Models для интеграции с серверной частью, которая предоставляет доступ к профессиональным возможностям ИИ через удобный интерфейс для разработчиков. [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) служит тестовой средой, где вы можете экспериментировать с различными моделями ИИ и понять их возможности перед внедрением в код.
+
+## 🧠 Экосистема разработки приложений с ИИ
+
+```mermaid
+mindmap
+  root((AI Development))
+    Understanding AI
+      Generative Models
+        Pattern Recognition
+        Content Generation
+        Context Understanding
+        Response Synthesis
+      AI Parameters
+        Temperature Control
+        Token Limits
+        Top-p Filtering
+        System Prompts
+    Backend Architecture
+      API Integration
+        GitHub Models
+        Authentication
+        Request Handling
+        Error Management
+      Python Infrastructure
+        FastAPI Framework
+        Async Operations
+        Environment Security
+        CORS Configuration
+    Frontend Experience
+      Chat Interface
+        Real-time Updates
+        Message History
+        User Feedback
+        Loading States
+      Modern Web Tech
+        ES6 Classes
+        Async/Await
+        DOM Manipulation
+        Event Handling
+    Professional Patterns
+      Security Best Practices
+        Token Management
+        Input Validation
+        XSS Prevention
+        Error Boundaries
+      Production Readiness
+        Performance Optimization
+        Responsive Design
+        Accessibility
+        Testing Strategies
+```
+
+**Основной принцип**: Разработка приложений с ИИ объединяет традиционные навыки веб-разработки с интеграцией ИИ-сервисов, создавая интеллектуальные приложения, которые кажутся естественными и отзывчивыми для пользователей.
+
+![Интерфейс GitHub Models AI Playground с выбором модели и областью тестирования](../../../translated_images/ru/playground.d2b927122224ff8f.webp)
+
+**Почему Playground так полезен:**
+- **Попробуйте** разные модели ИИ, такие как GPT-4o-mini, Claude и другие (всё бесплатно!)
+- **Протестируйте** свои идеи и запросы перед написанием кода
+- **Получите** готовые фрагменты кода на вашем любимом языке программирования
+- **Настройте** параметры, такие как уровень креативности и длина ответа, чтобы увидеть, как они влияют на результат
+
+После того как вы немного поиграете, просто нажмите вкладку "Code" и выберите ваш язык программирования, чтобы получить код для реализации.
+
+![Выбор Playground, показывающий варианты генерации кода для разных языков программирования](../../../translated_images/ru/playground-choice.1d23ba7d407f4758.webp)
+
+## Настройка интеграции серверной части на Python
+
+Теперь давайте реализуем интеграцию ИИ с использованием Python. Python отлично подходит для приложений с ИИ благодаря простому синтаксису и мощным библиотекам. Мы начнём с кода из Playground GitHub Models, а затем переработаем его в переиспользуемую, готовую к производству функцию.
+
+### Понимание базовой реализации
+
+Когда вы возьмёте код на Python из Playground, он будет выглядеть примерно так. Не переживайте, если сначала он покажется сложным — давайте разберём его шаг за шагом:
+
+```python
+"""Run this model in Python
+
+> pip install openai
+"""
+import os
+from openai import OpenAI
+
+# To authenticate with the model you will need to generate a personal access token (PAT) in your GitHub settings. 
+# Create your PAT token by following instructions here: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+client = OpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key=os.environ["GITHUB_TOKEN"],
+)
+
+response = client.chat.completions.create(
+    messages=[
+        {
+            "role": "system",
+            "content": "",
+        },
+        {
+            "role": "user",
+            "content": "What is the capital of France?",
+        }
+    ],
+    model="openai/gpt-4o-mini",
+    temperature=1,
+    max_tokens=4096,
+    top_p=1
+)
+
+print(response.choices[0].message.content)
+```
+
+**Что происходит в этом коде:**
+- **Импортируем** необходимые инструменты: `os` для чтения переменных окружения и `OpenAI` для взаимодействия с ИИ
+- **Настраиваем** клиент OpenAI, чтобы он указывал на серверы ИИ GitHub вместо OpenAI напрямую
+- **Аутентифицируемся** с помощью специального токена GitHub (об этом чуть позже!)
+- **Структурируем** наш разговор с различными «ролями» — это как установка сцены для спектакля
+- **Отправляем** запрос к ИИ с некоторыми параметрами настройки
+- **Извлекаем** текст ответа из всех данных, которые возвращаются
+
+### Понимание ролей сообщений: структура разговора с ИИ
+
+Разговоры с ИИ используют определённую структуру с различными «ролями», которые выполняют разные функции:
+
+```python
+messages=[
+    {
+        "role": "system",
+        "content": "You are a helpful assistant who explains things simply."
+    },
+    {
+        "role": "user", 
+        "content": "What is machine learning?"
+    }
+]
+```
+
+**Представьте, что это как режиссура спектакля:**
+- **Роль системы**: Как сценические указания для актёра — она говорит ИИ, как себя вести, какой иметь характер и как отвечать
+- **Роль пользователя**: Реальный вопрос или сообщение от человека, использующего ваше приложение
+- **Роль ассистента**: Ответ ИИ (вы его не отправляете, но он появляется в истории разговора)
+
+**Аналогия из реальной жизни**: Представьте, что вы представляете друга кому-то на вечеринке:
+- **Сообщение системы**: «Это моя подруга Сара, она врач, которая отлично объясняет медицинские концепции простыми словами»
+- **Сообщение пользователя**: «Можете объяснить, как работают вакцины?»
+- **Ответ ассистента**: Сара отвечает как дружелюбный врач, а не как юрист или шеф-повар
+
+### Понимание параметров ИИ: настройка поведения ответа
+
+Числовые параметры в вызовах API ИИ управляют тем, как модель генерирует ответы. Эти настройки позволяют вам адаптировать поведение ИИ для различных случаев использования:
+
+#### Температура (0.0 до 2.0): Регулятор креативности
+
+**Что делает**: Управляет тем, насколько креативными или предсказуемыми будут ответы ИИ.
+
+**Представьте это как уровень импровизации джазового музыканта:**
+- **Температура = 0.1**: Играет одну и ту же мелодию каждый раз (очень предсказуемо)
+- **Температура = 0.7**: Добавляет несколько вариаций, оставаясь узнаваемым (сбалансированная креативность)
+- **Температура = 1.5**: Полная экспериментальная импровизация с неожиданными поворотами (очень непредсказуемо)
+
+```python
+# Very predictable responses (good for factual questions)
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "What is 2+2?"}],
+    temperature=0.1  # Will almost always say "4"
+)
+
+# Creative responses (good for brainstorming)
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Write a creative story opening"}],
+    temperature=1.2  # Will generate unique, unexpected stories
+)
+```
+
+#### Максимальное количество токенов (1 до 4096+): Контроллер длины ответа
+
+**Что делает**: Устанавливает ограничение на длину ответа ИИ.
+
+**Представьте токены как примерно эквивалентные словам** (примерно 1 токен = 0.75 слова на английском):
+- **max_tokens=50**: Коротко и ясно (как текстовое сообщение)
+- **max_tokens=500**: Пара абзацев
+- **max_tokens=2000**: Детальное объяснение с примерами
+
+```python
+# Short, concise answers
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Explain JavaScript"}],
+    max_tokens=100  # Forces a brief explanation
+)
+
+# Detailed, comprehensive answers  
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Explain JavaScript"}],
+    max_tokens=1500  # Allows for detailed explanations with examples
+)
+```
+
+#### Top_p (0.0 до 1.0): Параметр фокусировки
+
+**Что делает**: Управляет тем, насколько ИИ сосредоточен на наиболее вероятных ответах.
+
+**Представьте, что у ИИ огромный словарный запас, ранжированный по вероятности каждого слова:**
+- **top_p=0.1**: Учитывает только 10% самых вероятных слов (очень сосредоточен)
+- **top_p=0.9**: Учитывает 90% возможных слов (более креативно)
+- **top_p=1.0**: Учитывает всё (максимальное разнообразие)
+
+**Например**: Если вы спросите «Небо обычно...»
+- **Низкий top_p**: Почти наверняка скажет «голубое»
+- **Высокий top_p**: Может сказать «голубое», «облачное», «обширное», «меняющееся», «красивое» и т.д.
+
+### Объединение всего: комбинации параметров для различных случаев использования
+
+```python
+# For factual, consistent answers (like a documentation bot)
+factual_params = {
+    "temperature": 0.2,
+    "max_tokens": 300,
+    "top_p": 0.3
+}
+
+# For creative writing assistance
+creative_params = {
+    "temperature": 1.1,
+    "max_tokens": 1000,
+    "top_p": 0.9
+}
+
+# For conversational, helpful responses (balanced)
+conversational_params = {
+    "temperature": 0.7,
+    "max_tokens": 500,
+    "top_p": 0.8
+}
+```
+
+```mermaid
+quadrantChart
+    title AI Parameter Optimization Matrix
+    x-axis Low Creativity --> High Creativity
+    y-axis Short Response --> Long Response
+    
+    quadrant-1 Creative Content
+    quadrant-2 Detailed Analysis
+    quadrant-3 Quick Facts
+    quadrant-4 Conversational AI
+    
+    Documentation Bot: [0.2, 0.3]
+    Customer Service: [0.4, 0.4]
+    General Assistant: [0.7, 0.5]
+    Creative Writer: [0.9, 0.9]
+    Brainstorming Tool: [0.8, 0.8]
+```
+
+**Понимание, почему эти параметры важны**: Разные приложения требуют разных типов ответов. Бот службы поддержки клиентов должен быть последовательным и фактическим (низкая температура), а помощник для написания креативных текстов — воображаемым и разнообразным (высокая температура). Понимание этих параметров даёт вам контроль над личностью и стилем ответа вашего ИИ.
+```
+
+**Here's what's happening in this code:**
+- **We import** the tools we need: `os` for reading environment variables and `OpenAI` for talking to the AI
+- **We set up** the OpenAI client to point to GitHub's AI servers instead of OpenAI directly
+- **We authenticate** using a special GitHub token (more on that in a minute!)
+- **We structure** our conversation with different "roles" – think of it like setting the scene for a play
+- **We send** our request to the AI with some fine-tuning parameters
+- **We extract** the actual response text from all the data that comes back
+
+> 🔐 **Security Note**: Never hardcode API keys in your source code! Always use environment variables to store sensitive credentials like your `GITHUB_TOKEN`.
+
+### Creating a Reusable AI Function
+
+Let's refactor this code into a clean, reusable function that we can easily integrate into our web application:
+
+```python
+import asyncio
+from openai import AsyncOpenAI
+
+# Use AsyncOpenAI for better performance
+client = AsyncOpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key=os.environ["GITHUB_TOKEN"],
+)
+
+async def call_llm_async(prompt: str, system_message: str = "You are a helpful assistant."):
+    """
+    Sends a prompt to the AI model asynchronously and returns the response.
+    
+    Args:
+        prompt: The user's question or message
+        system_message: Instructions that define the AI's behavior and personality
+    
+    Returns:
+        str: The AI's response to the prompt
+    """
+    try:
+        response = await client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_message,
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="openai/gpt-4o-mini",
+            temperature=1,
+            max_tokens=4096,
+            top_p=1
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        logger.error(f"AI API error: {str(e)}")
+        return "I'm sorry, I'm having trouble processing your request right now."
+
+# Backward compatibility function for synchronous calls
+def call_llm(prompt: str, system_message: str = "You are a helpful assistant."):
+    """Synchronous wrapper for async AI calls."""
+    return asyncio.run(call_llm_async(prompt, system_message))
+```
+
+**Понимание улучшенной функции:**
+- **Принимает** два параметра: запрос пользователя и необязательное сообщение системы
+- **Предоставляет** сообщение системы по умолчанию для общего поведения ассистента
+- **Использует** правильные подсказки типов Python для лучшей документации кода
+- **Возвращает** только содержимое ответа, что делает его удобным для использования в нашем веб-API
+- **Сохраняет** те же параметры модели для последовательного поведения ИИ
+
+### Магия системных подсказок: программирование личности ИИ
+
+Если параметры управляют тем, как ИИ думает, то системные подсказки управляют тем, кем ИИ себя считает. Это, честно говоря, одна из самых крутых частей работы с ИИ — вы фактически задаёте ИИ полную личность, уровень экспертизы и стиль общения.
+
+**Представьте системные подсказки как выбор разных актёров для разных ролей**: Вместо одного универсального ассистента вы можете создать специализированных экспертов для разных ситуаций. Нужен терпеливый учитель? Креативный партнёр для мозгового штурма? Деловой советник без лишних слов? Просто измените системную подсказку!
+
+#### Почему системные подсказки так мощны
+
+Вот что удивительно: модели ИИ обучены на бесчисленных разговорах, где люди принимают разные роли и уровни экспертизы. Когда вы задаёте ИИ определённую роль, это как включение переключателя, который активирует все эти изученные шаблоны.
+
+**Это как методическая актёрская игра для ИИ**: Скажите актёру «вы мудрый старый профессор» и посмотрите, как он автоматически изменит свою осанку, словарный запас и манеры. ИИ делает нечто удивительно похожее с языковыми шаблонами.
+
+#### Создание эффективных системных подсказок: искусство и наука
+
+**Структура отличной системной подсказки:**
+1. **Роль/идентичность**: Кто такой ИИ?
+2. **Экспертиза**: Что он знает?
+3. **Стиль общения**: Как он говорит?
+4. **Конкретные инструкции**: На чём он должен сосредоточиться?
+
+```python
+# ❌ Vague system prompt
+"You are helpful."
+
+# ✅ Detailed, effective system prompt
+"You are Dr. Sarah Chen, a senior software engineer with 15 years of experience at major tech companies. You explain programming concepts using real-world analogies and always provide practical examples. You're patient with beginners and enthusiastic about helping them understand complex topics."
+```
+
+#### Примеры системных подсказок с контекстом
+
+Давайте посмотрим, как разные системные подсказки создают совершенно разные личности ИИ:
+
+```python
+# Example 1: The Patient Teacher
+teacher_prompt = """
+You are an experienced programming instructor who has taught thousands of students. 
+You break down complex concepts into simple steps, use analogies from everyday life, 
+and always check if the student understands before moving on. You're encouraging 
+and never make students feel bad for not knowing something.
+"""
+
+# Example 2: The Creative Collaborator  
+creative_prompt = """
+You are a creative writing partner who loves brainstorming wild ideas. You're 
+enthusiastic, imaginative, and always build on the user's ideas rather than 
+replacing them. You ask thought-provoking questions to spark creativity and 
+offer unexpected perspectives that make stories more interesting.
+"""
+
+# Example 3: The Strategic Business Advisor
+business_prompt = """
+You are a strategic business consultant with an MBA and 20 years of experience 
+helping startups scale. You think in frameworks, provide structured advice, 
+and always consider both short-term tactics and long-term strategy. You ask 
+probing questions to understand the full business context before giving advice.
+"""
+```
+
+#### Демонстрация системных подсказок в действии
+
+Давайте протестируем один и тот же вопрос с разными системными подсказками, чтобы увидеть разительные различия:
+
+**Вопрос**: «Как мне организовать аутентификацию пользователей в моём веб-приложении?»
+
+```python
+# With teacher prompt:
+teacher_response = call_llm(
+    "How do I handle user authentication in my web app?",
+    teacher_prompt
+)
+# Typical response: "Great question! Let's break authentication down into simple steps. 
+# Think of it like a nightclub bouncer checking IDs..."
+
+# With business prompt:
+business_response = call_llm(
+    "How do I handle user authentication in my web app?", 
+    business_prompt
+)
+# Typical response: "From a strategic perspective, authentication is crucial for user 
+# trust and regulatory compliance. Let me outline a framework considering security, 
+# user experience, and scalability..."
+```
+
+#### Продвинутые техники системных подсказок
+
+**1. Установка контекста**: Предоставьте ИИ фоновую информацию
+```python
+system_prompt = """
+You are helping a junior developer who just started their first job at a startup. 
+They know basic HTML/CSS/JavaScript but are new to backend development and databases. 
+Be encouraging and explain things step-by-step without being condescending.
+"""
+```
+
+**2. Форматирование вывода**: Укажите ИИ, как структурировать ответы  
+```python
+system_prompt = """
+You are a technical mentor. Always structure your responses as:
+1. Quick Answer (1-2 sentences)
+2. Detailed Explanation 
+3. Code Example
+4. Common Pitfalls to Avoid
+5. Next Steps for Learning
+"""
+```
+  
+**3. Установка ограничений**: Определите, чего ИИ НЕ должен делать  
+```python
+system_prompt = """
+You are a coding tutor focused on teaching best practices. Never write complete 
+solutions for the user - instead, guide them with hints and questions so they 
+learn by doing. Always explain the 'why' behind coding decisions.
+"""
+```
+  
+
+#### Почему это важно для вашего чат-ассистента  
+
+Понимание системных подсказок дает вам невероятную возможность создавать специализированных ИИ-ассистентов:  
+- **Бот службы поддержки клиентов**: полезный, терпеливый, знающий политику  
+- **Учебный наставник**: поддерживающий, пошаговый, проверяющий понимание  
+- **Творческий партнер**: креативный, развивающий идеи, задающий вопросы "а что если?"  
+- **Технический эксперт**: точный, детализированный, ориентированный на безопасность  
+
+**Главная идея**: Вы не просто вызываете API ИИ – вы создаете индивидуальность ИИ, которая служит вашим конкретным целям. Именно это делает современные приложения ИИ персонализированными и полезными, а не общими.  
+
+### 🎯 Педагогическая проверка: Программирование личности ИИ  
+
+**Пауза и размышление**: Вы только что узнали, как программировать личности ИИ через системные подсказки. Это фундаментальный навык в разработке современных приложений ИИ.  
+
+**Быстрая самооценка**:  
+- Можете ли вы объяснить, чем системные подсказки отличаются от обычных пользовательских сообщений?  
+- В чем разница между параметрами temperature и top_p?  
+- Как бы вы создали системную подсказку для конкретного случая (например, для наставника по программированию)?  
+
+**Связь с реальным миром**: Техники системных подсказок, которые вы изучили, используются во всех крупных приложениях ИИ – от помощи в кодировании GitHub Copilot до интерфейса общения ChatGPT. Вы осваиваете те же шаблоны, которые используют команды разработки ИИ в крупных технологических компаниях.  
+
+**Вопрос для размышления**: Как вы могли бы разработать разные личности ИИ для разных типов пользователей (новичков и экспертов)? Подумайте, как одна и та же модель ИИ может обслуживать разные аудитории с помощью инженерии подсказок.  
+
+## Создание веб-API с FastAPI: ваш высокопроизводительный центр связи с ИИ  
+
+Теперь давайте создадим бэкенд, который соединяет ваш фронтенд с сервисами ИИ. Мы будем использовать FastAPI – современный фреймворк Python, который отлично подходит для создания API для приложений ИИ.  
+
+FastAPI предлагает несколько преимуществ для такого проекта: встроенная поддержка асинхронности для обработки параллельных запросов, автоматическая генерация документации API и отличная производительность. Ваш сервер FastAPI действует как посредник, который получает запросы от фронтенда, взаимодействует с сервисами ИИ и возвращает отформатированные ответы.  
+
+### Почему FastAPI идеально подходит для приложений ИИ?  
+
+Вы можете задаться вопросом: "Разве я не могу просто вызывать ИИ напрямую из JavaScript фронтенда?" или "Почему FastAPI, а не Flask или Django?" Отличные вопросы!  
+
+**Вот почему FastAPI идеально подходит для нашего проекта:**  
+- **Асинхронность по умолчанию**: Может обрабатывать несколько запросов к ИИ одновременно, не зависая  
+- **Автоматическая документация**: Перейдите на `/docs` и получите красивую, интерактивную страницу документации API бесплатно  
+- **Встроенная валидация**: Обнаруживает ошибки до того, как они вызовут проблемы  
+- **Молниеносная скорость**: Один из самых быстрых фреймворков Python  
+- **Современный Python**: Использует все последние и лучшие функции Python  
+
+**И вот почему нам вообще нужен бэкенд:**  
+
+**Безопасность**: Ваш API-ключ ИИ – это как пароль. Если вы поместите его в JavaScript фронтенда, любой, кто увидит исходный код вашего сайта, сможет украсть его и использовать ваши кредиты ИИ. Бэкенд сохраняет конфиденциальные данные в безопасности.  
+
+**Ограничение запросов и контроль**: Бэкенд позволяет вам контролировать, как часто пользователи могут отправлять запросы, реализовывать аутентификацию пользователей и добавлять логирование для отслеживания использования.  
+
+**Обработка данных**: Возможно, вы захотите сохранять разговоры, фильтровать неподходящий контент или комбинировать несколько сервисов ИИ. Логика для этого находится в бэкенде.  
+
+**Архитектура напоминает модель клиент-сервер:**  
+- **Фронтенд**: Слой пользовательского интерфейса для взаимодействия  
+- **API бэкенда**: Слой обработки запросов и маршрутизации  
+- **Сервис ИИ**: Внешние вычисления и генерация ответов  
+- **Переменные окружения**: Безопасное хранение конфигурации и учетных данных  
+
+### Понимание потока запросов и ответов  
+
+Давайте проследим, что происходит, когда пользователь отправляет сообщение:  
+
+```mermaid
+sequenceDiagram
+    participant User as 👤 User
+    participant Frontend as 🌐 Frontend
+    participant API as 🔧 FastAPI Server
+    participant AI as 🤖 AI Service
+    
+    User->>Frontend: Types "Hello AI!"
+    Frontend->>API: POST /hello {"message": "Hello AI!"}
+    Note over API: Validates request<br/>Adds system prompt
+    API->>AI: Sends formatted request
+    AI->>API: Returns AI response
+    Note over API: Processes response<br/>Logs conversation
+    API->>Frontend: {"response": "Hello! How can I help?"}
+    Frontend->>User: Displays AI message
+```
+  
+**Понимание каждого шага:**  
+1. **Взаимодействие пользователя**: Человек вводит текст в интерфейсе чата  
+2. **Обработка фронтенда**: JavaScript захватывает ввод и форматирует его как JSON  
+3. **Валидация API**: FastAPI автоматически проверяет запрос с помощью моделей Pydantic  
+4. **Интеграция ИИ**: Бэкенд добавляет контекст (системную подсказку) и вызывает сервис ИИ  
+5. **Обработка ответа**: API получает ответ ИИ и может модифицировать его при необходимости  
+6. **Отображение на фронтенде**: JavaScript показывает ответ в интерфейсе чата  
+
+### Понимание архитектуры API  
+
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant FastAPI
+    participant AI Function
+    participant GitHub Models
+    
+    Frontend->>FastAPI: POST /hello {"message": "Hello AI!"}
+    FastAPI->>AI Function: call_llm(message, system_prompt)
+    AI Function->>GitHub Models: API request
+    GitHub Models->>AI Function: AI response
+    AI Function->>FastAPI: response text
+    FastAPI->>Frontend: {"response": "Hello! How can I help?"}
+```
+  
+```mermaid
+flowchart TD
+    A[User Input] --> B[Frontend Validation]
+    B --> C[HTTP POST Request]
+    C --> D[FastAPI Router]
+    D --> E[Pydantic Validation]
+    E --> F[AI Function Call]
+    F --> G[GitHub Models API]
+    G --> H[Response Processing]
+    H --> I[JSON Response]
+    I --> J[Frontend Update]
+    
+    subgraph "Security Layer"
+        K[CORS Middleware]
+        L[Environment Variables]
+        M[Error Handling]
+    end
+    
+    D --> K
+    F --> L
+    H --> M
+```
+  
+
+### Создание приложения FastAPI  
+
+Давайте создадим наш API шаг за шагом. Создайте файл `api.py` с следующим кодом FastAPI:  
+
+```python
+# api.py
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from llm import call_llm
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Create FastAPI application
+app = FastAPI(
+    title="AI Chat API",
+    description="A high-performance API for AI-powered chat applications",
+    version="1.0.0"
+)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configure appropriately for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Pydantic models for request/response validation
+class ChatMessage(BaseModel):
+    message: str
+
+class ChatResponse(BaseModel):
+    response: str
+
+@app.get("/")
+async def root():
+    """Root endpoint providing API information."""
+    return {
+        "message": "Welcome to the AI Chat API",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {"status": "healthy", "service": "ai-chat-api"}
+
+@app.post("/hello", response_model=ChatResponse)
+async def chat_endpoint(chat_message: ChatMessage):
+    """Main chat endpoint that processes messages and returns AI responses."""
+    try:
+        # Extract and validate message
+        message = chat_message.message.strip()
+        if not message:
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        
+        logger.info(f"Processing message: {message[:50]}...")
+        
+        # Call AI service (note: call_llm should be made async for better performance)
+        ai_response = await call_llm_async(message, "You are a helpful and friendly assistant.")
+        
+        logger.info("AI response generated successfully")
+        return ChatResponse(response=ai_response)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error processing chat message: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000, reload=True)
+```
+  
+**Понимание реализации FastAPI:**  
+- **Импортирует** FastAPI для функциональности современного веб-фреймворка и Pydantic для валидации данных  
+- **Создает** автоматическую документацию API (доступную на `/docs`, когда сервер запущен)  
+- **Включает** CORS middleware для разрешения запросов фронтенда с разных источников  
+- **Определяет** модели Pydantic для автоматической валидации запросов/ответов и документации  
+- **Использует** асинхронные конечные точки для лучшей производительности с параллельными запросами  
+- **Реализует** правильные HTTP-коды состояния и обработку ошибок с помощью HTTPException  
+- **Включает** структурированное логирование для мониторинга и отладки  
+- **Предоставляет** конечную точку проверки состояния для мониторинга статуса сервиса  
+
+**Основные преимущества FastAPI перед традиционными фреймворками:**  
+- **Автоматическая валидация**: Модели Pydantic обеспечивают целостность данных до обработки  
+- **Интерактивная документация**: Перейдите на `/docs` для автоматически сгенерированной, тестируемой документации API  
+- **Безопасность типов**: Подсказки типов Python предотвращают ошибки во время выполнения и улучшают качество кода  
+- **Асинхронная поддержка**: Обрабатывает несколько запросов к ИИ одновременно без блокировки  
+- **Производительность**: Значительно быстрее обработки запросов для приложений в реальном времени  
+
+### Понимание CORS: охранник безопасности веба  
+
+CORS (Cross-Origin Resource Sharing) – это как охранник в здании, который проверяет, разрешено ли посетителям входить. Давайте разберемся, почему это важно и как это влияет на ваше приложение.  
+
+#### Что такое CORS и зачем он нужен?  
+
+**Проблема**: Представьте, что любой сайт мог бы отправлять запросы на сайт вашего банка от вашего имени без вашего разрешения. Это был бы кошмар безопасности! Браузеры предотвращают это по умолчанию через "Политику одного источника".  
+
+**Политика одного источника**: Браузеры разрешают веб-страницам отправлять запросы только на тот же домен, порт и протокол, с которого они были загружены.  
+
+**Аналогия из реальной жизни**: Это как охрана в жилом доме – только жители (один источник) могут получить доступ к зданию по умолчанию. Если вы хотите, чтобы друг (другой источник) пришел в гости, вы должны явно сообщить охране, что это разрешено.  
+
+#### CORS в вашей среде разработки  
+
+Во время разработки ваш фронтенд и бэкенд работают на разных портах:  
+- Фронтенд: `http://localhost:3000` (или file://, если открываете HTML напрямую)  
+- Бэкенд: `http://localhost:5000`  
+
+Они считаются "разными источниками", даже если находятся на одном компьютере!  
+
+```python
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(__name__)
+CORS(app)   # This tells browsers: "It's okay for other origins to make requests to this API"
+```
+  
+**Что делает конфигурация CORS на практике:**  
+- **Добавляет** специальные HTTP-заголовки к ответам API, которые говорят браузерам: "этот междоменный запрос разрешен"  
+- **Обрабатывает** "предварительные" запросы (браузеры иногда проверяют разрешения перед отправкой фактического запроса)  
+- **Предотвращает** раздражающую ошибку "запрос заблокирован политикой CORS" в консоли вашего браузера  
+
+#### Безопасность CORS: разработка против продакшена  
+
+```python
+# 🚨 Development: Allows ALL origins (convenient but insecure)
+CORS(app)
+
+# ✅ Production: Only allow your specific frontend domain
+CORS(app, origins=["https://yourdomain.com", "https://www.yourdomain.com"])
+
+# 🔒 Advanced: Different origins for different environments
+if app.debug:  # Development mode
+    CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"])
+else:  # Production mode
+    CORS(app, origins=["https://yourdomain.com"])
+```
+  
+**Почему это важно**: В разработке `CORS(app)` – это как оставить дверь открытой – удобно, но небезопасно. В продакшене вы хотите точно указать, какие сайты могут взаимодействовать с вашим API.  
+
+#### Общие сценарии CORS и решения  
+
+| Сценарий | Проблема | Решение |  
+|----------|---------|----------|  
+| **Локальная разработка** | Фронтенд не может достучаться до бэкенда | Добавьте CORSMiddleware в FastAPI |  
+| **GitHub Pages + Heroku** | Развернутый фронтенд не может достучаться до API | Добавьте URL вашего GitHub Pages в источники CORS |  
+| **Собственный домен** | Ошибки CORS в продакшене | Обновите источники CORS, чтобы они соответствовали вашему домену |  
+| **Мобильное приложение** | Приложение не может достучаться до веб-API | Добавьте домен вашего приложения или осторожно используйте `*` |  
+
+**Совет**: Вы можете проверить заголовки CORS в инструментах разработчика вашего браузера на вкладке "Сеть". Ищите заголовки, такие как `Access-Control-Allow-Origin` в ответе.  
+
+### Обработка ошибок и валидация  
+
+Обратите внимание, как наш API включает правильную обработку ошибок:  
+
+```python
+# Validate that we received a message
+if not message:
+    return jsonify({"error": "Message field is required"}), 400
+```
+  
+**Основные принципы валидации:**  
+- **Проверяет** обязательные поля до обработки запросов  
+- **Возвращает** понятные сообщения об ошибках в формате JSON  
+- **Использует** соответствующие HTTP-коды состояния (400 для неверных запросов)  
+- **Предоставляет** четкую обратную связь, чтобы помочь разработчикам фронтенда устранять проблемы  
+
+## Настройка и запуск вашего бэкенда  
+
+Теперь, когда у нас есть интеграция ИИ и сервер FastAPI, давайте запустим все. Процесс настройки включает установку зависимостей Python, конфигурацию переменных окружения и запуск сервера разработки.  
+
+### Настройка среды Python  
+
+Давайте настроим вашу среду разработки Python. Виртуальные среды похожи на подход с разделением доступа – каждый проект получает свое собственное изолированное пространство с определенными инструментами и зависимостями, предотвращая конфликты между проектами.  
+
+```bash
+# Navigate to your backend directory
+cd backend
+
+# Create a virtual environment (like creating a clean room for your project)
+python -m venv venv
+
+# Activate it (Linux/Mac)
+source ./venv/bin/activate
+
+# On Windows, use:
+# venv\Scripts\activate
+
+# Install the good stuff
+pip install openai fastapi uvicorn python-dotenv
+```
+  
+**Что мы только что сделали:**  
+- **Создали** собственный "пузырь" Python, где мы можем устанавливать пакеты, не влияя на другие проекты  
+- **Активировали** его, чтобы наш терминал знал, что использовать эту конкретную среду  
+- **Установили** основные инструменты: OpenAI для магии ИИ, FastAPI для нашего веб-API, Uvicorn для его запуска и python-dotenv для безопасного управления секретами  
+
+**Основные зависимости:**  
+- **FastAPI**: Современный, быстрый веб-фреймворк с автоматической документацией API  
+- **Uvicorn**: Молниеносный ASGI-сервер для запуска приложений FastAPI  
+- **OpenAI**: Официальная библиотека для интеграции моделей GitHub и OpenAI API  
+- **python-dotenv**: Безопасная загрузка переменных окружения из файлов .env  
+
+### Конфигурация окружения: сохранение секретов в безопасности  
+
+Прежде чем мы запустим наш API, нам нужно поговорить об одном из самых важных уроков веб-разработки: как действительно сохранить ваши секреты в безопасности. Переменные окружения – это как защищенный сейф, к которому может получить доступ только ваше приложение.  
+
+#### Что такое переменные окружения?  
+
+**Представьте переменные окружения как сейф для хранения ценных вещей** – вы кладете туда свои секреты, и только вы (и ваше приложение) имеете ключ для их извлечения. Вместо того чтобы писать конфиденциальную информацию прямо в коде (где ее может увидеть кто угодно), вы храните ее безопасно в окружении.  
+
+**Вот разница:**  
+- **Неправильный способ**: Написать пароль на стикере и приклеить его к монитору  
+- **Правильный способ**: Хранить пароль в защищенном менеджере паролей, к которому можете получить доступ только вы  
+
+#### Почему переменные окружения важны  
+
+```python
+# 🚨 NEVER DO THIS - API key visible to everyone
+client = OpenAI(
+    api_key="ghp_1234567890abcdef...",  # Anyone can steal this!
+    base_url="https://models.github.ai/inference"
+)
+
+# ✅ DO THIS - API key stored securely
+client = OpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],  # Only your app can access this
+    base_url="https://models.github.ai/inference"
+)
+```
+  
+**Что происходит, если вы жестко прописываете секреты:**  
+1. **Экспозиция в системе контроля версий**: Любой, у кого есть доступ к вашему репозиторию Git, видит ваш API-ключ  
+2. **Публичные репозитории**: Если вы загружаете на GitHub, ваш ключ виден всему интернету  
+3. **Совместная работа в команде**: Другие разработчики, работающие над вашим проектом, получают доступ к вашему личному API-ключу  
+4. **Угрозы безопасности**: Если кто-то украдет ваш API-ключ, он сможет использовать ваши кредиты ИИ  
+
+#### Настройка файла окружения  
+
+Создайте файл `.env` в каталоге вашего бэкенда. Этот файл хранит ваши секреты локально:  
+
+```bash
+# .env file - This should NEVER be committed to Git
+GITHUB_TOKEN=your_github_personal_access_token_here
+FASTAPI_DEBUG=True
+ENVIRONMENT=development
+```
+  
+**Понимание файла .env:**  
+- **Один секрет на строку** в формате `KEY=value`  
+- **Без пробелов** вокруг знака равно  
+- **Без кавычек** вокруг значений (обычно)  
+- **Комментарии** начинаются с `#`  
+
+#### Создание личного токена доступа GitHub  
+
+Ваш токен GitHub – это как специальный пароль, который дает вашему приложению разрешение использовать сервисы ИИ GitHub:  
+
+**Пошаговое создание токена:**  
+1. **Перейдите в настройки GitHub** → Настройки разработчика → Личные токены доступа → Tokens (classic)  
+2. **Нажмите "Generate new token (classic)"**  
+3. **Установите срок действия** (30 дней для тестирования, дольше для продакшена)  
+4. **Выберите области**: Отметьте "repo" и любые другие необходимые разрешения  
+5. **Создайте токен** и сразу скопируйте его (вы не сможете увидеть его снова!)  
+6. **Вставьте в ваш .env файл**  
+
+```bash
+# Example of what your token looks like (this is fake!)
+GITHUB_TOKEN=ghp_1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R
+```
+  
+
+#### Загрузка переменных окружения в Python  
+
+```python
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Now you can access them securely
+api_key = os.environ.get("GITHUB_TOKEN")
+if not api_key:
+    raise ValueError("GITHUB_TOKEN not found in environment variables!")
+
+client = OpenAI(
+    api_key=api_key,
+    base_url="https://models.github.ai/inference"
+)
+```
+  
+**Что делает этот код:**  
+- **Загружает** ваш файл .env и делает переменные доступными для Python  
+- **Проверяет**, существует ли необходимый токен (хорошая обработка ошибок!)  
+- **Вызывает** четкую ошибку, если токен отсутствует  
+- **Использует** токен безопасно, не раскрывая его в коде  
+
+#### Безопасность Git: файл .gitignore  
+
+Ваш файл `.gitignore` сообщает Git, какие файлы никогда не отслеживать или загружать:  
+
+```bash
+# .gitignore - Add these lines
+.env
+*.env
+.env.local
+.env.production
+__pycache__/
+venv/
+.vscode/
+```
+  
+**Почему это важно**: Как только вы добавите `.env` в `.gitignore`, Git будет игнорировать ваш файл окружения, предотвращая случайную загрузку ваших секретов в GitHub.  
+
+#### Разные окружения, разные секреты  
+
+Профессиональные приложения используют разные API-ключи для разных окружений:  
+
+```bash
+# .env.development
+GITHUB_TOKEN=your_development_token
+DEBUG=True
+
+# .env.production  
+GITHUB_TOKEN=your_production_token
+DEBUG=False
+```
+  
+**Почему это важно**: Вы не хотите, чтобы ваши эксперименты в разработке влияли на вашу квоту использования ИИ в продакшене, и хотите разные уровни безопасности для разных окружений.  
+
+### Запуск сервера разработки: оживляем ваш FastAPI  
+Теперь наступает захватывающий момент – запуск сервера разработки FastAPI и наблюдение за тем, как ваша интеграция с AI оживает! FastAPI использует Uvicorn, сверхбыстрый сервер ASGI, специально разработанный для асинхронных приложений на Python.
+
+#### Понимание процесса запуска сервера FastAPI
+
+```bash
+# Method 1: Direct Python execution (includes auto-reload)
+python api.py
+
+# Method 2: Using Uvicorn directly (more control)
+uvicorn api:app --host 0.0.0.0 --port 5000 --reload
+```
+
+Когда вы выполняете эту команду, за кулисами происходит следующее:
+
+**1. Python загружает ваше приложение FastAPI**:
+- Импортирует все необходимые библиотеки (FastAPI, Pydantic, OpenAI и др.)
+- Загружает переменные окружения из вашего файла `.env`
+- Создает экземпляр приложения FastAPI с автоматической документацией
+
+**2. Uvicorn настраивает сервер ASGI**:
+- Привязывается к порту 5000 с возможностями асинхронной обработки запросов
+- Настраивает маршрутизацию запросов с автоматической проверкой
+- Включает горячую перезагрузку для разработки (перезапуск при изменении файлов)
+- Генерирует интерактивную документацию API
+
+**3. Сервер начинает прослушивание**:
+- В вашем терминале отображается: `INFO: Uvicorn running on http://0.0.0.0:5000`
+- Сервер может обрабатывать несколько одновременных запросов AI
+- Ваш API готов с автоматической документацией по адресу `http://localhost:5000/docs`
+
+#### Что вы должны увидеть, если все работает
+
+```bash
+$ python api.py
+INFO:     Will watch for changes in these directories: ['/your/project/path']
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     Started reloader process [12345] using WatchFiles
+INFO:     Started server process [12346]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+```
+
+**Понимание вывода FastAPI:**
+- **Будет следить за изменениями**: Автоперезагрузка включена для разработки
+- **Uvicorn запущен**: Высокопроизводительный сервер ASGI активен
+- **Процесс перезагрузки запущен**: Наблюдение за файлами для автоматических перезапусков
+- **Приложение успешно запущено**: Приложение FastAPI успешно инициализировано
+- **Интерактивная документация доступна**: Перейдите на `/docs` для автоматической документации API
+
+#### Тестирование вашего FastAPI: несколько мощных подходов
+
+FastAPI предоставляет несколько удобных способов тестирования вашего API, включая автоматическую интерактивную документацию:
+
+**Метод 1: Интерактивная документация API (рекомендуется)**
+1. Откройте браузер и перейдите на `http://localhost:5000/docs`
+2. Вы увидите интерфейс Swagger UI с документацией всех ваших конечных точек
+3. Нажмите на `/hello` → "Try it out" → Введите тестовое сообщение → "Execute"
+4. Увидьте ответ прямо в браузере с правильным форматированием
+
+**Метод 2: Базовый тест в браузере**
+1. Перейдите на `http://localhost:5000` для корневой конечной точки
+2. Перейдите на `http://localhost:5000/health`, чтобы проверить состояние сервера
+3. Это подтверждает, что ваш сервер FastAPI работает правильно
+
+**Метод 3: Тестирование через командную строку (продвинутый уровень)**
+```bash
+# Test with curl (if available)
+curl -X POST http://localhost:5000/hello \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello AI!"}'
+
+# Expected response:
+# {"response": "Hello! I'm your AI assistant. How can I help you today?"}
+```
+
+**Метод 4: Тестовый скрипт на Python**
+```python
+# test_api.py - Create this file to test your API
+import requests
+import json
+
+# Test the API endpoint
+url = "http://localhost:5000/hello"
+data = {"message": "Tell me a joke about programming"}
+
+response = requests.post(url, json=data)
+if response.status_code == 200:
+    result = response.json()
+    print("AI Response:", result['response'])
+else:
+    print("Error:", response.status_code, response.text)
+```
+
+#### Устранение распространенных проблем при запуске
+
+| Сообщение об ошибке | Что это значит | Как исправить |
+|---------------------|----------------|--------------|
+| `ModuleNotFoundError: No module named 'fastapi'` | FastAPI не установлен | Выполните `pip install fastapi uvicorn` в вашем виртуальном окружении |
+| `ModuleNotFoundError: No module named 'uvicorn'` | Сервер ASGI не установлен | Выполните `pip install uvicorn` в вашем виртуальном окружении |
+| `KeyError: 'GITHUB_TOKEN'` | Переменная окружения не найдена | Проверьте ваш файл `.env` и вызов `load_dotenv()` |
+| `Address already in use` | Порт 5000 занят | Завершите другие процессы, использующие порт 5000, или измените порт |
+| `ValidationError` | Данные запроса не соответствуют модели Pydantic | Убедитесь, что формат вашего запроса соответствует ожидаемой схеме |
+| `HTTPException 422` | Неприемлемый объект | Проверка запроса не удалась, проверьте `/docs` для правильного формата |
+| `OpenAI API error` | Ошибка аутентификации AI-сервиса | Убедитесь, что ваш токен GitHub правильный и имеет необходимые разрешения |
+
+#### Лучшие практики разработки
+
+**Горячая перезагрузка**: FastAPI с Uvicorn обеспечивает автоматическую перезагрузку при сохранении изменений в ваших файлах Python. Это значит, что вы можете сразу тестировать изменения без ручного перезапуска.
+
+```python
+# Enable hot reloading explicitly
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)  # debug=True enables hot reload
+```
+
+**Логирование для разработки**: Добавьте логирование, чтобы понять, что происходит:
+
+```python
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+@app.route("/hello", methods=["POST"])
+def hello():
+    data = request.get_json()
+    message = data.get("message", "")
+    
+    logger.info(f"Received message: {message}")
+    
+    if not message:
+        logger.warning("Empty message received")
+        return jsonify({"error": "Message field is required"}), 400
+    
+    try:
+        response = call_llm(message, "You are a helpful and friendly assistant.")
+        logger.info(f"AI response generated successfully")
+        return jsonify({"response": response})
+    except Exception as e:
+        logger.error(f"AI API error: {str(e)}")
+        return jsonify({"error": "AI service temporarily unavailable"}), 500
+```
+
+**Почему логирование помогает**: Во время разработки вы можете видеть, какие запросы поступают, какие ответы дает AI и где возникают ошибки. Это значительно ускоряет отладку.
+
+### Настройка для GitHub Codespaces: облачная разработка без хлопот
+
+GitHub Codespaces – это как мощный компьютер для разработки в облаке, к которому вы можете получить доступ из любого браузера. Если вы работаете в Codespaces, есть несколько дополнительных шагов, чтобы сделать ваш бэкенд доступным для фронтенда.
+
+#### Понимание сетевых особенностей Codespaces
+
+В локальной среде разработки все работает на одном компьютере:
+- Бэкенд: `http://localhost:5000`
+- Фронтенд: `http://localhost:3000` (или file://)
+
+В Codespaces ваша среда разработки работает на серверах GitHub, поэтому "localhost" имеет другое значение. GitHub автоматически создает публичные URL для ваших сервисов, но их нужно правильно настроить.
+
+#### Пошаговая настройка Codespaces
+
+**1. Запустите сервер вашего бэкенда**:
+```bash
+cd backend
+python api.py
+```
+
+Вы увидите знакомое сообщение о запуске FastAPI/Uvicorn, но обратите внимание, что оно работает внутри среды Codespaces.
+
+**2. Настройте видимость порта**:
+- Найдите вкладку "Ports" в нижней панели VS Code
+- Найдите порт 5000 в списке
+- Щелкните правой кнопкой мыши на порт 5000
+- Выберите "Port Visibility" → "Public"
+
+**Почему сделать его публичным?** По умолчанию порты Codespaces являются приватными (доступны только вам). Сделав порт публичным, вы позволите вашему фронтенду (который работает в браузере) взаимодействовать с бэкендом.
+
+**3. Получите ваш публичный URL**:
+После того как порт станет публичным, вы увидите URL, например:
+```
+https://your-codespace-name-5000.app.github.dev
+```
+
+**4. Обновите конфигурацию вашего фронтенда**:
+```javascript
+// In your frontend app.js, update the BASE_URL:
+this.BASE_URL = "https://your-codespace-name-5000.app.github.dev";
+```
+
+#### Понимание URL Codespaces
+
+URL Codespaces следуют предсказуемому шаблону:
+```
+https://[codespace-name]-[port].app.github.dev
+```
+
+**Разбор структуры:**
+- `codespace-name`: Уникальный идентификатор вашего Codespace (обычно включает ваше имя пользователя)
+- `port`: Номер порта, на котором работает ваш сервис (5000 для нашего приложения FastAPI)
+- `app.github.dev`: Домен GitHub для приложений Codespace
+
+#### Тестирование вашей настройки Codespaces
+
+**1. Тестирование бэкенда напрямую**:
+Откройте ваш публичный URL в новой вкладке браузера. Вы должны увидеть:
+```
+Welcome to the AI Chat API. Send POST requests to /hello with JSON payload containing 'message' field.
+```
+
+**2. Тестирование с помощью инструментов разработчика браузера**:
+```javascript
+// Open browser console and test your API
+fetch('https://your-codespace-name-5000.app.github.dev/hello', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({message: 'Hello from Codespaces!'})
+})
+.then(response => response.json())
+.then(data => console.log(data));
+```
+
+#### Codespaces vs Локальная разработка
+
+| Аспект | Локальная разработка | GitHub Codespaces |
+|--------|-----------------------|-------------------|
+| **Время настройки** | Дольше (установка Python, зависимостей) | Мгновенно (преднастроенная среда) |
+| **Доступ к URL** | `http://localhost:5000` | `https://xyz-5000.app.github.dev` |
+| **Конфигурация порта** | Автоматическая | Ручная (сделать порты публичными) |
+| **Сохранение файлов** | Локальный компьютер | Репозиторий GitHub |
+| **Совместная работа** | Сложно делиться средой | Легко делиться ссылкой на Codespace |
+| **Зависимость от интернета** | Только для вызовов AI API | Требуется для всего |
+
+#### Советы по разработке в Codespaces
+
+**Переменные окружения в Codespaces**:
+Ваш файл `.env` работает так же, как и в Codespaces, но вы также можете задавать переменные окружения напрямую в Codespace:
+
+```bash
+# Set environment variable for the current session
+export GITHUB_TOKEN="your_token_here"
+
+# Or add to your .bashrc for persistence
+echo 'export GITHUB_TOKEN="your_token_here"' >> ~/.bashrc
+```
+
+**Управление портами**:
+- Codespaces автоматически обнаруживает, когда ваше приложение начинает прослушивать порт
+- Вы можете одновременно перенаправлять несколько портов (полезно, если позже добавите базу данных)
+- Порты остаются доступными, пока ваш Codespace работает
+
+**Рабочий процесс разработки**:
+1. Вносите изменения в код в VS Code
+2. FastAPI автоматически перезагружается (благодаря режиму перезагрузки Uvicorn)
+3. Мгновенно тестируйте изменения через публичный URL
+4. Коммитите и пушите, когда готовы
+
+> 💡 **Совет**: Добавьте ваш URL бэкенда Codespace в закладки во время разработки. Поскольку имена Codespace стабильны, URL не изменится, пока вы используете тот же Codespace.
+
+## Создание интерфейса чата для фронтенда: где человек встречается с AI
+
+Теперь мы создадим пользовательский интерфейс – ту часть, которая определяет, как люди взаимодействуют с вашим AI-ассистентом. Как и дизайн интерфейса оригинального iPhone, мы сосредоточимся на том, чтобы сложные технологии казались интуитивно понятными и простыми в использовании.
+
+### Понимание современной архитектуры фронтенда
+
+Наш интерфейс чата будет представлять собой "Одностраничное приложение" или SPA. Вместо старомодного подхода, где каждый клик загружает новую страницу, наше приложение обновляется плавно и мгновенно:
+
+**Старые сайты**: Как чтение физической книги – вы переворачиваете на совершенно новые страницы
+**Наше приложение чата**: Как использование телефона – все плавно обновляется и работает без задержек
+
+```mermaid
+graph TD
+    A[User Types Message] --> B[JavaScript Captures Input]
+    B --> C[Validate & Format Data]
+    C --> D[Send to Backend API]
+    D --> E[Display Loading State]
+    E --> F[Receive AI Response]
+    F --> G[Update Chat Interface]
+    G --> H[Ready for Next Message]
+```
+
+```mermaid
+classDiagram
+    class ChatApp {
+        +messages: HTMLElement
+        +form: HTMLElement
+        +input: HTMLElement
+        +sendButton: HTMLElement
+        +BASE_URL: string
+        +API_ENDPOINT: string
+        
+        +constructor()
+        +initializeEventListeners()
+        +handleSubmit(event)
+        +callAPI(message)
+        +appendMessage(text, role)
+        +escapeHtml(text)
+        +scrollToBottom()
+        +setLoading(isLoading)
+    }
+    
+    ChatApp --> DOM : manipulates
+    ChatApp --> FastAPI : sends requests
+```
+
+### Три столпа разработки фронтенда
+
+Каждое фронтенд-приложение – от простых сайтов до сложных приложений, таких как Discord или Slack – строится на трех основных технологиях. Они являются основой всего, что вы видите и с чем взаимодействуете в интернете:
+
+**HTML (Структура)**: Это ваш фундамент
+- Определяет, какие элементы существуют (кнопки, текстовые поля, контейнеры)
+- Придает смысл содержимому (это заголовок, это форма и т.д.)
+- Создает базовую структуру, на которой все остальное строится
+
+**CSS (Оформление)**: Это ваш дизайнер интерьера
+- Делает все красивым (цвета, шрифты, макеты)
+- Адаптирует под разные размеры экранов (телефон, ноутбук, планшет)
+- Создает плавные анимации и визуальную обратную связь
+
+**JavaScript (Поведение)**: Это ваш мозг
+- Реагирует на действия пользователей (клики, ввод текста, прокрутка)
+- Общается с вашим бэкендом и обновляет страницу
+- Делает все интерактивным и динамичным
+
+**Представьте это как архитектурный дизайн:**
+- **HTML**: Структурный чертеж (определение пространств и связей)
+- **CSS**: Эстетический и средовой дизайн (визуальный стиль и пользовательский опыт)
+- **JavaScript**: Механические системы (функциональность и интерактивность)
+
+### Почему важна современная архитектура JavaScript
+
+Наше приложение чата будет использовать современные шаблоны JavaScript, которые вы встретите в профессиональных приложениях. Понимание этих концепций поможет вам развиваться как разработчику:
+
+**Архитектура на основе классов**: Мы организуем наш код в классы, что похоже на создание чертежей для объектов
+**Async/Await**: Современный способ обработки операций, которые занимают время (например, вызовы API)
+**Программирование, основанное на событиях**: Наше приложение реагирует на действия пользователя (клики, нажатия клавиш), а не работает в цикле
+**Манипуляция DOM**: Динамическое обновление содержимого веб-страницы на основе взаимодействий пользователя и ответов API
+
+### Настройка структуры проекта
+
+Создайте директорию фронтенда с такой организованной структурой:
+
+```text
+frontend/
+├── index.html      # Main HTML structure
+├── app.js          # JavaScript functionality
+└── styles.css      # Visual styling
+```
+
+**Понимание архитектуры:**
+- **Разделение** ответственности между структурой (HTML), поведением (JavaScript) и оформлением (CSS)
+- **Поддержание** простой структуры файлов, которая легко навигается и модифицируется
+- **Следование** лучшим практикам веб-разработки для организации и удобства поддержки
+
+### Создание HTML-основы: семантическая структура для доступности
+
+Начнем с HTML-структуры. Современная веб-разработка делает акцент на "семантическом HTML" – использовании HTML-элементов, которые четко описывают их назначение, а не только внешний вид. Это делает ваше приложение доступным для экранных читалок, поисковых систем и других инструментов.
+
+**Почему семантический HTML важен**: Представьте, что вы описываете ваше приложение чата кому-то по телефону. Вы бы сказали: "Есть заголовок с названием, основная область, где появляются сообщения, и форма внизу для ввода сообщений". Семантический HTML использует элементы, которые соответствуют этому естественному описанию.
+
+Создайте `index.html` с этой продуманной структурой разметки:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>AI Chat Assistant</h1>
+            <p>Ask me anything!</p>
+        </header>
+        
+        <main class="chat-messages" id="messages" role="log" aria-live="polite">
+            <!-- Messages will be dynamically added here -->
+        </main>
+        
+        <form class="chat-form" id="chatForm">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Type your message here..." 
+                    required
+                    aria-label="Chat message input"
+                >
+                <button type="submit" id="sendBtn" aria-label="Send message">
+                    Send
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
+```
+
+**Понимание каждого HTML-элемента и его назначения:**
+
+#### Структура документа
+- **`<!DOCTYPE html>`**: Сообщает браузеру, что это современный HTML5
+- **`<html lang="en">`**: Указывает язык страницы для экранных читалок и инструментов перевода
+- **`<meta charset="UTF-8">`**: Обеспечивает правильное кодирование символов для международного текста
+- **`<meta name="viewport"...>`**: Делает страницу адаптивной для мобильных устройств, контролируя масштабирование
+
+#### Семантические элементы
+- **`<header>`**: Четко обозначает верхнюю секцию с заголовком и описанием
+- **`<main>`**: Обозначает основную область контента (где происходят разговоры)
+- **`<form>`**: Семантически корректно для ввода данных пользователем, обеспечивает правильную навигацию с клавиатуры
+
+#### Функции доступности
+- **`role="log"`**: Сообщает экранным читалкам, что эта область содержит хронологический журнал сообщений
+- **`aria-live="polite"`**: Объявляет новые сообщения экранным читалкам без прерывания
+- **`aria-label`**: Предоставляет описательные метки для элементов формы
+- **`required`**: Браузер проверяет, что пользователь ввел сообщение перед отправкой
+
+#### Интеграция CSS и JavaScript
+- **`class` атрибуты**: Предоставляют стилистические привязки для CSS (например, `chat-container`, `input-group`)
+- **`id` атрибуты**: Позволяют JavaScript находить и манипулировать конкретными элементами
+- **Расположение скрипта**: Файл JavaScript загружается в конце, чтобы сначала загрузился HTML
+
+**Почему эта структура работает:**
+- **Логический поток**: Заголовок → Основной контент → Форма ввода соответствует естественному порядку чтения
+- **Доступность с клавиатуры**: Пользователи могут перемещаться по всем интерактивным элементам с помощью клавиш Tab
+- **Дружественность к экранным читалкам**: Четкие ориентиры и описания для слабовидящих пользователей
+- **Адаптивность**: Мета-тег viewport обеспечивает адаптивный дизайн
+- **Прогрессивное улучшение**: Работает даже если CSS или JavaScript не загрузились
+
+### Добавление интерактивного JavaScript: логика современного веб-приложения
+Теперь давайте создадим JavaScript, который оживит наш интерфейс чата. Мы будем использовать современные подходы к разработке на JavaScript, которые часто встречаются в профессиональной веб-разработке, включая классы ES6, async/await и событийно-ориентированное программирование.
+
+#### Понимание современной архитектуры JavaScript
+
+Вместо написания процедурного кода (серии функций, выполняемых по порядку) мы создадим **архитектуру на основе классов**. Представьте класс как чертеж для создания объектов – как чертеж архитектора, который можно использовать для строительства множества домов.
+
+**Почему стоит использовать классы для веб-приложений?**
+- **Организация**: Вся связанная функциональность сгруппирована вместе
+- **Повторное использование**: Вы можете создать несколько экземпляров чата на одной странице
+- **Удобство поддержки**: Легче отлаживать и модифицировать отдельные функции
+- **Профессиональный стандарт**: Этот подход используется в таких фреймворках, как React, Vue и Angular
+
+Создайте файл `app.js` с этим современным, хорошо структурированным JavaScript:
+
+```javascript
+// app.js - Modern chat application logic
+
+class ChatApp {
+    constructor() {
+        // Get references to DOM elements we'll need to manipulate
+        this.messages = document.getElementById("messages");
+        this.form = document.getElementById("chatForm");
+        this.input = document.getElementById("messageInput");
+        this.sendButton = document.getElementById("sendBtn");
+        
+        // Configure your backend URL here
+        this.BASE_URL = "http://localhost:5000"; // Update this for your environment
+        this.API_ENDPOINT = `${this.BASE_URL}/hello`;
+        
+        // Set up event listeners when the chat app is created
+        this.initializeEventListeners();
+    }
+    
+    initializeEventListeners() {
+        // Listen for form submission (when user clicks Send or presses Enter)
+        this.form.addEventListener("submit", (e) => this.handleSubmit(e));
+        
+        // Also listen for Enter key in the input field (better UX)
+        this.input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                this.handleSubmit(e);
+            }
+        });
+    }
+    
+    async handleSubmit(event) {
+        event.preventDefault(); // Prevent form from refreshing the page
+        
+        const messageText = this.input.value.trim();
+        if (!messageText) return; // Don't send empty messages
+        
+        // Provide user feedback that something is happening
+        this.setLoading(true);
+        
+        // Add user message to chat immediately (optimistic UI)
+        this.appendMessage(messageText, "user");
+        
+        // Clear input field so user can type next message
+        this.input.value = '';
+        
+        try {
+            // Call the AI API and wait for response
+            const reply = await this.callAPI(messageText);
+            
+            // Add AI response to chat
+            this.appendMessage(reply, "assistant");
+        } catch (error) {
+            console.error('API Error:', error);
+            this.appendMessage("Sorry, I'm having trouble connecting right now. Please try again.", "error");
+        } finally {
+            // Re-enable the interface regardless of success or failure
+            this.setLoading(false);
+        }
+    }
+    
+    async callAPI(message) {
+        const response = await fetch(this.API_ENDPOINT, {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({ message })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data.response;
+    }
+    
+    appendMessage(text, role) {
+        const messageElement = document.createElement("div");
+        messageElement.className = `message ${role}`;
+        messageElement.innerHTML = `
+            <div class="message-content">
+                <span class="message-text">${this.escapeHtml(text)}</span>
+                <span class="message-time">${new Date().toLocaleTimeString()}</span>
+            </div>
+        `;
+        
+        this.messages.appendChild(messageElement);
+        this.scrollToBottom();
+    }
+    
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    scrollToBottom() {
+        this.messages.scrollTop = this.messages.scrollHeight;
+    }
+    
+    setLoading(isLoading) {
+        this.sendButton.disabled = isLoading;
+        this.input.disabled = isLoading;
+        this.sendButton.textContent = isLoading ? "Sending..." : "Send";
+    }
+}
+
+// Initialize the chat application when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    new ChatApp();
+});
+```
+
+#### Понимание каждого концепта JavaScript
+
+**Структура классов ES6**:
+```javascript
+class ChatApp {
+    constructor() {
+        // This runs when you create a new ChatApp instance
+        // It's like the "setup" function for your chat
+    }
+    
+    methodName() {
+        // Methods are functions that belong to the class
+        // They can access class properties using "this"
+    }
+}
+```
+
+**Паттерн Async/Await**:
+```javascript
+// Old way (callback hell):
+fetch(url)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+// Modern way (async/await):
+try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+} catch (error) {
+    console.error(error);
+}
+```
+
+**Событийно-ориентированное программирование**:
+Вместо постоянной проверки, произошло ли событие, мы "слушаем" события:
+```javascript
+// When form is submitted, run handleSubmit
+this.form.addEventListener("submit", (e) => this.handleSubmit(e));
+
+// When Enter key is pressed, also run handleSubmit
+this.input.addEventListener("keypress", (e) => { /* ... */ });
+```
+
+**Манипуляция с DOM**:
+```javascript
+// Create new elements
+const messageElement = document.createElement("div");
+
+// Modify their properties
+messageElement.className = "message user";
+messageElement.innerHTML = "Hello world!";
+
+// Add to the page
+this.messages.appendChild(messageElement);
+```
+
+#### Безопасность и лучшие практики
+
+**Предотвращение XSS**:
+```javascript
+escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;  // This automatically escapes HTML
+    return div.innerHTML;
+}
+```
+
+**Почему это важно**: Если пользователь введет `<script>alert('hack')</script>`, эта функция гарантирует, что текст будет отображаться как текст, а не выполняться как код.
+
+**Обработка ошибок**:
+```javascript
+try {
+    const reply = await this.callAPI(messageText);
+    this.appendMessage(reply, "assistant");
+} catch (error) {
+    // Show user-friendly error instead of breaking the app
+    this.appendMessage("Sorry, I'm having trouble...", "error");
+}
+```
+
+**Учет пользовательского опыта**:
+- **Оптимистичный интерфейс**: Добавляйте сообщение пользователя сразу, не ожидая ответа сервера
+- **Состояния загрузки**: Отключайте кнопки и показывайте "Отправка..." во время ожидания
+- **Автопрокрутка**: Держите последние сообщения видимыми
+- **Валидация ввода**: Не отправляйте пустые сообщения
+- **Горячие клавиши**: Клавиша Enter отправляет сообщения (как в реальных чатах)
+
+#### Понимание потока приложения
+
+1. **Загрузка страницы** → Срабатывает событие `DOMContentLoaded` → Создается `new ChatApp()`
+2. **Запуск конструктора** → Получает ссылки на элементы DOM → Устанавливает слушатели событий
+3. **Пользователь вводит сообщение** → Нажимает Enter или кнопку "Отправить" → Срабатывает `handleSubmit`
+4. **handleSubmit** → Проверяет ввод → Показывает состояние загрузки → Вызывает API
+5. **Ответ API** → Добавляет сообщение AI в чат → Включает интерфейс
+6. **Готово к следующему сообщению** → Пользователь может продолжить общение
+
+Эта архитектура масштабируема – вы легко можете добавить функции, такие как редактирование сообщений, загрузка файлов или несколько потоков общения, без переписывания основной структуры.
+
+### 🎯 Проверка знаний: Современная архитектура фронтенда
+
+**Понимание архитектуры**: Вы реализовали полноценное одностраничное приложение, используя современные паттерны JavaScript. Это соответствует профессиональному уровню фронтенд-разработки.
+
+**Ключевые освоенные концепты**:
+- **Архитектура классов ES6**: Организованный, поддерживаемый код
+- **Паттерны Async/Await**: Современное асинхронное программирование
+- **Событийно-ориентированное программирование**: Дизайн отзывчивого интерфейса
+- **Лучшие практики безопасности**: Предотвращение XSS и валидация ввода
+
+**Связь с индустрией**: Изученные вами паттерны (архитектура на основе классов, асинхронные операции, манипуляция с DOM) являются основой современных фреймворков, таких как React, Vue и Angular. Вы строите с тем же архитектурным мышлением, которое используется в производственных приложениях.
+
+**Вопрос для размышления**: Как бы вы расширили это приложение чата, чтобы оно поддерживало несколько потоков общения или аутентификацию пользователей? Подумайте о необходимых изменениях в архитектуре и о том, как будет развиваться структура классов.
+
+### Стилизация интерфейса чата
+
+Теперь давайте создадим современный, визуально привлекательный интерфейс чата с помощью CSS. Хорошая стилизация делает ваше приложение профессиональным и улучшает общий пользовательский опыт. Мы будем использовать современные функции CSS, такие как Flexbox, CSS Grid и пользовательские свойства для адаптивного, доступного дизайна.
+
+Создайте файл `styles.css` с этими комплексными стилями:
+
+```css
+/* styles.css - Modern chat interface styling */
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #f1f5f9;
+    --user-color: #3b82f6;
+    --assistant-color: #6b7280;
+    --error-color: #ef4444;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 800px;
+    height: 600px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.chat-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.chat-header p {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: var(--secondary-color);
+}
+
+.message {
+    display: flex;
+    max-width: 80%;
+    animation: slideIn 0.3s ease-out;
+}
+
+.message.user {
+    align-self: flex-end;
+}
+
+.message.user .message-content {
+    background: var(--user-color);
+    color: white;
+    border-radius: var(--border-radius) var(--border-radius) 4px var(--border-radius);
+}
+
+.message.assistant {
+    align-self: flex-start;
+}
+
+.message.assistant .message-content {
+    background: white;
+    color: var(--text-primary);
+    border-radius: var(--border-radius) var(--border-radius) var(--border-radius) 4px;
+    border: 1px solid #e2e8f0;
+}
+
+.message.error .message-content {
+    background: var(--error-color);
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+.message-content {
+    padding: 12px 16px;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.message-text {
+    display: block;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.message-time {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.chat-form {
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+    background: white;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#messageInput:focus {
+    border-color: var(--primary-color);
+}
+
+#messageInput:disabled {
+    background: #f8fafc;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#sendBtn {
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 80px;
+}
+
+#sendBtn:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+#sendBtn:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .chat-container {
+        height: calc(100vh - 20px);
+        border-radius: 8px;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #messageInput {
+        width: 100%;
+    }
+    
+    #sendBtn {
+        width: 100%;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .message {
+        animation: none;
+    }
+    
+    * {
+        transition: none !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .chat-container {
+        background: #1e293b;
+        color: #f1f5f9;
+    }
+    
+    .chat-messages {
+        background: #0f172a;
+    }
+    
+    .message.assistant .message-content {
+        background: #334155;
+        color: #f1f5f9;
+        border-color: #475569;
+    }
+    
+    .chat-form {
+        background: #1e293b;
+        border-color: #475569;
+    }
+    
+    #messageInput {
+        background: #334155;
+        color: #f1f5f9;
+        border-color: #475569;
+    }
+}
+```
+
+**Понимание архитектуры CSS:**
+- **Использует** пользовательские свойства CSS (переменные) для согласованного оформления и легкой поддержки
+- **Реализует** макет Flexbox для адаптивного дизайна и правильного выравнивания
+- **Включает** плавные анимации для появления сообщений без отвлечения
+- **Обеспечивает** визуальное различие между сообщениями пользователя, ответами AI и состояниями ошибок
+- **Поддерживает** адаптивный дизайн, который работает как на настольных компьютерах, так и на мобильных устройствах
+- **Учитывает** доступность с уменьшением движения и правильными коэффициентами контрастности
+- **Предлагает** поддержку темного режима в зависимости от предпочтений системы пользователя
+
+### Настройка URL вашего бэкенда
+
+Последний шаг – обновление `BASE_URL` в вашем JavaScript, чтобы он соответствовал вашему серверу бэкенда:
+
+```javascript
+// For local development
+this.BASE_URL = "http://localhost:5000";
+
+// For GitHub Codespaces (replace with your actual URL)
+this.BASE_URL = "https://your-codespace-name-5000.app.github.dev";
+```
+
+**Определение URL вашего бэкенда:**
+- **Локальная разработка**: Используйте `http://localhost:5000`, если фронтенд и бэкенд работают локально
+- **Codespaces**: Найдите URL вашего бэкенда на вкладке Ports после того, как сделаете порт 5000 публичным
+- **Продакшн**: Замените на ваш реальный домен при развертывании на хостинг-сервисе
+
+> 💡 **Совет по тестированию**: Вы можете протестировать ваш бэкенд напрямую, посетив корневой URL в браузере. Вы должны увидеть приветственное сообщение от вашего сервера FastAPI.
+
+## Тестирование и развертывание
+
+Теперь, когда вы создали фронтенд и бэкенд, давайте проверим, что все работает вместе, и изучим варианты развертывания, чтобы поделиться вашим чат-ассистентом с другими.
+
+### Локальное тестирование
+
+Следуйте этим шагам, чтобы протестировать ваше приложение:
+
+```mermaid
+graph TD
+    A[Start Backend Server] --> B[Configure Environment Variables]
+    B --> C[Test API Endpoints]
+    C --> D[Open Frontend in Browser]
+    D --> E[Test Chat Functionality]
+    E --> F[Debug Any Issues]
+```
+
+**Пошаговый процесс тестирования:**
+
+1. **Запустите сервер бэкенда**:
+   ```bash
+   cd backend
+   source venv/bin/activate  # or venv\Scripts\activate on Windows
+   python api.py
+   ```
+
+2. **Проверьте работу API**:
+   - Откройте `http://localhost:5000` в вашем браузере
+   - Вы должны увидеть приветственное сообщение от вашего сервера FastAPI
+
+3. **Откройте фронтенд**:
+   - Перейдите в директорию фронтенда
+   - Откройте `index.html` в вашем веб-браузере
+   - Или используйте расширение Live Server в VS Code для лучшего опыта разработки
+
+4. **Протестируйте функциональность чата**:
+   - Введите сообщение в поле ввода
+   - Нажмите "Отправить" или Enter
+   - Убедитесь, что AI отвечает корректно
+   - Проверьте консоль браузера на наличие ошибок JavaScript
+
+### Устранение распространенных проблем
+
+| Проблема | Симптомы | Решение |
+|---------|----------|----------|
+| **Ошибка CORS** | Фронтенд не может подключиться к бэкенду | Убедитесь, что FastAPI CORSMiddleware настроен правильно |
+| **Ошибка API Key** | Ответы 401 Unauthorized | Проверьте переменную окружения `GITHUB_TOKEN` |
+| **Ошибка соединения** | Сетевые ошибки на фронтенде | Убедитесь, что URL бэкенда правильный и сервер Flask запущен |
+| **Нет ответа AI** | Пустые или ошибочные ответы | Проверьте логи бэкенда на предмет проблем с квотой API или аутентификацией |
+
+**Общие шаги для отладки:**
+- **Проверьте** консоль инструментов разработчика браузера на наличие ошибок JavaScript
+- **Убедитесь**, что вкладка Network показывает успешные запросы и ответы API
+- **Просмотрите** вывод терминала бэкенда на наличие ошибок Python или проблем с API
+- **Убедитесь**, что переменные окружения загружены и доступны
+
+## 📈 Ваш путь к мастерству разработки AI-приложений
+
+```mermaid
+timeline
+    title Complete AI Application Development Journey
+    
+    section AI Foundations
+        Understanding Generative AI
+            : Grasp pattern recognition concepts
+            : Master AI parameter control
+            : Learn prompt engineering techniques
+        
+        GitHub Models Integration
+            : Navigate AI service platforms
+            : Handle authentication securely
+            : Optimize model parameters
+    
+    section Backend Development
+        Python API Architecture
+            : Build FastAPI applications
+            : Implement async operations
+            : Create secure endpoints
+        
+        AI Service Integration
+            : Connect to external AI APIs
+            : Handle rate limiting
+            : Implement error boundaries
+    
+    section Frontend Mastery
+        Modern JavaScript Patterns
+            : Master ES6 class architecture
+            : Implement async/await flows
+            : Build responsive interfaces
+        
+        Real-time User Experience
+            : Create dynamic chat interfaces
+            : Handle loading states
+            : Optimize user interactions
+    
+    section Production Readiness
+        Security & Performance
+            : Implement secure token management
+            : Prevent XSS vulnerabilities
+            : Optimize API performance
+        
+        Professional Deployment
+            : Build scalable architectures
+            : Create maintainable code
+            : Document development processes
+```
+
+**🎓 Этап завершения**: Вы успешно создали полноценное приложение с поддержкой AI, используя те же технологии и архитектурные паттерны, которые применяются в современных AI-ассистентах. Эти навыки представляют собой пересечение традиционной веб-разработки и передовой интеграции AI.
+
+**🔄 Следующий уровень возможностей**:
+- Готовность изучать продвинутые AI-фреймворки (LangChain, LangGraph)
+- Подготовка к созданию мультимодальных AI-приложений (текст, изображение, голос)
+- Освоение внедрения векторных баз данных и систем поиска
+- Заложена основа для машинного обучения и тонкой настройки моделей AI
+
+## Вызов GitHub Copilot Agent 🚀
+
+Используйте режим Agent, чтобы выполнить следующий вызов:
+
+**Описание:** Улучшите чат-ассистента, добавив историю общения и сохранение сообщений. Этот вызов поможет вам понять, как управлять состоянием в чат-приложениях и реализовать хранение данных для улучшения пользовательского опыта.
+
+**Задание:** Модифицируйте приложение чата, чтобы включить историю общения, которая сохраняется между сессиями. Добавьте функционал для сохранения сообщений чата в локальное хранилище, отображения истории общения при загрузке страницы и кнопку "Очистить историю". Также реализуйте индикаторы ввода текста и временные метки сообщений, чтобы сделать чат более реалистичным.
+
+Узнайте больше о [режиме агент](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) здесь.
+
+## Задание: Создайте своего личного AI-ассистента
+
+Теперь вы создадите собственную реализацию AI-ассистента. Вместо простого копирования кода из руководства, это возможность применить изученные концепты, создавая что-то, что отражает ваши интересы и потребности.
+
+### Требования к проекту
+
+Давайте настроим ваш проект с чистой, организованной структурой:
+
+```text
+my-ai-assistant/
+├── backend/
+│   ├── api.py          # Your FastAPI server
+│   ├── llm.py          # AI integration functions
+│   ├── .env            # Your secrets (keep this safe!)
+│   └── requirements.txt # Python dependencies
+├── frontend/
+│   ├── index.html      # Your chat interface
+│   ├── app.js          # The JavaScript magic
+│   └── styles.css      # Make it look amazing
+└── README.md           # Tell the world about your creation
+```
+
+### Основные задачи реализации
+
+**Разработка бэкенда:**
+- **Возьмите** наш код FastAPI и адаптируйте его под себя
+- **Создайте** уникальную личность AI – возможно, полезного помощника по кулинарии, партнера для творческого письма или учебного помощника?
+- **Добавьте** надежную обработку ошибок, чтобы ваше приложение не ломалось при сбоях
+- **Напишите** понятную документацию для тех, кто хочет понять, как работает ваш API
+
+**Разработка фронтенда:**
+- **Создайте** интерфейс чата, который будет интуитивно понятным и приятным
+- **Напишите** чистый, современный JavaScript, которым вы будете гордиться
+- **Разработайте** индивидуальный стиль, отражающий личность вашего AI – веселый и яркий? Чистый и минималистичный? Решать вам!
+- **Убедитесь**, что приложение отлично работает как на телефонах, так и на компьютерах
+
+**Требования к персонализации:**
+- **Выберите** уникальное имя и личность для вашего AI-ассистента – возможно, что-то, что отражает ваши интересы или задачи, которые вы хотите решить
+- **Настройте** визуальный дизайн, чтобы он соответствовал стилю вашего ассистента
+- **Напишите** привлекательное приветственное сообщение, которое побудит людей начать общение
+- **Протестируйте** вашего ассистента с различными типами вопросов, чтобы увидеть, как он реагирует
+
+### Идеи для улучшений (опционально)
+
+Хотите вывести свой проект на новый уровень? Вот несколько интересных идей для изучения:
+
+| Функция | Описание | Навыки, которые вы освоите |
+|---------|-------------|------------------------|
+| **История сообщений** | Запоминание разговоров даже после обновления страницы | Работа с localStorage, обработка JSON |
+| **Индикаторы ввода текста** | Показ "AI вводит..." во время ожидания ответа | Анимации CSS, асинхронное программирование |
+| **Временные метки сообщений** | Отображение времени отправки каждого сообщения | Форматирование даты/времени, дизайн UX |
+| **Экспорт чата** | Позволяет пользователям скачивать их разговор | Работа с файлами, экспорт данных |
+| **Переключение тем** | Переключение между светлой и темной темой | Переменные CSS, пользовательские настройки |
+| **Голосовой ввод** | Добавление функции преобразования речи в текст | Веб-API, доступность |
+
+### Тестирование и документация
+
+**Обеспечение качества:**
+- **Тестируйте** ваше приложение с различными типами ввода и крайними случаями
+- **Проверьте**, что адаптивный дизайн работает на разных размерах экрана
+- **Проверьте** доступность с помощью навигации клавиатурой и экранных читалок
+- **Проверьте** HTML и CSS на соответствие стандартам
+
+**Требования к документации:**
+- **Напишите** README.md, объясняющий ваш проект и как его запустить
+- **Включите** скриншоты работы вашего интерфейса чата
+- **Документируйте** любые уникальные функции или настройки, которые вы добавили
+- **Предоставьте** четкие инструкции по настройке для других разработчиков
+
+### Руководство по сдаче проекта
+
+**Требования к проекту:**
+1. Полная папка проекта со всем исходным кодом
+2. README.md с описанием проекта и инструкциями по настройке
+3. Скриншоты, демонстрирующие работу вашего чат-ассистента
+4. Краткое размышление о том, чему вы научились и с какими трудностями столкнулись
+
+**Критерии оценки:**
+- **Функциональность**: Работает ли чат-ассистент так, как ожидалось?
+- **Качество кода**: Организован ли код, прокомментирован и удобен для поддержки?
+- **Дизайн**: Привлекателен ли интерфейс и удобен ли он для пользователя?
+- **Креативность**: Насколько уникальна и персонализирована ваша реализация?
+- **Документация**: Являются ли инструкции по настройке четкими и полными?
+
+> 💡 **Совет для успеха**: Сначала выполните основные требования, а затем добавляйте улучшения, когда все будет работать. Сосредоточьтесь на создании качественного основного опыта перед добавлением сложных функций.
+
+## Решение
+
+[Решение](./solution/README.md)
+
+## Дополнительные вызовы
+
+Готовы вывести вашего AI-ассистента на новый уровень? Попробуйте эти сложные задачи, которые углубят ваше понимание интеграции AI и веб-разработки.
+
+### Персонализация
+
+Настоящая магия происходит, когда вы придаете вашему AI-ассистенту уникальную личность. Экспериментируйте с различными системными подсказками, чтобы создать специализированных ассистентов:
+
+**Пример профессионального ассистента:**
+```python
+call_llm(message, "You are a professional business consultant with 20 years of experience. Provide structured, actionable advice with specific steps and considerations.")
+```
+
+**Пример помощника для творческого письма:**
+```python
+call_llm(message, "You are an enthusiastic creative writing coach. Help users develop their storytelling skills with imaginative prompts and constructive feedback.")
+```
+
+**Пример технического наставника:**
+```python
+call_llm(message, "You are a patient senior developer who explains complex programming concepts using simple analogies and practical examples.")
+```
+
+### Улучшения фронтенда
+
+Преобразите ваш интерфейс чата с помощью этих визуальных и функциональных улучшений:
+
+**Расширенные функции CSS:**
+- **Реализуйте** плавные анимации сообщений и переходы
+- **Добавьте** индивидуальные дизайны пузырьков чата с помощью форм и градиентов CSS
+- **Создайте** анимацию индикатора ввода текста для момента, когда AI "думает"
+- **Разработайте** систему реакций на сообщения или рейтинговую систему
+
+**Улучшения JavaScript:**
+- **Добавьте** горячие клавиши (Ctrl+Enter для отправки, Escape для очистки ввода)
+- **Реализуйте** функцию поиска и фильтрации сообщений
+- **Создайте** функцию экспорта беседы (скачивание в виде текста или JSON)
+- **Добавьте** автоматическое сохранение в localStorage, чтобы предотвратить потерю сообщений
+
+### Продвинутая интеграция AI
+
+**Несколько личностей AI:**
+- **Создайте** выпадающий список для переключения между различными личностями AI
+- **Сохраните** предпочтительную личность пользователя в localStorage
+- **Реализуйте** переключение контекста, которое сохраняет поток общения
+
+**Функции умного ответа:**
+- **Добавьте** осведомленность о контексте беседы (AI запоминает предыдущие сообщения)
+- **Реализуйте** умные подсказки на основе темы разговора  
+- **Создайте** кнопки быстрого ответа для часто задаваемых вопросов  
+
+> 🎯 **Цель обучения**: Эти дополнительные задания помогут вам понять сложные шаблоны веб-разработки и техники интеграции ИИ, которые используются в реальных приложениях.
+
+## Резюме и следующие шаги  
+
+Поздравляем! Вы успешно создали полноценного чат-ассистента с поддержкой ИИ с нуля. Этот проект дал вам практический опыт работы с современными технологиями веб-разработки и интеграцией ИИ – навыками, которые становятся все более ценными в современном технологическом мире.
+
+### Чего вы достигли  
+
+На протяжении этого урока вы освоили несколько ключевых технологий и концепций:
+
+**Разработка серверной части:**  
+- **Интеграция** с GitHub Models API для функциональности ИИ  
+- **Создание** RESTful API с использованием Flask с корректной обработкой ошибок  
+- **Реализация** безопасной аутентификации с использованием переменных окружения  
+- **Настройка** CORS для запросов между фронтендом и бэкендом  
+
+**Разработка клиентской части:**  
+- **Создание** адаптивного интерфейса чата с использованием семантического HTML  
+- **Реализация** современного JavaScript с async/await и архитектурой на основе классов  
+- **Дизайн** привлекательного пользовательского интерфейса с использованием CSS Grid, Flexbox и анимаций  
+- **Добавление** функций доступности и принципов адаптивного дизайна  
+
+**Интеграция полного стека:**  
+- **Соединение** фронтенда и бэкенда через HTTP API запросы  
+- **Обработка** взаимодействий с пользователем в реальном времени и асинхронного потока данных  
+- **Реализация** обработки ошибок и обратной связи для пользователя во всем приложении  
+- **Тестирование** полного рабочего процесса приложения от ввода пользователя до ответа ИИ  
+
+### Основные результаты обучения  
+
+```mermaid
+mindmap
+  root((AI Chat App Skills))
+    API Integration
+      Authentication
+      Error Handling
+      Async Programming
+    Web Development
+      HTML5 Semantics
+      Modern CSS
+      ES6+ JavaScript
+    User Experience
+      Responsive Design
+      Accessibility
+      Real-time Interaction
+    AI Understanding
+      Prompt Engineering
+      Model Parameters
+      Conversation Flow
+```
+  
+Этот проект познакомил вас с основами создания приложений с поддержкой ИИ, что представляет собой будущее веб-разработки. Теперь вы понимаете, как интегрировать возможности ИИ в традиционные веб-приложения, создавая увлекательные пользовательские интерфейсы, которые кажутся умными и отзывчивыми.
+
+### Профессиональное применение  
+
+Навыки, которые вы развили в этом уроке, напрямую применимы к современным карьерам в области разработки программного обеспечения:  
+
+- **Веб-разработка полного цикла** с использованием современных фреймворков и API  
+- **Интеграция ИИ** в веб-приложения и мобильные приложения  
+- **Проектирование и разработка API** для архитектур микросервисов  
+- **Разработка пользовательских интерфейсов** с акцентом на доступность и адаптивный дизайн  
+- **Практики DevOps**, включая настройку окружения и развертывание  
+
+### Продолжение вашего пути в разработке с ИИ  
+
+**Следующие шаги обучения:**  
+- **Изучите** более продвинутые модели ИИ и API (GPT-4, Claude, Gemini)  
+- **Освойте** техники проектирования запросов для улучшения ответов ИИ  
+- **Изучите** дизайн диалогов и принципы пользовательского опыта чат-ботов  
+- **Исследуйте** безопасность ИИ, этику и практики ответственной разработки ИИ  
+- **Создайте** более сложные приложения с памятью разговоров и учетом контекста  
+
+**Идеи для продвинутых проектов:**  
+- Чат-комнаты для нескольких пользователей с модерацией ИИ  
+- Чат-боты для обслуживания клиентов с поддержкой ИИ  
+- Образовательные ассистенты для обучения с персонализированным подходом  
+- Коллаборация для творческого письма с различными личностями ИИ  
+- Ассистенты для технической документации для разработчиков  
+
+## Начало работы с GitHub Codespaces  
+
+Хотите попробовать этот проект в облачной среде разработки? GitHub Codespaces предоставляет полную среду разработки прямо в вашем браузере, идеально подходящую для экспериментов с приложениями на основе ИИ без необходимости локальной настройки.
+
+### Настройка вашей среды разработки  
+
+**Шаг 1: Создание из шаблона**  
+- **Перейдите** в [репозиторий Web Dev For Beginners](https://github.com/microsoft/Web-Dev-For-Beginners)  
+- **Нажмите** "Use this template" в правом верхнем углу (убедитесь, что вы вошли в GitHub)  
+
+![Интерфейс создания из шаблона с зеленой кнопкой "Use this template"](../../../translated_images/ru/template.67ad477109d29a2b.webp)  
+
+**Шаг 2: Запуск Codespaces**  
+- **Откройте** ваш недавно созданный репозиторий  
+- **Нажмите** зеленую кнопку "Code" и выберите "Codespaces"  
+- **Выберите** "Create codespace on main", чтобы запустить вашу среду разработки  
+
+![Интерфейс создания Codespace с опциями для запуска облачной среды разработки](../../../translated_images/ru/codespace.bcecbdf5d2747d3d.webp)  
+
+**Шаг 3: Конфигурация среды**  
+После загрузки Codespace у вас будет доступ к:  
+- **Предустановленным** Python, Node.js и всем необходимым инструментам разработки  
+- **Интерфейсу VS Code** с расширениями для веб-разработки  
+- **Доступу к терминалу** для запуска серверов бэкенда и фронтенда  
+- **Пробросу портов** для тестирования ваших приложений  
+
+**Что предоставляет Codespaces:**  
+- **Устраняет** проблемы настройки локальной среды  
+- **Обеспечивает** консистентную среду разработки на разных устройствах  
+- **Включает** предварительно настроенные инструменты и расширения для веб-разработки  
+- **Предлагает** бесшовную интеграцию с GitHub для контроля версий и совместной работы  
+
+> 🚀 **Полезный совет**: Codespaces идеально подходит для обучения и прототипирования приложений с ИИ, так как он автоматически справляется со всеми сложностями настройки среды, позволяя вам сосредоточиться на разработке и обучении, а не на устранении проблем конфигурации.  
+
+---
+
+**Отказ от ответственности**:  
+Этот документ был переведен с использованием сервиса автоматического перевода [Co-op Translator](https://github.com/Azure/co-op-translator). Хотя мы стремимся к точности, пожалуйста, учитывайте, что автоматические переводы могут содержать ошибки или неточности. Оригинальный документ на его родном языке следует считать авторитетным источником. Для получения критически важной информации рекомендуется профессиональный перевод человеком. Мы не несем ответственности за любые недоразумения или неправильные интерпретации, возникающие в результате использования данного перевода.

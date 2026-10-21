@@ -1,0 +1,1582 @@
+# AI ಜೊತೆ ಚಾಟ್ ಸಹಾಯಕನನ್ನು ನಿರ್ಮಿಸಿ
+
+ಸ್ಟಾರ್ ಟ್ರೆಕ್‌ನಲ್ಲಿ ಕ್ರೂ ಯಾವಾಗ ಹಡಗಿನ ಕಂಪ್ಯೂಟರ್ ಜೊತೆ ಸಹಜವಾಗಿ ಮಾತಾಡುತ್ತಿದ್ದರು, ಅದಕ್ಕೆ ಸಂಕೀರ್ಣ ಪ್ರಶ್ನೆಗಳನ್ನು ಕೇಳುತ್ತ ಮತ್ತು ಆಲೋಚನಾಶೀಲ ಉತ್ತರಗಳನ್ನು ಪಡೆಯುತ್ತಿದ್ದರು ಅನ್ನೋದು ನೆನಪಾಗಿದೆಯೇ? 1960ರ ದಶಕದಲ್ಲಿ ಅದು ಶುದ್ಧ ವೈಜ್ಞಾನಿಕ ಕತೆ ಅನ್ನಿಸಿಕೊಂಡಿದ್ದವು ಈಗ ನೀವು ಈಗಾಗಲೇ ತಿಳಿದಿರುವ ವೆಬ್ ತಂತ್ರಜ್ಞಾನಗಳನ್ನು ಉಪಯೋಗಿಸಿ ಬರುತ್ತದೆ.
+
+ಈ ಪಾಠದಲ್ಲಿ, ನಾವು HTML, CSS, ಜಾವಾಸ્ક್ರಿಪ್ಟ್ ಮತ್ತು ಕೆಲವು ಬ್ಯಾಕ್‌ಎಂಡ್ ಇಂಟಿಗ್ರೇಶನ್ ಬಳಸಿ AI ಚಾಟ್ ಸಹಾಯಕನನ್ನು ರಚಿಸುವುದು. ನೀವು ಈಗಾಗಲೇ ಕಲಿಯುತ್ತಿರುವ ಸೌಕర్యಗಳು ಶಕ್ತಿ ಹೊಂದಿದ AI ಸೇವೆಗಳೊಂದಿಗೆ ಹೇಗೆ ಸಂಪರ್ಕ ಹೊಂದುವುದನ್ನು ಕಂಡುಕೊಳ್ಳುತ್ತೀರಿ, ಅವು ಸಂಕೇತಾಂಶಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಮತ್ತು ಅರ್ಥಪೂರ್ಣ ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ಉತ್ಪಾದಿಸಲು ಸಾಧ್ಯವೆಂದು.
+
+AI ಅನ್ನು ಅದೃಷ್ಟಂತೆ ವೈಭವೀಯ ಗ್ರಂಥಾಲಯಕ್ಕೆ ಹೊಂದಿರುವಂತೆಯೆ ಕಲ್ಪಿಸಿಕೊಳ್ಳಿ, ಅದು ಕೇವಲ ಮಾಹಿತಿಯನ್ನು ಹುಡುಕುವುದಲ್ಲದೆ, ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಪ್ರಶ್ನೆಗಳಿಗೆ ಹೊಂದಿಕೊಳ್ಳುವ ಸಮಗ್ರ ಉತ್ತರಗಳನ್ನು ಸಂಶ್ಲೇಷಿಸುತ್ತದೆ. ಸಾವಿರಾರು ಪುಟಗಳ ಮೂಲಕ ಹುಡುಕುವುದನ್ನು ಬದಲು, ನೀವು ನೇರ, ಸಾಂಕೇತಿಕ ಉತ್ತರಗಳನ್ನು ಪಡೆಯುತ್ತೀರಿ.
+
+ಇಂಟಿಗ್ರೇಶನ್ ಪರಿಚಿತ ವೆಬ್ ತಂತ್ರಜ್ಞಾನಗಳ ಮೂಲಕ ನಡೆಯುತ್ತದೆ. HTML ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ ಸೃಷ್ಟಿಸುತ್ತದೆ, CSS ದೃಶ್ಯ ವಿನ್ಯಾಸವನ್ನು ನಿಯಂತ್ರಿಸುತ್ತದೆ, ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್ ಬಳಕೆದಾರರ ಮನೋಭಾವವನ್ನು ನಿರ್ವಹಿಸುತ್ತದೆ ಮತ್ತು ಬ್ಯಾಕ್‌ಎಂಡ್ API ಎಲ್ಲವನ್ನೂ AI ಸೇವೆಗಳಿಗೆ ಸಂಪರ್ಕಗೊಳಿಸುತ್ತದೆ. ಇದು ವಾದ್ಯಮಾಲೆಯ ವಿವಿಧ ಭಾಗಗಳು ಒಟ್ಟಾಗಿ ಸಂಗೀತ ಸೃಷ್ಟಿಸುವಂತೆಯೇ.
+
+ನಾವು ಮೂಲತಃ ಪ್ರಾಕೃತಿಕ ಮಾನವ ಸಂವಹನ ಮತ್ತು ಯಂತ್ರ ಪ್ರಕ್ರಿಯೆ ಮಧ್ಯೆ ಸೇತುವೆಯನ್ನು ನಿರ್ಮಿಸುತ್ತಿದ್ದೇವೆ. ನೀವು AI ಸೇವೆಗಳ ಇಂಟಿಗ್ರೇಶನ್ ತಾಂತ್ರಿಕ ಜಾರಿಗೆ ಮತ್ತು ಸಂವಹನ ಎಷ್ಟರಮಟ್ಟಿಗೆ ಸಹಜವಾಗಿಯೇ ಅನಿಸುತ್ತೆಂಬಿಕೆ ವಿನ್ಯಾಸ ಮಾದರಿಗಳನ್ನು ಕಲಿಯುತ್ತೀರಿ.
+
+ಈ ಪಾಠದ ಕೊನಕ್ಕೆ, AI ಇಂಟಿಗ್ರೇಶನ್ ಗುಪ್ತ ಪ್ರಕ್ರಿಯೆ ಎಂಬುದಿಲ್ಲದೇ ಇನ್ನೊಂದು API ಅನ್ನು ಬಳಸುವಂತೆ ಅನುಭವವಾಗುವುದು. ನೀವು ChatGPT ಮತ್ತು Claude ಮುಂತಾದ ಈಗಿನ AI ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ಶಕ್ತಿಯನ್ನು ನೀಡುವ ಮೂಲಭೂತ ಮಾದರಿಗಳನ್ನು ವೆಬ್ ಅಭಿವೃದ್ಧಿ ತತ್ವಗಳೊಂದಿಗೆ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುತ್ತೀರಿ.
+
+## ⚡ ಮುಂದಿನ 5 ನಿಮಿಷಗಳಲ್ಲಿ ನೀವು ಮಾಡಬಹುದು
+
+**ವ್ಯಸ್ತಿ ಅಭಿವೃದ್ಧಿಗಾರರಿಗಾಗಿ ತ್ವರಿತ ಆರಂಭ ಮಾರ್ಗ**
+
+```mermaid
+flowchart LR
+    A[⚡ 5 ನಿಮಿಷಗಳು] --> B[GitHub ಟೋಕನ್ ಪಡೆಯಿರಿ]
+    B --> C[AI ಪ್ಲೇಗ್ರೌಂಡ್ ಪರೀಕ್ಷಿಸಿ]
+    C --> D[Python ಕೋಡ್ ನಕಲಿಸಿ]
+    D --> E[AI ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ನೋಡಿ]
+```
+- **ಮೊದಲ 1 ನಿಮಿಷ**: [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) ವಿಸಿಟ್ ಮಾಡಿ ಮತ್ತು ವೈಯಕ್ತಿಕ ಪ್ರವೇಶ ಚಿಹ್ನೆಯನ್ನು ರಚಿಸಿ
+- **ಎರಡನೇ 2ನೋ  ನಿಮಿಷ**: ಪ್ಲೇಗ್ರೌಂಡ್ ಇಂಟರ್ಫೇಸ್ನಲ್ಲಿ ನೇರವಾಗಿ AI ಸಂವಹನವನ್ನು ಪರೀಕ್ಷಿಸಿ
+- **ಮೂರು 3ನೋ  ನಿಮಿಷ**: "Code" ಟ_TAB_ ಅನ್ನು ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ಪೈಥಾನ್ ಸಂಕ್ಷಿಪ್ತವನ್ನು ನಕಲುಮಾಡಿ
+- **ನಾಲ್ಕು 4ನೋ  ನಿಮಿಷ**: ನಿಮ್ಮ ಟೋಕನ್ ಜೊತೆ ಸ್ಥಳೀಯವಾಗಿ ಕೋಡ್ ಅನ್ನು ಚಲಿಸಿ: `GITHUB_TOKEN=your_token python test.py`
+- **ಐದು 5ನೋ  ನಿಮಿಷ**: ನಿಮ್ಮ ಮೊದಲ AI ಪ್ರತಿಕ್ರಿಯೆ ನಿಮ್ಮದೇ ಕೋಡಿನಿಂದ ಉತ್ಪಾದಿತವಾಗುವ ನೋಡಿ
+
+**ತ್ವರಿತ ಪರೀಕ್ಷಾ ಕೋಡ್**:
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key="your_token_here"
+)
+
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Hello AI!"}],
+    model="openai/gpt-4o-mini"
+)
+
+print(response.choices[0].message.content)
+```
+
+**ಇದಕ್ಕಾಗಿ ಏಕೆ ಮಹತ್ವವಿದೆ**: 5 ನಿಮಿಷಗಳಲ್ಲಿ ನೀವು ಕಾರ್ಯಕ್ರಮಾತ್ಮಕ AI ಸಂವಹನದ ಮಾಯಾಜಾಲವನ್ನು ಅನುಭವಿಸುವಿರಿ. ಇದು ನೀವು ಬಳಕೆಯಲ್ಲಿರುವ ಪ್ರತಿಯೊಂದು AI ಅಪ್ಲಿಕೇಶನ್‌ಗೆ ಶಕ್ತಿ ನೀಡುವ ಮೂಲ ಕಟ್ಟಡವನ್ನು ಪ್ರತಿಬಿಂಬಿಸುತ್ತದೆ.
+
+ನಿಮ್ಮ ಪೂರ್ಣಗೊಂಡ ಯೋಜನೆ ಹೀಗಿರಬಹುದು:
+
+![ವ್ಯವಸ್ಥಾಪಕರ ಮತ್ತು AI ಸಹಾಯಕರ ನಡುವೆ ಸಂಭಾಷಣೆಯನ್ನು ತೋರizingಾಗುವ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ ಇಂಟರ್ಫೇಸ್](../../../translated_images/kn/screenshot.0a1ee0d123df681b.webp)
+
+## 🗺️ AI ಅಪ್ಲಿಕೇಶನ್ ಅಭಿವೃದ್ಧಿಯ ಮೂಲಕ ನಿಮ್ಮ ಕಲಿಕೆಯ ಪ್ರಯಾಣ
+
+```mermaid
+journey
+    title ವೆಬ್ ಅಭಿವೃದ್ಧಿಯಿಂದ AI ಏಕೀಕರಣದವರೆಗೆ
+    section AI ನೆಲೆಯು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
+      ನಿರ್ಮಾಣಾತ್ಮಕ AI ಸಂಪ್ರದಾಯಗಳನ್ನು ಕಂಡುಹಿಡಿಯಿರಿ: 4: You
+      GitHub ಮಾದರಿಗಳ ವೇದಿಕೆಯನ್ನು ಅನ್ವೇಷಿಸಿ: 6: You
+      AI ಪರಾಮಿತಿಗಳು ಮತ್ತು ಪ್ರಾಂಪ್ಟ್‌ಗಳನ್ನು ಪರಿಣತಗೊಳಿಸಿ: 8: You
+    section ಬ್ಯಾಕೆಂಡ್ ಏಕೀಕರಣ
+      Python API ಸರ್ವರ್ ನಿರ್ಮಿಸಿ: 5: You
+      AI ಕಾರ್ಯ ಕರೆಗಳನ್ನು ಜಾರಿಗೆ ತರುತ್ತದೆ: 7: You
+      ಅಸಿಂಕ್ರೊನಸ್ ಕಾರ್ಯಾಚರಣೆಗಳನ್ನು ನಿರ್ವಹಿಸಿ: 8: You
+    section ಫ್ರಂಟ್‌ಎಂಡ್ ಅಭಿವೃದ್ಧಿ
+      ಆಧುನಿಕ ಚಾಟ್ ಇಂಟರ್ಪೇಸ್ ರಚಿಸಿ: 6: You
+      ನೈಜಕಾಲ ಸಂವಹನಗಳಲ್ಲಿ ಪರಿಣತಿ ಸಾಧಿಸಿ: 8: You
+      ಪ್ರತ್ಯುತ್ತರ ಸಮರ್ಥ ಬಳಕೆದಾರ ಅನುಭವವನ್ನು ನಿರ್ಮಿಸಿ: 9: You
+    section ವೃತ್ತಿಪರ ಅಪ್ಲಿಕೇಶನ್
+      ಪೂರ್ಣ AI ವ್ಯವಸ್ಥೆಯನ್ನು ನಿಯೋಜಿಸಿ: 7: You
+      ಕಾರ್ಯಕ್ಷಮತೆ ಮಾದರಿಗಳನ್ನು ಧಾರಾಳಗೊಳಿಸಿ: 8: You
+      ಉತ್ಪಾದನಾ-ಸಿದ್ಧ ಅಪ್ಲಿಕೇಶನ್ ರಚಿಸಿ: 9: You
+```
+**ನಿಮ್ಮ ಪ್ರಯಾಣ ಗುರಿ**: ಈ ಪಾಠದ ಕೊನೆಗೆ, ನೀವು ChatGPT, Claude ಮತ್ತು Google Bard ಮುಂತಾದ ಆಧುನಿಕ AI ಸಹಾಯಕರನ್ನು ಶಕ್ತಿಗೊಳಿಸುವ ವಂಶ, ತಂತ್ರಜ್ಞಾನ ಮತ್ತು ಮಾದರಿಗಳನ್ನು ಬಳಸಿ ಸಂಪೂರ್ಣ AI ಚಾಲಿತ ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ನಿರ್ಮಿಸಿದ್ದಿರಿ.
+
+## AI ಅರ್ಥಮಾಡಿಕೊಳ್ಲುವುದು: ರಹಸ್ಯದಿಂದ ನಿಪುಣತೆಗೆ
+
+ಕೋಡಿನಲ್ಲಿ ಮುಳುಗದೆ ಮೊದಲು, ನಾವು ಯಾರು ಸೇರಿದ್ದಾರೆ ಅರ್ಥಮಾಡಿಕೊಳ್ಳೋಣ. ನೀವು APIಗಳನ್ನು ಮೊದಲು ಬಳಸಿದ್ರೆ, ಮೂಲತಃ ಕಾಪಿ ವಿನ್ಯಾಸ ತಿಳಿದಿರಬಹುದು: ವಿನಂತಿಯನ್ನು ಕಳುಹಿಸಿ, ಉತ್ತರವನ್ನು ಸ್ವೀಕರಿಸಿ.
+
+AI API ಗಳು ಸಮಾನ ರಚನೆ ತಾಳುತ್ತವೆ, ಆದರೆ ಡೇಟಾಬೇಸಿನಿಂದ ಪೂರ್ವ-ಸಂಗ್ರಹಿತ ಡೇಟಾವನ್ನು ಪಡೆಯುವುದನ್ನು ಬದಲಾಗಿ, ಅವು ವಿಮರ್ಶಿಸಿದ್ದ ಅಷ್ಟ ದೋಷಪಡುವಿಕೆಯ ಪಠ್ಯ ಬಳಸಿ ಹೊಸ ಉತ್ತರಗಳನ್ನು ಸೃಷ್ಟಿಸುತ್ತವೆ. ಅದನ್ನು ಗ್ರಂಥಾಲಯ ಕ್ಯಾಟಲೋಗ್ ವ್ಯವಸ್ಥೆ ಮತ್ತು ನೋಡಗರ ಪಲ್ಲಟಿಸುವ ಗ್ರಂಥಜ್ಞರ ನಡುವಿನ ಭೇದವಾಗಿ ಭಾವಿಸಿ.
+
+### "ಸೃಜನಶೀಲ AI" ಎಂದರೆ ಏನು?
+
+ರೋಸೆಟ್ಟಾ ಸ್ಟೋನ್ ಹೇಗೆ ಶಾಸ್ತ್ರಜ್ಞರು ಈಜಿಪ್ಷಿಯನ್ ಹೈರೋಗ್ಲಿಫ್ಸ್ ಅನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಪ್ರಜ್ಞೆ ನಿಯಮಗಳನ್ನು ಕಂಡುಕೊಂಡಿತು ಅನ್ನೋದನ್ನು ಗಮನಿಸಿ. AI ಮಾದರಿಗಳು ಸಹ ಹಾಗೆ ಕೆಲಸ ಮಾಡುತ್ತವೆ – ಅವು ಪದಗಳ ಗಣನೀಯ ಪ್ರಮಾಣದಲ್ಲಿ ನಿರಂತರವಾಗಿ ಉದಾಹರಣೆಗಳನ್ನು ಕಂಡು ಭಾಷೆಯ ಕಾರ್ಯವಿಧಾನವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುತ್ತವೆ ಮತ್ತು ಆ ನಿಯಮಗಳನ್ನು ಹೊಸ ಪ್ರಶ್ನೆಗಳಿಗೆ ಸೂಕ್ತ ಉತ್ತರಗಳನ್ನು ಸೃಷ್ಟಿಸಲು ಉಪಯೋಗಿಸುತ್ತವೆ.
+
+**ಸರಳ ಹೋಲಿಕೆಯನ್ನು ನೀಡುತ್ತೇನೆ:**
+- **ಸಾಂಪ್ರದಾಯಿಕ ಡೇಟಾಬೇಸ್**: ನಿಮ್ಮ ಜನನ ಪ್ರಮಾಣಪತ್ರ ಕೇಳುವುದಂತೆ – ಪ್ರತಿಯೊಮ್ಮೆ ನಿಖರ ಅದೇ ಡಾಕ್ಯುಮೆಂಟ್ ದೊರೆಯುತ್ತದೆ
+- **ಹುಡುಕು ಎಂಜಿನ್**: ಗ್ರಂಥಜ್ಞರನ್ನು ಪ್ರಾಣಿ ಪುಸ್ತಕಗಳನ್ನು ಹುಡುಕಲು ಕೇಳುವುದಂಥ – ಅವರು ಲಭ್ಯವಿರುವುದನ್ನು ತೋರಿಸುತ್ತಾರೆ
+- **ಸೃಜನಶೀಲ AI**: ನಿಮ್ಮ ಅಂದುಕೊಂಡ ಪ್ರಾಣಿಗಳ ಬಗ್ಗೆ ತಿಳಿಯುವ ಸ್ನೇಹಿತನನ್ನು ಕೇಳುವುದಂಥ – ಅವರು ತಮ್ಮ ಸ್ವಂತ ಶಬ್ದಗಳಲ್ಲಿ ಆಸಕ್ತಿಕರ ವಿಷಯಗಳನ್ನು ಹೇಳುತ್ತಾರೆ, ನೀವು ತಿಳಿಯಬೇಕಾದ್ದಿಗೆ ಅನುಗುಣವಾಗಿ
+
+```mermaid
+graph LR
+    A[ನಿಮ್ಮ ಪ್ರಶ್ನೆ] --> B[AI ಮಾದರಿ]
+    B --> C[ಪ್ಯಾಟರ್ನ್ ಗುರುತಿಸುವಿಕೆ]
+    C --> D[ವಿಷಯ ಸೃಷ್ಟಿ]
+    D --> E[ಸಂದರ್ಭಾಧಿಕೃತ ಪ್ರತಿಕ್ರಿಯೆ]
+    
+    F[ಪ್ರಶಿಕ್ಷಣ ಡೇಟಾ<br/>ಪುಸ್ತಕಗಳು, ಲೇಖನಗಳು, ವೆಬ್] --> B
+```
+### AI ಮಾದರಿಗಳು ಹೇಗೆ ಕಲಿಯುತ್ತವೆ (ಸರಳ ಆವೃತ್ತಿ)
+
+AI ಮಾದರಿಗಳು ಪುಸ್ತಕಗಳು, ಲೇಖನಗಳು, ಸಂಭಾಷಣೆಗಳ ಪಠ್ಯವನ್ನು ಒಳಗೊಂಡ ಭಾರಿ ಡೇಟಾಸೆಟ್ ಮೂಲಕ ಕಲಿಯುತ್ತವೆ. ಈ ಪ್ರಕ್ರಿಯೆಯಲ್ಲಿ ಅವು ಕೆಳಗಿನ ನಿಯಮಗಳನ್ನು ಕಂಡುಹಿಡಿಯುತ್ತವೆ:
+- ಬರಹದಲ್ಲಿ ಚಿಂತನೆಗಳು ಹೇಗೆ ರಚಿಸಲ್ಪಡುತ್ತವೆ
+- ಯಾವ ಪದಗಳು ಸಾಮಾನ್ಯంగా ಒಂದೇ ಜೊತೆಯಲ್ಲಿ ಕಾಣುತ್ತವೆ
+- ಸಂಭಾಷಣೆಯಾದರೆ ಸಾಮಾನ್ಯವಾಗಿ ಹೇಗೆ ಹರಿಯುತ್ತದೆ
+- ಅಧಿಕೃತ ಮತ್ತು ಅನಧಿಕೃತ ಸಂವಹನದ ಸಾಂದರ್ಭಿಕ ವ್ಯತ್ಯಾಸಗಳು
+
+**ಇದು ಪ್ರಾಚೀನ ಭಾಷೆಗಳ ಶಾಸ್ತ್ರಜ್ಞಾನಿಗಳು ಹೇಗೆ ಭಾಷೆಯನ್ನು_decode_ಮಾಡುತ್ತಾರೆ ಹಾಗೇ**: ಅವರು ಸಾವಿರಾರು ಉದಾಹರಣೆಗಳನ್ನು ವಿಶ್ಲೇಷಿಸಿ ವ್ಯಾಕರಣ, ಪದಕೋಶ ಮತ್ತು ಸಾಂಸ್ಕೃತಿಕ ಸಾಂದರ್ಭಿಕತೆಯನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುತ್ತಾರೆ; ನಂತರ ಆ ಕಲಿತ ನಿಯಮಗಳಿಂದ ಹೊಸ ಪಠ್ಯಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ತಾರೆ.
+
+### GitHub Models ಯಾಕೆ?
+
+ನಾವು GitHub Models ಬಳಸುತ್ತಿರುವುದು ತಾರ್ಕಿಕ ಕಾರಣಕ್ಕೆ – ನಮಗೆ AI ಸ್ಥಾಪನೆ ಮಾಡದೆ ಉದ್ಯಮ ಮಟ್ಟದ AI ಪಡೆಯಲು ಅವಕಾಶ ನೀಡುತ್ತದೆ (ನಿಮಗೆ ತಿಳಿದಂತೆ, ಈಗಲೇ ನೀವು ಅದನ್ನು ಮಾಡಲು ಇಚ್ಛಿಸುವುದಿಲ್ಲ!). ನೀವು ಎಲ್ಲೆಡೆ ಹವಾಮಾನ API ಬಳಸಿಕೊಂಡು ಹವಾಮಾನ ನುಡಿದಂತೆ ಕಲ್ಪಿಸಿ.
+
+ಇದು ಮೂಲತಃ "AI-ಆಸ್-ಸರ್ವಿಸ್", ಮತ್ತು ಉತ್ತಮ ಭಾಗ? ಪ್ರಾರಂಭಿಸಲು ಉಚಿತವಾಗಿದೆ, ಆದ್ದರಿಂದ ನೀವು ಪ್ರಯೋಗ ಶೂನ್ಯ ಖರ್ಚಿನಿಂದ ಮಾಡಬಹುದು.
+
+```mermaid
+graph LR
+    A[ಮುಂಭಾಗದ ಚಾಟ್ UI] --> B[ನಿಮ್ಮ ಬ್ಯಾಕ್‌ಎಂಡ್ API]
+    B --> C[GitHub ಮಾದರಿ API]
+    C --> D[AI ಮಾದರಿ ಪ್ರಕ್ರಿಯೆ]
+    D --> C
+    C --> B
+    B --> A
+```
+ನಾವು GitHub Models ಅನ್ನು ಬ್ಯಾಕ್‌ಎಂಡ್ ಇಂಟಿಗ್ರೇಶನ್‌ಗೆ ಬಳಸುತ್ತೇವೆ, ಇದು ವೃತ್ತಿಪರ-ಮಟ್ಟದ AI ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಡೆವಲಪರ್ ಸ್ನೇಹಿ ಇಂಟರ್ಫೇಸಿನ ಮೂಲಕ ಒದಗಿಸುತ್ತದೆ. [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) ವಿವಿಧ AI ಮಾದರಿಗಳನ್ನು ಪರೀಕ್ಷಿಸಲು ಮತ್ತು ಅವುಗಳ ಸಾಮರ್ಥ್ಯವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಸಹಾಯ ಮಾಡುವ ಪರೀಕ್ಷಾ ವಾತಾವರಣ.
+
+## 🧠 AI ಅಪ್ಲಿಕೇಶನ್ ಅಭಿವೃದ್ಧಿ ಪರಿಸರ
+
+```mermaid
+mindmap
+  root((AI Development))
+    Understanding AI
+      Generative Models
+        Pattern Recognition
+        Content Generation
+        Context Understanding
+        Response Synthesis
+      AI Parameters
+        Temperature Control
+        Token Limits
+        Top-p Filtering
+        System Prompts
+    Backend Architecture
+      API Integration
+        GitHub Models
+        Authentication
+        Request Handling
+        Error Management
+      Python Infrastructure
+        FastAPI Framework
+        Async Operations
+        Environment Security
+        CORS Configuration
+    Frontend Experience
+      Chat Interface
+        Real-time Updates
+        Message History
+        User Feedback
+        Loading States
+      Modern Web Tech
+        ES6 Classes
+        Async/Await
+        DOM Manipulation
+        Event Handling
+    Professional Patterns
+      Security Best Practices
+        Token Management
+        Input Validation
+        XSS Prevention
+        Error Boundaries
+      Production Readiness
+        Performance Optimization
+        Responsive Design
+        Accessibility
+        Testing Strategies
+```
+**ಮೂಲತತ್ವ**: AI ಅಪ್ಲಿಕೇಶನ್ ಅಭಿವೃದ್ಧಿ ಸಾಂಪ್ರದಾಯಿಕ ವೆಬ್ ಅಭಿವೃದ್ಧಿ ಕೌಶಲ್ಯಗಳನ್ನು AI ಸೇವೆಗಳ ಇಂಟಿಗ್ರೇಶನ್ ಜೊತೆಗೆ ಸಂಯೋಜಿಸಿ ಬಳಕೆದಾರರಿಗೆ ಸಹಜ ಮತ್ತು ಸ್ಪಂದನಶೀಲ ಬಗೆಯ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ರಚಿಸುತ್ತದೆ.
+
+![GitHub Models AI Playground ಇಂಟರ್ಫೇಸ್ ಮಾದರಿ ಆಯ್ಕೆ ಮತ್ತು ಪರೀಕ್ಷಾ ಪ್ರದೇಶವನ್ನು ತೋರಿಸುವುದು](../../../translated_images/kn/playground.d2b927122224ff8f.webp)
+
+**ಪ್ಲೇಗ್ರೌಂಡ್ ಉಪಕಾರ ಮಾಡುವ ಕೆಲವು ಅಂಶಗಳು:**
+- GPT-4o-mini, Claude ಮತ್ತು ಇತರ ವಿವಿಧ AI ಮಾದರಿಗಳನ್ನು ಪ್ರಯತ್ನಿಸಿ (ಎಲ್ಲವೂ ಉಚಿತ!)
+- ನೀವು ಬರೆಯುವ ಮೊದಲು ನಿಮ್ಮ ಕಲ್ಪನೆಗಳು ಮತ್ತು ಪ್ರಾಂಪ್ಟ್‌ಗಳನ್ನು ಪರೀಕ್ಷಿಸಿ
+- ನೀವು ಬಯಸುವ ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆಯಲ್ಲಿ ತಕ್ಷಣ ಬಳಸಬಹುದಾದ ಕೋಡ್ ಉದಾಹರಣೆಗಳನ್ನು ಪಡೆದುಕೊಳ್ಳಿ
+- ಸೃಜನಶೀಲತೆ ಮಟ್ಟ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯೆ ಉದ್ದದಂತಹ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ತಿದ್ದುಪಡಿ ಮಾಡಿ ಅವು ಔಟ್‌ಪುಟ್‌ ಮೇಲೆ ಹೇಗೆ ಪರಿಣಾಮ ಬೀರುತ್ತದೆ ನೋಡಿ
+
+ಸ್ವಲ್ಪ ಪ್ರಯೋಗಮಾಡಿದ ಮೇಲೆ "Code" ಟ್ಯಾಬ್ ಕ್ಲಿಕ್ ಮಾಡಿ ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ ಅವಶ್ಯವಾದ ಜಾರಿಗೆ ಕೋಡ್ ಪಡೆಯಿರಿ.
+
+![ಪ್ಲೇಗ್ರೌಂಡ್ ಆಯ್ಕೆ ವಿವಿಧ ಪ್ರೋಗ್ರಾಮಿಂಗ್ ಭಾಷೆಗಳಿಗಾಗಿ ಕೋಡ್ ತಯಾರಿಕೆಯ ಆಯ್ಕೆಯೊಂದಿಗೆ](../../../translated_images/kn/playground-choice.1d23ba7d407f4758.webp)
+
+## ಪೈಥಾನ್ ಬ್ಯಾಕ್‌ಎಂಡ್ ಇಂಟಿಗ್ರೇಶನ್ ವ್ಯವಸ್ಥೆಗೊಳಿಸುವುದು
+
+ಹೀಗಿರುವಾಗ AI ಇಂಟಿಗ್ರೇಶನ್ ಅನ್ನು ಪೈಥಾನ್ ಬಳಸಿಕೊಂಡು ಜಾರಿಮಾಡೋಣ. ಪೈಥಾನ್ ಸರಳ ಸಿಂಟ್ಯಾಕ್ಸ್ ಮತ್ತು ಬಲವಂತದ ಗ್ರಂಥಾಲಯಗಳ ಕಾರಣ AI ಅಪ್ಲಿಕೇಶನ್ಗೆ ಅತ್ಯುತ್ತಮ. ನಾವು GitHub Models ಪ್ಲೇಗ್ರೌಂಡ್‌ನಿಂದ ಕೋಡ್ ತೆಗೆದು ನಂತರ ಅದನ್ನು ಮರುರಚಿಸಿ ಪುನಃ ಉಪಯೋಗಿಸಲು ಯೋಗ್ಯ ಮತ್ತು ಉತ್ಪಾದನಾ-ತಯಾರಿರುವ ಫಂಕ್ಷನ್‌ಗೆ ಪರಿವರ್ತಿಸುವೆವು.
+
+### ಮೂಲ ಜಾರಿಗೆ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
+
+ನೀವು ಪ್ಲೇಗ್ರೌಂಡ್‌ನಿಂದ ಪೈಥಾನ್ ಕೋಡ್ ತೆಗೆದುಕೊಂಡಾಗ, ಹೀಗೊಂದು ಕಡೆಯಾಗಿರುತ್ತದೆ. ಮೊದಲಿಗೆ ಹೆಚ್ಚು ಲೆಕ್ಕ ಬದುಕಲು ಭಯಪಡಬೇಡಿ – ಹಂತ ಹಂತವಾಗಿ ಪರಿಶೀಲಿಸೋಣ:
+
+```python
+"""Run this model in Python
+
+> pip install openai
+"""
+import os
+from openai import OpenAI
+
+# ಮಾದರಿಯೊಂದಿಗೆ ಪ್ರಮಾಣೀಕರಿಸಲು ನೀವು ನಿಮ್ಮ GitHub ಸೆಟ್ಟಿಂಗ್ಸ್‌ನಲ್ಲಿ ವೈಯಕ್ತಿಕ ಪ್ರವೇಶ ಟೋಕನ್ (PAT) ಅನ್ನು ರಚಿಸಬೇಕಾಗುತ್ತದೆ.
+# ನಿಮ್ಮ PAT ಟೋಕನನ್ನು ರಚಿಸಲು ಇಲ್ಲಿ ನೀಡಲಾದ ಸೂಚನೆಗಳನ್ನು ಅನುಸರಿಸಿ: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+client = OpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key=os.environ["GITHUB_TOKEN"],
+)
+
+response = client.chat.completions.create(
+    messages=[
+        {
+            "role": "system",
+            "content": "",
+        },
+        {
+            "role": "user",
+            "content": "What is the capital of France?",
+        }
+    ],
+    model="openai/gpt-4o-mini",
+    temperature=1,
+    max_tokens=4096,
+    top_p=1
+)
+
+print(response.choices[0].message.content)
+```
+
+**ಈ ಕೋಡ್‌ನಲ್ಲಿ ಏನಾಗುತ್ತಿದ್ದುದು ಯಾಕೆ:**
+- **ನಾವು ಇಂಪೋರ್ಟ್ ಮಾಡುತ್ತೇವೆ** ಅಗತ್ಯವಿರುವ ಉಪಕರಣಗಳು: ಪರಿಸರ ಚರಗಳನ್ನು ಓದಲು `'os'`, AI ಜೊತೆ ಮಾತಾಡಲು `'OpenAI'`
+- **ನಾವು ವ್ಯವಸ್ಥೆ ಮಾಡುತ್ತೇವೆ** OpenAI ಕ್ಲೈಂಟ್ GitHub ನ AI ಸರ್ವರ್‌ಗಳ ಕಡೆ ಸೂಚಿಸಲು ಬದಲಾಗಿ OpenAI ನೇರವಾಗಿ
+- **ನಾವು ಪ್ರমাণೀಕರಿಸುತ್ತೇವೆ** ವಿಶೇಷ GitHub ಟೋಕನ್ ಬಳಸಿ (ಇದಕ್ಕೆ ಸ್ವಲ್ಪ ಬಳಿಕ!)
+- **ನಾವು ರಚಿಸುತ್ತೇವೆ** ಬಿಂಚಿನ "ರೋಲ್ಸ್" ಬಳಸಿ our ಸಂಭಾಷಣೆಯನ್ನು – ನಾಟಕದ ದೃಶ್ಯಸ್ಥಳವನ್ನು ಹೊಂದಿಸುವಂತೆಯೇ
+- **ನಾವು ಕಳುಹಿಸುತ್ತೇವೆ** AI ಗೆ ವಿನಂತಿಯನ್ನು ಕೆಲ ಸೂಕ್ಷ್ಮ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳೊಂದಿಗೆ
+- **ನಾವು ಎಳೆಯುತ್ತೇವೆ** ಎಲ್ಲ ಡೇಟಾದಿಂದ ವಾಸ್ತವಿಕ ಪ್ರತಿಕ್ರಿಯೆ ಪಠ್ಯವನ್ನು
+
+### ಸಂದೇಶ ರೋಲ್ಸ್ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು: AI ಸಂಭಾಷಣಾ ರೂಪರೇಖೆ
+
+AI ಸಂಭಾಷಣೆಗಳು ವಿಭಿನ್ನ "ರೋಲ್ಸ್" ಬಳಸಿ ನಿರ್ದಿಷ್ಟ ಉದ್ದೇಶಗಳನ್ನು ಹೊಂದಿರುತ್ತವೆ:
+
+```python
+messages=[
+    {
+        "role": "system",
+        "content": "You are a helpful assistant who explains things simply."
+    },
+    {
+        "role": "user", 
+        "content": "What is machine learning?"
+    }
+]
+```
+
+**ನಾಟಕ ನಿರ್ದೇಶನದಂತೆ ಭಾವಿಸಿ:**
+- **ಸಿಸ್ಟಮ್ ರೋಲ್**: ನಟನ ನಿರ್ದೇಶಗಳು – AI ಹೇಗೆ ವರ್ತಿಸಬೇಕು, ಯಾವ ವ್ಯಕ್ತಿತ್ವ ಹೊಂದಬೇಕು ಮತ್ತು ಹೇಗೆ ಪ್ರತಿಕ್ರಿಯಿಸಬೇಕು ಎಂದು ಹೇಳುತ್ತದೆ
+- **ಬಳಕೆದಾರ ರೋಲ್**: ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಬಳಸುವ ವ್ಯಕ್ತಿಯ ನಿಜವಾದ ಪ್ರಶ್ನೆ ಅಥವಾ ಸಂದೇಶ
+- **ಸಹಾಯಕ ರೋಲ್**: AI ನ ಉತ್ತರ (ನೀವು ಕಳುಹಿಸುವುದಿಲ್ಲ, ಆದರೆ ಸಂಭಾಷಣಾ ಇತಿಹಾಸದಲ್ಲಿ ಕಾಣಸಿಗುತ್ತದೆ)
+
+**ವಾಸ್ತವ ಜಗತ್ತಿನ ಉದಾಹರಣೆ**: ನೀವು ಪಕ್ಷಿ ಪಾರ್ಟಿಯಲ್ಲಿ ಗೆಳೆಯನ ಪರಿಚಯ ಮಾಡಿಸುತ್ತಿದ್ದೀರಿ ಅನ್ನೋಣ:
+- **ಸಿಸ್ಟಮ್ ಸಂದೇಶ**: “ಇವರು ನನ್ನ ಗೆಳೆಯ ಸರಾ, ಅವರು ವೈದ್ಯರು ಮತ್ತು ವೈದ್ಯಕೀಯ ತತ್ವಗಳನ್ನು ಸರಳ ಭಾಷೆಯಲ್ಲಿ ಅರ್ಥಮಾಡಿಸುವರು”
+- **ಬಳಕೆದಾರ ಸಂದೇಶ**: “ನೀವು ಲಸಿಕೆಗಳು ಹೇಗೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತವೆ ಎಂದು ವಿವರಿಸಬಹುದುವೇ?”
+- **ಸಹಾಯಕ ಪ್ರತಿಕ್ರಿಯೆ**: ಸರಾ ಸ್ನೇಹಪರ ವೈದ್ಯರಾಗಿಯೇ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತಾರೆ, ವಕೀಲ ಅಥವಾ ಶೆಫ್ ಆಗಿ ಅಲ್ಲ
+
+### AI ಪ್ಯಾರಾಮೀಟರ್ಗಳ ಅರ್ಥ: ಪ್ರತಿಕ್ರಿಯೆ ನಡವಳಿಕೆ ಸುಧಾರಣೆ
+
+AI API ಕರೆಗಳಲ್ಲಿ ಸಂಖ್ಯಾತ್ಮಕ ಪ್ಯಾರಾಮೀಟರ್ಗಳು ಮಾದರಿ ಪ್ರತಿಕ್ರಿಯೆಗಳನ್ನು ಹೇಗೆ ಸೃಷ್ಟಿಸುತ್ತದೆ ಎನ್ನುವುದನ್ನು ನಿಯಂತ್ರಿಸುತ್ತವೆ. ಆ ಸೆಟ್ಟಿಂಗ್‌ಗಳನ್ನು ಬದಲಾಯಿಸಿ ನೀವು AI ನ ನಡವಳಿಕೆಯನ್ನು ಬೇರೆ ಬೇರೆ ಬಳಕೆಯ ಪ್ರಕಾರ ಹೊಂದಿಸಬಹುದು:
+
+#### ತಾಪಮಾನ (0.0 ರಿಂದ 2.0): ಸೃಜನಶೀಲತೆ ಡೈಯಲ್
+
+**ಇದು ಮಾಡುವುದು**: AI ಪ್ರತಿಕ್ರಿಯೆಗಳ ಸೃಜನಶೀಲತೆ ಅಥವಾ പ്രവಚನೀಯತೆ ಮಟ್ಟವನ್ನು ನಿಯಂತ್ರಿಸುವುದು.
+
+**ಇದನ್ನು ಜ್ಯಾಜ್ ವಾದಕನ ಸುಗಮರೀತಿ ತರಗೆಣಿಸುವಂತೆ ಭಾವಿಸಿ:**
+- **Temperature = 0.1**: ಪ್ರತಿಯೊಮ್ಮೆ ಅಂದಾಜು ಹೆಚ್ಚು ಇರದಂತೆ ನಿಜವಾದ ಅದೇ ಮೇಳೋಡಿಯನ್ನು ನುಡಿಸುವುದು (ಅತ್ಯಂತ ನಿರೀಕ್ಷಿತ)
+- **Temperature = 0.7**: ಗುರುತಿಸುವಂತೆಯೇ ಸಾಂದರ್ಭಿಕ ಬದಲಾವಣೆಗಳನ್ನು ಸೇರಿಸುವುದು (ಸಮತೋಲನಸಿದ್ದ ಸೃಜನಶೀಲತೆ)
+- **Temperature = 1.5**: ಒಂದೇಬಗೆಯಲ್ಲದ ಪೂರ್ಣ ಪ್ರಯೋಗాత್ಮಕ ಜ್ಯಾಜ್, ಅಪೇಕ್ಷಿತವಲ್ಲದ ತಿರುವುಗಳೊಂದಿಗೆ (ಅತ್ಯಂತ ಅಸಂಭವ)
+
+```python
+# ತುಂಬಾ ಊಹಿಸಬಹುದಾದ ಉತ್ತರಗಳು (ವಾಸ್ತವಿಕ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತಮ)
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "What is 2+2?"}],
+    temperature=0.1  # ಬಹುಶಃ ಯಾವಾಗಲೂ "4" ಎಂದು ಹೇಳುವುದು
+)
+
+# ಸೃಜನಶೀಲ ಉತ್ತರಗಳು (ಒಳಗೊಳ್ಳಲು ಒಳ್ಳೆಯದು)
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Write a creative story opening"}],
+    temperature=1.2  # ಅನನ್ಯ, ಅಪೇಕ್ಷಿಸಲ್ಪಟ್ಟ ಕಥೆಗಳನ್ನು ರಚಿಸುವುದು
+)
+```
+
+#### ಗರಿಷ್ಟ ಟೋಕೆನ್ಸ್ (1 ರಿಂದ 4096+): ಪ್ರತಿಕ್ರಿಯೆ ಉದ್ದ ನಿಯಂತ್ರಕ
+
+**ಇದು ಮಾಡುವುದು**: AI ಪ್ರತಿಕ್ರಿಯೆ ಎಷ್ಟು ಉದ್ದವಾಗಬಹುದು ಎಂದು ಮಿತಿ ನಿಗದಿಪಡಿಸುವುದು.
+
+**ಟೋಕೆನ್ಸ್ ಅನ್ನು ಸುಮಾರು ಪದಗಳಿಗೆ ಸಮನ್ವಯ ಎಣಿಸಬಹುದು** (1 ಟೋಕೆನ್ ಅಂದಾಜು 0.75 ಪದಗಳು ಇಂಗ್ಲಿಷ್‌ನಲ್ಲಿ):
+- **max_tokens=50**: ಚುಟುಕು ಮತ್ತು ಮಧುರ (ಟೆಕ್ಸ್ಟ್ ಸಂದೇಶದಂತೆ)
+- **max_tokens=500**: ಒಳ್ಳೆಯ ಪ್ಯಾರಾಗ್ರಾಫ್ ಅಥವಾ ಎರಡು
+- **max_tokens=2000**: ಉದಾಹರಣೆಯೊಂದಿಗೆ ಸಂಪೂರ್ಣ ವಿವರಣೆ
+
+```python
+# ಸಂಕ್ಷಿಪ್ತ, ಸಲ್ಪ ವಿವರಗಳ ಉತ್ತರಗಳು
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Explain JavaScript"}],
+    max_tokens=100  # ಸಂಕ್ಷಿಪ್ತ ವಿವರಣೆಗಾಗಿ ಬಲವಂತಪಡಿಸುತ್ತದೆ
+)
+
+# ವಿವರವಾದ, ಸಂಪೂರ್ಣ ಉತ್ತರಗಳು
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Explain JavaScript"}],
+    max_tokens=1500  # ಉದಾಹರಣೆಗಳೊಂದಿಗೆ ವಿವರವಾದ ವಿವರಣೆಗಳಿಗೆ ಅವಕಾಶ ನೀಡುತ್ತದೆ
+)
+```
+
+#### top_p (0.0 ರಿಂದ 1.0): ಕೇಂದ್ರೀಕರಣ ಪ್ಯಾರಾಮೀಟರ್
+
+**ಇದು ಮಾಡುವುದು**: AI ಅತ್ಯಂತ ಸಾಧ್ಯತೆ ಇರುವ ಪದಗಳ ಮೇಲೆ ಎಷ್ಟು ಕೇಂದ್ರೀಕರಿಸಬೇಕು ಎಂದು ನಿಯಂತ್ರಿಸುವುದು.
+
+**AI ಜ್ಞಾಪಕದಲ್ಲಿ ದೊಡ್ಡ ಪದಸಂಗ್ರಹ ಇದೆಯೆಂದು ಭಾವಿಸಿ, ಪದಗಳನ್ನು ಸಾಧ್ಯತೆ ಕ್ರಮದಲ್ಲಿ ಮೌಲ್ಯಮಾಪನ ಮಾಡಲಾಗುತ್ತದೆ**:
+- **top_p=0.1**: ಅತ್ಯುಚ್ಚ 10% ಸಾಧ್ಯತೆ ಪದಗಳನ್ನು ಮಾತ್ರ ಪರಿಗಣಿಸುತ್ತದೆ (ತೀವ್ರ ಕೇಂದ್ರೀಕೃತ)
+- **top_p=0.9**: 90% ಸಾಧ್ಯತೆ ಇರುವ ಪದಗಳನ್ನು ಪರಿಗಣಿಸುತ್ತದೆ (ಹೆಚ್ಚು ಸೃಜನಶೀಲ)
+- **top_p=1.0**: ಎಲ್ಲ ಪದಗಳನ್ನು ಪರಿಗಣಿಸುತ್ತದೆ (ಅತ್ಯುತ್ತಮ ವೈವಿಧ್ಯ)
+
+**ಉದಾಹರಣೆ**: ನೀವು ಕೇಳಿದರೆ "ಆಕಾಶ ಸಹಜವಾಗಿ..."
+- **ಕಡಿಮೆ top_p**: ಬಹುಶಃ "ನೀಲಿ" ಅನ್ನು ಹೇಳುತ್ತದೆ
+- **ಹೆಚ್ಚು top_p**: ಸಾಧ್ಯವಾಗಿ "ನೀಲಿ", "ಮೇಘ", "ವಿಸ್ತಾರ", "ಬದಲಾಗುತ್ತಿದೆ", "ಸುಂದರ" ಮುಂತಾದ ಪದಗಳನ್ನು ಹೇಳಬಹುದು
+
+### ಎಲ್ಲವನ್ನೂ ಒಟ್ಟುಗೂಡಿಸುವುದು: ವಿವಿಧ ಬಳಕೆಗಳಿಗಾಗಿ ಪ್ಯಾರಾಮೀಟರ್ ಸಂಯೋಜನೆಗಳು
+
+```python
+# ವಾಸ್ತವಿಕ, ಸತತ ಉತ್ತರಗಳಿಗಾಗಿ (ಎಂತಹ ದಾಖಲೆ ಬೊಟ್)
+factual_params = {
+    "temperature": 0.2,
+    "max_tokens": 300,
+    "top_p": 0.3
+}
+
+# ಸೃಜನಾತ್ಮಕ ಬರವಣಿಗೆ ಸಹಾಯಕ್ಕಾಗಿ
+creative_params = {
+    "temperature": 1.1,
+    "max_tokens": 1000,
+    "top_p": 0.9
+}
+
+# ಸಂಭಾಷಣಾತ್ಮಕ, ಸಹಾಯಕ ಪ್ರತ್ಯುತ್ತರಗಳಿಗಾಗಿ (ಸಮತೋಲನ)
+conversational_params = {
+    "temperature": 0.7,
+    "max_tokens": 500,
+    "top_p": 0.8
+}
+```
+
+```mermaid
+quadrantChart
+    title ಎಐ ಪರಿಮಿತಿ ಸುಧಾರಣಾ ಮ್ಯಾಟ್ರಿಕ್ಸ್
+    x-axis ಕಡಿಮೆ ಸೃಜನಶೀಲತೆ --> ಹೆಚ್ಚು ಸೃಜನಶೀಲತೆ
+    y-axis ಕಡಿಮೆ ಪ್ರತಿಕ್ರಿಯೆ --> ಹೆಚ್ಚು ಪ್ರತಿಕ್ರಿಯೆ
+    
+    quadrant-1 ಸೃಜನಾತ್ಮಕ ವಿಷಯ
+    quadrant-2 ವಿವರವಾದ ವಿಶ್ಲೇಷಣೆ
+    quadrant-3 ವೇಗದ ಮಾಹಿತಿ
+    quadrant-4 ಸಂಭಾಷಣಾತ್ಮಕ ಎಐ
+    
+    Documentation Bot: [0.2, 0.3]
+    Customer Service: [0.4, 0.4]
+    General Assistant: [0.7, 0.5]
+    Creative Writer: [0.9, 0.9]
+    Brainstorming Tool: [0.8, 0.8]
+```
+**ಈ ಪ್ಯಾರಾಮೀಟರ್ಗಳ ಮಹತ್ವ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು**: ಭಿನ್ನ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ಬೇರೆ ಬೇರೆ ಬಗೆಯ ಉತ್ತರಗಳು ಆವಶ್ಯಕ. ಗ್ರಾಹಕ ಸೇವಾ ಬಾಟ್ ಸ್ಥಿರ ಮತ್ತು ವಾಸ್ತವಮೂಲಕವಾಗಿರಬೇಕು (ತಾಪಮಾನ ಕಡಿಮೆ), ಸೃಜನಶೀಲ ಬರವಣಿಗೆಯ ಸಹಾಯಕ ಕಲ್ಪನೆಗಳು ಹಾಗೂ ಬದಲಾವಣೆಗಾಗಿ(ತಾಪಮಾನ ಹಚ್ಚು). ಈ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳೊಂದಿಗೆ ನೀವು AI ವ್ಯಕ್ತಿತ್ವ ಮತ್ತು ನಡವಳಿಕೆಯನ್ನು ನಿಯಂತ್ರಿಸಬಹುದು.
+```
+
+**Here's what's happening in this code:**
+- **We import** the tools we need: `os` for reading environment variables and `OpenAI` for talking to the AI
+- **We set up** the OpenAI client to point to GitHub's AI servers instead of OpenAI directly
+- **We authenticate** using a special GitHub token (more on that in a minute!)
+- **We structure** our conversation with different "roles" – think of it like setting the scene for a play
+- **We send** our request to the AI with some fine-tuning parameters
+- **We extract** the actual response text from all the data that comes back
+
+> 🔐 **Security Note**: Never hardcode API keys in your source code! Always use environment variables to store sensitive credentials like your `GITHUB_TOKEN`.
+
+### Creating a Reusable AI Function
+
+Let's refactor this code into a clean, reusable function that we can easily integrate into our web application:
+
+```python
+import asyncio
+from openai import AsyncOpenAI
+
+# Use AsyncOpenAI for better performance
+client = AsyncOpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key=os.environ["GITHUB_TOKEN"],
+)
+
+async def call_llm_async(prompt: str, system_message: str = "You are a helpful assistant."):
+    """
+    Sends a prompt to the AI model asynchronously and returns the response.
+    
+    Args:
+        prompt: The user's question or message
+        system_message: Instructions that define the AI's behavior and personality
+    
+    Returns:
+        str: The AI's response to the prompt
+    """
+    try:
+        response = await client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_message,
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="openai/gpt-4o-mini",
+            temperature=1,
+            max_tokens=4096,
+            top_p=1
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        logger.error(f"AI API error: {str(e)}")
+        return "I'm sorry, I'm having trouble processing your request right now."
+
+# Backward compatibility function for synchronous calls
+def call_llm(prompt: str, system_message: str = "You are a helpful assistant."):
+    """Synchronous wrapper for async AI calls."""
+    return asyncio.run(call_llm_async(prompt, system_message))
+```
+
+**ಈ ಸುಧಾರಿತ ಫಂಕ್ಷನ್ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು:**
+- ಬಳಕೆದಾರರ ಪ್ರಾಂಪ್ಟ್ ಮತ್ತು ಐಚ್ಛಿಕ ಸಿಸ್ಟಮ್ ಸಂದೇಶ ಎರಡು ಪ್ಯಾರಾಮೀಟರ್‌ಗಳನ್ನು ಅಂಗೀಕರಿಸುತ್ತದೆ
+- ಸಾಮಾನ್ಯ ಸಹಾಯಕ ನಡವಳಿಕೆಗೆ ಡಿಫಾಲ್ಟ್ ಸಿಸ್ಟಮ್ ಸಂದೇಶ ಒದಗಿಸುತ್ತದೆ
+- ಉತ್ತಮ ಕೋಡ್ ದಾಖಲಾತಿಗಾಗಿ ಪೈಥಾನ್ ಟೈಪ್ ಸೂಚನೆಗಳನ್ನು ಬಳಸುತ್ತದೆ
+- ಫಂಕ್ಷನ್ ಉದ್ದೇಶ ಮತ್ತು ಪ್ಯಾರಾಮೀಟರ್‌ಗಳ ವಿವರಣೆಗಾಗಿ ವಿಶದ ಡಾಕ್ಸ್ಟ್ರಿಂಗ್ ಸೇರಿದೆ
+- ಪ್ರತಿಕ್ರಿಯೆಯ ವಿಷಯವನ್ನು ಮಾತ್ರ ಹಿಂತಿರುಗಿಸುತ್ತದೆ, ವೆಬ್ API ಗೆ ಬಳಸಲು ಸುಲಭವಾಗಿದೆ
+- ಸತತ AI ನಡವಳಿಕೆಗೆ ಒಂದೇ ಮಾದರಿ ಪ್ಯಾರಾಮೀಟರ್‌ಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತದೆ
+
+### ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್ಗಳ ಮಾಯಾಜಾಲ: AI ವ್ಯಕ್ತಿತ್ವ ಪ್ರೋಗ್ರಾಮ್ಮಿಂಗ್
+
+ಪ್ಯಾರಾಮೀಟರ್‌ಗಳು AI ಯ ಯೋಚಿಸುವ ರೀತಿಯನ್ನು ನಿಯಂತ್ರಿಸುವಾಗ, ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್‌ಗಳು AI ಯ ಯಾರು ಎಂದು ನಿರ್ಧರಿಸುತ್ತವೆ. ಇದು ಐಎಸ್ ಒಂದರಲ್ಲಿ ಅತ್ಯಂತ ಕುತೂಹಲಕಾರಿ ಭಾಗ: ನೀವು AI ಗೆ ಪೂರಕ ವ್ಯಕ್ತಿತ್ವ, ಪರಿಣತಿ ಮಟ್ಟ ಮತ್ತು ಸಂವಹನ ಶೈಲಿಯನ್ನು ನೀಡುತ್ತೀರಿ.
+
+**ವಿಭಿನ್ನ ಪಾತ್ರಗಳಿಗೆ ವಿಭಿನ್ನ ನಟರನ್ನು ಆಯ್ಕೆ ಮಾಡುವಂತೆ ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್‌ಗಳನ್ನು ಭಾವಿಸಿ**: ಒಂದೇ ಸಾಮಾನ್ಯ ಸಹಾಯಕನ ಹೊರತಾಗಿ ನೀವು ವಿಭಿನ್ನ ಹುದ್ದೆಗಳಿಗಾಗಿ ವಿಶೇಷಜ್ಞರನ್ನು ರಚಿಸಬಹುದು. ಸಹನೆಪ್ರವೃತ್ತಿ ಶಿಕ್ಷಕನ ಅಗತ್ಯವಿದೆಯೇ? ಸೃಜನಶೀಲ ಮನಃಪೂರ್ವಕ ಸಹಫೋಲಕ? ಗಂಭೀರ ವ್ಯವಹಾರ ಸಲಹೆಗಾರ? ಕೇವಲ ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್ ಬದಲಿಸಿ!
+
+#### ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್‌ಗಳು ಏಕೆ ಶಕ್ತಿಶಾಲಿ
+
+ಇಲ್ಲಿ ಆಸಕ್ತಿದಾಯಕ ಭಾಗ: AI ಮಾದರಿಗಳನ್ನು ಲಕ್ಷಾಂತರ ಸಂಭಾಷಣೆಗಳಲ್ಲಿ ತರಬೇತಿ ಮಾಡಲಾಗಿದೆ, ಅಲ್ಲಿ ಜನರು ವಿಭಿನ್ನ ಪಾತ್ರ ಮತ್ತು ಪರಿಣತಿ ಮಟ್ಟಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುತ್ತಾರೆ. ನೀವು AI ಗೆ ನಿರ್ದಿಷ್ಟ ಪಾತ್ರ ನೀಡಿದರೆ, ಅದು ಕಲಿತ ನಿಯಮಗಳ ಎಲ್ಲ ನಡವಳಿಕೆಯನ್ನು ನಿಷ್ಕ್ರಿಯಗೊಳಿಸುವ ಸ್ವಿಚ್‌ ಅಥವಾ ಬಟನ್‌ನಂತಿದೆ.
+
+**ಇದು AI ನಿಗಾಗಿ ಮೆಥಡ್ ನಟನೆಯಂತೆ**: ನಟನಿಗೆ "ನೀವು ಜ್ಞಾನವಂತ ಹಳೆಯ ಪ್ರಾಧ್ಯಾಪಕರಾಗಿದ್ದೀರಿ" ಎಂದರೆ ಅವರು ತಕ್ಷಣ ತಮ್ಮ ದೈಹಿಕ ಭಂಗಿಮೆಗಳು, ಪದಕೋಶ ಮತ್ತು ಅಭಿವ್ಯಕ್ತಿಗಳನ್ನು ಹೊಂದಿಸಿಕೊಂಡಿದ್ದಾರೆ. AI ಸಹ ಭಾಷಾ ಮಾದರಿಗಳೊಂದಿಗೆ ಅದೇ ರೀತಿಯಲ್ಲಿ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ.
+
+#### ಪರಿಣಾಮಕಾರಿ ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್ ರಚನೆ: ಕಲಾ ಮತ್ತು ವಿಜ್ಞಾನ
+
+**ಉತ್ತಮ ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್ ರಚನೆಯ ಅಂಗಾಂಗಗಳು:**
+1. **ಪಾತ್ರ/ಗುಣಧರ್ಮ**: AI ಯಾರು?
+2. **ಪರಿಣತಿ**: ಅವರು ಏನು ತಿಳಿಯುತ್ತಾರೆ?
+3. **ಸಂವಹನ ಶೈಲಿ**: ಹೇಗೆ ಮಾತಾಡುತ್ತಾರೆ?
+4. **ನಿಖರ ನಿರ್ದೇಶನಗಳು**: ಏನು ಗಮನCentered
+ಅವಕಾಷಿಸಬೇಕು?
+
+```python
+# ❌ ಅಸ್ಪಷ್ಟ ವ್ಯವಸ್ಥೆಯ ಸೂಚನೆ
+"You are helpful."
+
+# ✅ ವೈವಿಧ್ಯಮಯ, ಪರಿಣಾಮಕಾರಿ ವ್ಯವಸ್ಥೆಯ ಸೂಚನೆ
+"You are Dr. Sarah Chen, a senior software engineer with 15 years of experience at major tech companies. You explain programming concepts using real-world analogies and always provide practical examples. You're patient with beginners and enthusiastic about helping them understand complex topics."
+```
+
+#### ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್ ಉದಾಹರಣೆಗಳು ಮತ್ತು ಸಾಂದರ್ಭಿಕತೆ
+
+ವಿಭಿನ್ನ ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್‌ಗಳು ಹೇಗೆ ಸಂಪೂರ್ಣ ವಿಭಿನ್ನ AI ವ್ಯಕ್ತಿತ್ವಗಳನ್ನು ರಚಿಸುತ್ತವೆ ನೋಡೋಣ:
+
+```python
+# ಉದಾಹರಣೆ 1: ಸಹನೆಯ ಶಿಕ್ಷಕ
+teacher_prompt = """
+You are an experienced programming instructor who has taught thousands of students. 
+You break down complex concepts into simple steps, use analogies from everyday life, 
+and always check if the student understands before moving on. You're encouraging 
+and never make students feel bad for not knowing something.
+"""
+
+# ಉದಾಹರಣೆ 2: ಸೃಜನಾತ್ಮಕ ಸಹಯೋಗಿ
+creative_prompt = """
+You are a creative writing partner who loves brainstorming wild ideas. You're 
+enthusiastic, imaginative, and always build on the user's ideas rather than 
+replacing them. You ask thought-provoking questions to spark creativity and 
+offer unexpected perspectives that make stories more interesting.
+"""
+
+# ಉದಾಹರಣೆ 3: ತಂತ್ರಜ್ಞಾನದ ವ್ಯಾಪಾರ ಸಲಹೆಗಾರ
+business_prompt = """
+You are a strategic business consultant with an MBA and 20 years of experience 
+helping startups scale. You think in frameworks, provide structured advice, 
+and always consider both short-term tactics and long-term strategy. You ask 
+probing questions to understand the full business context before giving advice.
+"""
+```
+
+#### ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್‌ಗಳು ಕಾರ್ಯಾಚರಣೆಯಲ್ಲಿ ನೋಡುವುದು
+
+ಒಂದೇ ಪ್ರಶ್ನೆಯನ್ನು ವಿವಿಧ ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್‌ಗಳೊಂದಿಗೆ ಪರೀಕ್ಷಿಸಿ ಭಿನ್ನತೆಯನ್ನು ನೋಡಿ:
+
+**ಪ್ರಶ್ನೆ**: "ನನ್ನ ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ಬಳಕೆದಾರ ಸರ್ಟಿಫಿಕೇಶನ್ ಅನ್ನು ಹೇಗೆ ನಿರ್ವಹಿಸಬಹುದು?"
+
+```python
+# ಶಿಕ್ಷಕರ ಪ್ರಾಂಪ್ಟ್ ಜೊತೆ:
+teacher_response = call_llm(
+    "How do I handle user authentication in my web app?",
+    teacher_prompt
+)
+# ಸಾಮಾನ್ಯ ಪ್ರತಿಕ್ರಿಯೆ: "ಅತಿದೊಡ್ಡ ಪ್ರಶ್ನೆ! ಪ್ರವೇಶ ಪರಿಶೀಲನೆಯನ್ನು ಸರಳ ಹಂತಗಳಲ್ಲಿ ವಿಭಾಗಿಸೋಣ.
+# ಅದನ್ನು ಇಡೀ ನೈಟ್‌ಕ್ಲಬ್ ಬೌನ್ಸರ್ ಐಡಿ ಪರಿಶೀಲಿಸುತ್ತಿರುವಂತೆ ಕಲ್ಪಿಸಿಕೊಳ್ಳಿ..."
+
+# ವ್ಯವಹಾರ ಪ್ರಾಂಪ್ಟ್ ಜೊತೆ:
+business_response = call_llm(
+    "How do I handle user authentication in my web app?", 
+    business_prompt
+)
+# ಸಾಮಾನ್ಯ ಪ್ರತಿಕ್ರಿಯೆ: "ವ್ಯೂಹಾತ್ಮಕ ದೃಷ್ಟಿಕೋಣದಿಂದ, ಪ್ರವೇಶ ಪರಿಶೀಲನೆ ಬಳಕೆದಾರರ
+# ವಿಶ್ವಾಸ ಮತ್ತು ನಿಯಮ ಸಂವಿಧಾನದ ಪಾಲನೆಗೆ ಅತ್ಯಂತ ಮುಖ್ಯವಾಗಿದೆ. ಸುರಕ್ಷತೆ,
+# ಬಳಕೆದಾರ ಅನುಭವ ಮತ್ತು ವಿಸ್ತರಣೆ ಸಾಧ್ಯತೆಯನ್ನು ಪರಿಗಣಿಸಿ ಒಂದು ರೂಪರೇಖೆ ನೀಡಲು ಅನುಮತಿಸಿ..."
+```
+
+#### ಸುಧಾರಿತ ಸಿಸ್ಟಮ್ ಪ್ರಾಂಪ್ಟ್ ತಂತ್ರಗಳು
+
+**1. ಸಾಂದರ್ಭಿಕ ಭೂಮಿ ಒದಗಿಸುವುದು**: AI ಗಾಗಿ ಹಿನ್ನೆಲೆ ಮಾಹಿತಿಯನ್ನು ನೀಡಿ
+```python
+system_prompt = """
+You are helping a junior developer who just started their first job at a startup. 
+They know basic HTML/CSS/JavaScript but are new to backend development and databases. 
+Be encouraging and explain things step-by-step without being condescending.
+"""
+```
+
+**2. output formāṭiṅg**: AIige uttaragaḷannu eṅgaṭṭu raṭṭisu beku antu heḷi  
+```python
+system_prompt = """
+You are a technical mentor. Always structure your responses as:
+1. Quick Answer (1-2 sentences)
+2. Detailed Explanation 
+3. Code Example
+4. Common Pitfalls to Avoid
+5. Next Steps for Learning
+"""
+```
+  
+**3. constraint setting**: AI yenu māḍabēḍa entu niyamisi  
+```python
+system_prompt = """
+You are a coding tutor focused on teaching best practices. Never write complete 
+solutions for the user - instead, guide them with hints and questions so they 
+learn by doing. Always explain the 'why' behind coding decisions.
+"""
+```
+  
+#### nim'ma cāṭ asisṭaṇṭigagi idu yēninda mukhya
+
+vaṇṇaneya sambandha system promptsannu artha mādikoḷḷuvudu nim'mage pariśiṣṭa AI asisṭaṇṭugaḷannu sṛṣṭisalu bhāri shakti koḍuttade:  
+- **grahāka seve bota**: upakāraka, dheyāri, nīti-āmˊsakr̥ta  
+- **adhyāyana śikṣaka**: hosa hēḷagalu, taragaṇagaḷalli kāyasu, artha māḍikoḷḷuva nīgaraṇe  
+- **śṛjanātmakasaha\-sāhāyaka**: kalpanātmakate, vicāragḷalalli nirmāṇa māḍuva, "yādi" eMba prashne keḷuva  
+- **tākhanika viśēṣajña**: sūkṣmavāda, vicitravāda, surakṣita cittavāgi  
+ 
+**pradhāna artha**: niṅgaḷu kevala AI API na kareyuvudilla – niṅgaḷu niṅgaḷa viśiṣṭa upayōgakē seva mādūva svatantra AI vyaktitva racisuttiddīri. idu ādhunika AI anukramaṇikeya upayōgagaḷannu sādhanavāgiyu upayōgakaḷige mailāgi māḍuttade.
+
+### 🎯 śikṣaṇīya nīgaraṇe: AI vyaktitva kāryakrama
+
+**nilasi cintisi**: nīvu hecchu AI vyaktitvagaḷannu system prompts mūlake kāryakrama māḍuva kalike tegedukoṇḍiddīri. idu ādhunika AI anukramaṇika abhivr̥ddhiyalli mūlakamaṇa kāryakṣētram.
+
+**chikkana svayam-mūlyāmāna**:  
+- system prompts yella saadhāraṇa upayōgakartṛ sandeśagaḷinda hege vividha?  
+- temperature mattu top_p parimāṇagaḷa vicēda yāke?  
+- nīnu hege viśiṣṭa upayōgakēge system prompt racisuvudu? (udāharaṇegāgi kodina śikṣaka)
+
+**vāstavika sambandha**: nīvu kalitukoṇḍa system prompt naipunya ellā pratishṭhita AI anukramaṇika gaḷalli upayōgisalāgide – GitHub Copilot codinḡ sahāya, ChatGPT sambhāṣaṇa anukramaṇike. niṅgaḷu e māṇḍala AI utpādakagaḷa upayōgisuva rīti tantra kalitiddīri.
+
+**pratibandhaka prashne**: hēge vividha upayōgakarigaḷige (ārambhaka matthu viśēṣajña) vividha AI vyaktitvagaḷannu racisabahudu? adu hege oMde AI māḍela vividha pramukha darśakara upayōgada mattu prōmpt enjinīyaringa mūlake sādhisabahudu?
+
+## fastapi mūlakavāgi web API racane: nim'ma ati-pātradāyakavāda AI sancharanā kendra
+
+īga nāvu frontend mattu AI sevegala naḷavāguva backend na racisuvudakke barutiddīvi. nāvu FastAPI na upayōgisuttivi, oMde ādhunika Python mārgaḍhaṭi AI anukramaṇikege APIgaḷannu tayārisuvudakkaḷuge uttama.
+
+FastAPI illā project ge bere bēlakke sūcanegaḷu koḍuttade: bayatakālika ārjakate, svayaṃkṛta API darśanagaḷa sṛṣṭi, hosa sāramshada balavantate. nim'ma FastAPI server frontend inda bāgata anoḷagina AI sevegala mūlake karyakrama hoḍeyutade mattu rūpavān uttara koḍuttade.
+
+### AI anukramaṇikege FastAPI yāke?
+
+niṅgaḷu cintisuttiddīri: "heladiddare nīvu frontend JavaScript inda AI na nirakṣisi kareyabahuda?" athavā "FastAPI yāke Flask athavā Django badalige?"  
+sariduddēsha prashnegaḷu!  
+
+**FastAPI ēke nāvu irodu upayōgisuve:**
+
+- **modalu async**: anēka AI āvedanegaḷannu oTuTx anukramadiyu oḷavaṇeyinda naḍedukoḷḷabahudu  
+- **svayaṃkṛta darśana**: `/docs` ge hoḍi adu sundara mattu antargṛhīta API darśanada tāri  
+- **built-in pariśīlane**: tappugaḷannu adaralli gāḍeyāgi toḷagi hākuvudu  
+- **ati vegavāgi**: oMde vegavanta Python mārgaḍhaṭigaḷalli oMdu  
+- **ādhunika Python**: hosa Python viśēṣategaḷannu migilu upayōga māḍuva  
+
+**matte backend beka yāke:**
+
+**surakṣā**: nim'ma AI API keṭa password hāgide – yādarinda nivege atte frontend JavaScript ge idannu ididdare, nim'ma vebasāiṭina mūla kodu opipisuvavaru adannu Heḷida mahaḍada māḍi nim'ma AI credits upayōgisabahudu. backend taṇṇagege joṭṭisalidiruvudu.
+
+**mātrā niyantraṇe mattu nīgaraṇe**: backend nīvu yelli matthu śīghra āvedanegaḷannu māḍabahudu, upayōgakartṛccinmaṭṭu sahīti maḍabahudu.
+
+**dātā saṃpādaneya niyamana**: samvāda nivaḍi irabahudu, apatyakāra sāmagrigaḷan Thessī mārkavelu, hēcchadyanta AI sevegaḷannu saṅkaḷisuva.
+
+**samācāra chuṛumeraḍu tantara:**
+
+- **frontend**: upayōgakartṛ muhūrtaphurti  
+- **backend API**: āvedaneya pariśīlane mattu mārgaṇe  
+- **AI seve**: bāhya gaṇanādi mattu uttara racane  
+- **paryāvaraṇa māpaka**: surakṣita sācive mattu sujñā dhāraṇe
+
+### āvedane-uttara pravāha artha māḍikoḷḷuvudu
+
+upayōgakartṛ sandeśa koḍuvaga yenu naḍeyutte anta noḍona:  
+
+```mermaid
+sequenceDiagram
+    participant User as 👤 ಬಳಕೆದಾರ
+    participant Frontend as 🌐 ಮುಂಭಾಗ
+    participant API as 🔧 ಫಾಸ್ಟ್‌ಎಪಿಐ ಸರ್ವರ್
+    participant AI as 🤖 ಏಐ ಸೇವೆ
+    
+    User->>Frontend: ಟೈಪ್ ಮಾಡುತ್ತಾ "ಹಲೋ ಏಐ!"
+    Frontend->>API: POST /hello {"message": "ಹಲೋ ಏಐ!"}
+    Note over API: ವಿನಂತಿಯನ್ನು ಪರಿಶೀಲಿಸುತ್ತದೆ<br/>ಸಿಸ್ಟಮ್ ಪ್ರಂಪ್ಟ್ ಸೇರುತ್ತದೆ
+    API->>AI: ಸ್ವರೂಪಗೊಳ್ಳಿಸಿದ ವಿನಂತಿ ಕಳುಹಿಸುತ್ತದೆ
+    AI->>API: ಏಐ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಕಳುಹಿಸುತ್ತದೆ
+    Note over API: ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸುತ್ತದೆ<br/>ಸಂವಾದದ ಲಾಗ್ ಮಾಡುತ್ತದೆ
+    API->>Frontend: {"response": "ಹಲೋ! ನಾನು ಹಾಯ್ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?"}
+    Frontend->>User: ಏಐ ಸಂದೇಶ್ ಪ್ರದರ್ಶನ ಮಾಡುತ್ತದೆ
+```  
+**prati padavannu artha māḍikoḷḷuva hāge:**  
+1. **upayōgakartṛ hāgāḍuvike**: vyakti cāṭ interface nalli type māḍuttaḍe  
+2. **frontend pariśīlane**: JavaScript data na grahisi JSON rītige rūpāntaṛisuttade  
+3. **API pariśīlane**: FastAPI kevala Pydantic taraha modelgaḷinda āvedanegaḷannu pariśīlisuttade  
+4. **AI saṅkalana**: backend sandarbha (system prompt) koṭṭu AI sevegala na kareyuttade  
+5. **uttara nivaṛane**: API AI na uttara paḍedukoḷḷi avashyakathe iddare badalāyisuva  
+6. **frontend pradarśana**: JavaScript adakke uttara cāṭ interface nalli māḍuttade
+
+### API saṃrachaneya arthakikr̥ti
+
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant FastAPI
+    participant AI Function
+    participant GitHub Models
+    
+    Frontend->>FastAPI: POST /hello {"message": "ನಮಸ್ಕಾರ AI!"}
+    FastAPI->>AI Function: call_llm(message, system_prompt)
+    AI Function->>GitHub Models: API request
+    GitHub Models->>AI Function: AI response
+    AI Function->>FastAPI: response text
+    FastAPI->>Frontend: {"response": "ನಮಸ್ಕಾರ! ನಾನು ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?"}
+```  
+```mermaid
+flowchart TD
+    A[ಬಳಕೆದಾರ ನುಡಿಗಳು] --> B[ಮುಂಬಡಿಭಾಗ ಮಾನ್ಯತೆ]
+    B --> C[HTTP POST ವಿನಂತಿ]
+    C --> D[ಫಾಸ್ಟ್API ರೌಟರ್]
+    D --> E[ಪಿಡ್ಯಾಂಟಿಕ್ ಮಾನ್ಯತೆ]
+    E --> F[ಎಐ ಕಾರ್ಯ ಕರೆಯುವುದು]
+    F --> G[GitHub ಮಾದರಿಗಳು API]
+    G --> H[ಪ್ರತಿಕ್ರಿಯೆ ಪ್ರಕ್ರಿಯೆ]
+    H --> I[JSON ಪ್ರತಿಕ್ರಿಯೆ]
+    I --> J[ಮುಂಭಡಿಭಾಗ ನವೀಕರಣ]
+    
+    subgraph "ಸುರಕ್ಷತೆ ಪದರ"
+        K[CORS ಮಧ್ಯಂತರ ಸಾಫ್ಟ್‌ವೇರ್]
+        L[ಪರಿಸರ ಚರ]
+        M[ದೋಷ ನಿರ್ವಹಣೆ]
+    end
+    
+    D --> K
+    F --> L
+    H --> M
+```  
+### FastAPI kāryakrama racane māḍuvudu
+
+nam'ma API na taragatē taragatē racisona. `api.py` anta hesarina oMdu file na FastAPI koḍige racisi:
+
+```python
+# api.py
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from llm import call_llm
+import logging
+
+# ಲಾಗಿಂಗ್ ಅನ್ನು ಸಂರಚಿಸಿ
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# ಫಾಸ್ಟ್ API ಅಪ್ಲಿಕೇಶನ್ ರಚಿಸಿ
+app = FastAPI(
+    title="AI Chat API",
+    description="A high-performance API for AI-powered chat applications",
+    version="1.0.0"
+)
+
+# CORS ಅನ್ನು ಸಂರಚಿಸಿ
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # ಉತ್ಪಾದನೆಗಾಗಿ ಸೂಕ್ತವಾಗಿ ಸಂರಚಿಸಿ
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# ವಿನಂತಿ/ಪ್ರತಿಕ್ರಿಯೆ ಮಾನ್ಯತೆಗಾಗಿ ಪೈಡಾಂಟಿಕ್ ಮಾದರಿಗಳು
+class ChatMessage(BaseModel):
+    message: str
+
+class ChatResponse(BaseModel):
+    response: str
+
+@app.get("/")
+async def root():
+    """Root endpoint providing API information."""
+    return {
+        "message": "Welcome to the AI Chat API",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {"status": "healthy", "service": "ai-chat-api"}
+
+@app.post("/hello", response_model=ChatResponse)
+async def chat_endpoint(chat_message: ChatMessage):
+    """Main chat endpoint that processes messages and returns AI responses."""
+    try:
+        # ಸಂದೇಶವನ್ನು ತೆಗೆಯಿರಿ ಮತ್ತು ಮಾನ್ಯತೆ ಮಾಡಿರಿ
+        message = chat_message.message.strip()
+        if not message:
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        
+        logger.info(f"Processing message: {message[:50]}...")
+        
+        # AI ಸೇವೆಯನ್ನು ಕರೆಮಾಡಿ (ನೋಟ್: ಉತ್ತಮ ಕಾರ್ಯಕ್ಷಮತೆಗಾಗಿ call_llm ಅನ್ನು ಅಸಿಂಕ್ರೋನಸ್ ಮಾಡಬೇಕು)
+        ai_response = await call_llm_async(message, "You are a helpful and friendly assistant.")
+        
+        logger.info("AI response generated successfully")
+        return ChatResponse(response=ai_response)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error processing chat message: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000, reload=True)
+```
+  
+**FastAPI pariṣkaraṇeya artha māḍikoḷḷuvudu:**  
+- **import** māḍuttade FastAPI mattu Pydantic na pariśīlanege  
+- **tāyārisuttade** svayaṁkṛta API darśanagaḷa (server naḍeyuvāga `/docs` nalli)  
+- **sampādisuttade** CORS madhyamavāhini frontend inda vividha laikāḷadinda āvedanegaḷannu anumatisuva  
+- **vikalpa** māḍuttade Pydantic modeli āvedane/uttara pariśīlane mattu darśana savalpa  
+- **upayōga māḍuttade** async endpointgaḷannu sariyāgi pariśīlane mattu uttama kāryakṣamatege  
+- **iruvudu** sarīya HTTP sthiti koḍugaḷu mattu tappina samādhāna HTTPException jothege  
+- **saha** rūpagaḷalli loggaḷannu koduttade nīgaraṇeya maddi mattu pariśīlanege  
+- **koduttade** svāsthya pariśīlane endpointu, sevā sthiti heḷuvudu  
+
+**paramparāgata frameworkgaḷa mēle FastAPI pramukha viśēṣategaḷu:**  
+- **svayaṁkṛta pariśīlane**: Pydantic modeli dātā nirvāhane māṭṭuvaruvudu  
+- **antarvartīya darśana**: `/docs` ge hogaḷuva svayaṃkṛta, pariśīlitavāda API darśana  
+- **type surakṣā**: Python kelavu rīti saṁketa yōjane koda tappugaḷannu nivaŕtisuva  
+- **async sahāya**: anēka AI āvedanegaḷannu oMde samayadalli niravadhisuva  
+- **kāryakṣamate**: satyavāgi requestgaḷa rīti pariśīlane atiyuttama
+
+### CORS annodannu artha māḍikoḷḷuvudu: web surakṣā carita
+
+CORS (Cross-Origin Resource Sharing) oMdu surakṣaka digavāhna hāgide, yārendare binna maṭṭalāḍu māḍalu anumati koḍuvudāgi nōḍuttade. idu yāke mukhya mattu nim'ma anukramaṇikeyalli yenu pāthrapāḍuttade anta tilidukoḷḷona.
+
+#### CORS yenu mattu idu yāke irutē?
+
+**saṁśaya**: yāvudādaru vebasāiṭu nim'ma hesarinda nim'ma bēlige āvedanegaḷannu māḍabahuda endare? adu surakṣā maḍuvala! baḍigegaḷu "same-origin policy" mūlake īdannu avarjemge niveyuttade.
+
+**same-origin policy**: baḍige nīvu pagege tindi āḍida domain, port mattu protocol nalli mātra āvedanegaḷannu mōḍvatte.
+
+**vāstavika udāharaṇa**: oMdu apartment bhavana surakṣaka – kevala nivāsigaḷu (same origin) bhavana koḍalāgide. nīvu obba mitra (binnā origin) barediḍa kareyalu surakṣakanu toḷaguvudu.
+
+#### nim'ma abhivr̥ddhi parisaradalli CORS
+
+abhivr̥ddhi shēṣa nim'ma frontend mattu backend vividha ports nalli naḍeyuttade:  
+- frontend: `http://localhost:3000` (athavā HTML sīdhāgi teredaga `file://`)  
+- backend: `http://localhost:5000`  
+
+iduvu oMde kaṇṇuhāṇḍa nīḍuvudilla yāvaḍe avantara!
+
+```python
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(__name__)
+CORS(app)   # ಇದು ಬ್ರೌಸರ್ ಗಳಿಗೆ ಹೇಳುತ್ತದೆ: "ಇತರೆ ಮೌಲುಗಳಿಂದ ಈ API ಗೆ ವಿನಂತಿಗಳನ್ನು ಮಾಡುವುದು ಸಮಸ್ಯೆಯಿಲ್ಲ"
+```
+  
+**CORS paricaya yeda prakara:**  
+- **ADD māḍuttade** vishēṣa HTTP headers jothege API uttaragaḷige, idu baḍigege "ī binna origin āvedane anumatide" antu heḷidda  
+- **pālgottade** "prāraṃbhika" āvedanegaḷu (baḍigegaḷu modala kārya keḷabekādare nivu parīkṣeya māḍuttade)  
+- **nivārisuttade** "CORS nīti dvara baḍiga nivāda" anta brauzar console dalli tappu
+
+#### CORS surakṣā: abhivr̥ddhi vs utpādan
+
+```python
+# 🚨 ಅಭಿವೃದ್ಧಿ: ಎಲ್ಲಾ ಮೂಲಗಳನ್ನು ಅನುಮತಿಸುತ್ತದೆ (ಸರಳ ಆದರೆ ಸುರಕ್ಷಿತವಲ್ಲ)
+CORS(app)
+
+# ✅ ಉತ್ಪಾದನೆ: ನಿಮ್ಮ ನಿರ್ದಿಷ್ಟ ಫ್ರಂಟ್‌ಎಂಡ್ ಡೊಮೈನ್ ಅನ್ನು ಮಾತ್ರ ಅನುಮತಿಸಿ
+CORS(app, origins=["https://yourdomain.com", "https://www.yourdomain.com"])
+
+# 🔒 ಉನ್ನತ: ವಿಭಿನ್ನ ವಾತಾವರಣಗಳಿಗೆ ವಿಭಿನ್ನ ಮೂಲಗಳು
+if app.debug:  # ಅಭಿವೃದ್ಧಿ ಮೋಡ್
+    CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"])
+else:  # ಉತ್ಪಾದನೆ ಮೋಡ್
+    CORS(app, origins=["https://yourdomain.com"])
+```
+  
+**idu yāke mukhya**: abhivr̥ddhi nalli `CORS(app)` nim'ma mūkaḷuvina hatadiṭṭu – sulabhavāgi kottade, ādare surakṣita alla. utpādanadalli tappadanta websitegaḷu nim'ma API nalli ḍāka koḍuttade endu niyamisabekāguttade.
+
+#### sāmānya CORS paristhitigalu mattu pariṣkāragaḷu
+
+| paristhiti           | samasya                 | pariṣkāra                            |  
+|---------------------|-------------------------|------------------------------------|  
+| **sthala abhivr̥ddhi**    | frontend backendge sigalilla | FastAPI ge CORSMiddleware seerisuvudu  |  
+| **GitHub Pages + Heroku** | utpādita frontend APIge sigalilla | nim'ma GitHub Pages URL na CORS dvara seerisu  |  
+| **viśiṣṭa ḍomēn**        | utpādanadalli CORS tappugaḷu | CORS dvara nim'ma domainge anurūpa māḍi  |  
+| **moḍi apilikeśan**      | apile Web API sigalilla  | nim'ma app-ina domain athavā `*`niyama savalaṅkita rūpadiṁda upayōga  
+
+**uttama sūtra**: nim'ma brauzar developer tools nalli Network tab nūḍi CORS headergaḷannu noḍabahudu. erada uttarada Access-Control-Allow-Origin jothege header eṣṭu iddēnte noḍi.
+
+### tappugaḷannu niyantaraṇe mattu pariśīlane
+
+nim'ma API elli sarīya tappu niyama māḍida noḍi:
+
+```python
+# ನಮಗೆ ಸಂದೇಶವು ಬಂದಿದೆಯೆಂದು ಪರಿಶೀಲಿಸಿ
+if not message:
+    return jsonify({"error": "Message field is required"}), 400
+```
+  
+**pramukha pariśīlane sid'dhānta:**  
+- āvedana mūlagāgi āvashyaka māṭugaḷannu pariśīlade  
+- artha purṇavāda tappina sandeśagaḷu JSON rītige koḍuttade  
+- sārthaka HTTP sthiti codegaḷu hākuva (400 tappu āvedanegaḷige)  
+- frontend abhivr̥ddhakaḷige spashṭa pariśōdhane sahāya koḍuvudu
+
+## nim'ma backend na set up māḍuvudu mattu naḍeyuvudu
+
+īga nāvu AI saṅkalana mattu FastAPI server tayār māḍiddāre, ellāvanḷḷi naḍeyalu beku. setup prakriye Python avashyakagaḷannu iruvisuvudu, parisaravagi bēḍikegaḷannu sheṭṭu māḍuvudu, mattu abhivr̥ddhi server na pampiṭṭu.
+
+### Python parisarada sādhane
+
+nim'ma Python abhivr̥ddhi parisara na set up māḍona. Virtual environments hāge bāvariyuta ide – yāva projejkṭu adhika sthāna paricālana māduttade (cada one hosa sāmagrigaḷu mattu avashyakagaḷu jothege, paraspara sāhasasamarthakathe illa).
+
+```bash
+# ನಿಮ್ಮ ಬ್ಯಾಕೆಂಡ್ ಡೈರೆಕ್ಟರಿಗೆ ನ್ಯಾವಿಗೇಟ್ ಮಾಡಿ
+cd backend
+
+# ವರ್ಚುವಲ್ ಪರಿಸರವನ್ನು ರಚಿಸಿ (ನಿಮ್ಮ ಪ್ರಾಜೆಕ್ಟ್‌ಗಾಗಿ ಸ್ವಚ್ಚ ಕೊಠಡಿಯನ್ನು ರಚಿಸುವಂತೆ)
+python -m venv venv
+
+# ಅದನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ (ಲಿನಕ್ಸ/ಮ್ಯಾಕ್)
+source ./venv/bin/activate
+
+# ವಿಂಡೋಸ್‌ನಲ್ಲಿ, ಬಳಸಿ:
+# venv\Scripts\activate
+
+# ಉತ್ತಮ ವಸ್ತುಗಳನ್ನು ಸ್ಥಾಪಿಸಿ
+pip install openai fastapi uvicorn python-dotenv
+```
+  
+**nāvu hege māḍiddēve:**  
+- oMdu nim'ma mōṭṭu Python hākuge, yāvudakke bere yāvude aśraya māḍuvudilla  
+- activate mādide heḷuvudu terminal alli idu kārya mādutte anta  
+- avashyakagaḷu install māḍide: OpenAI AI aṣṭiraśakti ge, FastAPI web API ge, Uvicorn aṅga server ge mattu python-dotenv gupta māḍalu
+
+**pramukha āvaśyakagaḷu vivaravāgi**:  
+- **FastAPI**: ādhunika, vegavanta Web framework svayaṁkṛta API darśana sahita  
+- **Uvicorn**: vegavāgi FastAPI anukramaṇika naḍeyuva ASGI server  
+- **OpenAI**: GitHub Models mattu OpenAI API jothege adhikārika pustaka  
+- **python-dotenv**: .env file galinda surakṣita parisaravagi parivartisuva
+
+### parisaravagi samayōjana: guptagaḷannu surakṣita māḍuvudu
+
+API na prārambhamāḍuva munnaṭa, ondhu atiyavashyaka web abhivr̥ddhi paṭaṇike - nim'ma guptagaḷannu yāke surakṣita māḍabēku anta. parisaravagi samayōjana hāge oMdu rakṣita vāśi vikeśa – kevala nim'ma app ge use maduva hakku ide.
+
+#### parisaravagi samayōjana yenu?
+
+**parisaravagi samayōjana na`nn guptākaḷa dhanāvarṇiḍi ghāṭaka** – nīvu heḷuva mūlya vastuḷannu adaralli horuvarisuvudu matte nim'ma (matte nim'ma app) mātra tannadu koḷḷuttade. sīdhāgirisi guptavāgada māḍuvaru kode inside idde (ellavārigū noḍabahudu) avaru kuri noḍuva maniṣṭada bhāga.
+
+**iduvudake paryāyatmaka:**  
+- **tappu mārga**: nim'ma password sticky note alli baredu monitor mele hākida heḷuvudu  
+- **sariyāgi mārga**: password nim'ma surakṣita password menējaraḷḷi iruvudu
+
+#### parisaravagi samayōjaneya mukhyate
+
+```python
+# 🚨 ಎಂದಿಗೂ ಇದು ಮಾಡಬೇಡಿ - API ಕೀ ಎಲ್ಲರಿಗೂ ಕಾಣುವಂತೆ ಇಡುವುದು
+client = OpenAI(
+    api_key="ghp_1234567890abcdef...",  # ಇದನ್ನು ಯಾರಾದರೂ ಕದಿಯಬಹುದು!
+    base_url="https://models.github.ai/inference"
+)
+
+# ✅ ಇದನ್ನು ಮಾಡಿ - API ಕೀ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಗ್ರಹಿಸು
+client = OpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],  # ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಮಾತ್ರ ಇದನ್ನು ಪ್ರವೇಶಿಸಬಹುದು
+    base_url="https://models.github.ai/inference"
+)
+```
+  
+**nim'ma guptagaḷu hardcode māḍuva samayadalli:**  
+1. **version control prākaṭya**: nim'ma git repository yārigē access ide avaru nim'ma API key nōḍabahudu  
+2. **sarvajana repository**: GitHub ge push māḍiddare key sampūrṇavāgi prakaṭa  
+3. **team hēḷuva**: bere developergaḷu nim'ma API key upayōgisuva  
+4. **surakṣā bhanga**: yāradaru nim'ma API key kaVcukoNDare adannu upayōgisuva AI creditgala haṇḍādare
+
+#### nim'ma environment file na set māḍuvudu
+
+backend directory nalli `.env` file tayār māḍi. ivasthu nim'ma guptagaḷu sthaḷīya rakṣaṇeyalli iruvudakke:
+
+```bash
+# .env ಫೈಲ್ - ಇದನ್ನು Git ಗೆ ಎಂದಿಗೂ ಕಮಿಟ್ ಮಾಡಬಾರದು
+GITHUB_TOKEN=your_github_personal_access_token_here
+FASTAPI_DEBUG=True
+ENVIRONMENT=development
+```
+  
+**.env file artha māḍikoḷḷuvudu:**  
+- **oMdu rahasya pratyēka kēlinalilx** `KEY=value` mārgaḍalli  
+- **samakṣepiNAre** illa `=` choṭṭalalli  
+- **koti cita** illa mūlyagaḷa āsapāsa (āmumaṭe)  
+- **ṭippaṇigaḷu** `#` inda ārambhamāḍuva
+
+#### nim'ma GitHub vyakti gatāvaiyāyuṭa token tayārisuvudu
+
+nim'ma GitHub token nim'ma app ge GitHub AI sevagaḷannu upayōgisuva adhikāra niḍuva hēgagāgiruttade:
+
+**tera mārga kramayāvaḷi:**  
+1. **GitHub Setṭingsge hoḍi** → Developer settings → Personal access tokens → Tokens (classic)  
+2. **"Generate new token (classic)" nalilc lābhyamāḍi state**  
+3. **samāpti samaaya niḍu** (30 dino parīkṣaṇege, hecchu kālagaḷakke sthāyi)  
+4. **adhikāragaḷannu tīḷiyiri**: "repo" mattu bere sādhyateya nirūpaṇa mēle tikki  
+5. **token tayārisu** mattu turuntu copy māḍi (mati noḍalu sādhyavilla!)  
+6. **.env file ge oḷage olidisiri**
+
+```bash
+# ನಿಮ್ಮ ಟೋಕನ್ ಹೇಗಿರುತ್ತದೆ ಎಂಬ ಉದಾಹರಣೆ (ಇದು ನಕಲಿ!)
+GITHUB_TOKEN=ghp_1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R
+```
+  
+#### Python nalli parisaravagi samayōjanagaḷannu hākuvudu
+
+```python
+import os
+from dotenv import load_dotenv
+
+# .env ಫೈಲ್‌ನಿಂದ ಪರಿಸರ ಚರಗಳನ್ನು ಲೋಡ್ ಮಾಡಿ
+load_dotenv()
+
+# ಈಗ ನೀವು ಅವುಗಳನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಪ್ರವೇಶಿಸಬಹುದು
+api_key = os.environ.get("GITHUB_TOKEN")
+if not api_key:
+    raise ValueError("GITHUB_TOKEN not found in environment variables!")
+
+client = OpenAI(
+    api_key=api_key,
+    base_url="https://models.github.ai/inference"
+)
+```
+  
+**ī koḍu yenu māḍuttade:**  
+- nim'ma .env file na load māḍi parisaravagi samayōjanagaḷannu Python ge anukūḷa māḍuttade  
+- āvedavalada API key iddēnte anta pariśīlane māḍuttade (sarala tappina nirīkṣe)  
+- token illa iddare heḷuva tappu baruttade  
+- token na surakṣita vagadāda upayōga māḍuttade, koḍina bāgaṁdu parigaṇisuva illa
+
+#### Git surakṣā: `.gitignore` file
+
+nim'ma `.gitignore` file Git ge yaava filegaḷannu anusarisuva illa endu heḷuttade:
+
+```bash
+# .gitignore - ಈ ಸಾಲುಗಳನ್ನು ಸೇರಿಸಿ
+.env
+*.env
+.env.local
+.env.production
+__pycache__/
+venv/
+.vscode/
+```
+  
+**īdara mukhyate**: `.env` ge `.gitignore` seerisi, Git nīvu niyamita kramadalli nim'ma guptagaḷannu GitHub ge accidental hākuvudakkiro naḍeyuvudilla.
+
+#### vividha parisaragaḷu, vividha guptagaḷu
+
+vṛddhānta padavīya appgaḷu vividha parisaragaḷige vividha API keys na upayōgisuttave:
+
+```bash
+# .env.ಅಭಿವೃದ್ಧಿ
+GITHUB_TOKEN=your_development_token
+DEBUG=True
+
+# .env.ಉತ್ಪಾದನೆ
+GITHUB_TOKEN=your_production_token
+DEBUG=False
+```
+  
+**ekuvala mukhyate**: abhivr̥ddhige nim'ma anubravaṇe nim'ma utpādanā IC upayōga mattu surakṣā māta matthu vividha parisaragaḷige vividha surakṣā tarāgalannu bhinnamāḍabeku.
+
+### nim'ma abhivr̥ddhi server na prārambha māḍuvudu: nim'ma FastAPI ge prāṇadāna koḍuvudu
+ಇದೀಗ रोमಾಂಚಕ ಕ್ಷಣ — ನಿಮ್ಮ FastAPI ಅಭಿವೃದ್ಧಿ ಸರ್ವರ್ ಅನ್ನು ಪ್ರಾರಂಭಿಸಿ ಮತ್ತು ನಿಮ್ಮ AI ಎಂಕೋಮಿಗೇಶನ್ ಜೀವಂತವಾಗಿರುವುದನ್ನು ನೋಡಿರಿ! FastAPI Uvicorn ಅನ್ನು ಉಪಯೋಗಿಸುತ್ತದೆ, ಇದು ಅತಿವ್ಯಾಪಕವಾಗಿ ವೇಗದ ASGI ಸರ್ವರ್ ಆಗಿದ್ದು, ವಿಶೇಷವಾಗಿ ಅಸಿಂಕ್ರೋನಸ್ ಪೈಥಾನ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗಾಗಿ ವಿನ್ಯಾಸಗೊಳ್ಳಲಾಗಿದೆ.
+
+#### FastAPI ಸರ್ವರ್ ಪ್ರಾರಂಭ ಪ್ರಕ್ರಿಯೆಯ ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
+
+```bash
+# ವಿಧಾನ 1: ನೇರ ಪೈಥಾನ್ ಕಾರ್ಯಾಚರಣೆ (ಸ್ವಯಂ-ಪುನಃಲೋಡ್ ಸಹಿತ)
+python api.py
+
+# ವಿಧಾನ 2: ಯೂವಿಕೋರ್ನ್ ನೇರವಾಗಿ ಬಳಸುವುದು (ಹೆಚ್ಚು ನಿಯಂತ್ರಣ)
+uvicorn api:app --host 0.0.0.0 --port 5000 --reload
+```
+
+ನೀವು ಈ ಕಮಾಂಡ್ ಅನ್ನು ಓಡಿಸಿದಾಗ, ಹಿಂಭಾಗದಲ್ಲಿ ಈ ಕೆಳಗಿನ ಘಟನೆಗಳು ಸಂಭವಿಸುತ್ತವೆ:
+
+**1. ಪೈಥಾನ್ ನಿಮ್ಮ FastAPI ಅಪ್ಲಿಕೇಶನ್ ಅನ್ನು ಲೋಡ್ ಮಾಡುತ್ತದೆ**:
+- ಅಗತ್ಯವಿರುವ ಎಲ್ಲಾ ಲೈಬ್ರರಿಗಳನ್ನು ಆಮದು ಮಾಡಿಕೊಳ್ಳುತ್ತದೆ (FastAPI, Pydantic, OpenAI ಮುಂತಾದವು)
+- ನಿಮ್ಮ `.env` ಕಡತದಿಂದ ಪರಿಸರ ವೈಯರಿಯಬಲ್ಗಳನ್ನು ಲೋಡ್ ಮಾಡುತ್ತದೆ
+- ಸ್ವಯಂಚಾಲಿತ ದಾಖಲೆಗಳೊಂದಿಗೆ FastAPI ಅಪ್ಲಿಕೇಶನ್ ಉದಾಹರಣೆಯನ್ನು ರಚಿಸುತ್ತದೆ
+
+**2. Uvicorn ASGI ಸರ್ವರ್ ಅನ್ನು ಸಂರಚಿಸುತ್ತದೆ**:
+- ಅಸಿಂಕ್ರೋನಸ್ ವಿನಂತಿ ನಿರ್ವಹಣೆಯೊಂದಿಗೆ ಪೋರ್ಟ್ 5000 ಗೆ ಬಾಂಧುತ್ತದೆ
+- ಸ್ವಯಂಚಾಲಿತ ಮಾನ್ಯತೆ ಹೊಂದಿದ ವಿನಂತಿ ಮಾರ್ಗನಿರ್ದೇಶನವನ್ನು ಸ್ಥಾಪಿಸುತ್ತದೆ
+- ಅಭಿವೃದ್ಧಿಗಾಗಿ ಹಾಟ್ ರಿಲೋಡ್ ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ (ಕಡತ ಬದಲಾವಣೆಗಳಿಗೆ ಮರುಪ್ರಾರಂಭ)
+- ತಂತ್ರಜ್ಞಾನಾತ್ಮಕ API ದಾಖಲೆಗಳನ್ನು ರಚಿಸುತ್ತದೆ
+
+**3. ಸರ್ವರ್ ಕೇಳಲು ಪ್ರಾರಂಭಿಸುತ್ತದೆ**:
+- ನಿಮ್ಮ ಟರ್ಮಿನಲ್‌ನಲ್ಲಿ ಪ್ರದರ್ಶಿಸುತ್ತದೆ: `INFO: Uvicorn running on http://0.0.0.0:5000`
+- ಸರ್ವರ್ ಹಲವಾರು ಸಮಕಾಲೀನ AI ವಿನಂತಿಗಳನ್ನು ನಿರ್ವಹಿಸಬಹುದು
+- ನಿಮ್ಮ API ಸಿದ್ದವಾಗಿದೆ ಸ್ವಯಂಚಾಲಿತ ದಾಖಲೆಗಳೊಂದಿಗೆ `http://localhost:5000/docs` ನಲ್ಲಿ
+
+#### ಎಲ್ಲವೂ ಸರಿಯಾಗಿ ನಡೆದಾಗ ನೀವು ಏನು ನೋಡಬೇಕು
+
+```bash
+$ python api.py
+INFO:     Will watch for changes in these directories: ['/your/project/path']
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     Started reloader process [12345] using WatchFiles
+INFO:     Started server process [12346]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+```
+
+**FastAPI output ಅನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು:**
+- **ಮಾರ್ಪಾಡುಗಳಿಗಾಗಿ ನೋಡಲಿದೆ**: ಅಭಿವೃದ್ಧಿಗಾಗಿ ಸ್ವಯಂ ರಿಲೋಡ್ ಸಕ್ರಿಯವಾಗಿದೆ
+- **Uvicorn ಚಾಲನೆಯಲ್ಲಿದೆ**: ಹೆಚ್ಚಿನವಾಗಿ ಕಾರ್ಯನಿರ್ವಹಿಸುವ ASGI ಸರ್ವರ್ ಸಕ್ರಿಯವಾಗಿದೆ
+- **ರಿಲೋಡರ್ ಪ್ರಕ್ರಿಯೆ ಪ್ರಾರಂಭವಾಯಿತು**: ಸ್ವಯಂ ಮರುಪ್ರಾರಂಭಕ್ಕಾಗಿ ಕಡತ ವೀಕ್ಷಕ
+- **ಅಪ್ಲಿಕೇಶನ್ ಪ್ರಾರಂಭ ಸಂಪೂರ್ಣ**: FastAPI ಅಪ್ಲಿಕೇಶನ್ ಯಶಸ್ವಿಯಾಗಿ ಆರಂಭವಾಗಿದೆ
+- **ಪರಸ್ಪರ ಕ್ರಿಯಾಶೀಲ ದಾಖಲೆಗಳು ಲಭ್ಯ**: API ಡಾಕ್ಯುಮೆಂಟೇಶನ್‌ಗೆ `/docs` ತೆರೆಯಿರಿ
+
+#### ನಿಮ್ಮ FastAPI ನ ಪರೀಕ್ಷೆ: ಹಲವು ಶಕ್ತಿಶಾಲೀ ವಿಧಾನಗಳು
+
+FastAPI ಸ್ವಯಂಚಾಲಿತ ಪರಸ್ಪರ ಕ್ರಿಯಾಶೀಲ ಡಾಕ್ಯುಮೆಂಟೇಶನ್ ಸೇರಿ ಹಲವಾರು ಅನುಕೂಲಕರ API ಪರಿಶೀಲನಾ ವಿಧಾನಗಳನ್ನು ಒದಗಿಸುತ್ತದೆ:
+
+**ವಿಧಾನ 1: ಪರಸ್ಪರ ಕ್ರಿಯಾಶೀಲ API ಡಾಕ್ಯುಮೆಂಟೇಶನ್ (ಶಿಫಾರಸ್ಸು)**  
+1. ನಿಮ್ಮ ಬ್ರೌಸರ್ ತೆರೆಯಿರಿ ಮತ್ತು `http://localhost:5000/docs` ಗೆ ಹೋಗಿ  
+2. ನಿಮ್ಮ ಎಲ್ಲಾ ಎಂಡ್ಫಾಯಿಂಟ್‌ಗಳ ದಾಖಲೆಗಳೊಂದಿಗೆ Swagger UI ಕಾಣಿಸುತ್ತವೆ  
+3. `/hello` ಮೇಲೆ ಕ್ಲಿಕ್ ಮಾಡಿ → "Try it out" → ಪರೀಕ್ಷಾ ಸಂದೇಶವನ್ನು ನಮೂದಿಸಿ → "Execute"  
+4. ಸರಿಯಾದ ವಿನ್ಯಾಸದಲ್ಲಿ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು ನೇರವಾಗಿ ಬ್ರೌಸರ್ ನಲ್ಲಿ ನೋಡಿ
+
+**ವಿಧಾನ 2: ಮೂಲ ಬ್ರೌಸರ್ ಪರೀಕ್ಷೆ**  
+1. ರೂಟ್ ಎಂಡ್ಪಾಯಿಂಟ್‌ಗೆ `http://localhost:5000` ಗೆ ಹೋಗಿ  
+2. ಸರ್ವರ್ ಆರೋಗ್ಯವನ್ನು ಪರಿಶೀಲಿಸಲು `http://localhost:5000/health` ಗೆ ಹೋಗಿ  
+3. ಇದು ನಿಮ್ಮ FastAPI ಸರ್ವರ್ ಸರಿಯಾಗಿ ಚಾಲನೆಯಲ್ಲಿದೆ ಎಂದು ಖಚಿತಪಡಿಸುತ್ತದೆ
+
+**ವಿಧಾನ 2: ಕಮಾಂಡ್ ಲೈನ್ ಪರೀಕ್ಷೆ (ಮುಂದಿನ ಮಟ್ಟ)**  
+```bash
+# curls (ಸಿಗುತ್ತದೆ ಎಂದು ಹೀಗಿದ್ದರೆ) ಮೂಲಕ ಪರೀಕ್ಷಿಸಿ
+curl -X POST http://localhost:5000/hello \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello AI!"}'
+
+# ನಿರೀಕ್ಷಿತ ಪ್ರತಿಕ್ರಿಯೆ:
+# {"response": "ನಮಸ್ಕಾರ! ನಾನು ನಿಮ್ಮ ಎಐ ಸಹಾಯಕನಾಗಿದ್ದೇನೆ. ನಾನು ಇಂದು ನಿಮಗೆ ಹೇಗೆ ಸಹಾಯ ಮಾಡಬಹುದು?"}
+```
+  
+**ವಿಧಾನ 3: ಪೈಥಾನ್ ಪರೀಕ್ಷಾ ಸ್ಕ್ರಿಪ್ಟ್**  
+```python
+# test_api.py - ನಿಮ್ಮ API ಅನ್ನು ಪರೀಕ್ಷಿಸಲು ಈ ಫೈಲ್ ಅನ್ನು ರಚಿಸಿ
+import requests
+import json
+
+# API ಎಂಡ್‌ಪಾಯಿಂಟ್ ಅನ್ನು ಪರೀಕ್ಷಿಸಿ
+url = "http://localhost:5000/hello"
+data = {"message": "Tell me a joke about programming"}
+
+response = requests.post(url, json=data)
+if response.status_code == 200:
+    result = response.json()
+    print("AI Response:", result['response'])
+else:
+    print("Error:", response.status_code, response.text)
+```
+  
+#### ಸಾಮಾನ್ಯ ಪ್ರಾರಂಭ ಸಮಸ್ಯೆಗಳ ಪರಿಹಾರ
+
+| ದೋಷ ಸಂದೇಶ | ಅರ್ಥ | ಹೇಗೆ ಸರಿಪಡಿಸಲು |
+|---------------|---------------|------------|
+| `ModuleNotFoundError: No module named 'fastapi'` | FastAPI ಇನ್‌ಸ್ಟಾಲ್ ಆಗಿಲ್ಲ | ನಿಮ್ಮ ವರ್ಚುವಲ್ ಎನ್ವಿರಾನ್‌ಮೆಂಟ್‌ನಲ್ಲಿ `pip install fastapi uvicorn` ರನ್ ಮಾಡಿ |
+| `ModuleNotFoundError: No module named 'uvicorn'` | ASGI ಸರ್ವರ್ ಇನ್‌ಸ್ಟಾಲ್ ಆಗಿಲ್ಲ | ನಿಮ್ಮ ವರ್ಚುವಲ್ ಎನ್ವಿರಾನ್‌ಮೆಂಟ್‌ನಲ್ಲಿ `pip install uvicorn` ರನ್ ಮಾಡಿ |
+| `KeyError: 'GITHUB_TOKEN'` | ಪರಿಸರ ವ್ಯತ್ಯಾಸ ಸಿಗಲಿಲ್ಲ | ನಿಮ್ಮ `.env` ಕಡತ ಮತ್ತು `load_dotenv()` ಕಾಲ್ ಅನ್ನು ಪರಿಶೀಲಿಸಿ |
+| `Address already in use` | ಪೋರ್ಟ್ 5000 ಬ್ಯುಸಿ ಇದೆ | 5000 ಪೋರ್ಟ್ ಬಳಸುತ್ತಿರುವ ಇತರ ಪ್ರಕ್ರಿಯೆಗಳನ್ನು ಕೊಲ್ಲಿರಿ ಅಥವಾ ಪೋರ್ಟ್ ಬದಲಾಯಿಸಿ |
+| `ValidationError` | ವಿನಂತಿ ಡೇಟಾ Pydantic ಮಾದರಿಯನ್ನು ಹೊಂದುವುದಿಲ್ಲ | ನಿಮ್ಮ ವಿನಂತಿ ಫಾರ್ಮೆಟ್ ನಿರೀಕ್ಷಿಸಲಾದ ಸ್ಕೀಮಾಕ್ಕೆ ಹೊಂದಿಕೊಳಗು |
+| `HTTPException 422` | ಪ್ರಕ್ರಿಯೆಗೆ ಸಾಧ್ಯವಿಲ್ಲದ ಘಟಕ | ವಿನಂತಿ ಮಾನ್ಯತೆ ವಿಫಲವಾಗಿದೆ, ಸರಿಯಾದ ಫಾರ್ಮೆಟ್ ಇಲ್ಲದಿದ್ದರೆ `/docs` ಪರಿಶೀಲಿಸಿ |
+| `OpenAI API error` | AI ಸೇವೆ ದೃಢೀಕರಣ ವಿಫಲ | ನಿಮ್ಮ GitHub ಟೋಕನ್ ಸರಿಯಿದೆ ಮತ್ತು ಹೊಂದಾಣಿಕೆಯ ಅನುಮತಿಗಳು ಇವೆ ಎಂದು ಖಚಿತಪಡಿಸಿಕೊಳ್ಳಿ |
+
+#### ಅಭಿವೃದ್ಧಿ ಉತ್ತಮ ಅನುಸರಣೆಗಳು
+
+**ಹಾಟ್ ರಿಲೋಡಿಂಗ್**: ನಿಮ್ಮ ಪೈಥಾನ್ ಕಡತಗಳಲ್ಲಿ ಬದಲಾವಣೆಗಳನ್ನು ಉಳಿಸಿದಾಗ FastAPI ಮತ್ತು Uvicorn ಸ್ವಯಂಚಾಲಿತ ಮರುಪ್ರಾರಂಭವನ್ನು ಒದಗಿಸುತ್ತವೆ. ಇದರಿಂದ ನಿಮ್ಮ ಕೋಡ್ ತಕ್ಷಣ ತಿದ್ದುಪಡಿ ಮಾಡಿ ಪರೀಕ್ಷೆ ಮಾಡಲು ಸಾಧ್ಯ, ಕೈದಿಂದ ಮನುಯಲ್ ಮರುಪ್ರಾರಂಭ ಅಗತ್ಯವಿಲ್ಲ.
+
+```python
+# ಹಾಟ್ ರೀಲುಡಿಂಗ್ ಅನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ಸಕ್ರಿಯಗೊಳಿಸಿ
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)  # debug=True ಹಾಟ್ ರೀಲುಡ್ ಅನ್ನು ಸಕ್ರಿಯಗೊಳಿಸುತ್ತದೆ
+```
+  
+**ಅಭಿವೃದ್ಧಿಗಾಗಿ ಲಾಗಿಂಗ್**: ಏನಾಗುತ್ತಿದೆ ಎಂದು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಲಾಗಿಂಗ್ ಸೇರಿಸಿ:
+
+```python
+import logging
+
+# ಲಾಗಿಂಗ್ ಅನ್ನು ಹೊಂದಿಸಿ
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+@app.route("/hello", methods=["POST"])
+def hello():
+    data = request.get_json()
+    message = data.get("message", "")
+    
+    logger.info(f"Received message: {message}")
+    
+    if not message:
+        logger.warning("Empty message received")
+        return jsonify({"error": "Message field is required"}), 400
+    
+    try:
+        response = call_llm(message, "You are a helpful and friendly assistant.")
+        logger.info(f"AI response generated successfully")
+        return jsonify({"response": response})
+    except Exception as e:
+        logger.error(f"AI API error: {str(e)}")
+        return jsonify({"error": "AI service temporarily unavailable"}), 500
+```
+  
+**ಲಾಗಿಂಗ್ ಸಹಾಯವೆಲ್ಲಿ**: ಅಭಿವೃದ್ಧಿಯಲ್ಲಿ ನೀವು ಬರುವ ವಿನಂತಿಗಳನ್ನು, AI ಉತ್ತರಿಸುವ ವಿಷಯಗಳನ್ನು ಮತ್ತು ದೋಷಗಳು ಎಲ್ಲಿದೆ ಎಂದು ನಿಖರವಾಗಿ ನೋಡಬಹುದು. ಇದರಿಂದ ದೋಷಗಳ ಪರಿಹಾರ ವೇಗವಾಗಿ ಸಾಧ್ಯವಾಗುತ್ತದೆ.
+
+### GitHub Codespaces ನಿಗಾಗಿ ಸಂರಚನೆ: ಕ್ಲೌಡ್ ಅಭಿವೃದ್ಧಿ ಸುಲಭವಾಗಿಸಿದವು
+
+GitHub Codespaces ಎಂದರೆ ಕ್ಲೌಡ್‌ನಲ್ಲಿ ಶಕ್ತಿಶಾಲಿ ಅಭಿವೃದ್ಧಿ ಕಂಪ್ಯೂಟರ್ ಇದಾಗಿದೆ, ನೀವು ಯಾವುದೇ ಬ್ರೌಸರ್‌ನಿಂದ ತಲುಪಬಹುದು. ನೀವು Codespaces ನಲ್ಲಿ ಕೆಲಸ ಮಾಡುತ್ತಿದ್ದರೆ, ನಿಮ್ಮ ಬ್ಯಾಕೆಂಡ್ ನಿಮ್ಮ ಫ್ರಂಟ್‌ಎಂಡ್‌ಗೆ ಲಭ್ಯವಿರುವಂತೆ ಮಾಡಲು ಕೆಲವು ಹೆಚ್ಚುವರಿ ಹಂತಗಳಿವೆ.
+
+#### Codespaces ನೆಟ್ವರ್ಕಿಂಗ್ ಅನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
+
+ಸ್ಥಳೀಯ ಅಭಿವೃದ್ಧಿ ಪರಿಸರದಲ್ಲಿ ಎಲ್ಲವೂ ಒಂದೇ ಕಂಪ್ಯೂಟರ್‌ನಲ್ಲಿ ಓಡುತ್ತದೆ:  
+- ಬ್ಯಾಕೆಂಡ್: `http://localhost:5000`  
+- ಫ್ರಂಟ್‌ಎಂಡ್: `http://localhost:3000` (ಅಥವಾ file://)
+
+Codespaces ನಲ್ಲಿ ನಿಮ್ಮ ಅಭಿವೃದ್ಧಿ ಪರಿಸರ GitHub ಸರ್ವರ್‌ಗಳ ಮೇಲೆ ಓಡುತ್ತದೆ, ಆದ್ದರಿಂದ "localhost"ನ ಅರ್ಥ ವಿಭಿನ್ನ. GitHub ನಿಮ್ಮ ಸೇವೆಗಳಿಗೆ ಸಾರ್ವಜನಿಕ URLಗಳನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ರಚಿಸುತ್ತದೆ, ಆದರೆ ನೀವು ಸರಿಯಾಗಿ ಸಂರಚಿಸಬೇಕಾಗುತ್ತದೆ.
+
+#### ಹಂತ-ಪ್ರತಿ-ಹಂತ Codespaces ಸಂರಚನೆ
+
+**1. ನಿಮ್ಮ ಬ್ಯಾಕೆಂಡ್ ಸರ್ವರ್ ಪ್ರಾರಂಭಿಸಿ**:  
+```bash
+cd backend
+python api.py
+```
+  
+ನೀವು ಪರಿಚಿತ FastAPI/Uvicorn ಪ್ರಾರಂಭ ಸಂದೇಶವನ್ನು ನೋಡುತ್ತೀರಿ, ಆದರೆ ಅದು Codespace ಪರಿಸರದ ಒಳಗೆ ಓಡುತ್ತಿದೆ.
+
+**2. ಪೋರ್ಟ್ ದೃಶ್ಯತೆಯನ್ನು ಸಂರಚಿಸಿ**:  
+- VS Code ಕೆಳಗಿನ ಫಲಕದಲ್ಲಿ "Ports" ಟ್ಯಾಬ್ ನೋಡಿ  
+- ಪೋರ್ಟ್ 5000 ಅನ್ನು ಪಟ್ಟಿ ಯಲ್ಲಿ ಹುಡುಕಿ  
+- ಪೋರ್ಟ್ 5000 ಮೇಲೆ ರೈಟ್-ಕ್ಲಿಕ್ ಮಾಡಿ  
+- "Port Visibility" → "Public" ಆಯ್ಕೆಮಾಡಿ
+
+**ಸಾರ್ವಜನಿಕ ಮಾಡಲು ಏಕೆ?** ನಿರ್ದಿಷ್ಟವಾಗಿ Codespace ಪೋರ್ಟ್‌ಗಳು ಖಾಸಗಿ (ನೀವು ಮಾತ್ರ ಪ್ರವೇಶಿಸಬಹುದಾಗಿದೆ). ಪೋರ್ಟ್ ಅನ್ನು ಸಾರ್ವಜನಿಕ ಮಾಡಿದರೆ, ನಿಮ್ಮ ಫ್ರಂಟ್‌ಎಂಡ್ (ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಓಡುತ್ತಿದೆ) ಬ್ಯಾಕೆಂಡ್ ಜೊತೆ ಸಂವಹನ ನಡೆಸಬಹುದು.
+
+**3. ನಿಮ್ಮ ಸಾರ್ವಜನಿಕ URL ಪಡೆಯಿರಿ**:  
+ಪೋರ್ಟ್ ಅನ್ನು ಸಾರ್ವಜನಿಕ ಮಾಡಿದ ಮೇಲೆ ಈ ರೀತಿಯ URL ಇರುತ್ತದೆ:  
+```
+https://your-codespace-name-5000.app.github.dev
+```
+  
+**4. ನಿಮ್ಮ ಫ್ರಂಟ್‌ಎಂಡ್ ಸಂರಚನೆಯನ್ನು ನವೀಕರಿಸಿ**:  
+```javascript
+// ನಿಮ್ಮ ಫ್ರಂಟ್‌ಎಂಡ್ app.js ನಲ್ಲಿ, BASE_URL ಅನ್ನು ನವೀಕರಿಸಿ:
+this.BASE_URL = "https://your-codespace-name-5000.app.github.dev";
+```
+  
+#### Codespace URL ಗಳ ಅರ್ಥ
+
+Codespace URL ಗಳಿಗೆ ನಿರೀಕ್ಷಿಸಲಾದ ಮಾದರಿ ಇದೆ:  
+```
+https://[codespace-name]-[port].app.github.dev
+```
+  
+**ಈ ಹಂಚಿಕೆ**:  
+- `codespace-name`: ನಿಮ್ಮ Codespace ಗಾಗಿ ಅನನ್ಯ ಗುರುತಿನ ಹೆಸರು (ಸಾಮಾನ್ಯವಾಗಿ ನಿಮ್ಮ ಬಳಕೆದಾರಹೆಸರು ಒಳಗೊಂಡಿದೆ)  
+- `port`: ನಿಮ್ಮ ಸೇವೆ ನಡೆಯುತ್ತಿರುವ ಪೋರ್ಟ್ ಸಂಖ್ಯೆ (ನಮ್ಮ FastAPI ಅಪ್ಲಿಕೇಶನ್ ಗಾಗಿ 5000)  
+- `app.github.dev`: GitHub ನ Codespace ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ವಿಶೇಷ ಡೊಮೇನ್
+
+#### ನಿಮ್ಮ Codespace ಸೆಟಪ್ ಅನ್ನು ಪರಿಶೀಲಿಸುವುದು
+
+**1. ಬ್ಯಾಕೆಂಡನ್ನು ನೇರವಾಗಿ ಪರೀಕ್ಷಿಸಿ**:  
+ನಿಮ್ಮ ಸಾರ್ವಜನಿಕ URL ಅನ್ನು ಹೊಸ ಬ್ರೌಸರ್ ಟ್ಯಾಬ್‌ನಲ್ಲಿ ತೆರೆಯಿರಿ. ನೀವು ನೋಡಬಹುದು:  
+```
+Welcome to the AI Chat API. Send POST requests to /hello with JSON payload containing 'message' field.
+```
+  
+**2. ಬ್ರೌಸರ್ ಡೆವಲಪರ್ ಟೂಲ್ಸ್ ಬಳಸಿಕೊಂಡು ಪರೀಕ್ಷಿಸಿ**:  
+```javascript
+// ಬ್ರೌಸರ್ ಕನಸೋಲ್ ತೆರೆಯಿರಿ ಮತ್ತು ನಿಮ್ಮ API ನ್ನು ಪರೀಕ್ಷಿಸಿ
+fetch('https://your-codespace-name-5000.app.github.dev/hello', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({message: 'Hello from Codespaces!'})
+})
+.then(response => response.json())
+.then(data => console.log(data));
+```
+  
+#### Codespaces ವಿರುದ್ಧ ಸ್ಥಳೀಯ ಅಭಿವೃದ್ಧಿ
+
+| پہلو | ಸ್ಥಳೀಯ ಅಭಿವೃದ್ಧಿ | GitHub Codespaces |
+|--------|-------------------|-------------------|
+| **ಸೆಟಪ್ ಸಮಯ** | ಹೆಚ್ಚು (ಪೈಥಾನ್, ಅವಲಂಬನೆಗಳು ಇನ್‌ಸ್ಟಾಲ್ ಮಾಡಬೇಕಾದುದು) | ಕ್ಷಣಾರ್ಧದಲ್ಲಿ (ಮುಗ್ಧಗೊಂಡ ಪರಿಸರ) |
+| **URL ಸೇರ್ಪಡೆ** | `http://localhost:5000` | `https://xyz-5000.app.github.dev` |
+| **ಪೋರ್ಟ್ ಸಂರಚನೆ** | ಸ್ವಯಂಚಾಲಿತ | ಕೈಗಾರಿಕೆ (ಪೋರ್ಟುಗಳನ್ನು ಸಾರ್ವಜನಿಕ ಮಾಡಬೇಕು) |
+| **ಫೈಲ್ ಸಂರಕ್ಷಣಾ** | ಸ್ಥಳೀಯ ಯಂತ್ರ | GitHub ಸಂಗ್ರಹಾಲಯ |
+| **ಸಹಯೋಗ** | ಪರಿಸರ ಹಂಚಿಕೊಳ್ಳಲು ಕಷ್ಟ | Codespace ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಲು ಸುಲಭ |
+| **ಇಂಟರ್ನೆಟ್ ಅವಲಂಬನೆ** | ಕೇವಲ AI API ಕರೆಗಳಿಗೆ | ಎಲ್ಲದರಿಗೂ ಅಗತ್ಯ |
+
+#### Codespace ಅಭಿವೃದ್ಧಿ ಸಲಹೆಗಳು
+
+**Codespaces ನಲ್ಲಿ ಪರಿಸರ ವ್ಯತ್ಯಾಸಗಳು**:  
+ನಿಮ್ಮ `.env` ಕಡತ Codespaces ನಲ್ಲಿ ಅದೇ ರೀತಿಯಲ್ಲಿಲೇ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ, ಆದರೆ ನೀವು Codespace ಒಳಗೆ ನೇರವಾಗಿ ಪರಿಸರ ವ್ಯತ್ಯಾಸಗಳನ್ನು ಕೂಡ ಸೆಟ್ ಮಾಡಬಹುದು:  
+
+```bash
+# ಪ್ರಸ್ತುತ ಸೆಷನ್‌ಗೆ ಪರಿಸರ ಚರವನ್ನು ಸೆಟ್ ಮಾಡಿ
+export GITHUB_TOKEN="your_token_here"
+
+# ಅಥವಾ ಕಾಯ್ದಿರಿಸಲು ನಿಮ್ಮ .bashrc ಗೆ ಸೇರಿಸಿ
+echo 'export GITHUB_TOKEN="your_token_here"' >> ~/.bashrc
+```
+  
+**ಪೋರ್ಟ್ ನಿರ್ವಹಣೆ**:  
+- Codespaces ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಪೋರ್ಟ್ ಮೇಲೆ ಕೇಳಲು ಪ್ರಾರಂಭಿಸಿದಾಗ ಅದನ್ನು ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪತ್ತೆಹಚ್ಚುತ್ತದೆ  
+- ನೀವು ಏಕಕಾಲದಲ್ಲಿ ಹಲವಾರು ಪೋರ್ಟುಗಳನ್ನು ಫಾರ್ವರ್ಡ್ ಮಾಡಬಹುದು (ನಂತರ ಡೇಟಾಬೇಸ್ ಸೇರಿಸಿದಾಗ ಉಪಯುಕ್ತ)  
+- ನಿಮ್ಮ Codespace ನಡೆದುいるವರೆಗೆ ಪೋರ್ಟುಗಳು ಪ್ರವೇಶಿಸಬಹುದಾಗಿರುತ್ತವೆ
+
+**ಅಭ್ಯರ್ಥನಾ ಕೆಲಸದ ಕ್ರಮ**:  
+1. VS Code ನಲ್ಲಿ ಕೋಡ್ ಬದಲಾವಣೆ ಮಾಡಿ  
+2. FastAPI ಸ್ವಯಂಚಾಲಿತ ಮರುಹಚ್ (Uvicorn ರಿಲೋಡ್ ಮೋಡ್ ಧನ್ಯವಾದಗಳು)  
+3. ಬದಲಾವಣೆಗಳನ್ನು ಸಕಾಲಿಕವಾಗಿ ಸಾರ್ವಜನಿಕ URL ಮೂಲಕ ಪರೀಕ್ಷಿಸಿ  
+4. ಸಿದ್ದವಾದಾಗ ಕಮಿಟ್ ಮಾಡಿ ಪುಶ್ ಮಾಡಿ
+
+> 💡 **ಪರಿಪೂರ್ಣ ಸಲಹೆ**: ಅಭಿವೃದ್ಧಿಯ ಸಂದರ್ಭದಲ್ಲಿ ನಿಮ್ಮ Codespace ಬ್ಯಾಕೆಂಡ್ URL ಅನ್ನು ಬುಕ್‌ಮಾರ್ಕ್ ಮಾಡಿ. Codespace ಹೆಸರಗಳು ಸ್ಥಿರವಾಗಿರುವುದರಿಂದ ನೀವು ಅದೇ Codespace ಬಳಸುತ್ತಿರುವಲ್ಲಿ URL ಬದಲಾಗುವುದಿಲ್ಲ.
+
+## ಫ್ರಂಟ್‌ಎಂಡ್ ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ ಸೃಷ್ಟಿಸೋಣ: ಸ್ಥಳವು ಹೊಸಮನುಷ್ಯರು AI ಜೊತೆಗೆ ಸಂವಾದಿಸುವಲ್ಲಿ
+
+ಇದೀಗ ನಾವು ಬಳಕೆದಾರ ಇಂಟರ್ಫೇಸ್ ಅನ್ನು ನಿರ್ಮಿಸಲು ಹೋಗುತ್ತಿದ್ದೇವೆ — ಇದು ನೀವು ನಿಮ್ಮ AI ಸಹಾಯಕನೊಂದಿಗೆ ಹೇಗೆ ಸಂವಹನ ಮಾಡಬೋದು ಎಂಬುದನ್ನು ನಿರ್ಧರಿಸುತ್ತದೆ. ಮೊದಲು iPhone ಇಂಟರ್ಫೇಸ್ ವಿನ್ಯಾಸದಂತೆ, ನಾವು ಸಾಂದರ್ಭಿಕ ತಂತ್ರಜ್ಞಾನವನ್ನು ನೈಸರ್ಗಿಕ ಮತ್ತು ಸಾಮಾನ್ಯವಾಗಿ ಉಪಯೋಗಿಸಬಹುದಾದಂತೆ ಮಾಡಿ.
+
+### ಆಧುನಿಕ ಫ್ರಂಟ್‌ಎಂಡ್ ವಾಸ್ತುಶಿಲ್ಪವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು
+
+ನಮ್ಮ ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ ಅನ್ನು "ಸಿಂಗಲ್ ಪೇಜ್ ಅಪ್ಲಿಕೇಶನ್" ಅಥವಾ SPA ಎಂದು ಕರೆಸಿಕೊಳ್ಳುತ್ತೇವೆ. ಹಳೆಯ ಶೈಲಿಯಂತೆ ಪ್ರತಿಯೊಂದು ಕ್ಲಿಕ್ ಹೊಸ ಪುಟವನ್ನು ಲೋಡ್ ಮಾಡುವ ಬದಲು, ನಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ನೀರಸವಾಗಿ ಮತ್ತು ತಕ್ಷಣ ಇಂದೇ ಅಪ್‌ಡೇಟ್ ಆಗುತ್ತದೆ:
+
+**ಹಳೆಯ ವೆಬ್‌ಸೈಟ್‌ಗಳು**: ಭೌತಿಕ ಪುಸ್ತಕ ಓದುವಂತೆ — ನೀವು ಸಂಪೂರ್ಣ ಹೊಸ ಪುಟಗಳಿಗೆ ಹಾರಿ  
+**ನಮ್ಮ ಚಾಟ್ ಆಪ್**: ನಿಮ್ಮ ಫೋನ್ ಬಳಸುವಂತೆ — ಎಲ್ಲವೂ ನಿಧಾನವಾಗಿ ಹರಿದು ಹೊಸತಾಗಿ ನವೀಕರಿಸಿ  
+
+```mermaid
+graph TD
+    A[ಬಳಕೆದಾರ ಸಂದೇಶವನ್ನು ಟೈಪ್ ಮಾಡುತ್ತಾನೆ] --> B[JavaScript ಇನ್‌ಪುಟ್ ಅನ್ನು ಸೆರೆಹಿಡಿಯುತ್ತದೆ]
+    B --> C[ಡೇಟಾವನ್ನು ಪರಿಶೀಲಿಸಿ ಮತ್ತು ಫಾರ್ಮ್ಯಾಟ್ ಮಾಡಿ]
+    C --> D[ಬ್ಯಾಕೆಂಡ್ API ಗೆ ಕಳುಹಿಸಿ]
+    D --> E[ಲೋಡಿಂಗ್ ಸ್ಥಿತಿಯನ್ನು ತೋರಿಸು]
+    E --> F[AI ಪ್ರತಿಕ್ರಿಯೆ પ્રાપ્તಿ]
+    F --> G[ಚಾಟ್ ಇಂಟರ್ಫೇಸ್ ನವೀಕರಿಸಿ]
+    G --> H[ಮುಂದಿನ ಸಂದೇಶಕ್ಕೆ ಸಿದ್ಧ]
+```  
+```mermaid
+classDiagram
+    class ChatApp {
+        +ಸಂದೇಶಗಳು: HTMLElement
+        +ಫಾರ್ಮ್: HTMLElement
+        +ಇನ್ಪುಟ್: HTMLElement
+        +ಸೇಂಡ್ ಬಟನ್: HTMLElement
+        +ಮೂಲ_URL: string
+        +API_ಎಂಡ್ಪಾಯಿಂಟ್: string
+        
+        +ರಚನೆ()
+        +ಇವೆಂಟ್_ಶ್ರೋತರು_ಪ್ರಾರಂಭಿಸು()
+        +ಹ್ಯಾಂಡಲ್_ಸಬ್ಮಿಟ್(ಹUBA)
+        +ಕಾಲ್_API(ಸಂದೇಶ)
+        +ಸಂದೇಶವನ್ನು ಸೇರಿಸಿ(ಪಠ್ಯ, ಪಾತ್ರ)
+        +ಹೆಚ್ಟಿಎಂಎಲ್_ಒಳಚೆ()  
+        +ಕೆಳಭಾಗಕ್ಕೆ ಸ್ಕ್ರೋಲ್ ಮಾಡಿ()
+        +ಲೋಡ್ ಆಗುತ್ತಿದೆ ಎಂದು ಸೆಟ್ ಮಾಡಿ(ಲೋಡ್ ಆಗುತ್ತಿದೆ)
+    }
+    
+    ChatApp --> DOM : ಪರಿಣತ
+    ChatApp --> FastAPI : ವಿನಂತಿಗಳನ್ನು ಕಳುಹಿಸುತ್ತದೆ
+```  
+### ಫ್ರಂಟ್‌ಎಂಡ್ ಅಭಿವೃದ್ಧಿಯ ಮೂರು ಸ್ತಂಭಗಳು
+
+ಪ್ರತಿ ಫ್ರಂಟ್‌ಎಂಡ್ ಅಪ್ಲಿಕೇಶನ್ — ಸರಳ ವೆಬ್‌ಸೈಟ್‌ಗಳಿಂದ Discord ಅಥವಾ Slack ಜತೆಗೆ ಸಂಕೀರ್ಣ ಆಪ್ಸ್ ತನಕ — ಮೂರು ಕೋರ ತಂತ್ರಜ್ಞಾನಗಳ ಮೇಲೆ ನಿರ್ಮಿಸಲಾಗಿದೆ. ಇವು ನಿಮ್ಮ ವೆಬ್‌ನಲ್ಲಿ ನೀವು ನೋಡುತ್ತಿರುವ ಮತ್ತು ಸಂವಹನ ಮಾಡುತ್ತಿರುವ ಪ್ರತಿಯೊಂದು ಆಧಾರಗಳು:
+
+**HTML (ಸಂರಚನೆ)**: ಇದು ನಿಮ್ಮ ಆಧಾರ  
+- ಯಾವ ಅಂಶಗಳು ಇರುವುದೆಂದು ನಿರ್ಧರಿಸುತ್ತದೆ (ಬಟನ್‌ಗಳು, ಪಠ್ಯ ಪ್ರದೇಶಗಳು, ಕಾಂಟೈನ್‌ರ್‌ಗಳು)  
+- ವಿಷಯಕ್ಕೆ ಅರ್ಥ ನೀಡುತ್ತದೆ (ಇದು ಹೆಡರ್, ಇದು ಫಾರ್ಮ್ ಮುಂತಾದವು)  
+- ಬೇರೆ ಎಲ್ಲವೂ ಅದರಲ್ಲಿ ನಿರ್ಮಿಸಲ್ಪಡುವ ಮೂಲ ರಚನೆ ಸೃಷ್ಟಿ
+
+**CSS (ಪ್ರಸ್ತುತಿಕೆಯ)**: ಇದು ನಿಮ್ಮ ಒಳಭಾಗ ವಿನ್ಯಾಸಕಾರ  
+- ಎಲ್ಲವನ್ನೂ ಸುಂದರವಾಗಿ ಕಾಣುವಂತೆ ಮಾಡುತ್ತದೆ (ಬಣ್ಣಗಳು, ಫಾಂಟ್ಸ್, ವಿನ್ಯಾಸ)  
+- ವಿಭಿನ್ನ ಪರದೆ ಗಾತ್ರಗಳನ್ನು ನಿರ್ವಹಿಸುತ್ತದೆ (ಫೋನ್, ಲ್ಯಾಪ್‌ಟಾಪ್, ಟ್ಯಾಬ್ಲೆಟ್)  
+- ಮೃದುವಾದ ಅನಿಮೆಷನು ಮತ್ತು ದೃಶ್ಯ ಪ್ರಸಕ್ತಿಕರಣಗಳನ್ನು ಸೃಷ್ಟಿಸುತ್ತದೆ
+
+**JavaScript (ನಡತ)**: ಇದು ನಿಮ್ಮ ಮೆದುಳು  
+- ಬಳಕೆದಾರರ ಕ್ರಿಯೆಗಳಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆ (ಕ್ಲಿಕ್, ಟೈಪಿಂಗ್, ಸ್ಕ್ರೋಲ್)  
+- ನಿಮ್ಮ ಬ್ಯಾಕೆಂಡ್ ಜೊತೆ ಮಾತನಾಡಿ ಪುಟವನ್ನು ನವೀಕರಿಸುತ್ತದೆ  
+- ಎಲ್ಲವನ್ನೂ ಪರಸ್ಪರ ಕ್ರಿಯಾಶೀಲ ಮತ್ತು ಗತಿಶೀಲ ಮಾಡುತ್ತದೆ
+
+**ಇದನ್ನು ವಾಸ್ತುಶಿಲ್ಪ ವಿನ್ಯಾಸದಂತೆ ಭಾವಿಸಿ**:  
+- **HTML**: ರಚನಾತ್ಮಕ ಬ್ಲೂಪ್ರಿಂಟ್‌(ಏರೀಯಾಗಳು ಮತ್ತು ಸಂಬಂಧಗಳನ್ನು ನಿರ್ಧರಿಸುವುದು)  
+- **CSS**: ಆಕರ್ಷಕ ಮತ್ತು ಪರಿಸರ ವಿನ್ಯಾಸ (ದೃಶ್ಯ ಶೈಲಿ ಮತ್ತು ಬಳಕೆದಾರ ಅನುಭವ)  
+- **JavaScript**: ಯಾಂತ್ರಿಕ ವ್ಯವಸ್ಥೆಗಳು (ಕಾರ್ಯನಿರ್ವಹಣೆ ಮತ್ತು ಪರಸ್ಪರ ಕ್ರಿಯಾಶೀಲತೆ)  
+
+### ಆಧುನಿಕ JavaScript ವಾಸ್ತುಶಿಲ್ಪದ ಮಹತ್ವ
+
+ನಮ್ಮ ಚಾಟ್ ಅಪ್ಲಿಕೇಶನ್ ವೃತ್ತಿಪರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಕಾಣುವ ಆಧುನಿಕ JavaScript ಮಾದರಿಗಳನ್ನು ಉಪಯೋಗಿಸುತ್ತದೆ. ಈ ಕಲ್ಪನೆಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದರಿಂದ ನೀವು ಅಭಿವೃದ್ಧಿಪಕರಾಗುವಾಗ ಸಹಾಯವಾಗುತ್ತದೆ:
+
+**ವರ್ಗಾಧಾರಿತ ವಾಸ್ತುಶಿಲ್ಪ**: ನಾವು ನಮ್ಮ ಕೋಡ್ ಅನ್ನು ವರ್ಗಗಳಲ್ಲಿ ಆಯೋಜಿಸೋಣ, ಅವು ಅವುಗಳ ಬ್ಲೂಪ್ರಿಂಟ್‌ಗಳಂತೆ  
+**Async/Await**: ಸಮಯ ಪಡೆಯುವ ಕಾರ್ಯಗಳನ್ನು ಕೈಗೊಳ್ಳಲು ಆಧುನಿಕ ವಿಧಾನ (API ಕರೆಗಳು ಮುಂತಾದವು)  
+**ಇವೆಂಟ್ ಚಾಲಿತ ಪ್ರೋಗ್ರಾಮಿಂಗ್**: ನಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಬಳಕೆದಾರರ ಕ್ರಿಯೆಗಳಿಗೆ ಪ್ರತಿಕ್ರಿಯಿಸುತ್ತದೆ (ಕ್ಲಿಕ್, ಕೀಪ್ರೆಸು ಮುಂತಾದವು), ಲೂಪ್‌ನಲ್ಲಿ ಓಡುವುದಿಲ್ಲ  
+**DOM ಮ್ಯಾನಿಪ್ಯುಲೇಶನ್**: ಬಳಕೆದಾರ ಸಂವಹನ ಮತ್ತು API ಒಳಗೂಡು ಆಧಾರದ ಮೇಲೆ ವೆಬ್ ಪುಟ ವಿಷಯವನ್ನು ಡೈನಾಮಿಕ್ ಆಗಿ ನವೀಕರಿಸುವುದು  
+
+### ಪ್ರಾಜೆಕ್ಟ್ ರಚನೆ ಸಂರಚನೆ
+
+ಈ ಕಟ್ಟಟವಾದ ರಚನೆಳ್ಳ frontend ಡೈರೆಕ್ಟರಿಯೊಂದನ್ನು ರಚಿಸಿ:
+
+```text
+frontend/
+├── index.html      # Main HTML structure
+├── app.js          # JavaScript functionality
+└── styles.css      # Visual styling
+```
+  
+**ವಾಸ್ತುಶಿಲ್ಪವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು:**  
+- ಸಂರಚನೆ (HTML), ನಡತೆ (JavaScript) ಮತ್ತು ಪ್ರದರ್ಶನ (CSS) ನಡುವಿನ ತಾತ್ವಿಕ ವಿಭಜನೆ  
+- ಸರಳ ಕಡತ ರಚನೆ ಇರುತ್ತದೆ, ಇದು ಸುಲಭವಾಗಿ ನಾವಿಗೇಟ್ ಮತ್ತು ಬದಲಾಯಿಸಬಹುದಾಗಿದೆ  
+- ವೆಬ್ ಅಭಿವೃದ್ಧಿಯ ಉತ್ತಮಚಾರಿಕೆ ಅನುಸರಣೆಗಳಂತೆ ಆಯೋಜನೆ ಮತ್ತು ನಿರ್ವಹಣೆ  
+
+### HTML ಮೂಲವನ್ನು ನಿರ್ಮಿಸುವುದು: ಪ್ರವೇಶಾಸಾಧ್ಯತೆಗಾಗಿ ಸಾಂದರ್ಭಿಕ ರಚನೆ
+
+ನಾವು HTML ರಚನೆಯಿಂದ ಪ್ರಾರಂಭಿಸೋಣ. ಆಧುನಿಕ ವೆಬ್ ಅಭಿವೃದ್ಧಿ "ಸಾಂದರ್ಭಿಕ HTML" ಮೇಲೆ ಗಮನ ಹರಿಸುತ್ತದೆ — ಅಂಶಗಳು فقط ಅವರ ರೂಪದ ಕೈಗೆ ತೆಗೆದು ಪಾತ್ರವನ್ನು ವಿವರಿಸುತ್ತವೆ. ಇದು ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್ ಸ್ಕ್ರೀನ್ ರೀಡರ್‌ಗಳು, ಹುಡುಕಾಟೇಂಜಿನ್‌ಗಳು ಮತ್ತು ಇತರೆ ಉಪಕರಣಗಳಿಗೆ ಪ್ರವೇಶಾಸಾಧ್ಯ ಮಾಡಲು ಸಹಾಯ ಮಾಡುತ್ತದೆ.
+
+**ಸಾಂದರ್ಭಿಕ HTML ಮಹತ್ವವೇನು**: ನಿಮ್ಮ ಚಾಟ್ ಆ್ಯಪ್ ಅನ್ನು ಯಾರಿಗಾದರೂ ಫೋನಿನಲ್ಲಿ ವಿವರಿಸುತ್ತಿದ್ದೀರಿ ಎಂದು ಭಾವಿಸಿ. ನೀವು ಹೇಳುತ್ತೀರಾ "ಅಲ್ಲಿ ಶೀರ್ಷಿಕೆ ಮತ್ತು ವಿವರಣೆಯಿರುವ ಹೆಡರ್ ಇದೆ, ಸಂಭಾಷಣೆ ನಡೆಯುವ ಮುಖ್ಯ ಪ್ರದೇಶ ಇದೆ, ಮತ್ತು ಸಂದೇಶಗಳನ್ನು ಟೈಪ್ ಮಾಡುವುದಕ್ಕಾಗಿ ಕೆಳದಲ್ಲಿ ಫಾರ್ಮ್ ಇದೆ." ಸಾಂದರ್ಭಿಕ HTML ಈ ಸಹಜ ವಿವರಣೆಗೆ ಹೊಂದುವ ಅಂಶಗಳನ್ನು ಬಳಸುತ್ತದೆ.
+
+`index.html` ಅನ್ನು ಈ ಸೂಕ್ಷ್ಮವಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಿದ ಗುರುತಿನೊಂದಿಗೆ ರಚಿಸಿ:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>AI Chat Assistant</h1>
+            <p>Ask me anything!</p>
+        </header>
+        
+        <main class="chat-messages" id="messages" role="log" aria-live="polite">
+            <!-- Messages will be dynamically added here -->
+        </main>
+        
+        <form class="chat-form" id="chatForm">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Type your message here..." 
+                    required
+                    aria-label="Chat message input"
+                >
+                <button type="submit" id="sendBtn" aria-label="Send message">
+                    Send
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
+```
+  
+**ಪ್ರತಿ HTML ಅಂಶ ಮತ್ತು ಅದರ ಉದ್ದೇಶವನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳುವುದು:**
+
+#### ಡಾಕ್ಯುಮೆಂಟ್ ರಚನೆ  
+- **`<!DOCTYPE html>`**: ಬ್ರೌಸರ್‌ಗಿಗೆ ಇದು ಆಧುನಿಕ HTML5 ಎಂದು ತಿಳಿಸುವುದು  
+- **`<html lang="en">`**: ಸ್ಕ್ರೀನ್ ರೀಡರ್‌ಗಳಿಗೆ ಮತ್ತು ಭಾಷಾಂತರ ಸಾಧನಗಳಿಗೆ ಪುಟ ಭಾಷೆಯನ್ನು ಸೂಚಿಸುವುದು  
+- **`<meta charset="UTF-8">`**: ಅಂತಾರಾಷ್ಟ್ರೀಯ ಪಠ್ಯಕ್ಕೆ ಸರಿಯಾದ ಅಕ್ಷರ ಸಂಕೋಚನೆಯನ್ನು ಖಚಿತಪಡಿಸುವುದು  
+- **`<meta name="viewport"...>`**: ಪುಟವನ್ನು ಮೊಬೈಲ್ ಸೂಕ್ತವಾಗಿ ಸ್ಕೇಲ್ ಮತ್ತು ಜೂಮ್‌ವವಿಕೆ ನಿಯಂತ್ರಿಸುವುದು  
+
+#### ಸಾಂದರ್ಭಿಕ ಅಂಶಗಳು  
+- **`<header>`**: ಶೀರ್ಷಿಕೆ ಮತ್ತು ವಿವರಣೆಯೊಂದಿಗೆ ಮೇಲ್ಭಾಗವನ್ನು ಸ್ಪಷ್ಟವಾಗಿ ಗುರುತಿಸುವುದು  
+- **`<main>`**: ಮುಖ್ಯ ವಿಷಯ ಪ್ರದೇಶ (ಸಂಭಾಷಣೆಗಳು ನಡೆಯುವ ಸ್ಥಳ) ಆದರ್ಶಗೊಳಿಸುವುದು  
+- **`<form>`**: ಬಳಕೆದಾರ ಇನ್‌ಪುಟ್‌ಗಾಗಿ ಸಾಂದರ್ಭಿಕವಾಗಿ ಸರಿಯಾದ ರೂಪ, ಸರಿಯಾದ ಕೀಬೋರ್ಡ್ ನ್ಯಾವಿಗೇಶನ್ ಒದಗಿಸುವುದು  
+
+#### ಪ್ರವೇಶಾಸಾಧ್ಯತೆ ವಿಜ್ಞಾನಗಳು  
+- **`role="log"`**: ಸ್ಕ್ರೀನ್ ರೀಡರ್‌ಗಳಿಗೆ ಈ ಪ್ರದೇಶವು ಕಾಲಾನುಗತ ಸಂದೇಶಗಳ ಲಾಗ್ ಎಂದೂ ತಿಳಿಸುವುದು  
+- **`aria-live="polite"`**: ಸ್ಕ್ರೀನ್ ರೀಡರ್‌ಗಳಿಗೆ ಅಡ್ಡದಾಡದೆ ಹೊಸ ಸಂದೇಶಗಳನ್ನು ಘೋಷಿಸುವುದು  
+- **`aria-label`**: ಫಾರ್ಮ್ ನಿಯಂತ್ರಣಗಳಿಗೆ ವಿವರಣಾತ್ಮಕ ಲೇಬಲ್ಗಳನ್ನು ಒದಗಿಸುವುದು  
+- **`required`**: ಬಳಕೆದಾರರು ಸಂದೇಶವನ್ನು ಕಳುಹಿಸುವ ಮೊದಲು ನಮೂದಿಸುವಂತೆ ಬ್ರೌಸರ್ ಮಾನ್ಯತೆ ನೀಡುವುದು  
+
+#### CSS ಮತ್ತು JavaScript ಸಂಯೋಜನೆ  
+- **`class` ಗುಣಲಕ್ಷಣಗಳು**: CSS ಕ್ಕೆ ಶೈಲಿನ ಹೊತ್ತಿಕೊಡುವುದು (`chat-container`, `input-group` ಮುಂತಾದವು)  
+- **`id` ಗುಣಲಕ್ಷಣಗಳು**: JavaScript ప్రత్యేక ಅಂಶಗಳನ್ನು ಹುಡುಕಲು ಮತ್ತು ನಿರ್ವಹಿಸಲು  
+- **ಸ್ಕ್ರಿಪ್ಟ್ ಸ್ಥಾಪನೆ**: HTML ಮೊದಲಿಗೆ ಲೋಡ್ ಆಗುವಂತೆ ನಂತರ JavaScript ಕಡತಗಳು ಲೋಡ್ ಆಗುವಂತೆ ಮಾಡಲಾಗಿದೆ  
+
+**ಈ ರಚನೆ ಯಾಕೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ:**  
+- **ತಾರ್ಕಿಕ ಕ್ರಮ**: ಹೆಡರ್ → ಮುಖ್ಯ ವಿಷಯ → ಇನ್‌ಪುಟ್ ಫಾರ್ಮ್ ಸಹಜ ಓದುವ ಆದೇಶಕ್ಕೆ ಹೊಂದಿಕೊಳ್ಳುತ್ತದೆ  
+- **ಕೀಬೋರ್ಡ್ ಪ್ರವೇಶಾಸಾಧ್ಯತೆ**: ಬಳಕೆದಾರರು ಎಲ್ಲಾ ಪರಸ್ಪರಕ್ರಿಯಾಶೀಲ ಅಂಶಗಳ ಮೂಲಕ ಟ್ಯಾಬ್ ಮೂಲಕ ಹೋಗಬಹುದು  
+- **ಸ್ಕ್ರೀನ್ ರೀಡರ್ ಸ್ನೇಹಿ**: ದೃಷ್ಟಿಬಾಧಿತ ಬಳಕೆದಾರರಿಗೆ ಸ್ಪಷ್ಟ ಸೀಮಾಕ್ಷೇತ್ರ ಮತ್ತು ವಿವರಣೆಗಳು  
+- **ಮೊಬೈಲ್ ಸೂಕ್ತತೆ**: viewport ಮೆಟಾ ಟ್ಯಾಗ್ ಪ್ರತಿಕ್ರಿಯಾಶೀಲ ವಿನ್ಯಾಸಕ್ಕೆ ಅವಕಾಶ ನೀಡುತ್ತದೆ  
+- **ಪ್ರಗತಿಶೀಲ ಬಲವರ್ಧನೆ**: CSS ಅಥವಾ JavaScript ಲೋಡ್ ಆಗದಿದ್ದ ಶ್ರೇಣಿಗಲ್ಲದೆ ಕಾರ್ಯನಿರ್ವಹಿಸುತ್ತದೆ  
+
+### ಪರಸ್ಪರ ಕ್ರಿಯಾಶೀಲ JavaScript ಸೇರ್ಪಡೆ: ಆಧುನಿಕ ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್ ಲಾಜಿಕ್  
+
+Translation for chunk 4 of 'README.md' skipped due to timeout.
+- **ಸಂಭಾಷಣೆ ವಿಷಯ** ಆಧರಿಸಿ ಸ್ಮಾರ್ಟ್ ಸಲಹೆಗಳನ್ನು **ನಿರ್ವಹಿಸಿ**
+- ಸಾಮಾನ್ಯ ಪ್ರಶ್ನೆಗಳಿಗೆ ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯೆ ಬಟನ್‌ಗಳನ್ನು **ಸೃಷ್ಟಿಸಿ**
+
+> 🎯 **ಕಲಿಕೆಯ ಗುರಿ**: ಈ ಬೋನಸ್ ಸವಾಲುಗಳು ನಿಮ್ಮನ್ನು ಆಧುನಿಕ ವೆಬ್ ಅಭಿವೃದ್ಧಿ ಮಾದರಿಗಳನ್ನು ಮತ್ತು ಉತ್ಪಾದನಾ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ ಬಳಸುವ AI ಏಕೀಕರಣ ತಂತ್ರಗಳನ್ನು ಅರ್ಥಮಾಡಿಕೊಳ್ಳಲು ಸಹಾಯ ಮಾಡುತ್ತವೆ.
+
+## ಸಾರಾಂಶ ಮತ್ತು ಮುಂದಿನ ಹೆಜ್ಜೆಗಳು
+
+ಅಭಿನಂದನೆಗಳು! ನೀವು ಶೂನ್ಯದಿಂದಲೇ ಸಂಪೂರ್ಣ AI ಚಾಲಿತ ಚಾಟ್ ಸಹಾಯಕವನ್ನು ಯಶಸ್ವಿಯಾಗಿ ನಿರ್ಮಿಸಿದ್ದಾರೆ. ಈ ಯೋಜನೆಯು ನಿಮಗೆ ಆಧುನಿಕ ವೆಬ್ ಅಭಿವೃದ್ಧಿ ತಂತ್ರಜ್ಞಾನಗಳು ಮತ್ತು AI ಏಕೀಕರಣದಲ್ಲಿ ಪ್ರಾಯೋಗಿಕ ಅನುಭವವನ್ನು ನೀಡಿದೆ – ಇದು ಇಂದಿನ ತಂತ್ರಜ್ಞಾನ ಕ್ಷೇತ್ರದಲ್ಲಿ ಹೆಚ್ಚುತ್ತಿಹುದಾದ ಕೌಶಲ್ಯಗಳು.
+
+### ನೀವು ಸಾಧಿಸಿದವು ಏನು
+
+ಈ ಪಾಠದ ಮೊದಲಿನಿಂದಲೇ ನೀವು ಹಲವಾರು ಪ್ರಮುಖ ತಂತ್ರಜ್ಞಾನಗಳು ಮತ್ತು ಸಂಪ್ರದಾಯಗಳನ್ನು ಪರಿಣಸ್ಕರಿಸಿದ್ದೀರಿ:
+
+**ಬ್ಯಾಕ್‌ಎಂಡ್ ಅಭಿವೃದ್ಧಿ:**
+- AI ಕಾರ್ಯಕ್ಷಮತೆಯಿಗಾಗಿ GitHub Models API ಜೊತೆಗೆ **ಸಂಯೋಜಿಸಲಾಗಿದೆ**
+- ಸರಿಯಾದ ದೋಷ ನಿರ್ವಹಣೆಯೊಂದಿಗೆ Flask ಬಳಸಿ RESTful API ಅನ್ನು **ನಿರ್ಮಿಸಿಕೊಂಡಿದೆ**
+- ಪರಿಸರ ಚರಗಳ ಮೂಲಕ ಸುರಕ್ಷಿತ ಪ್ರಮಾಣೀಕರಣವನ್ನು **ಅಳವಡಿಸಿದೆ**
+- ಮುಂಭಾಗ ಮತ್ತು ಪಶ್ಚಾತ್ ಭಾಗದ ನಡುವೆ ಕ್ರಾಸ್-ಓರಿಜಿನ್ ವಿನಂತಿಗಳಿಗೆ CORS ಅನ್ನು **ಕಾನ್ಫಿಗರ್ ಮಾಡಲಾಗಿದೆ**
+
+**ಮುಂಭಾಗ ಅಭಿವೃದ್ಧಿ:**
+- ಅರ್ಥಪೂರ್ಣ HTML ಬಳಸಿ ಪ್ರತಿಕ್ರಿಯಾಶೀಲ ಚಾಟ್ ಇಂಟರ್‌ಫೇಸ್ ಅನ್ನು **ರಚಿಸಲಾಗಿದೆ**
+- async/await ಮತ್ತು ವರ್ಗ ಆಧಾರಿತ ರಚನೆಯೊಂದಿಗೆ ಆಧುನಿಕ ಜಾವಾಸ್ಕ್ರಿಪ್ಟ್ ಅನ್ನು **ಅಳವಡಿಸಲಾಗಿದೆ**
+- CSS Grid, Flexbox, ಮತ್ತು ಅನಿಮೇಶನ್‌ಗಳೊಂದಿಗೆ ಆಕರ್ಷಕ ಬಳಕೆದಾರ ಇಂಟರ್‌ಫೇಸ್ ಅನ್ನು **ರೂ ಆದರೆ ಮಾಡಿ**
+- ಪ್ರವೇಶಾಯಕತೆ ಲಕ್ಷಣಗಳು ಮತ್ತು ಪ್ರತಿಕ್ರಿಯಾಶೀಲ ವಿನ್ಯಾಸ ತत्त्वಗಳನ್ನು **ಸೇರಿಸಲಾಗಿದೆ**
+
+**ಸಂಪೂರ್ಣ-ಸ್ಟಾಕ್ ಏಕೀಕರಣ:**
+- HTTP API ಕರೆಗಳ ಮೂಲಕ ಮುಂಭಾಗ ಮತ್ತು ಪಶ್ಚಾತ್ ಭಾಗಗಳನ್ನು **ಸಂಪರ್ಕಿಸಲಾಗಿದೆ**
+- ನೈಜ-ಕಾಲ ಬಳಕೆದಾರ ಸಂವಹನ ಮತ್ತು ಅಸಿಂಕ್ರೋನಸ್ ದತ್ತಾಂಶ ಹರಿವನ್ನು **ನಿಭಾಯಿಸಲಾಗಿದೆ**
+- ಅನ್ವಯಿಕೆಯಲ್ಲಿ ದೋಷ ನಿರ್ವಹಣೆ ಮತ್ತು ಬಳಕೆದಾರ ಪ್ರತಿಕ್ರಿಯೆಯನ್ನು **ಅಳವಡಿಸಲಾಗಿದೆ**
+- ಬಳಕೆದಾರ ಇನ್‌ಪುಟ್ ನಿಂದ AI ಪ್ರತಿಕ್ರಿಯೆಯವರೆಗಿನ ಸಂಪೂರ್ಣ ಅಪ್ಲಿಕೇಶನ್ ಕಾರ್ಯಪ್ರವಾಹವನ್ನು **ಪರೀಕ್ಷಿಸಲಾಗಿದೆ**
+
+### ಪ್ರಮುಖ ಕಲಿಕೆಯ ಫಲಿತಾಂಶಗಳು
+
+```mermaid
+mindmap
+  root((AI ಚಾಟ್ ಆಪ್ ಕೌಶಲ್ಯಗಳು))
+    API Integration
+      Authentication
+      Error Handling
+      Async Programming
+    Web Development
+      HTML5 Semantics
+      Modern CSS
+      ES6+ JavaScript
+    User Experience
+      Responsive Design
+      Accessibility
+      Real-time Interaction
+    AI Understanding
+      Prompt Engineering
+      Model Parameters
+      Conversation Flow
+```  
+ಈ ಯೋಜನೆಯು AI ಚಾಲಿತ ಅಪ್ಲಿಕೇಶನ್ನಗಳನ್ನು ರಚಿಸುವ ಮೂಲತತ್ವಗಳನ್ನು ನಿಮಗೆ ಪರಿಚಯಿಸಿದ್ದು, ಇದು ವೆಬ್ ಅಭಿವೃದ್ಧಿಯ ಭವಿಷ್ಯವನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ. ನೀವು ಈಗ AI ಸಾಮರ್ಥ್ಯಗಳನ್ನು ಪರಂಪರাগত ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಿಗೆ ಏಕೀಕರಿಸುವುದನ್ನು ಅರ್ಥಮಾಡಿಕೊಂಡಿದ್ದು, ಬುದ್ಧಿವಂತ ಮತ್ತು ತ್ವರಿತ ಪ್ರತಿಕ್ರಿಯಿಸುವ ಬಳಕೆದಾರ ಅನುಭವಗಳನ್ನು ಸೃಷ್ಟಿಸುತ್ತೀರಿ.
+
+### ವೃತ್ತಿಪರ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು
+
+ಈ ಪಾಠದಲ್ಲಿ ನೀವು ಅಭಿವೃದ್ಧಿಪಡಿಸಿದ ಕೌಶಲ್ಯಗಳು ನೇರವಾಗಿ ಆಧುನಿಕ ಸಾಫ್ಟ್‌ವೇರ್ ಅಭಿವೃದ್ಧಿ ಕಾರ್‍ಯಗಳಲ್ಲಿ ಅನ್ವಯವಾಗುತ್ತವೆ:
+
+- ಆಧುನಿಕ ಫ್ರೇಮ್ವರ್ಕ್‌ಗಳು ಮತ್ತು APIಗಳೊಂದಿಗೆ **ಸಂಪೂರ್ಣ-ಸ್ಟಾಕ್ ವೆಬ್ ಅಭಿವೃದ್ಧಿ**
+- ವೆಬ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳು ಮತ್ತು ಮೊಬೈಲ್ ಅಪ್ಲಿಕೇಶನ್‌ಗಳಲ್ಲಿ **AI ಏಕೀಕರಣ**
+- ಮೈಕ್ರೋಸರ್ವೀಸ್ ವಾಸ್ತುಶಿಲ್ಪಗಳಿಗಾಗಿ **API ವಿನ್ಯಾಸ ಮತ್ತು ಅಭಿವೃದ್ಧಿ**
+- ಪ್ರವೇಶಾಯಕತೆ ಮತ್ತು ಪ್ರತಿಕ್ರಿಯಾಶೀಲ ವಿನ್ಯಾಸಕ್ಕೆ ಹೊಣೆಗಾರಿಕೆಯೊಂದಿಗೆ **ಬಳಕೆದಾರ ಇಂಟರ್‌ಫೇಸ್ ಅಭಿವೃದ್ಧಿ**
+- ಪರಿಸರ ಕಾನ್ಫಿಗರೇಶನ್ ಮತ್ತು ನಿಯೋಜನೆ ಸೇರಿದಂತೆ **DevOps ಅಭ್ಯಾಸಗಳು**
+
+### ನಿಮ್ಮ AI ಅಭಿವೃದ್ಧಿ ಯಾತ್ರೆಯನ್ನು ಮುಂದುವರಿಸುವುದು
+
+**ಮುಂದಿನ ಕಲಿಕೆಯ ಹೆಜ್ಜೆಗಳು:**  
+- ಹೆಚ್ಚು ಆಧುನಿಕ AI ಮಾದರಿ ಮತ್ತು APIಗಳನ್ನು **ಅನುಷ್ಠಾನಗೊಳ್ಳಿ** (GPT-4, Claude, Gemini)  
+- ಉತ್ತಮ AI ಪ್ರತಿಕ್ರಿಯೆಗಾಗಿ ಪ್ರಾಂಪ್ಟ್ ಇಂಜಿನಿಯರಿಂಗ್ ತಂತ್ರಗಳನ್ನು **ಕಲಿಯಿರಿ**  
+- ಸಂಭಾಷಣೆಯ ವಿನ್ಯಾಸ ಮತ್ತು ಚಾಟ್‌ಬಾಟ್ ಬಳಕೆದಾರ ಅನುಭವ ತತ್ವಗಳನ್ನು **ಅಧ್ಯಯನ ಮಾಡಿ**  
+- AI ಭದ್ರತೆ, ನೈತಿಕತೆ ಮತ್ತು ಜವಾಬ್ದಾರಿತ್ವ AI ಅಭಿವೃದ್ಧಿ ಅಭ್ಯಾಸಗಳನ್ನು **ಪರಿಶೀಲಿಸಿ**  
+- ಸಂಭಾಷಣೆ ನೆನಪಿನ ಮತ್ತು ಪ್ರ_CONTEXT ಅರಿವು ಹೊಂದಿದ್ದ ಹೆಚ್ಚಿನ ಸಂಕೀರ್ಣ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು **ನಿರ್ಮಿಸಿ**  
+
+**ಆಧುನಿಕ ಯೋಜನೆ ಯೋಚನೆಗಳು:**  
+- ಬಹು ಬಳಕೆದಾರರ ಚಾಟ್ ರೂಮ್‌ಗಳು AI ಮಧ್ಯಸ್ಥಿಕೆಯಿಂದ  
+- AI ಚಾಲಿತ ಗ್ರಾಹಕ ಸೇವಾ ಚಾಟ್‌ಬಾಟ್‌ಗಳು  
+- ವೈಯಕ್ತಿಕೃತ ಕಲಿಕೆಯೊಂದಿಗೆ ಶೈಕ್ಷಣಿಕ ಟ್ಯೂಟರ್ ಸಹాయకರು  
+- ವಿಭಿನ್ನ AI ವೈಯಕ್ತಿಕತೆಗಳೊಂದಿಗೆ ಸೃಜನಾತ್ಮಕ ಬರವು ಸಹೋದ್ಯೋಗಿಗಳು  
+- ಅಭಿವೃದ್ಧಿಪಡողների ಗಾಗಿ ತಾಂತ್ರಿಕ ದಾಖಲಾತಿ ಸಹಾಯಕರು
+
+## GitHub Codespaces ಯೊಂದಿಗೆ ಪ್ರಾರಂಭಿಸುವುದು
+
+ನೀವು ಈ ಯೋಜನೆಯನ್ನು ಕ್ಲೌಡ್ ಅಭಿವೃದ್ಧಿ ಪರಿಸರದಲ್ಲಿ ಪ್ರಯತ್ನಿಸಲು ಇಚ್ಛಿಸುವಿರಾ? GitHub Codespaces ನಿಮ್ಮ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಸಂಪೂರ್ಣ ಅಭಿವೃದ್ಧಿ ಸಜ್ಜುವಿಕೆಯನ್ನು ಒದಗಿಸುತ್ತದೆ, ಸ್ಥಳೀಯ ಸಜ್ಜುವಿಕೆ ಅಗತ್ಯವಿಲ್ಲದೆ AI ಅಪ್ಲಿಕೇಶನಗಳೊಂದಿಗೆ ಪ್ರಯೋಗಮಾಡಲು ಸರಿಹೊಂದುತ್ತದೆ.
+
+### ನಿಮ್ಮ ಅಭಿವೃದ್ಧಿ ಪರಿಸರವನ್ನು ಕಾನ್ಫಿಗರ್ ಮಾಡುವುದು
+
+**ಹೆಜ್ಜೆ 1: ಟೆಂಪ್ಲೇಟ್‌ನಿಂದ ರಚಿಸಿ**  
+- [Web Dev For Beginners repository](https://github.com/microsoft/Web-Dev-For-Beginners) ಗೆ **ನೌಯಿಗೇಟ್ ಮಾಡಿ**  
+- ಮೇಲೆ-ಬಲ ದೇವರದಲ್ಲಿ "Use this template" ಕ್ಲಿಕ್ ಮಾಡಿ (ನೀವು GitHub ನಲ್ಲಿ ಲಾಗಿನ್ ಆಗಿರಬೇಕು)
+
+![Create from template interface showing the green "Use this template" button](../../../translated_images/kn/template.67ad477109d29a2b.webp)
+
+**ಹೆಜ್ಜೆ 2: Codespaces ಪ್ರಾರಂಭಿಸಿ**  
+- ನಿಮ್ಮ ಹೊಸ ರೆಪೊ ತೆರೆಯಿರಿ  
+- ಹಸಿರು "Code" ಬಟನ್ ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು "Codespaces" ಆಯ್ಕೆ ಮಾಡಿ  
+- ನಿಮ್ಮ ಅಭಿವೃದ್ಧಿ ಪರಿಸರವನ್ನು ಪ್ರಾರಂಭಿಸಲು "Create codespace on main" ಆಯ್ಕೆಮಾಡಿ
+
+![Create codespace interface with options for launching cloud development environment](../../../translated_images/kn/codespace.bcecbdf5d2747d3d.webp)
+
+**ಹೆಜ್ಜೆ 3: ಪರಿಸರ ಕಾನ್ಫಿಗರೇಶನ್**  
+ನೀವು Codespace ತೆರೆಯುತ್ತಿದ್ದಂತೆ, ನಿಮಗೆ ಲಭ್ಯವಾಗಲಿದೆ:  
+- ಮುಂದಿನ ಸಿದ್ಧ ಸ್ಥಿತಿಯಲ್ಲಿ Python, Node.js ಮತ್ತು ಎಲ್ಲಾ ಅಗತ್ಯ ವಿಕಸದ ಸಾಧನಗಳು  
+- ವೆಬ್ ಅಭಿವೃದ್ಧಿಗೆ VS Code ಇಂಟರ್‌ಫೇಸ್ ಮತ್ತು ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳು  
+- ಬ್ಯಾಕ್‌ಎಂಡ್ ಮತ್ತು ಮುಂಭಾಗ ಸರ್ವರ್‌ಗಳನ್ನು ಚಲಿಸಲು ಟರ್ಮಿನಲ್ ಪ್ರವೇಶ  
+- ನಿಮ್ಮ ಅಪ್ಲಿಕೇಶನ್‌ಗಳನ್ನು ಪರೀಕ್ಷಿಸಲು ಪೋರ್ಟ್ ಫಾರ್ವಾರ್ಡಿಂಗ್
+
+**Codespaces ನೀಡುವುದು:**  
+- ಸ್ಥಳೀಯ ಪರಿಸರ ಸಜ್ಜುವಿಕೆ ಮತ್ತು ಕಾನ್ಫಿಗರೇಶನ್ ಸಮಸ್ಯೆಗಳನ್ನು **ನಿರಾಕರಿಸುತ್ತದೆ**  
+- ವಿವಿಧ ಸಾಧನಗಳಲ್ಲಿ ಸಹಜವಾಗಿಯೇ ಸुसಂಗತ ವಿಕಸನ ಪರಿಸರವನ್ನು **ಪ್ರದಾನಿಸುತ್ತದೆ**  
+- ವೆಬ್ ಅಭಿವೃದ್ಧಿಗೆ ಪೂರ್ವ-ಕಾನ್ಫಿಗರ್ ಸಾಧನಗಳು ಮತ್ತು ಎಕ್ಸ್ಟೆನ್ಶನ್‌ಗಳನ್ನು **ಒದಗಿಸುತ್ತದೆ**  
+- GitHub ಜೊತೆ ಸಂಸ್ಕರಣಾ ನಿಯಂತ್ರಣ ಮತ್ತು ಸಹಯೋಗಕ್ಕಾಗಿ ಸೌಮ್ಯ ಏಕೀಕರಣವನ್ನು **ಕೊಡುತ್ತದೆ**
+
+> 🚀 **ಪ್ರೊ ಟಿಪ್**: Codespaces ಗಳು AI ಅಪ್ಲಿಕೆಶನ್‌ಗಳು ಕಲಿಯಲು ಮತ್ತು ಪ್ರೋಟೋಟೈಪಿಂಗ್ ಮಾಡಲು ಅತ್ಯುತ್ತಮವಾಗಿದೆ ಏಕೆಂದರೆ ಇದು ಎಲ್ಲಾ ಸಂಕೀರ್ಣ ಪರಿಸರ ಸಜ್ಜುವಿಕೆಗಳನ್ನು ತಾನಾಗಿಯೇ ನಿರ್ವಹಿಸುತ್ತದೆ, ನೀವು ನಿರ್ವಹಣೆ ದೋಷ ಪರಿಹಾರ ಬದಲಾಗಿ ನಿರ್ಮಾಣ ಮತ್ತು ಕಲಿಕೆಗೆ ಫೋಕಸ್ ಮಾಡಬಹುದು.
+
+---
+
+<!-- CO-OP TRANSLATOR DISCLAIMER START -->
+**ತಿರಸ್ಕರಣೆ**:  
+ಈ ದಸ್ತಾವೇಜು [Co-op Translator](https://github.com/Azure/co-op-translator) ಎಂಬ AI ಭಾಷಾಂತರ ಸೇವೆಯನ್ನು ಬಳಸಿ ಭಾಷಾಂತರಿಸಲಾಗಿದೆ. ನಾವು ಶುದ್ಧತೆಗಾಗಿ ಪ್ರಯತ್ನಿಸುತ್ತಿದ್ದರೂ, ಸ್ವಯಂಚಾಲಿತ ಭಾಷಾಂತರಗಳಲ್ಲಿ ತಪ್ಪುಗಳು ಅಥವಾ ಅಸತ್ಯತೆಗಳಿದ್ದುಕೊಳ್ಳಬಹುದು ಎಂಬುದು ದಯವಿಟ್ಟು ಗಮನದಲ್ಲಿರಲಿ. ಮೂಲ ದಸ್ತಾವೇಜಿನ ಸ್ವಭಾವಿಕ ಭಾಷೆಯೇ ಅಧಿಕೃತ ಮೂಲ ಎಂದು ಪರಿಗಣಿಸಬೇಕು. ಅತ್ಯಾವಶ್ಯಕ ಮಾಹಿತಿಗಾಗಿ ವೃತ್ತಿಪರ ಮಾನವ ಭಾಷಾಂತರವನ್ನು ಶಿಫಾರಸು ಮಾಡಲಾಗುತ್ತದೆ. ಈ ಭಾಷಾಂತರಣದಿಂದ ಉಂಟಾಗುವ ಯಾವುದೇ ಬಲಪೂರ್ವಕ ಅರ್ಥಹೀನತೆಗಳ ಅಥವಾ ಸ್ವಲ್ಪತಗಳ ಹೇಗಾದರೂ ಜವಾಬ್ದಾರಿಯಲ್ಲವನು ನಾವು ஆகಿರುವುದಿಲ್ಲ.
+<!-- CO-OP TRANSLATOR DISCLAIMER END -->

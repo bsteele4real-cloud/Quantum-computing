@@ -1,0 +1,2385 @@
+# بناء مساعد دردشة باستخدام الذكاء الاصطناعي
+
+هل تتذكر في مسلسل "ستار تريك" عندما كان الطاقم يتحدث بشكل عادي مع كمبيوتر السفينة، يطرحون عليه أسئلة معقدة ويحصلون على إجابات مدروسة؟ ما كان يبدو كخيال علمي في الستينيات أصبح الآن شيئًا يمكنك بناؤه باستخدام تقنيات الويب التي تعرفها بالفعل.
+
+في هذه الدرس، سنقوم بإنشاء مساعد دردشة بالذكاء الاصطناعي باستخدام HTML، CSS، JavaScript وبعض التكامل الخلفي. ستكتشف كيف يمكن للمهارات التي تعلمتها أن تتصل بخدمات ذكاء اصطناعي قوية تفهم السياق وتولد ردودًا ذات معنى.
+
+فكر في الذكاء الاصطناعي كأنه مكتبة ضخمة يمكنها ليس فقط العثور على المعلومات، بل أيضًا صياغتها في إجابات متماسكة ومخصصة لأسئلتك المحددة. بدلاً من البحث عبر آلاف الصفحات، تحصل على ردود مباشرة وسياقية.
+
+يحدث التكامل من خلال تقنيات الويب المألوفة التي تعمل معًا. HTML ينشئ واجهة الدردشة، CSS يتولى التصميم البصري، JavaScript يدير التفاعلات مع المستخدم، وواجهة برمجة التطبيقات الخلفية تربط كل شيء بخدمات الذكاء الاصطناعي. يشبه ذلك كيف تعمل أقسام مختلفة من الأوركسترا معًا لتقديم سيمفونية.
+
+نحن نبني جسرًا بين التواصل البشري الطبيعي ومعالجة الآلة. ستتعلم التنفيذ الفني لتكامل خدمات الذكاء الاصطناعي وأنماط التصميم التي تجعل التفاعلات تبدو طبيعية.
+
+بنهاية هذا الدرس، سيصبح تكامل الذكاء الاصطناعي أقل غموضًا وأكثر كأنه واجهة برمجة تطبيقات أخرى يمكنك العمل معها. ستفهم الأنماط الأساسية التي تشغل تطبيقات مثل ChatGPT وClaude باستخدام نفس مبادئ تطوير الويب التي كنت تتعلمها.
+
+## ⚡ ما يمكنك القيام به في الـ 5 دقائق القادمة
+
+**مسار البداية السريعة للمطورين المشغولين**
+
+```mermaid
+flowchart LR
+    A[⚡ 5 minutes] --> B[Get GitHub token]
+    B --> C[Test AI playground]
+    C --> D[Copy Python code]
+    D --> E[See AI responses]
+```
+
+- **الدقيقة الأولى**: قم بزيارة [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) وأنشئ رمز وصول شخصي
+- **الدقيقة الثانية**: اختبر التفاعلات مع الذكاء الاصطناعي مباشرة في واجهة الملعب
+- **الدقيقة الثالثة**: انقر على علامة التبويب "Code" ونسخ مقتطف Python
+- **الدقيقة الرابعة**: قم بتشغيل الكود محليًا باستخدام الرمز الخاص بك: `GITHUB_TOKEN=your_token python test.py`
+- **الدقيقة الخامسة**: شاهد أول استجابة من الذكاء الاصطناعي يتم إنشاؤها من الكود الخاص بك
+
+**كود الاختبار السريع**:
+```python
+import os
+from openai import OpenAI
+
+client = OpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key="your_token_here"
+)
+
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Hello AI!"}],
+    model="openai/gpt-4o-mini"
+)
+
+print(response.choices[0].message.content)
+```
+
+**لماذا هذا مهم**: في 5 دقائق، ستختبر سحر التفاعل البرمجي مع الذكاء الاصطناعي. هذا يمثل حجر الأساس الذي يشغل كل تطبيقات الذكاء الاصطناعي التي تستخدمها.
+
+إليك كيف سيبدو مشروعك النهائي:
+
+![واجهة تطبيق الدردشة تظهر محادثة بين المستخدم ومساعد الذكاء الاصطناعي](../../../translated_images/ar/screenshot.0a1ee0d123df681b.webp)
+
+## 🗺️ رحلتك التعليمية عبر تطوير تطبيقات الذكاء الاصطناعي
+
+```mermaid
+journey
+    title From Web Development to AI Integration
+    section Understanding AI Foundations
+      Discover generative AI concepts: 4: You
+      Explore GitHub Models platform: 6: You
+      Master AI parameters and prompts: 8: You
+    section Backend Integration
+      Build Python API server: 5: You
+      Implement AI function calls: 7: You
+      Handle async operations: 8: You
+    section Frontend Development
+      Create modern chat interface: 6: You
+      Master real-time interactions: 8: You
+      Build responsive user experience: 9: You
+    section Professional Application
+      Deploy complete AI system: 7: You
+      Optimize performance patterns: 8: You
+      Create production-ready app: 9: You
+```
+
+**وجهة رحلتك**: بنهاية هذا الدرس، ستكون قد أنشأت تطبيقًا كاملًا مدعومًا بالذكاء الاصطناعي باستخدام نفس التقنيات والأنماط التي تشغل مساعدي الذكاء الاصطناعي الحديثين مثل ChatGPT وClaude وGoogle Bard.
+
+## فهم الذكاء الاصطناعي: من الغموض إلى الإتقان
+
+قبل الغوص في الكود، دعونا نفهم ما نعمل عليه. إذا كنت قد استخدمت واجهات برمجة التطبيقات من قبل، فأنت تعرف النمط الأساسي: إرسال طلب، تلقي استجابة.
+
+واجهات برمجة تطبيقات الذكاء الاصطناعي تتبع هيكلًا مشابهًا، ولكن بدلاً من استرجاع بيانات مخزنة مسبقًا من قاعدة بيانات، فإنها تولد ردودًا جديدة بناءً على أنماط تعلمتها من كميات هائلة من النصوص. فكر في الأمر كأنه الفرق بين نظام فهرسة مكتبة وأمين مكتبة ذو معرفة واسعة يمكنه صياغة المعلومات من مصادر متعددة.
+
+### ما هو "الذكاء الاصطناعي التوليدي" حقًا؟
+
+تأمل كيف سمحت حجر رشيد للعلماء بفهم الهيروغليفية المصرية من خلال العثور على أنماط بين اللغات المعروفة وغير المعروفة. نماذج الذكاء الاصطناعي تعمل بطريقة مشابهة – فهي تجد أنماطًا في كميات هائلة من النصوص لفهم كيفية عمل اللغة، ثم تستخدم تلك الأنماط لتوليد ردود مناسبة على الأسئلة الجديدة.
+
+**دعني أوضح ذلك بمقارنة بسيطة:**
+- **قاعدة بيانات تقليدية**: مثل طلب شهادة ميلادك – تحصل على نفس الوثيقة في كل مرة
+- **محرك بحث**: مثل طلب أمين مكتبة العثور على كتب عن القطط – يظهر لك ما هو متاح
+- **الذكاء الاصطناعي التوليدي**: مثل سؤال صديق ذو معرفة عن القطط – يخبرك بأشياء مثيرة للاهتمام بكلماته الخاصة، مخصصة لما تريد معرفته
+
+```mermaid
+graph LR
+    A[Your Question] --> B[AI Model]
+    B --> C[Pattern Recognition]
+    C --> D[Content Generation]
+    D --> E[Contextual Response]
+    
+    F[Training Data<br/>Books, Articles, Web] --> B
+```
+
+### كيف تتعلم نماذج الذكاء الاصطناعي (النسخة المبسطة)
+
+تتعلم نماذج الذكاء الاصطناعي من خلال التعرض لمجموعات بيانات ضخمة تحتوي على نصوص من كتب، مقالات، ومحادثات. من خلال هذه العملية، تحدد الأنماط في:
+- كيفية هيكلة الأفكار في التواصل الكتابي
+- الكلمات التي تظهر عادةً معًا
+- كيفية تدفق المحادثات عادةً
+- الفروقات السياقية بين التواصل الرسمي وغير الرسمي
+
+**يشبه ذلك كيف يفك علماء الآثار رموز اللغات القديمة**: يحللون آلاف الأمثلة لفهم القواعد، المفردات، والسياق الثقافي، وفي النهاية يصبحون قادرين على تفسير نصوص جديدة باستخدام تلك الأنماط المكتسبة.
+
+### لماذا GitHub Models؟
+
+نستخدم GitHub Models لسبب عملي جدًا – فهو يمنحنا الوصول إلى ذكاء اصطناعي على مستوى المؤسسات دون الحاجة إلى إعداد بنية تحتية خاصة بالذكاء الاصطناعي (والتي، صدقني، لا تريد القيام بها الآن!). فكر في الأمر كأنه استخدام واجهة برمجة تطبيقات الطقس بدلاً من محاولة التنبؤ بالطقس بنفسك عن طريق إعداد محطات الطقس في كل مكان.
+
+إنه ببساطة "الذكاء الاصطناعي كخدمة"، وأفضل جزء؟ يمكنك البدء مجانًا، لذا يمكنك التجربة دون القلق بشأن تكاليف باهظة.
+
+```mermaid
+graph LR
+    A[Frontend Chat UI] --> B[Your Backend API]
+    B --> C[GitHub Models API]
+    C --> D[AI Model Processing]
+    D --> C
+    C --> B
+    B --> A
+```
+
+سنستخدم GitHub Models لتكاملنا الخلفي، الذي يوفر الوصول إلى قدرات ذكاء اصطناعي على مستوى احترافي من خلال واجهة سهلة الاستخدام للمطورين. [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) يعمل كبيئة اختبار حيث يمكنك تجربة نماذج ذكاء اصطناعي مختلفة وفهم قدراتها قبل تنفيذها في الكود.
+
+## 🧠 نظام تطوير تطبيقات الذكاء الاصطناعي
+
+```mermaid
+mindmap
+  root((AI Development))
+    Understanding AI
+      Generative Models
+        Pattern Recognition
+        Content Generation
+        Context Understanding
+        Response Synthesis
+      AI Parameters
+        Temperature Control
+        Token Limits
+        Top-p Filtering
+        System Prompts
+    Backend Architecture
+      API Integration
+        GitHub Models
+        Authentication
+        Request Handling
+        Error Management
+      Python Infrastructure
+        FastAPI Framework
+        Async Operations
+        Environment Security
+        CORS Configuration
+    Frontend Experience
+      Chat Interface
+        Real-time Updates
+        Message History
+        User Feedback
+        Loading States
+      Modern Web Tech
+        ES6 Classes
+        Async/Await
+        DOM Manipulation
+        Event Handling
+    Professional Patterns
+      Security Best Practices
+        Token Management
+        Input Validation
+        XSS Prevention
+        Error Boundaries
+      Production Readiness
+        Performance Optimization
+        Responsive Design
+        Accessibility
+        Testing Strategies
+```
+
+**المبدأ الأساسي**: تطوير تطبيقات الذكاء الاصطناعي يجمع بين مهارات تطوير الويب التقليدية وتكامل خدمات الذكاء الاصطناعي، مما يخلق تطبيقات ذكية تبدو طبيعية وتفاعلية للمستخدمين.
+
+![واجهة GitHub Models AI Playground مع اختيار النموذج ومنطقة الاختبار](../../../translated_images/ar/playground.d2b927122224ff8f.webp)
+
+**ما الذي يجعل الملعب مفيدًا جدًا:**
+- **جرب** نماذج ذكاء اصطناعي مختلفة مثل GPT-4o-mini، Claude، وغيرها (كلها مجانية!)
+- **اختبر** أفكارك ومطالباتك قبل كتابة أي كود
+- **احصل على** مقتطفات كود جاهزة للاستخدام بلغتك البرمجية المفضلة
+- **عدل** الإعدادات مثل مستوى الإبداع وطول الاستجابة لترى كيف تؤثر على النتائج
+
+بمجرد أن تجرب قليلاً، فقط انقر على علامة التبويب "Code" واختر لغتك البرمجية للحصول على كود التنفيذ الذي تحتاجه.
+
+![اختيار الملعب يظهر خيارات توليد الكود للغات البرمجة المختلفة](../../../translated_images/ar/playground-choice.1d23ba7d407f4758.webp)
+
+## إعداد تكامل الخلفية باستخدام Python
+
+الآن دعونا ننفذ التكامل مع الذكاء الاصطناعي باستخدام Python. Python ممتازة لتطبيقات الذكاء الاصطناعي بسبب بساطة صياغتها ومكتباتها القوية. سنبدأ بالكود من ملعب GitHub Models ثم نعيد صياغته ليصبح وظيفة قابلة لإعادة الاستخدام وجاهزة للإنتاج.
+
+### فهم التنفيذ الأساسي
+
+عندما تحصل على كود Python من الملعب، سيبدو كالتالي. لا تقلق إذا بدا كثيرًا في البداية – دعونا نمر عليه خطوة بخطوة:
+
+```python
+"""Run this model in Python
+
+> pip install openai
+"""
+import os
+from openai import OpenAI
+
+# To authenticate with the model you will need to generate a personal access token (PAT) in your GitHub settings. 
+# Create your PAT token by following instructions here: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens
+client = OpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key=os.environ["GITHUB_TOKEN"],
+)
+
+response = client.chat.completions.create(
+    messages=[
+        {
+            "role": "system",
+            "content": "",
+        },
+        {
+            "role": "user",
+            "content": "What is the capital of France?",
+        }
+    ],
+    model="openai/gpt-4o-mini",
+    temperature=1,
+    max_tokens=4096,
+    top_p=1
+)
+
+print(response.choices[0].message.content)
+```
+
+**ما الذي يحدث في هذا الكود:**
+- **نستورد** الأدوات التي نحتاجها: `os` لقراءة متغيرات البيئة و`OpenAI` للتواصل مع الذكاء الاصطناعي
+- **نقوم بإعداد** عميل OpenAI للإشارة إلى خوادم الذكاء الاصطناعي الخاصة بـ GitHub بدلاً من OpenAI مباشرة
+- **نقوم بالمصادقة** باستخدام رمز GitHub خاص (المزيد عن ذلك لاحقًا!)
+- **نهيكل** محادثتنا بأدوار مختلفة – فكر فيها كإعداد المشهد لمسرحية
+- **نرسل** طلبنا إلى الذكاء الاصطناعي مع بعض معلمات الضبط
+- **نستخرج** النص الفعلي للاستجابة من جميع البيانات التي تعود
+
+### فهم أدوار الرسائل: إطار عمل المحادثة مع الذكاء الاصطناعي
+
+تستخدم محادثات الذكاء الاصطناعي هيكلًا محددًا بأدوار مختلفة تخدم أغراضًا متميزة:
+
+```python
+messages=[
+    {
+        "role": "system",
+        "content": "You are a helpful assistant who explains things simply."
+    },
+    {
+        "role": "user", 
+        "content": "What is machine learning?"
+    }
+]
+```
+
+**فكر فيها كإخراج مسرحية:**
+- **دور النظام**: مثل تعليمات المسرح للممثل – يخبر الذكاء الاصطناعي كيف يتصرف، وما الشخصية التي يجب أن يتبناها، وكيف يرد
+- **دور المستخدم**: السؤال الفعلي أو الرسالة من الشخص الذي يستخدم التطبيق
+- **دور المساعد**: استجابة الذكاء الاصطناعي (لا ترسل هذا، لكنه يظهر في تاريخ المحادثة)
+
+**تشبيه واقعي**: تخيل أنك تقدم صديقًا لشخص ما في حفلة:
+- **رسالة النظام**: "هذا صديقي سارة، هي طبيبة رائعة في شرح المفاهيم الطبية بطريقة بسيطة"
+- **رسالة المستخدم**: "هل يمكنك شرح كيفية عمل اللقاحات؟"
+- **استجابة المساعد**: سارة ترد كطبيبة ودودة، وليس كمحامية أو طاهية
+
+### فهم معلمات الذكاء الاصطناعي: ضبط سلوك الاستجابة
+
+تتحكم المعلمات الرقمية في استدعاءات واجهات برمجة تطبيقات الذكاء الاصطناعي في كيفية توليد النموذج للاستجابات. تتيح لك هذه الإعدادات ضبط سلوك الذكاء الاصطناعي لحالات الاستخدام المختلفة:
+
+#### درجة الحرارة (0.0 إلى 2.0): مؤشر الإبداع
+
+**ما الذي تفعله**: تتحكم في مدى إبداع أو توقع استجابات الذكاء الاصطناعي.
+
+**فكر فيها كمستوى ارتجال عازف الجاز:**
+- **درجة الحرارة = 0.1**: يعزف نفس اللحن تمامًا في كل مرة (متوقع للغاية)
+- **درجة الحرارة = 0.7**: يضيف بعض التغييرات اللطيفة مع الحفاظ على التعرف (إبداع متوازن)
+- **درجة الحرارة = 1.5**: ارتجال كامل مع تحولات غير متوقعة (غير متوقع للغاية)
+
+```python
+# Very predictable responses (good for factual questions)
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "What is 2+2?"}],
+    temperature=0.1  # Will almost always say "4"
+)
+
+# Creative responses (good for brainstorming)
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Write a creative story opening"}],
+    temperature=1.2  # Will generate unique, unexpected stories
+)
+```
+
+#### الحد الأقصى للرموز (1 إلى 4096+): التحكم في طول الاستجابة
+
+**ما الذي تفعله**: تحدد حدًا لطول استجابة الذكاء الاصطناعي.
+
+**فكر في الرموز كأنها تعادل الكلمات تقريبًا** (حوالي 1 رمز = 0.75 كلمة بالإنجليزية):
+- **max_tokens=50**: قصير ومباشر (مثل رسالة نصية)
+- **max_tokens=500**: فقرة أو اثنتين
+- **max_tokens=2000**: شرح مفصل مع أمثلة
+
+```python
+# Short, concise answers
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Explain JavaScript"}],
+    max_tokens=100  # Forces a brief explanation
+)
+
+# Detailed, comprehensive answers  
+response = client.chat.completions.create(
+    messages=[{"role": "user", "content": "Explain JavaScript"}],
+    max_tokens=1500  # Allows for detailed explanations with examples
+)
+```
+
+#### Top_p (0.0 إلى 1.0): مؤشر التركيز
+
+**ما الذي تفعله**: تتحكم في مدى تركيز الذكاء الاصطناعي على الاستجابات الأكثر احتمالًا.
+
+**تخيل الذكاء الاصطناعي لديه مفردات ضخمة، مرتبة حسب مدى احتمال كل كلمة:**
+- **top_p=0.1**: يأخذ في الاعتبار أعلى 10% من الكلمات الأكثر احتمالًا (مركّز جدًا)
+- **top_p=0.9**: يأخذ في الاعتبار 90% من الكلمات الممكنة (أكثر إبداعًا)
+- **top_p=1.0**: يأخذ في الاعتبار كل شيء (أقصى تنوع)
+
+**على سبيل المثال**: إذا سألت "السماء عادةً..."
+- **top_p منخفض**: سيقول "زرقاء" بالتأكيد
+- **top_p مرتفع**: قد يقول "زرقاء"، "غائمة"، "واسعة"، "متغيرة"، "جميلة"، إلخ.
+
+### جمع كل شيء معًا: تركيبات المعلمات لحالات الاستخدام المختلفة
+
+```python
+# For factual, consistent answers (like a documentation bot)
+factual_params = {
+    "temperature": 0.2,
+    "max_tokens": 300,
+    "top_p": 0.3
+}
+
+# For creative writing assistance
+creative_params = {
+    "temperature": 1.1,
+    "max_tokens": 1000,
+    "top_p": 0.9
+}
+
+# For conversational, helpful responses (balanced)
+conversational_params = {
+    "temperature": 0.7,
+    "max_tokens": 500,
+    "top_p": 0.8
+}
+```
+
+```mermaid
+quadrantChart
+    title AI Parameter Optimization Matrix
+    x-axis Low Creativity --> High Creativity
+    y-axis Short Response --> Long Response
+    
+    quadrant-1 Creative Content
+    quadrant-2 Detailed Analysis
+    quadrant-3 Quick Facts
+    quadrant-4 Conversational AI
+    
+    Documentation Bot: [0.2, 0.3]
+    Customer Service: [0.4, 0.4]
+    General Assistant: [0.7, 0.5]
+    Creative Writer: [0.9, 0.9]
+    Brainstorming Tool: [0.8, 0.8]
+```
+
+**فهم لماذا هذه المعلمات مهمة**: التطبيقات المختلفة تحتاج إلى أنواع مختلفة من الاستجابات. يجب أن يكون روبوت خدمة العملاء متسقًا وواقعيًا (درجة حرارة منخفضة)، بينما يجب أن يكون مساعد الكتابة الإبداعي خياليًا ومتغيرًا (درجة حرارة عالية). فهم هذه المعلمات يمنحك التحكم في شخصية الذكاء الاصطناعي وأسلوب استجابته.
+```
+
+**Here's what's happening in this code:**
+- **We import** the tools we need: `os` for reading environment variables and `OpenAI` for talking to the AI
+- **We set up** the OpenAI client to point to GitHub's AI servers instead of OpenAI directly
+- **We authenticate** using a special GitHub token (more on that in a minute!)
+- **We structure** our conversation with different "roles" – think of it like setting the scene for a play
+- **We send** our request to the AI with some fine-tuning parameters
+- **We extract** the actual response text from all the data that comes back
+
+> 🔐 **Security Note**: Never hardcode API keys in your source code! Always use environment variables to store sensitive credentials like your `GITHUB_TOKEN`.
+
+### Creating a Reusable AI Function
+
+Let's refactor this code into a clean, reusable function that we can easily integrate into our web application:
+
+```python
+import asyncio
+from openai import AsyncOpenAI
+
+# Use AsyncOpenAI for better performance
+client = AsyncOpenAI(
+    base_url="https://models.github.ai/inference",
+    api_key=os.environ["GITHUB_TOKEN"],
+)
+
+async def call_llm_async(prompt: str, system_message: str = "You are a helpful assistant."):
+    """
+    Sends a prompt to the AI model asynchronously and returns the response.
+    
+    Args:
+        prompt: The user's question or message
+        system_message: Instructions that define the AI's behavior and personality
+    
+    Returns:
+        str: The AI's response to the prompt
+    """
+    try:
+        response = await client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_message,
+                },
+                {
+                    "role": "user",
+                    "content": prompt,
+                }
+            ],
+            model="openai/gpt-4o-mini",
+            temperature=1,
+            max_tokens=4096,
+            top_p=1
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        logger.error(f"AI API error: {str(e)}")
+        return "I'm sorry, I'm having trouble processing your request right now."
+
+# Backward compatibility function for synchronous calls
+def call_llm(prompt: str, system_message: str = "You are a helpful assistant."):
+    """Synchronous wrapper for async AI calls."""
+    return asyncio.run(call_llm_async(prompt, system_message))
+```
+
+**فهم هذه الوظيفة المحسنة:**
+- **تقبل** معلمين: طلب المستخدم ورسالة النظام الاختيارية
+- **توفر** رسالة نظام افتراضية لسلوك المساعد العام
+- **تستخدم** تلميحات نوع Python المناسبة لتوثيق الكود بشكل أفضل
+- **تعيد** فقط محتوى الاستجابة، مما يجعل استخدامها سهلًا في واجهة برمجة التطبيقات الخاصة بنا
+- **تحافظ** على نفس معلمات النموذج لسلوك الذكاء الاصطناعي المتسق
+
+### سحر مطالبات النظام: برمجة شخصية الذكاء الاصطناعي
+
+إذا كانت المعلمات تتحكم في كيفية تفكير الذكاء الاصطناعي، فإن مطالبات النظام تتحكم في من يعتقد الذكاء الاصطناعي أنه هو. هذا بصراحة أحد أكثر الأجزاء إثارة للعمل مع الذكاء الاصطناعي – أنت تعطي الذكاء الاصطناعي شخصية كاملة، مستوى خبرة، وأسلوب تواصل.
+
+**فكر في مطالبات النظام كأنك تختار ممثلين لأدوار مختلفة**: بدلاً من وجود مساعد عام واحد، يمكنك إنشاء خبراء متخصصين لمواقف مختلفة. هل تحتاج إلى معلم صبور؟ شريك في العصف الذهني الإبداعي؟ مستشار أعمال صارم؟ فقط قم بتغيير مطالبة النظام!
+
+#### لماذا مطالبات النظام قوية جدًا
+
+إليك الجزء المثير: تم تدريب نماذج الذكاء الاصطناعي على عدد لا يحصى من المحادثات حيث يتبنى الناس أدوارًا ومستويات خبرة مختلفة. عندما تعطي الذكاء الاصطناعي دورًا معينًا، فإنه يشبه تشغيل مفتاح ينشط كل تلك الأنماط المكتسبة.
+
+**إنه مثل التمثيل المنهجي للذكاء الاصطناعي**: أخبر ممثلًا "أنت أستاذ حكيم كبير في السن" وشاهد كيف يضبط تلقائيًا وضعه، مفرداته، وأسلوبه. الذكاء الاصطناعي يفعل شيئًا مشابهًا بشكل ملحوظ مع أنماط اللغة.
+
+#### صياغة مطالبات نظام فعالة: الفن والعلم
+
+**تشريح المطالبة النظامية الجيدة:**
+1. **الدور/الهوية**: من هو الذكاء الاصطناعي؟
+2. **الخبرة**: ماذا يعرف؟
+3. **أسلوب التواصل**: كيف يتحدث؟
+4. **تعليمات محددة**: على ماذا يجب أن يركز؟
+
+```python
+# ❌ Vague system prompt
+"You are helpful."
+
+# ✅ Detailed, effective system prompt
+"You are Dr. Sarah Chen, a senior software engineer with 15 years of experience at major tech companies. You explain programming concepts using real-world analogies and always provide practical examples. You're patient with beginners and enthusiastic about helping them understand complex topics."
+```
+
+#### أمثلة مطالبات النظام مع السياق
+
+دعونا نرى كيف تخلق مطالبات النظام المختلفة شخصيات ذكاء اصطناعي مختلفة تمامًا:
+
+```python
+# Example 1: The Patient Teacher
+teacher_prompt = """
+You are an experienced programming instructor who has taught thousands of students. 
+You break down complex concepts into simple steps, use analogies from everyday life, 
+and always check if the student understands before moving on. You're encouraging 
+and never make students feel bad for not knowing something.
+"""
+
+# Example 2: The Creative Collaborator  
+creative_prompt = """
+You are a creative writing partner who loves brainstorming wild ideas. You're 
+enthusiastic, imaginative, and always build on the user's ideas rather than 
+replacing them. You ask thought-provoking questions to spark creativity and 
+offer unexpected perspectives that make stories more interesting.
+"""
+
+# Example 3: The Strategic Business Advisor
+business_prompt = """
+You are a strategic business consultant with an MBA and 20 years of experience 
+helping startups scale. You think in frameworks, provide structured advice, 
+and always consider both short-term tactics and long-term strategy. You ask 
+probing questions to understand the full business context before giving advice.
+"""
+```
+
+#### رؤية مطالبات النظام أثناء العمل
+
+دعونا نختبر نفس السؤال مع مطالبات نظام مختلفة لنرى الفروقات الكبيرة:
+
+**السؤال**: "كيف أتعامل مع مصادقة المستخدم في تطبيقي الويب؟"
+
+```python
+# With teacher prompt:
+teacher_response = call_llm(
+    "How do I handle user authentication in my web app?",
+    teacher_prompt
+)
+# Typical response: "Great question! Let's break authentication down into simple steps. 
+# Think of it like a nightclub bouncer checking IDs..."
+
+# With business prompt:
+business_response = call_llm(
+    "How do I handle user authentication in my web app?", 
+    business_prompt
+)
+# Typical response: "From a strategic perspective, authentication is crucial for user 
+# trust and regulatory compliance. Let me outline a framework considering security, 
+# user experience, and scalability..."
+```
+
+#### تقنيات مطالبات النظام المتقدمة
+
+**1. إعداد السياق**: قدم للذكاء الاصطناعي معلومات خلفية
+```python
+system_prompt = """
+You are helping a junior developer who just started their first job at a startup. 
+They know basic HTML/CSS/JavaScript but are new to backend development and databases. 
+Be encouraging and explain things step-by-step without being condescending.
+"""
+```
+
+**2. تنسيق الإخراج**: أخبر الذكاء الاصطناعي بكيفية هيكلة الردود  
+```python
+system_prompt = """
+You are a technical mentor. Always structure your responses as:
+1. Quick Answer (1-2 sentences)
+2. Detailed Explanation 
+3. Code Example
+4. Common Pitfalls to Avoid
+5. Next Steps for Learning
+"""
+```
+  
+**3. إعداد القيود**: حدد ما يجب على الذكاء الاصطناعي عدم القيام به  
+```python
+system_prompt = """
+You are a coding tutor focused on teaching best practices. Never write complete 
+solutions for the user - instead, guide them with hints and questions so they 
+learn by doing. Always explain the 'why' behind coding decisions.
+"""
+```
+  
+
+#### لماذا هذا مهم لمساعد الدردشة الخاص بك  
+
+فهم مطالبات النظام يمنحك قوة هائلة لإنشاء مساعدي ذكاء اصطناعي متخصصين:  
+- **روبوت خدمة العملاء**: مفيد، صبور، على دراية بالسياسات  
+- **مدرس تعليمي**: مشجع، خطوة بخطوة، يتحقق من الفهم  
+- **شريك إبداعي**: خيالي، يبني على الأفكار، يسأل "ماذا لو؟"  
+- **خبير تقني**: دقيق، مفصل، واعٍ بالأمان  
+
+**الفكرة الرئيسية**: أنت لا تستدعي فقط واجهة برمجة تطبيقات الذكاء الاصطناعي – بل تقوم بإنشاء شخصية ذكاء اصطناعي مخصصة تخدم حالتك الخاصة. هذا ما يجعل تطبيقات الذكاء الاصطناعي الحديثة تبدو مخصصة ومفيدة بدلاً من أن تكون عامة.  
+
+### 🎯 مراجعة تعليمية: برمجة شخصية الذكاء الاصطناعي  
+
+**توقف وفكر**: لقد تعلمت للتو كيفية برمجة شخصيات الذكاء الاصطناعي من خلال مطالبات النظام. هذه مهارة أساسية في تطوير تطبيقات الذكاء الاصطناعي الحديثة.  
+
+**تقييم ذاتي سريع**:  
+- هل يمكنك شرح كيف تختلف مطالبات النظام عن رسائل المستخدم العادية؟  
+- ما الفرق بين معلمات temperature و top_p؟  
+- كيف يمكنك إنشاء مطالبة نظام لحالة استخدام محددة (مثل مدرس برمجة)؟  
+
+**صلة بالعالم الحقيقي**: تقنيات مطالبات النظام التي تعلمتها تُستخدم في كل تطبيق رئيسي للذكاء الاصطناعي - من مساعد البرمجة GitHub Copilot إلى واجهة المحادثة ChatGPT. أنت تتقن نفس الأنماط التي تستخدمها فرق منتجات الذكاء الاصطناعي في شركات التكنولوجيا الكبرى.  
+
+**سؤال التحدي**: كيف يمكنك تصميم شخصيات ذكاء اصطناعي مختلفة لأنواع مختلفة من المستخدمين (مبتدئ مقابل خبير)؟ فكر في كيفية خدمة نفس نموذج الذكاء الاصطناعي الأساسي لجماهير مختلفة من خلال هندسة المطالبات.  
+
+## بناء واجهة برمجة التطبيقات باستخدام FastAPI: مركز الاتصال عالي الأداء الخاص بك مع الذكاء الاصطناعي  
+
+الآن دعونا نبني الخلفية التي تربط واجهة المستخدم الأمامية بخدمات الذكاء الاصطناعي. سنستخدم FastAPI، وهو إطار عمل حديث بلغة Python يتميز في بناء واجهات برمجة التطبيقات لتطبيقات الذكاء الاصطناعي.  
+
+FastAPI يقدم عدة مزايا لهذا النوع من المشاريع: دعم مدمج للعمليات غير المتزامنة لمعالجة الطلبات المتزامنة، توليد تلقائي لتوثيق واجهة برمجة التطبيقات، وأداء ممتاز. يعمل خادم FastAPI الخاص بك كوسيط يتلقى الطلبات من الواجهة الأمامية، يتواصل مع خدمات الذكاء الاصطناعي، ويعيد الردود المهيكلة.  
+
+### لماذا FastAPI لتطبيقات الذكاء الاصطناعي؟  
+
+قد تتساءل: "ألا يمكنني فقط استدعاء الذكاء الاصطناعي مباشرة من JavaScript في الواجهة الأمامية؟" أو "لماذا FastAPI بدلاً من Flask أو Django؟" أسئلة رائعة!  
+
+**إليك السبب في أن FastAPI مثالي لما نبنيه:**  
+- **غير متزامن افتراضيًا**: يمكنه معالجة طلبات الذكاء الاصطناعي المتعددة في وقت واحد دون توقف  
+- **توثيق تلقائي**: قم بزيارة `/docs` واحصل على صفحة توثيق واجهة برمجة التطبيقات تفاعلية وجميلة مجانًا  
+- **التحقق المدمج**: يكتشف الأخطاء قبل أن تسبب مشاكل  
+- **سريع للغاية**: أحد أسرع أطر عمل Python  
+- **Python حديث**: يستخدم أحدث ميزات Python  
+
+**وهذا هو السبب في أننا بحاجة إلى خلفية على الإطلاق:**  
+
+**الأمان**: مفتاح واجهة برمجة تطبيقات الذكاء الاصطناعي الخاص بك يشبه كلمة المرور – إذا وضعته في JavaScript في الواجهة الأمامية، يمكن لأي شخص يرى كود المصدر لموقعك سرقته واستخدام أرصدة الذكاء الاصطناعي الخاصة بك. الخلفية تحافظ على أمان بيانات الاعتماد الحساسة.  
+
+**تحديد المعدل والتحكم**: الخلفية تتيح لك التحكم في عدد مرات إرسال المستخدمين للطلبات، تنفيذ مصادقة المستخدم، وإضافة تسجيل لتتبع الاستخدام.  
+
+**معالجة البيانات**: قد ترغب في حفظ المحادثات، تصفية المحتوى غير المناسب، أو دمج خدمات الذكاء الاصطناعي المتعددة. الخلفية هي المكان الذي تعيش فيه هذه المنطقية.  
+
+**تشبه البنية نموذج العميل-الخادم:**  
+- **الواجهة الأمامية**: طبقة واجهة المستخدم للتفاعل  
+- **واجهة برمجة التطبيقات الخلفية**: طبقة معالجة الطلبات والتوجيه  
+- **خدمة الذكاء الاصطناعي**: الحساب الخارجي وتوليد الردود  
+- **متغيرات البيئة**: تخزين التكوين والبيانات السرية بأمان  
+
+### فهم تدفق الطلب-الرد  
+
+دعونا نتتبع ما يحدث عندما يرسل المستخدم رسالة:  
+
+```mermaid
+sequenceDiagram
+    participant User as 👤 User
+    participant Frontend as 🌐 Frontend
+    participant API as 🔧 FastAPI Server
+    participant AI as 🤖 AI Service
+    
+    User->>Frontend: Types "Hello AI!"
+    Frontend->>API: POST /hello {"message": "Hello AI!"}
+    Note over API: Validates request<br/>Adds system prompt
+    API->>AI: Sends formatted request
+    AI->>API: Returns AI response
+    Note over API: Processes response<br/>Logs conversation
+    API->>Frontend: {"response": "Hello! How can I help?"}
+    Frontend->>User: Displays AI message
+```
+  
+**فهم كل خطوة:**  
+1. **تفاعل المستخدم**: يكتب الشخص في واجهة الدردشة  
+2. **معالجة الواجهة الأمامية**: JavaScript يلتقط الإدخال ويهيكله كـ JSON  
+3. **التحقق من واجهة برمجة التطبيقات**: FastAPI يتحقق تلقائيًا من الطلب باستخدام نماذج Pydantic  
+4. **دمج الذكاء الاصطناعي**: الخلفية تضيف السياق (مطالبة النظام) وتستدعي خدمة الذكاء الاصطناعي  
+5. **معالجة الرد**: واجهة برمجة التطبيقات تتلقى رد الذكاء الاصطناعي ويمكنها تعديله إذا لزم الأمر  
+6. **عرض الواجهة الأمامية**: JavaScript يعرض الرد في واجهة الدردشة  
+
+### فهم بنية واجهة برمجة التطبيقات  
+
+```mermaid
+sequenceDiagram
+    participant Frontend
+    participant FastAPI
+    participant AI Function
+    participant GitHub Models
+    
+    Frontend->>FastAPI: POST /hello {"message": "Hello AI!"}
+    FastAPI->>AI Function: call_llm(message, system_prompt)
+    AI Function->>GitHub Models: API request
+    GitHub Models->>AI Function: AI response
+    AI Function->>FastAPI: response text
+    FastAPI->>Frontend: {"response": "Hello! How can I help?"}
+```
+  
+```mermaid
+flowchart TD
+    A[User Input] --> B[Frontend Validation]
+    B --> C[HTTP POST Request]
+    C --> D[FastAPI Router]
+    D --> E[Pydantic Validation]
+    E --> F[AI Function Call]
+    F --> G[GitHub Models API]
+    G --> H[Response Processing]
+    H --> I[JSON Response]
+    I --> J[Frontend Update]
+    
+    subgraph "Security Layer"
+        K[CORS Middleware]
+        L[Environment Variables]
+        M[Error Handling]
+    end
+    
+    D --> K
+    F --> L
+    H --> M
+```
+  
+
+### إنشاء تطبيق FastAPI  
+
+دعونا نبني واجهة برمجة التطبيقات خطوة بخطوة. قم بإنشاء ملف يسمى `api.py` مع الكود التالي لـ FastAPI:  
+
+```python
+# api.py
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from pydantic import BaseModel
+from llm import call_llm
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Create FastAPI application
+app = FastAPI(
+    title="AI Chat API",
+    description="A high-performance API for AI-powered chat applications",
+    version="1.0.0"
+)
+
+# Configure CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Configure appropriately for production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Pydantic models for request/response validation
+class ChatMessage(BaseModel):
+    message: str
+
+class ChatResponse(BaseModel):
+    response: str
+
+@app.get("/")
+async def root():
+    """Root endpoint providing API information."""
+    return {
+        "message": "Welcome to the AI Chat API",
+        "docs": "/docs",
+        "health": "/health"
+    }
+
+@app.get("/health")
+async def health_check():
+    """Health check endpoint."""
+    return {"status": "healthy", "service": "ai-chat-api"}
+
+@app.post("/hello", response_model=ChatResponse)
+async def chat_endpoint(chat_message: ChatMessage):
+    """Main chat endpoint that processes messages and returns AI responses."""
+    try:
+        # Extract and validate message
+        message = chat_message.message.strip()
+        if not message:
+            raise HTTPException(status_code=400, detail="Message cannot be empty")
+        
+        logger.info(f"Processing message: {message[:50]}...")
+        
+        # Call AI service (note: call_llm should be made async for better performance)
+        ai_response = await call_llm_async(message, "You are a helpful and friendly assistant.")
+        
+        logger.info("AI response generated successfully")
+        return ChatResponse(response=ai_response)
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error processing chat message: {str(e)}")
+        raise HTTPException(status_code=500, detail="Internal server error")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=5000, reload=True)
+```
+  
+**فهم تنفيذ FastAPI:**  
+- **استيراد** FastAPI لوظائف إطار العمل الحديث وPydantic للتحقق من البيانات  
+- **إنشاء** توثيق واجهة برمجة التطبيقات تلقائيًا (متاح في `/docs` عند تشغيل الخادم)  
+- **تمكين** وسيط CORS للسماح بطلبات الواجهة الأمامية من أصول مختلفة  
+- **تعريف** نماذج Pydantic للتحقق التلقائي من الطلبات/الردود وتوثيقها  
+- **استخدام** نقاط نهاية غير متزامنة لتحسين الأداء مع الطلبات المتزامنة  
+- **تنفيذ** رموز حالة HTTP المناسبة ومعالجة الأخطاء باستخدام HTTPException  
+- **تضمين** تسجيل منظم للمراقبة واستكشاف الأخطاء  
+- **توفير** نقطة نهاية لفحص الحالة لمراقبة حالة الخدمة  
+
+**مزايا FastAPI الرئيسية مقارنة بالأطر التقليدية:**  
+- **التحقق التلقائي**: نماذج Pydantic تضمن سلامة البيانات قبل المعالجة  
+- **توثيق تفاعلي**: قم بزيارة `/docs` للحصول على توثيق واجهة برمجة التطبيقات الذي يتم إنشاؤه تلقائيًا وقابل للاختبار  
+- **سلامة الأنواع**: تلميحات الأنواع في Python تمنع الأخطاء أثناء التشغيل وتحسن جودة الكود  
+- **دعم غير متزامن**: معالجة طلبات الذكاء الاصطناعي المتعددة في وقت واحد دون توقف  
+- **الأداء**: معالجة الطلبات بشكل أسرع بشكل ملحوظ للتطبيقات في الوقت الفعلي  
+
+### فهم CORS: حارس أمان الويب  
+
+CORS (مشاركة الموارد عبر الأصول) يشبه حارس أمان في مبنى يتحقق مما إذا كان الزوار مسموح لهم بالدخول. دعونا نفهم لماذا هذا مهم وكيف يؤثر على تطبيقك.  
+
+#### ما هو CORS ولماذا يوجد؟  
+
+**المشكلة**: تخيل لو أن أي موقع يمكنه إرسال طلبات إلى موقع البنك الخاص بك نيابة عنك دون إذنك. سيكون ذلك كابوسًا أمنيًا! المتصفحات تمنع هذا افتراضيًا من خلال "سياسة الأصل نفسه".  
+
+**سياسة الأصل نفسه**: المتصفحات تسمح فقط لصفحات الويب بإرسال طلبات إلى نفس النطاق، المنفذ، والبروتوكول الذي تم تحميلها منه.  
+
+**تشبيه في العالم الحقيقي**: إنه مثل أمان مبنى سكني – فقط السكان (الأصل نفسه) يمكنهم الوصول إلى المبنى افتراضيًا. إذا كنت تريد السماح لصديق (أصل مختلف) بالزيارة، عليك أن تخبر الأمن صراحةً أنه لا بأس بذلك.  
+
+#### CORS في بيئة التطوير الخاصة بك  
+
+أثناء التطوير، تعمل واجهتك الأمامية والخلفية على منافذ مختلفة:  
+- الواجهة الأمامية: `http://localhost:3000` (أو file:// إذا فتحت HTML مباشرة)  
+- الخلفية: `http://localhost:5000`  
+
+هذه تعتبر "أصول مختلفة" حتى لو كانت على نفس الكمبيوتر!  
+
+```python
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(__name__)
+CORS(app)   # This tells browsers: "It's okay for other origins to make requests to this API"
+```
+  
+**ما يفعله تكوين CORS عمليًا:**  
+- **إضافة** رؤوس HTTP خاصة إلى ردود واجهة برمجة التطبيقات التي تخبر المتصفحات "هذا الطلب عبر الأصول مسموح به"  
+- **معالجة** طلبات "التحقق المسبق" (المتصفحات أحيانًا تتحقق من الأذونات قبل إرسال الطلب الفعلي)  
+- **منع** الخطأ المزعج "محظور بواسطة سياسة CORS" في وحدة التحكم بالمتصفح  
+
+#### أمان CORS: التطوير مقابل الإنتاج  
+
+```python
+# 🚨 Development: Allows ALL origins (convenient but insecure)
+CORS(app)
+
+# ✅ Production: Only allow your specific frontend domain
+CORS(app, origins=["https://yourdomain.com", "https://www.yourdomain.com"])
+
+# 🔒 Advanced: Different origins for different environments
+if app.debug:  # Development mode
+    CORS(app, origins=["http://localhost:3000", "http://127.0.0.1:3000"])
+else:  # Production mode
+    CORS(app, origins=["https://yourdomain.com"])
+```
+  
+**لماذا هذا مهم**: في التطوير، `CORS(app)` يشبه ترك بابك الأمامي مفتوحًا – مريح ولكنه غير آمن. في الإنتاج، تريد تحديد المواقع التي يمكنها التحدث إلى واجهة برمجة التطبيقات الخاصة بك بدقة.  
+
+#### سيناريوهات وحلول CORS الشائعة  
+
+| السيناريو | المشكلة | الحل |  
+|----------|---------|----------|  
+| **التطوير المحلي** | الواجهة الأمامية لا يمكنها الوصول إلى الخلفية | أضف CORSMiddleware إلى FastAPI |  
+| **GitHub Pages + Heroku** | الواجهة الأمامية المنشورة لا يمكنها الوصول إلى واجهة برمجة التطبيقات | أضف عنوان URL الخاص بـ GitHub Pages إلى أصول CORS |  
+| **النطاق المخصص** | أخطاء CORS في الإنتاج | قم بتحديث أصول CORS لتطابق نطاقك |  
+| **تطبيق الهاتف المحمول** | التطبيق لا يمكنه الوصول إلى واجهة برمجة الويب | أضف نطاق التطبيق الخاص بك أو استخدم `*` بحذر |  
+
+**نصيحة احترافية**: يمكنك التحقق من رؤوس CORS في أدوات المطور بالمتصفح ضمن علامة التبويب الشبكة. ابحث عن رؤوس مثل `Access-Control-Allow-Origin` في الرد.  
+
+### معالجة الأخطاء والتحقق  
+
+لاحظ كيف تتضمن واجهة برمجة التطبيقات الخاصة بنا معالجة الأخطاء بشكل صحيح:  
+
+```python
+# Validate that we received a message
+if not message:
+    return jsonify({"error": "Message field is required"}), 400
+```
+  
+**مبادئ التحقق الرئيسية:**  
+- **التحقق** من الحقول المطلوبة قبل معالجة الطلبات  
+- **إرجاع** رسائل خطأ ذات معنى بتنسيق JSON  
+- **استخدام** رموز حالة HTTP المناسبة (400 للطلبات السيئة)  
+- **توفير** ملاحظات واضحة لمساعدة مطوري الواجهة الأمامية في استكشاف الأخطاء  
+
+## إعداد وتشغيل الخلفية الخاصة بك  
+
+الآن بعد أن أصبح لدينا تكامل الذكاء الاصطناعي وخادم FastAPI جاهزًا، دعونا نبدأ كل شيء. تتضمن عملية الإعداد تثبيت تبعيات Python، تكوين متغيرات البيئة، وتشغيل خادم التطوير الخاص بك.  
+
+### إعداد بيئة Python  
+
+دعونا نعد بيئة تطوير Python الخاصة بك. البيئات الافتراضية تشبه نهج المشروع المخصص – كل مشروع يحصل على مساحته الخاصة بأدواته وتبعياته المحددة، مما يمنع التعارض بين المشاريع المختلفة.  
+
+```bash
+# Navigate to your backend directory
+cd backend
+
+# Create a virtual environment (like creating a clean room for your project)
+python -m venv venv
+
+# Activate it (Linux/Mac)
+source ./venv/bin/activate
+
+# On Windows, use:
+# venv\Scripts\activate
+
+# Install the good stuff
+pip install openai fastapi uvicorn python-dotenv
+```
+  
+**ما فعلناه للتو:**  
+- **أنشأنا** فقاعة Python الخاصة بنا حيث يمكننا تثبيت الحزم دون التأثير على أي شيء آخر  
+- **قمنا بتفعيلها** حتى يعرف الطرفية استخدام هذه البيئة المحددة  
+- **قمنا بتثبيت** الأساسيات: OpenAI للسحر الذكاء الاصطناعي، FastAPI لواجهة برمجة الويب، Uvicorn لتشغيلها، وpython-dotenv لإدارة الأسرار بأمان  
+
+**تفسير التبعيات الرئيسية:**  
+- **FastAPI**: إطار عمل ويب حديث وسريع مع توثيق واجهة برمجة التطبيقات تلقائي  
+- **Uvicorn**: خادم ASGI سريع للغاية لتشغيل تطبيقات FastAPI  
+- **OpenAI**: مكتبة رسمية لتكامل نماذج GitHub وواجهة برمجة تطبيقات OpenAI  
+- **python-dotenv**: تحميل متغيرات البيئة بأمان من ملفات .env  
+
+### تكوين البيئة: الحفاظ على الأسرار بأمان  
+
+قبل أن نبدأ واجهة برمجة التطبيقات الخاصة بنا، نحتاج إلى الحديث عن أحد أهم الدروس في تطوير الويب: كيفية الحفاظ على الأسرار بالفعل سرية. متغيرات البيئة تشبه خزنة آمنة يمكن لتطبيقك فقط الوصول إليها.  
+
+#### ما هي متغيرات البيئة؟  
+
+**فكر في متغيرات البيئة مثل صندوق ودائع آمن** – تضع أشياءك القيمة فيه، وفقط أنت (وتطبيقك) لديك المفتاح لإخراجها. بدلاً من كتابة معلومات حساسة مباشرة في الكود الخاص بك (حيث يمكن لأي شخص رؤيتها حرفيًا)، تقوم بتخزينها بأمان في البيئة.  
+
+**إليك الفرق:**  
+- **الطريقة الخاطئة**: كتابة كلمة المرور الخاصة بك على ورقة لاصقة ووضعها على شاشتك  
+- **الطريقة الصحيحة**: الاحتفاظ بكلمة المرور الخاصة بك في مدير كلمات مرور آمن يمكن فقط لك الوصول إليه  
+
+#### لماذا متغيرات البيئة مهمة  
+
+```python
+# 🚨 NEVER DO THIS - API key visible to everyone
+client = OpenAI(
+    api_key="ghp_1234567890abcdef...",  # Anyone can steal this!
+    base_url="https://models.github.ai/inference"
+)
+
+# ✅ DO THIS - API key stored securely
+client = OpenAI(
+    api_key=os.environ["GITHUB_TOKEN"],  # Only your app can access this
+    base_url="https://models.github.ai/inference"
+)
+```
+  
+**ما يحدث عندما تقوم بتضمين الأسرار في الكود:**  
+1. **تعرض التحكم بالإصدار**: أي شخص لديه وصول إلى مستودع Git الخاص بك يرى مفتاح واجهة برمجة التطبيقات الخاص بك  
+2. **المستودعات العامة**: إذا دفعت إلى GitHub، يصبح مفتاحك مرئيًا للإنترنت بأكمله  
+3. **مشاركة الفريق**: المطورون الآخرون الذين يعملون على مشروعك يحصلون على وصول إلى مفتاح واجهة برمجة التطبيقات الخاص بك  
+4. **اختراقات الأمان**: إذا سرق أحدهم مفتاح واجهة برمجة التطبيقات الخاص بك، يمكنه استخدام أرصدة الذكاء الاصطناعي الخاصة بك  
+
+#### إعداد ملف البيئة الخاص بك  
+
+قم بإنشاء ملف `.env` في دليل الخلفية الخاص بك. هذا الملف يخزن أسرارك محليًا:  
+
+```bash
+# .env file - This should NEVER be committed to Git
+GITHUB_TOKEN=your_github_personal_access_token_here
+FASTAPI_DEBUG=True
+ENVIRONMENT=development
+```
+  
+**فهم ملف .env:**  
+- **سر واحد لكل سطر** بتنسيق `KEY=value`  
+- **لا توجد مسافات** حول علامة التساوي  
+- **لا حاجة إلى علامات اقتباس** حول القيم (عادةً)  
+- **التعليقات** تبدأ بـ `#`  
+
+#### إنشاء رمز الوصول الشخصي الخاص بك على GitHub  
+
+رمز GitHub الخاص بك يشبه كلمة مرور خاصة تمنح تطبيقك الإذن باستخدام خدمات الذكاء الاصطناعي الخاصة بـ GitHub:  
+
+**خطوات إنشاء الرمز:**  
+1. **اذهب إلى إعدادات GitHub** → إعدادات المطور → رموز الوصول الشخصي → الرموز (الكلاسيكية)  
+2. **انقر على "إنشاء رمز جديد (كلاسيكي)"**  
+3. **حدد تاريخ انتهاء الصلاحية** (30 يومًا للاختبار، أطول للإنتاج)  
+4. **حدد النطاقات**: تحقق من "repo" وأي أذونات أخرى تحتاجها  
+5. **إنشاء الرمز** ونسخه فورًا (لا يمكنك رؤيته مرة أخرى!)  
+6. **الصقه في ملف .env الخاص بك**  
+
+```bash
+# Example of what your token looks like (this is fake!)
+GITHUB_TOKEN=ghp_1A2B3C4D5E6F7G8H9I0J1K2L3M4N5O6P7Q8R
+```
+  
+#### تحميل متغيرات البيئة في Python  
+
+```python
+import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+
+# Now you can access them securely
+api_key = os.environ.get("GITHUB_TOKEN")
+if not api_key:
+    raise ValueError("GITHUB_TOKEN not found in environment variables!")
+
+client = OpenAI(
+    api_key=api_key,
+    base_url="https://models.github.ai/inference"
+)
+```
+  
+**ما يفعله هذا الكود:**  
+- **تحميل** ملف .env الخاص بك وجعل المتغيرات متاحة لـ Python  
+- **التحقق** مما إذا كان الرمز المطلوب موجودًا (معالجة أخطاء جيدة!)  
+- **إثارة** خطأ واضح إذا كان الرمز مفقودًا  
+- **استخدام** الرمز بأمان دون كشفه في الكود  
+
+#### أمان Git: ملف .gitignore  
+
+ملف `.gitignore` الخاص بك يخبر Git بالملفات التي لا يجب تتبعها أو تحميلها أبدًا:  
+
+```bash
+# .gitignore - Add these lines
+.env
+*.env
+.env.local
+.env.production
+__pycache__/
+venv/
+.vscode/
+```
+  
+**لماذا هذا مهم**: بمجرد إضافة `.env` إلى `.gitignore`، سيتجاهل Git ملف البيئة الخاص بك، مما يمنعك من تحميل أسرارك إلى GitHub عن طريق الخطأ.  
+
+#### بيئات مختلفة، أسرار مختلفة  
+
+التطبيقات الاحترافية تستخدم مفاتيح واجهة برمجة تطبيقات مختلفة لبيئات مختلفة:  
+
+```bash
+# .env.development
+GITHUB_TOKEN=your_development_token
+DEBUG=True
+
+# .env.production  
+GITHUB_TOKEN=your_production_token
+DEBUG=False
+```
+  
+**لماذا هذا مهم**: لا تريد أن تؤثر تجارب التطوير الخاصة بك على حصة استخدام الذكاء الاصطناعي في الإنتاج، وتريد مستويات أمان مختلفة لبيئات مختلفة.  
+
+### تشغيل خادم التطوير الخاص بك: إحياء FastAPI الخاص بك  
+اللحظة المثيرة تأتي الآن – بدء تشغيل خادم تطوير FastAPI ومشاهدة تكامل الذكاء الاصطناعي ينبض بالحياة! يستخدم FastAPI خادم Uvicorn، وهو خادم ASGI سريع للغاية مصمم خصيصًا لتطبيقات Python غير المتزامنة.
+
+#### فهم عملية بدء تشغيل خادم FastAPI
+
+```bash
+# Method 1: Direct Python execution (includes auto-reload)
+python api.py
+
+# Method 2: Using Uvicorn directly (more control)
+uvicorn api:app --host 0.0.0.0 --port 5000 --reload
+```
+
+عند تشغيل هذا الأمر، يحدث ما يلي خلف الكواليس:
+
+**1. Python يقوم بتحميل تطبيق FastAPI الخاص بك**:
+- يقوم باستيراد جميع المكتبات المطلوبة (FastAPI، Pydantic، OpenAI، إلخ)
+- يقوم بتحميل متغيرات البيئة من ملف `.env` الخاص بك
+- ينشئ مثيل تطبيق FastAPI مع التوثيق التلقائي
+
+**2. Uvicorn يقوم بتكوين خادم ASGI**:
+- يربط المنفذ 5000 مع قدرات معالجة الطلبات غير المتزامنة
+- يقوم بإعداد توجيه الطلبات مع التحقق التلقائي
+- يُمكن إعادة التحميل السريع أثناء التطوير (إعادة التشغيل عند تغييرات الملفات)
+- يُنشئ توثيق API تفاعلي
+
+**3. يبدأ الخادم في الاستماع**:
+- يظهر في الطرفية: `INFO: Uvicorn running on http://0.0.0.0:5000`
+- يمكن للخادم معالجة طلبات الذكاء الاصطناعي المتزامنة
+- يصبح API جاهزًا مع التوثيق التلقائي على `http://localhost:5000/docs`
+
+#### ما يجب أن تراه عندما يعمل كل شيء بشكل صحيح
+
+```bash
+$ python api.py
+INFO:     Will watch for changes in these directories: ['/your/project/path']
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     Started reloader process [12345] using WatchFiles
+INFO:     Started server process [12346]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+```
+
+**فهم مخرجات FastAPI**:
+- **سيقوم بمراقبة التغييرات**: تم تمكين إعادة التحميل التلقائي للتطوير
+- **Uvicorn يعمل**: خادم ASGI عالي الأداء نشط
+- **عملية إعادة التحميل بدأت**: مراقب الملفات لإعادة التشغيل التلقائي
+- **اكتمال بدء تشغيل التطبيق**: تم تهيئة تطبيق FastAPI بنجاح
+- **التوثيق التفاعلي متاح**: قم بزيارة `/docs` للحصول على توثيق API التلقائي
+
+#### اختبار FastAPI الخاص بك: طرق قوية متعددة
+
+يوفر FastAPI عدة طرق مريحة لاختبار API الخاص بك، بما في ذلك التوثيق التفاعلي التلقائي:
+
+**الطريقة الأولى: توثيق API التفاعلي (موصى به)**
+1. افتح متصفحك وانتقل إلى `http://localhost:5000/docs`
+2. سترى واجهة Swagger UI مع جميع نقاط النهاية موثقة
+3. انقر على `/hello` → "Try it out" → أدخل رسالة اختبار → "Execute"
+4. شاهد الرد مباشرة في المتصفح مع التنسيق المناسب
+
+**الطريقة الثانية: اختبار المتصفح الأساسي**
+1. انتقل إلى `http://localhost:5000` لنقطة النهاية الرئيسية
+2. انتقل إلى `http://localhost:5000/health` للتحقق من صحة الخادم
+3. هذا يؤكد أن خادم FastAPI يعمل بشكل صحيح
+
+**الطريقة الثالثة: اختبار سطر الأوامر (متقدم)**
+```bash
+# Test with curl (if available)
+curl -X POST http://localhost:5000/hello \
+  -H "Content-Type: application/json" \
+  -d '{"message": "Hello AI!"}'
+
+# Expected response:
+# {"response": "Hello! I'm your AI assistant. How can I help you today?"}
+```
+
+**الطريقة الرابعة: سكربت اختبار Python**
+```python
+# test_api.py - Create this file to test your API
+import requests
+import json
+
+# Test the API endpoint
+url = "http://localhost:5000/hello"
+data = {"message": "Tell me a joke about programming"}
+
+response = requests.post(url, json=data)
+if response.status_code == 200:
+    result = response.json()
+    print("AI Response:", result['response'])
+else:
+    print("Error:", response.status_code, response.text)
+```
+
+#### استكشاف المشكلات الشائعة عند بدء التشغيل
+
+| رسالة الخطأ | ماذا تعني | كيفية الإصلاح |
+|-------------|-----------|---------------|
+| `ModuleNotFoundError: No module named 'fastapi'` | FastAPI غير مثبت | قم بتشغيل `pip install fastapi uvicorn` في بيئة العمل الافتراضية |
+| `ModuleNotFoundError: No module named 'uvicorn'` | خادم ASGI غير مثبت | قم بتشغيل `pip install uvicorn` في بيئة العمل الافتراضية |
+| `KeyError: 'GITHUB_TOKEN'` | متغير البيئة غير موجود | تحقق من ملف `.env` الخاص بك واستدعاء `load_dotenv()` |
+| `Address already in use` | المنفذ 5000 مشغول | قم بإنهاء العمليات الأخرى التي تستخدم المنفذ 5000 أو قم بتغيير المنفذ |
+| `ValidationError` | بيانات الطلب لا تتطابق مع نموذج Pydantic | تحقق من أن تنسيق الطلب يتطابق مع المخطط المتوقع |
+| `HTTPException 422` | كيان غير قابل للمعالجة | فشل التحقق من الطلب، تحقق من `/docs` للحصول على التنسيق الصحيح |
+| `OpenAI API error` | فشل مصادقة خدمة الذكاء الاصطناعي | تحقق من صحة رمز GitHub الخاص بك وأن لديه الأذونات المناسبة |
+
+#### أفضل الممارسات للتطوير
+
+**إعادة التحميل السريع**: يوفر FastAPI مع Uvicorn إعادة تحميل تلقائية عند حفظ تغييرات ملفات Python. هذا يعني أنه يمكنك تعديل الكود واختباره فورًا دون إعادة التشغيل يدويًا.
+
+```python
+# Enable hot reloading explicitly
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000, debug=True)  # debug=True enables hot reload
+```
+
+**التسجيل للتطوير**: أضف تسجيلًا لفهم ما يحدث:
+
+```python
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+@app.route("/hello", methods=["POST"])
+def hello():
+    data = request.get_json()
+    message = data.get("message", "")
+    
+    logger.info(f"Received message: {message}")
+    
+    if not message:
+        logger.warning("Empty message received")
+        return jsonify({"error": "Message field is required"}), 400
+    
+    try:
+        response = call_llm(message, "You are a helpful and friendly assistant.")
+        logger.info(f"AI response generated successfully")
+        return jsonify({"response": response})
+    except Exception as e:
+        logger.error(f"AI API error: {str(e)}")
+        return jsonify({"error": "AI service temporarily unavailable"}), 500
+```
+
+**لماذا يساعد التسجيل**: أثناء التطوير، يمكنك رؤية الطلبات التي تصل، وكيف يستجيب الذكاء الاصطناعي، وأين تحدث الأخطاء. هذا يجعل عملية التصحيح أسرع بكثير.
+
+### التهيئة لـ GitHub Codespaces: تطوير سحابي بسهولة
+
+GitHub Codespaces يشبه وجود جهاز تطوير قوي في السحابة يمكنك الوصول إليه من أي متصفح. إذا كنت تعمل في Codespaces، هناك بعض الخطوات الإضافية لجعل الواجهة الخلفية الخاصة بك متاحة للواجهة الأمامية.
+
+#### فهم الشبكات في Codespaces
+
+في بيئة التطوير المحلية، كل شيء يعمل على نفس الكمبيوتر:
+- الواجهة الخلفية: `http://localhost:5000`
+- الواجهة الأمامية: `http://localhost:3000` (أو file://)
+
+في Codespaces، بيئة التطوير الخاصة بك تعمل على خوادم GitHub، لذا فإن "localhost" له معنى مختلف. يقوم GitHub تلقائيًا بإنشاء روابط عامة لخدماتك، ولكن تحتاج إلى تكوينها بشكل صحيح.
+
+#### خطوات التهيئة في Codespaces
+
+**1. قم بتشغيل خادم الواجهة الخلفية الخاص بك**:
+```bash
+cd backend
+python api.py
+```
+
+سترى رسالة بدء تشغيل FastAPI/Uvicorn المعتادة، ولكن لاحظ أنها تعمل داخل بيئة Codespace.
+
+**2. قم بتكوين رؤية المنفذ**:
+- ابحث عن علامة التبويب "Ports" في اللوحة السفلية لـ VS Code
+- ابحث عن المنفذ 5000 في القائمة
+- انقر بزر الماوس الأيمن على المنفذ 5000
+- اختر "Port Visibility" → "Public"
+
+**لماذا تجعلها عامة؟** بشكل افتراضي، منافذ Codespace خاصة (يمكن الوصول إليها فقط من قبلك). جعلها عامة يسمح للواجهة الأمامية (التي تعمل في المتصفح) بالتواصل مع الواجهة الخلفية.
+
+**3. احصل على الرابط العام الخاص بك**:
+بعد جعل المنفذ عامًا، سترى رابطًا مثل:
+```
+https://your-codespace-name-5000.app.github.dev
+```
+
+**4. قم بتحديث تكوين الواجهة الأمامية الخاصة بك**:
+```javascript
+// In your frontend app.js, update the BASE_URL:
+this.BASE_URL = "https://your-codespace-name-5000.app.github.dev";
+```
+
+#### فهم روابط Codespace
+
+روابط Codespace تتبع نمطًا متوقعًا:
+```
+https://[codespace-name]-[port].app.github.dev
+```
+
+**تفصيل هذا النمط**:
+- `codespace-name`: معرف فريد لـ Codespace الخاص بك (عادةً يتضمن اسم المستخدم الخاص بك)
+- `port`: رقم المنفذ الذي تعمل عليه خدمتك (5000 لتطبيق FastAPI الخاص بنا)
+- `app.github.dev`: نطاق GitHub لتطبيقات Codespace
+
+#### اختبار إعداد Codespace الخاص بك
+
+**1. اختبر الواجهة الخلفية مباشرة**:
+افتح الرابط العام الخاص بك في علامة تبويب جديدة في المتصفح. يجب أن ترى:
+```
+Welcome to the AI Chat API. Send POST requests to /hello with JSON payload containing 'message' field.
+```
+
+**2. اختبر باستخدام أدوات المطور في المتصفح**:
+```javascript
+// Open browser console and test your API
+fetch('https://your-codespace-name-5000.app.github.dev/hello', {
+  method: 'POST',
+  headers: {'Content-Type': 'application/json'},
+  body: JSON.stringify({message: 'Hello from Codespaces!'})
+})
+.then(response => response.json())
+.then(data => console.log(data));
+```
+
+#### مقارنة بين Codespaces والتطوير المحلي
+
+| الجانب | التطوير المحلي | GitHub Codespaces |
+|--------|----------------|-------------------|
+| **وقت الإعداد** | أطول (تثبيت Python، التبعيات) | فوري (بيئة مُعدة مسبقًا) |
+| **الوصول إلى الرابط** | `http://localhost:5000` | `https://xyz-5000.app.github.dev` |
+| **تكوين المنفذ** | تلقائي | يدوي (جعل المنافذ عامة) |
+| **استمرارية الملفات** | جهاز محلي | مستودع GitHub |
+| **التعاون** | صعب مشاركة البيئة | سهل مشاركة رابط Codespace |
+| **الاعتماد على الإنترنت** | فقط لطلبات API الذكاء الاصطناعي | مطلوب لكل شيء |
+
+#### نصائح لتطوير Codespace
+
+**متغيرات البيئة في Codespaces**:
+يعمل ملف `.env` الخاص بك بنفس الطريقة في Codespaces، ولكن يمكنك أيضًا تعيين متغيرات البيئة مباشرة في Codespace:
+
+```bash
+# Set environment variable for the current session
+export GITHUB_TOKEN="your_token_here"
+
+# Or add to your .bashrc for persistence
+echo 'export GITHUB_TOKEN="your_token_here"' >> ~/.bashrc
+```
+
+**إدارة المنافذ**:
+- يكتشف Codespaces تلقائيًا عندما يبدأ تطبيقك في الاستماع على منفذ
+- يمكنك إعادة توجيه منافذ متعددة في نفس الوقت (مفيد إذا أضفت قاعدة بيانات لاحقًا)
+- تبقى المنافذ قابلة للوصول طالما أن Codespace الخاص بك يعمل
+
+**سير عمل التطوير**:
+1. قم بإجراء تغييرات على الكود في VS Code
+2. يقوم FastAPI بإعادة التحميل تلقائيًا (بفضل وضع إعادة التحميل في Uvicorn)
+3. اختبر التغييرات فورًا عبر الرابط العام
+4. قم بالتزام التغييرات ودفعها عندما تكون جاهزًا
+
+> 💡 **نصيحة احترافية**: قم بحفظ رابط الواجهة الخلفية لـ Codespace أثناء التطوير. نظرًا لأن أسماء Codespace مستقرة، لن يتغير الرابط طالما أنك تستخدم نفس Codespace.
+
+## إنشاء واجهة الدردشة الأمامية: حيث يلتقي البشر بالذكاء الاصطناعي
+
+الآن سنقوم ببناء واجهة المستخدم – الجزء الذي يحدد كيفية تفاعل الأشخاص مع مساعد الذكاء الاصطناعي الخاص بك. مثل تصميم واجهة iPhone الأصلية، نحن نركز على جعل التكنولوجيا المعقدة تبدو بديهية وطبيعية للاستخدام.
+
+### فهم بنية الواجهة الأمامية الحديثة
+
+ستكون واجهة الدردشة الخاصة بنا ما نسميه "تطبيق صفحة واحدة" أو SPA. بدلاً من النهج القديم حيث يتم تحميل صفحة جديدة مع كل نقرة، يتم تحديث تطبيقنا بسلاسة وفورًا:
+
+**المواقع القديمة**: مثل قراءة كتاب مادي – تقلب إلى صفحات جديدة تمامًا
+**تطبيق الدردشة الخاص بنا**: مثل استخدام هاتفك – كل شيء يتدفق ويتحدث بسلاسة
+
+```mermaid
+graph TD
+    A[User Types Message] --> B[JavaScript Captures Input]
+    B --> C[Validate & Format Data]
+    C --> D[Send to Backend API]
+    D --> E[Display Loading State]
+    E --> F[Receive AI Response]
+    F --> G[Update Chat Interface]
+    G --> H[Ready for Next Message]
+```
+
+```mermaid
+classDiagram
+    class ChatApp {
+        +messages: HTMLElement
+        +form: HTMLElement
+        +input: HTMLElement
+        +sendButton: HTMLElement
+        +BASE_URL: string
+        +API_ENDPOINT: string
+        
+        +constructor()
+        +initializeEventListeners()
+        +handleSubmit(event)
+        +callAPI(message)
+        +appendMessage(text, role)
+        +escapeHtml(text)
+        +scrollToBottom()
+        +setLoading(isLoading)
+    }
+    
+    ChatApp --> DOM : manipulates
+    ChatApp --> FastAPI : sends requests
+```
+
+### الركائز الثلاث لتطوير الواجهة الأمامية
+
+كل تطبيق واجهة أمامية – من المواقع البسيطة إلى التطبيقات المعقدة مثل Discord أو Slack – يعتمد على ثلاث تقنيات أساسية. فكر فيها كأساس لكل ما تراه وتتفاعل معه على الويب:
+
+**HTML (الهيكل)**: هذا هو الأساس
+- يحدد العناصر الموجودة (الأزرار، مناطق النص، الحاويات)
+- يعطي معنى للمحتوى (هذا عنوان، هذا نموذج، إلخ)
+- ينشئ الهيكل الأساسي الذي يبني عليه كل شيء آخر
+
+**CSS (العرض)**: هذا هو المصمم الداخلي
+- يجعل كل شيء يبدو جميلًا (الألوان، الخطوط، التخطيطات)
+- يتعامل مع أحجام الشاشات المختلفة (الهاتف مقابل الكمبيوتر المحمول مقابل الجهاز اللوحي)
+- ينشئ الرسوم المتحركة السلسة وردود الفعل البصرية
+
+**JavaScript (السلوك)**: هذا هو العقل
+- يستجيب لما يفعله المستخدمون (النقرات، الكتابة، التمرير)
+- يتحدث إلى الواجهة الخلفية ويحدث الصفحة
+- يجعل كل شيء تفاعليًا وديناميكيًا
+
+**فكر فيها كتصميم معماري**:
+- **HTML**: المخطط الهيكلي (تحديد المساحات والعلاقات)
+- **CSS**: التصميم الجمالي والبيئي (النمط البصري وتجربة المستخدم)
+- **JavaScript**: الأنظمة الميكانيكية (الوظائف والتفاعلية)
+
+### لماذا بنية JavaScript الحديثة مهمة
+
+سيستخدم تطبيق الدردشة الخاص بنا أنماط JavaScript الحديثة التي ستراها في التطبيقات الاحترافية. فهم هذه المفاهيم سيساعدك على النمو كمطور:
+
+**بنية قائمة على الفئات**: سننظم الكود الخاص بنا في فئات، وهو مثل إنشاء مخططات للأشياء
+**Async/Await**: الطريقة الحديثة للتعامل مع العمليات التي تستغرق وقتًا (مثل طلبات API)
+**البرمجة القائمة على الأحداث**: تطبيقنا يستجيب لإجراءات المستخدم (النقرات، ضغط المفاتيح) بدلاً من التشغيل في حلقة
+**التلاعب بـ DOM**: تحديث محتوى صفحة الويب ديناميكيًا بناءً على تفاعلات المستخدم وردود API
+
+### إعداد هيكل المشروع
+
+قم بإنشاء دليل للواجهة الأمامية مع هذا الهيكل المنظم:
+
+```text
+frontend/
+├── index.html      # Main HTML structure
+├── app.js          # JavaScript functionality
+└── styles.css      # Visual styling
+```
+
+**فهم الهيكل**:
+- **يفصل** بين الهيكل (HTML)، السلوك (JavaScript)، والعرض (CSS)
+- **يحافظ** على هيكل ملفات بسيط يسهل التنقل والتعديل
+- **يتبع** أفضل ممارسات تطوير الويب للتنظيم وقابلية الصيانة
+
+### بناء أساس HTML: هيكل دلالي للوصول
+
+لنبدأ بهيكل HTML. يركز تطوير الويب الحديث على "HTML الدلالي" – استخدام عناصر HTML التي تصف بوضوح غرضها، وليس فقط مظهرها. هذا يجعل تطبيقك متاحًا لقارئات الشاشة ومحركات البحث والأدوات الأخرى.
+
+**لماذا HTML الدلالي مهم**: تخيل وصف تطبيق الدردشة الخاص بك لشخص عبر الهاتف. ستقول "هناك رأس مع العنوان، منطقة رئيسية حيث تظهر المحادثات، ونموذج في الأسفل لكتابة الرسائل." يستخدم HTML الدلالي عناصر تتطابق مع هذا الوصف الطبيعي.
+
+قم بإنشاء `index.html` مع هذا الترميز المنظم بعناية:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Chat Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="chat-container">
+        <header class="chat-header">
+            <h1>AI Chat Assistant</h1>
+            <p>Ask me anything!</p>
+        </header>
+        
+        <main class="chat-messages" id="messages" role="log" aria-live="polite">
+            <!-- Messages will be dynamically added here -->
+        </main>
+        
+        <form class="chat-form" id="chatForm">
+            <div class="input-group">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Type your message here..." 
+                    required
+                    aria-label="Chat message input"
+                >
+                <button type="submit" id="sendBtn" aria-label="Send message">
+                    Send
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
+```
+
+**فهم كل عنصر HTML وغرضه**:
+
+#### هيكل الوثيقة
+- **`<!DOCTYPE html>`**: يخبر المتصفح أن هذا HTML5 حديث
+- **`<html lang="en">`**: يحدد لغة الصفحة لقارئات الشاشة وأدوات الترجمة
+- **`<meta charset="UTF-8">`**: يضمن ترميز الأحرف الصحيح للنصوص الدولية
+- **`<meta name="viewport"...>`**: يجعل الصفحة متجاوبة مع الأجهزة المحمولة من خلال التحكم في التكبير والتصغير
+
+#### العناصر الدلالية
+- **`<header>`**: يحدد بوضوح القسم العلوي مع العنوان والوصف
+- **`<main>`**: يخصص المنطقة الرئيسية للمحتوى (حيث تحدث المحادثات)
+- **`<form>`**: صحيح دلاليًا لإدخال المستخدم، يُمكن التنقل الصحيح عبر لوحة المفاتيح
+
+#### ميزات الوصول
+- **`role="log"`**: يخبر قارئات الشاشة أن هذه المنطقة تحتوي على سجل زمني للرسائل
+- **`aria-live="polite"`**: يعلن عن الرسائل الجديدة لقارئات الشاشة دون مقاطعة
+- **`aria-label`**: يوفر تسميات وصفية لعناصر التحكم في النموذج
+- **`required`**: يتحقق المتصفح من أن المستخدمين يدخلون رسالة قبل الإرسال
+
+#### تكامل CSS و JavaScript
+- **`class` attributes**: توفر نقاط ربط للتنسيق باستخدام CSS (مثل `chat-container`, `input-group`)
+- **`id` attributes**: تسمح لـ JavaScript بالعثور على عناصر محددة والتلاعب بها
+- **وضع السكربت**: يتم تحميل ملف JavaScript في النهاية حتى يتم تحميل HTML أولاً
+
+**لماذا يعمل هذا الهيكل**:
+- **تدفق منطقي**: الرأس → المحتوى الرئيسي → نموذج الإدخال يتطابق مع ترتيب القراءة الطبيعي
+- **قابلية الوصول عبر لوحة المفاتيح**: يمكن للمستخدمين التنقل عبر جميع العناصر التفاعلية
+- **صديق لقارئات الشاشة**: معالم واضحة وأوصاف للمستخدمين ضعاف البصر
+- **متجاوب مع الأجهزة المحمولة**: علامة meta viewport تمكن التصميم المتجاوب
+- **تحسين تدريجي**: يعمل حتى إذا فشل تحميل CSS أو JavaScript
+
+### إضافة JavaScript التفاعلي: منطق تطبيق ويب حديث
+الآن دعونا نبني كود JavaScript الذي سيجعل واجهة الدردشة الخاصة بنا تنبض بالحياة. سنستخدم أنماط JavaScript الحديثة التي ستواجهها في تطوير الويب الاحترافي، بما في ذلك الفئات (classes) في ES6، و async/await، وبرمجة الأحداث.
+
+#### فهم بنية JavaScript الحديثة
+
+بدلاً من كتابة كود إجرائي (سلسلة من الوظائف التي تعمل بترتيب معين)، سنقوم بإنشاء **بنية تعتمد على الفئات (classes)**. فكر في الفئة كأنها مخطط لإنشاء الكائنات – مثلما يمكن استخدام مخطط المهندس المعماري لبناء عدة منازل.
+
+**لماذا نستخدم الفئات في تطبيقات الويب؟**
+- **التنظيم**: يتم تجميع جميع الوظائف ذات الصلة معًا.
+- **إعادة الاستخدام**: يمكنك إنشاء عدة مثيلات للدردشة على نفس الصفحة.
+- **سهولة الصيانة**: يسهل تصحيح الأخطاء وتعديل الميزات المحددة.
+- **المعيار المهني**: يتم استخدام هذا النمط في أطر العمل مثل React وVue وAngular.
+
+قم بإنشاء ملف `app.js` باستخدام JavaScript الحديث والمنظم:
+
+```javascript
+// app.js - Modern chat application logic
+
+class ChatApp {
+    constructor() {
+        // Get references to DOM elements we'll need to manipulate
+        this.messages = document.getElementById("messages");
+        this.form = document.getElementById("chatForm");
+        this.input = document.getElementById("messageInput");
+        this.sendButton = document.getElementById("sendBtn");
+        
+        // Configure your backend URL here
+        this.BASE_URL = "http://localhost:5000"; // Update this for your environment
+        this.API_ENDPOINT = `${this.BASE_URL}/hello`;
+        
+        // Set up event listeners when the chat app is created
+        this.initializeEventListeners();
+    }
+    
+    initializeEventListeners() {
+        // Listen for form submission (when user clicks Send or presses Enter)
+        this.form.addEventListener("submit", (e) => this.handleSubmit(e));
+        
+        // Also listen for Enter key in the input field (better UX)
+        this.input.addEventListener("keypress", (e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                this.handleSubmit(e);
+            }
+        });
+    }
+    
+    async handleSubmit(event) {
+        event.preventDefault(); // Prevent form from refreshing the page
+        
+        const messageText = this.input.value.trim();
+        if (!messageText) return; // Don't send empty messages
+        
+        // Provide user feedback that something is happening
+        this.setLoading(true);
+        
+        // Add user message to chat immediately (optimistic UI)
+        this.appendMessage(messageText, "user");
+        
+        // Clear input field so user can type next message
+        this.input.value = '';
+        
+        try {
+            // Call the AI API and wait for response
+            const reply = await this.callAPI(messageText);
+            
+            // Add AI response to chat
+            this.appendMessage(reply, "assistant");
+        } catch (error) {
+            console.error('API Error:', error);
+            this.appendMessage("Sorry, I'm having trouble connecting right now. Please try again.", "error");
+        } finally {
+            // Re-enable the interface regardless of success or failure
+            this.setLoading(false);
+        }
+    }
+    
+    async callAPI(message) {
+        const response = await fetch(this.API_ENDPOINT, {
+            method: "POST",
+            headers: { 
+                "Content-Type": "application/json" 
+            },
+            body: JSON.stringify({ message })
+        });
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        return data.response;
+    }
+    
+    appendMessage(text, role) {
+        const messageElement = document.createElement("div");
+        messageElement.className = `message ${role}`;
+        messageElement.innerHTML = `
+            <div class="message-content">
+                <span class="message-text">${this.escapeHtml(text)}</span>
+                <span class="message-time">${new Date().toLocaleTimeString()}</span>
+            </div>
+        `;
+        
+        this.messages.appendChild(messageElement);
+        this.scrollToBottom();
+    }
+    
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    scrollToBottom() {
+        this.messages.scrollTop = this.messages.scrollHeight;
+    }
+    
+    setLoading(isLoading) {
+        this.sendButton.disabled = isLoading;
+        this.input.disabled = isLoading;
+        this.sendButton.textContent = isLoading ? "Sending..." : "Send";
+    }
+}
+
+// Initialize the chat application when the page loads
+document.addEventListener("DOMContentLoaded", () => {
+    new ChatApp();
+});
+```
+
+#### فهم كل مفهوم في JavaScript
+
+**بنية الفئات في ES6**:
+```javascript
+class ChatApp {
+    constructor() {
+        // This runs when you create a new ChatApp instance
+        // It's like the "setup" function for your chat
+    }
+    
+    methodName() {
+        // Methods are functions that belong to the class
+        // They can access class properties using "this"
+    }
+}
+```
+
+**نمط Async/Await**:
+```javascript
+// Old way (callback hell):
+fetch(url)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));
+
+// Modern way (async/await):
+try {
+    const response = await fetch(url);
+    const data = await response.json();
+    console.log(data);
+} catch (error) {
+    console.error(error);
+}
+```
+
+**برمجة الأحداث**:
+بدلاً من التحقق باستمرار مما إذا كان هناك شيء قد حدث، نستمع إلى الأحداث:
+```javascript
+// When form is submitted, run handleSubmit
+this.form.addEventListener("submit", (e) => this.handleSubmit(e));
+
+// When Enter key is pressed, also run handleSubmit
+this.input.addEventListener("keypress", (e) => { /* ... */ });
+```
+
+**التعامل مع DOM**:
+```javascript
+// Create new elements
+const messageElement = document.createElement("div");
+
+// Modify their properties
+messageElement.className = "message user";
+messageElement.innerHTML = "Hello world!";
+
+// Add to the page
+this.messages.appendChild(messageElement);
+```
+
+#### الأمن وأفضل الممارسات
+
+**منع XSS**:
+```javascript
+escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;  // This automatically escapes HTML
+    return div.innerHTML;
+}
+```
+
+**لماذا هذا مهم**: إذا قام المستخدم بكتابة `<script>alert('hack')</script>`، فإن هذه الوظيفة تضمن عرضه كنص بدلاً من تنفيذه ككود.
+
+**معالجة الأخطاء**:
+```javascript
+try {
+    const reply = await this.callAPI(messageText);
+    this.appendMessage(reply, "assistant");
+} catch (error) {
+    // Show user-friendly error instead of breaking the app
+    this.appendMessage("Sorry, I'm having trouble...", "error");
+}
+```
+
+**اعتبارات تجربة المستخدم**:
+- **واجهة متفائلة**: أضف رسالة المستخدم فورًا، دون انتظار استجابة الخادم.
+- **حالات التحميل**: قم بتعطيل الأزرار وأظهر "جارٍ الإرسال..." أثناء الانتظار.
+- **التمرير التلقائي**: اجعل الرسائل الأحدث مرئية.
+- **التحقق من الإدخال**: لا ترسل رسائل فارغة.
+- **اختصارات لوحة المفاتيح**: مفتاح Enter يرسل الرسائل (مثل تطبيقات الدردشة الحقيقية).
+
+#### فهم تدفق التطبيق
+
+1. **تحميل الصفحة** → يتم تشغيل حدث `DOMContentLoaded` → يتم إنشاء `new ChatApp()`.
+2. **تشغيل المُنشئ** → الحصول على مراجع عناصر DOM → إعداد مستمعي الأحداث.
+3. **كتابة المستخدم للرسالة** → الضغط على Enter أو النقر على إرسال → يتم تشغيل `handleSubmit`.
+4. **تشغيل handleSubmit** → التحقق من صحة الإدخال → عرض حالة التحميل → استدعاء API.
+5. **استجابة API** → إضافة رسالة الذكاء الاصطناعي إلى الدردشة → إعادة تمكين الواجهة.
+6. **جاهز للرسالة التالية** → يمكن للمستخدم متابعة الدردشة.
+
+هذه البنية قابلة للتوسع – يمكنك بسهولة إضافة ميزات مثل تعديل الرسائل، تحميل الملفات، أو سلاسل محادثات متعددة دون إعادة كتابة الهيكل الأساسي.
+
+### 🎯 مراجعة تعليمية: بنية الواجهة الأمامية الحديثة
+
+**فهم البنية**: لقد قمت بتنفيذ تطبيق صفحة واحدة كامل باستخدام أنماط JavaScript الحديثة. هذا يمثل تطوير واجهة أمامية بمستوى احترافي.
+
+**المفاهيم الرئيسية التي تم إتقانها**:
+- **بنية الفئات في ES6**: هيكل كود منظم وقابل للصيانة.
+- **أنماط Async/Await**: برمجة غير متزامنة حديثة.
+- **برمجة الأحداث**: تصميم واجهة مستخدم تفاعلية.
+- **أفضل ممارسات الأمان**: منع XSS والتحقق من الإدخال.
+
+**الاتصال بالصناعة**: الأنماط التي تعلمتها (بنية تعتمد على الفئات، العمليات غير المتزامنة، التعامل مع DOM) هي أساس الأطر الحديثة مثل React وVue وAngular. أنت تبني بنفس التفكير المعماري المستخدم في التطبيقات الإنتاجية.
+
+**سؤال للتفكير**: كيف يمكنك توسيع تطبيق الدردشة هذا للتعامل مع محادثات متعددة أو مصادقة المستخدم؟ فكر في التغييرات المعمارية المطلوبة وكيف يمكن أن تتطور بنية الفئة.
+
+### تصميم واجهة الدردشة الخاصة بك
+
+الآن دعونا ننشئ واجهة دردشة حديثة وجذابة بصريًا باستخدام CSS. التصميم الجيد يجعل تطبيقك يبدو احترافيًا ويحسن تجربة المستخدم بشكل عام. سنستخدم ميزات CSS الحديثة مثل Flexbox وCSS Grid والخصائص المخصصة لتصميم مستجيب وسهل الوصول.
+
+قم بإنشاء ملف `styles.css` باستخدام هذه الأنماط الشاملة:
+
+```css
+/* styles.css - Modern chat interface styling */
+
+:root {
+    --primary-color: #2563eb;
+    --secondary-color: #f1f5f9;
+    --user-color: #3b82f6;
+    --assistant-color: #6b7280;
+    --error-color: #ef4444;
+    --text-primary: #1e293b;
+    --text-secondary: #64748b;
+    --border-radius: 12px;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 800px;
+    height: 600px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.chat-header h1 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.chat-header p {
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: var(--secondary-color);
+}
+
+.message {
+    display: flex;
+    max-width: 80%;
+    animation: slideIn 0.3s ease-out;
+}
+
+.message.user {
+    align-self: flex-end;
+}
+
+.message.user .message-content {
+    background: var(--user-color);
+    color: white;
+    border-radius: var(--border-radius) var(--border-radius) 4px var(--border-radius);
+}
+
+.message.assistant {
+    align-self: flex-start;
+}
+
+.message.assistant .message-content {
+    background: white;
+    color: var(--text-primary);
+    border-radius: var(--border-radius) var(--border-radius) var(--border-radius) 4px;
+    border: 1px solid #e2e8f0;
+}
+
+.message.error .message-content {
+    background: var(--error-color);
+    color: white;
+    border-radius: var(--border-radius);
+}
+
+.message-content {
+    padding: 12px 16px;
+    box-shadow: var(--shadow);
+    position: relative;
+}
+
+.message-text {
+    display: block;
+    line-height: 1.5;
+    word-wrap: break-word;
+}
+
+.message-time {
+    display: block;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+.chat-form {
+    padding: 20px;
+    border-top: 1px solid #e2e8f0;
+    background: white;
+}
+
+.input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 12px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+#messageInput:focus {
+    border-color: var(--primary-color);
+}
+
+#messageInput:disabled {
+    background: #f8fafc;
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#sendBtn {
+    padding: 12px 24px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    min-width: 80px;
+}
+
+#sendBtn:hover:not(:disabled) {
+    background: #1d4ed8;
+}
+
+#sendBtn:disabled {
+    background: #94a3b8;
+    cursor: not-allowed;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design for mobile devices */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .chat-container {
+        height: calc(100vh - 20px);
+        border-radius: 8px;
+    }
+    
+    .message {
+        max-width: 90%;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    #messageInput {
+        width: 100%;
+    }
+    
+    #sendBtn {
+        width: 100%;
+    }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+    .message {
+        animation: none;
+    }
+    
+    * {
+        transition: none !important;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .chat-container {
+        background: #1e293b;
+        color: #f1f5f9;
+    }
+    
+    .chat-messages {
+        background: #0f172a;
+    }
+    
+    .message.assistant .message-content {
+        background: #334155;
+        color: #f1f5f9;
+        border-color: #475569;
+    }
+    
+    .chat-form {
+        background: #1e293b;
+        border-color: #475569;
+    }
+    
+    #messageInput {
+        background: #334155;
+        color: #f1f5f9;
+        border-color: #475569;
+    }
+}
+```
+
+**فهم بنية CSS:**
+- **استخدام** خصائص CSS المخصصة (المتغيرات) لتوحيد التصميم وسهولة الصيانة.
+- **تطبيق** تخطيط Flexbox لتصميم مستجيب ومحاذاة صحيحة.
+- **تضمين** حركات سلسة لظهور الرسائل دون أن تكون مشتتة.
+- **توفير** تمييز بصري بين رسائل المستخدم، ردود الذكاء الاصطناعي، وحالات الخطأ.
+- **دعم** تصميم مستجيب يعمل على كل من أجهزة الكمبيوتر المكتبية والهواتف المحمولة.
+- **مراعاة** إمكانية الوصول مع تفضيلات تقليل الحركة ونسب تباين مناسبة.
+- **تقديم** دعم الوضع الداكن بناءً على تفضيلات نظام المستخدم.
+
+### إعداد عنوان URL الخاص بالخادم الخلفي
+
+الخطوة الأخيرة هي تحديث `BASE_URL` في JavaScript الخاص بك لتطابق خادمك الخلفي:
+
+```javascript
+// For local development
+this.BASE_URL = "http://localhost:5000";
+
+// For GitHub Codespaces (replace with your actual URL)
+this.BASE_URL = "https://your-codespace-name-5000.app.github.dev";
+```
+
+**تحديد عنوان URL الخاص بالخادم الخلفي:**
+- **التطوير المحلي**: استخدم `http://localhost:5000` إذا كنت تشغل الواجهة الأمامية والخلفية محليًا.
+- **Codespaces**: ابحث عن عنوان URL الخاص بالخادم الخلفي في علامة التبويب Ports بعد جعل المنفذ 5000 عامًا.
+- **الإنتاج**: استبدل بالنطاق الفعلي الخاص بك عند النشر على خدمة استضافة.
+
+> 💡 **نصيحة اختبار**: يمكنك اختبار الخادم الخلفي مباشرةً عن طريق زيارة عنوان URL الجذر في متصفحك. يجب أن ترى رسالة الترحيب من خادم FastAPI الخاص بك.
+
+## الاختبار والنشر
+
+الآن بعد أن قمت ببناء كل من مكونات الواجهة الأمامية والخلفية، دعونا نختبر أن كل شيء يعمل معًا ونستكشف خيارات النشر لمشاركة مساعد الدردشة الخاص بك مع الآخرين.
+
+### سير عمل الاختبار المحلي
+
+اتبع هذه الخطوات لاختبار تطبيقك الكامل:
+
+```mermaid
+graph TD
+    A[Start Backend Server] --> B[Configure Environment Variables]
+    B --> C[Test API Endpoints]
+    C --> D[Open Frontend in Browser]
+    D --> E[Test Chat Functionality]
+    E --> F[Debug Any Issues]
+```
+
+**عملية الاختبار خطوة بخطوة:**
+
+1. **ابدأ خادمك الخلفي**:
+   ```bash
+   cd backend
+   source venv/bin/activate  # or venv\Scripts\activate on Windows
+   python api.py
+   ```
+
+2. **تحقق من عمل API**:
+   - افتح `http://localhost:5000` في متصفحك.
+   - يجب أن ترى رسالة الترحيب من خادم FastAPI الخاص بك.
+
+3. **افتح واجهتك الأمامية**:
+   - انتقل إلى دليل الواجهة الأمامية.
+   - افتح `index.html` في متصفح الويب الخاص بك.
+   - أو استخدم إضافة Live Server في VS Code لتجربة تطوير أفضل.
+
+4. **اختبر وظيفة الدردشة**:
+   - اكتب رسالة في حقل الإدخال.
+   - انقر على "إرسال" أو اضغط على Enter.
+   - تحقق من أن الذكاء الاصطناعي يستجيب بشكل مناسب.
+   - تحقق من وحدة التحكم في المتصفح لأي أخطاء JavaScript.
+
+### استكشاف المشكلات الشائعة وإصلاحها
+
+| المشكلة | الأعراض | الحل |
+|---------|----------|----------|
+| **خطأ CORS** | الواجهة الأمامية لا يمكنها الوصول إلى الخلفية | تأكد من إعداد FastAPI CORSMiddleware بشكل صحيح |
+| **خطأ مفتاح API** | استجابات 401 Unauthorized | تحقق من متغير البيئة `GITHUB_TOKEN` |
+| **رفض الاتصال** | أخطاء الشبكة في الواجهة الأمامية | تحقق من عنوان URL الخلفي وأن خادم Flask يعمل |
+| **لا يوجد رد من الذكاء الاصطناعي** | استجابات فارغة أو بها أخطاء | تحقق من سجلات الخلفية لمشاكل الحصة أو المصادقة |
+
+**خطوات تصحيح الأخطاء الشائعة:**
+- **تحقق** من وحدة التحكم في أدوات المطور في المتصفح لأخطاء JavaScript.
+- **تأكد** من أن علامة التبويب Network تعرض طلبات واستجابات API ناجحة.
+- **راجع** إخراج الطرفية الخلفية لأخطاء Python أو مشاكل API.
+- **تأكد** من تحميل متغيرات البيئة بشكل صحيح ويمكن الوصول إليها.
+
+## 📈 جدول زمني لإتقان تطوير تطبيقات الذكاء الاصطناعي
+
+```mermaid
+timeline
+    title Complete AI Application Development Journey
+    
+    section AI Foundations
+        Understanding Generative AI
+            : Grasp pattern recognition concepts
+            : Master AI parameter control
+            : Learn prompt engineering techniques
+        
+        GitHub Models Integration
+            : Navigate AI service platforms
+            : Handle authentication securely
+            : Optimize model parameters
+    
+    section Backend Development
+        Python API Architecture
+            : Build FastAPI applications
+            : Implement async operations
+            : Create secure endpoints
+        
+        AI Service Integration
+            : Connect to external AI APIs
+            : Handle rate limiting
+            : Implement error boundaries
+    
+    section Frontend Mastery
+        Modern JavaScript Patterns
+            : Master ES6 class architecture
+            : Implement async/await flows
+            : Build responsive interfaces
+        
+        Real-time User Experience
+            : Create dynamic chat interfaces
+            : Handle loading states
+            : Optimize user interactions
+    
+    section Production Readiness
+        Security & Performance
+            : Implement secure token management
+            : Prevent XSS vulnerabilities
+            : Optimize API performance
+        
+        Professional Deployment
+            : Build scalable architectures
+            : Create maintainable code
+            : Document development processes
+```
+
+**🎓 إنجاز التخرج**: لقد قمت ببناء تطبيق كامل مدعوم بالذكاء الاصطناعي باستخدام نفس التقنيات والأنماط المعمارية التي تدعم مساعدي الذكاء الاصطناعي الحديثين. هذه المهارات تمثل تقاطع تطوير الويب التقليدي مع دمج الذكاء الاصطناعي المتقدم.
+
+**🔄 قدرات المستوى التالي**:
+- جاهز لاستكشاف أطر الذكاء الاصطناعي المتقدمة (LangChain، LangGraph).
+- مستعد لبناء تطبيقات ذكاء اصطناعي متعددة الوسائط (نص، صورة، صوت).
+- مجهز لتنفيذ قواعد بيانات المتجهات وأنظمة الاسترجاع.
+- تم إعداد الأساس لتعلم الآلة وضبط نماذج الذكاء الاصطناعي.
+
+## تحدي GitHub Copilot Agent 🚀
+
+استخدم وضع Agent لإكمال التحدي التالي:
+
+**الوصف:** قم بتحسين مساعد الدردشة عن طريق إضافة سجل المحادثات واستمرارية الرسائل. سيساعدك هذا التحدي على فهم كيفية إدارة الحالة في تطبيقات الدردشة وتنفيذ تخزين البيانات لتحسين تجربة المستخدم.
+
+**المهمة:** قم بتعديل تطبيق الدردشة ليشمل سجل المحادثات الذي يستمر بين الجلسات. أضف وظيفة لحفظ رسائل الدردشة في التخزين المحلي، عرض سجل المحادثات عند تحميل الصفحة، وتضمين زر "مسح السجل". قم أيضًا بتنفيذ مؤشرات الكتابة وطوابع زمنية للرسائل لجعل تجربة الدردشة أكثر واقعية.
+
+تعرف على المزيد حول [وضع Agent](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) هنا.
+
+## المهمة: بناء مساعد الذكاء الاصطناعي الشخصي الخاص بك
+
+الآن ستقوم بإنشاء تطبيق مساعد الذكاء الاصطناعي الخاص بك. بدلاً من مجرد تكرار كود الدليل، هذه فرصة لتطبيق المفاهيم أثناء بناء شيء يعكس اهتماماتك وحالات الاستخدام الخاصة بك.
+
+### متطلبات المشروع
+
+لنقم بإعداد مشروعك بهيكل نظيف ومنظم:
+
+```text
+my-ai-assistant/
+├── backend/
+│   ├── api.py          # Your FastAPI server
+│   ├── llm.py          # AI integration functions
+│   ├── .env            # Your secrets (keep this safe!)
+│   └── requirements.txt # Python dependencies
+├── frontend/
+│   ├── index.html      # Your chat interface
+│   ├── app.js          # The JavaScript magic
+│   └── styles.css      # Make it look amazing
+└── README.md           # Tell the world about your creation
+```
+
+### مهام التنفيذ الأساسية
+
+**تطوير الخلفية:**
+- **خذ** كود FastAPI الخاص بنا واجعله خاصًا بك.
+- **أنشئ** شخصية ذكاء اصطناعي فريدة – ربما مساعد طهي مفيد، شريك كتابة إبداعي، أو زميل دراسة؟
+- **أضف** معالجة أخطاء قوية حتى لا يتعطل تطبيقك عندما تسوء الأمور.
+- **اكتب** وثائق واضحة لأي شخص يريد فهم كيفية عمل API الخاص بك.
+
+**تطوير الواجهة الأمامية:**
+- **قم ببناء** واجهة دردشة تبدو بديهية ومرحبة.
+- **اكتب** JavaScript حديث ونظيف ستفخر بعرضه للمطورين الآخرين.
+- **صمم** أنماطًا مخصصة تعكس شخصية الذكاء الاصطناعي الخاص بك – ممتعة وملونة؟ نظيفة وبسيطة؟ الأمر متروك لك تمامًا!
+- **تأكد** من أنها تعمل بشكل رائع على كل من الهواتف وأجهزة الكمبيوتر.
+
+**متطلبات التخصيص:**
+- **اختر** اسمًا وشخصية فريدة لمساعد الذكاء الاصطناعي الخاص بك – ربما شيء يعكس اهتماماتك أو المشاكل التي تريد حلها.
+- **خصص** التصميم المرئي ليتناسب مع أجواء مساعدك.
+- **اكتب** رسالة ترحيب جذابة تجعل الناس يرغبون في بدء الدردشة.
+- **اختبر** مساعدك مع أنواع مختلفة من الأسئلة لترى كيف يستجيب.
+
+### أفكار تحسين (اختياري)
+
+هل تريد رفع مستوى مشروعك؟ إليك بعض الأفكار الممتعة لاستكشافها:
+
+| الميزة | الوصف | المهارات التي ستتمرن عليها |
+|---------|-------------|------------------------|
+| **سجل الرسائل** | تذكر المحادثات حتى بعد تحديث الصفحة | العمل مع التخزين المحلي، التعامل مع JSON |
+| **مؤشرات الكتابة** | عرض "الذكاء الاصطناعي يكتب..." أثناء انتظار الردود | الرسوم المتحركة في CSS، البرمجة غير المتزامنة |
+| **طوابع زمنية للرسائل** | عرض وقت إرسال كل رسالة | تنسيق التاريخ/الوقت، تصميم تجربة المستخدم |
+| **تصدير الدردشة** | السماح للمستخدمين بتنزيل محادثاتهم | التعامل مع الملفات، تصدير البيانات |
+| **تبديل السمات** | تبديل الوضع الفاتح/الداكن | متغيرات CSS، تفضيلات المستخدم |
+| **إدخال صوتي** | إضافة وظيفة تحويل الكلام إلى نص | واجهات برمجة التطبيقات للويب، إمكانية الوصول |
+
+### الاختبار والتوثيق
+
+**ضمان الجودة:**
+- **اختبر** تطبيقك مع أنواع مختلفة من الإدخال والحالات الحدية.
+- **تحقق** من أن التصميم المستجيب يعمل على أحجام شاشات مختلفة.
+- **افحص** إمكانية الوصول باستخدام التنقل عبر لوحة المفاتيح وقارئات الشاشة.
+- **تحقق** من صحة HTML وCSS للامتثال للمعايير.
+
+**متطلبات التوثيق:**
+- **اكتب** README.md يشرح مشروعك وكيفية تشغيله.
+- **قم بتضمين** لقطات شاشة لواجهة الدردشة الخاصة بك أثناء العمل.
+- **وثق** أي ميزات أو تخصيصات فريدة أضفتها.
+- **قدم** تعليمات إعداد واضحة للمطورين الآخرين.
+
+### إرشادات التقديم
+
+**مخرجات المشروع:**
+1. مجلد المشروع الكامل مع جميع الكود المصدري.
+2. README.md مع وصف المشروع وتعليمات الإعداد.
+3. لقطات شاشة توضح مساعد الدردشة الخاص بك أثناء العمل.
+4. انعكاس موجز لما تعلمته وما التحديات التي واجهتها.
+
+**معايير التقييم:**
+- **الوظائف**: هل يعمل مساعد الدردشة كما هو متوقع؟
+- **جودة الكود**: هل الكود منظم، ومعلق عليه، وقابل للصيانة؟
+- **التصميم**: هل الواجهة جذابة بصريًا وسهلة الاستخدام؟
+- **الإبداع**: ما مدى تفرد وتخصيص التنفيذ الخاص بك؟
+- **التوثيق**: هل تعليمات الإعداد واضحة وكاملة؟
+
+> 💡 **نصيحة النجاح**: ابدأ بالمتطلبات الأساسية أولاً، ثم أضف التحسينات بمجرد أن يعمل كل شيء. ركز على إنشاء تجربة أساسية مصقولة قبل إضافة ميزات متقدمة.
+
+## الحل
+
+[الحل](./solution/README.md)
+
+## تحديات إضافية
+
+هل أنت مستعد لأخذ مساعد الذكاء الاصطناعي الخاص بك إلى المستوى التالي؟ جرب هذه التحديات المتقدمة التي ستعمق فهمك لدمج الذكاء الاصطناعي وتطوير الويب.
+
+### تخصيص الشخصية
+
+السحر الحقيقي يحدث عندما تمنح مساعد الذكاء الاصطناعي الخاص بك شخصية فريدة. جرب مطالبات النظام المختلفة لإنشاء مساعدين متخصصين:
+
+**مثال مساعد احترافي:**
+```python
+call_llm(message, "You are a professional business consultant with 20 years of experience. Provide structured, actionable advice with specific steps and considerations.")
+```
+
+**مثال مساعد الكتابة الإبداعية:**
+```python
+call_llm(message, "You are an enthusiastic creative writing coach. Help users develop their storytelling skills with imaginative prompts and constructive feedback.")
+```
+
+**مثال المرشد الفني:**
+```python
+call_llm(message, "You are a patient senior developer who explains complex programming concepts using simple analogies and practical examples.")
+```
+
+### تحسينات الواجهة الأمامية
+
+قم بتحويل واجهة الدردشة الخاصة بك باستخدام هذه التحسينات البصرية والوظيفية:
+
+**ميزات CSS المتقدمة:**
+- **قم بتطبيق** حركات سلسة للرسائل والانتقالات.
+- **أضف** تصميم فقاعات دردشة مخصص باستخدام أشكال وتدرجات CSS.
+- **أنشئ** حركة مؤشر الكتابة عندما يكون الذكاء الاصطناعي "يفكر".
+- **صمم** ردود فعل الرموز التعبيرية أو نظام تقييم الرسائل.
+
+**تحسينات JavaScript:**
+- **أضف** اختصارات لوحة المفاتيح (Ctrl+Enter للإرسال، Escape لمسح الإدخال).
+- **قم بتنفيذ** وظيفة البحث والتصفية للرسائل.
+- **أنشئ** ميزة تصدير المحادثة (تنزيل كنص أو JSON).
+- **أضف** الحفظ التلقائي إلى التخزين المحلي لمنع فقدان الرسائل.
+
+### دمج الذكاء الاصطناعي المتقدم
+
+**شخصيات ذكاء اصطناعي متعددة:**
+- **أنشئ** قائمة منسدلة للتبديل بين شخصيات الذكاء الاصطناعي المختلفة.
+- **احفظ** شخصية المستخدم المفضلة في التخزين المحلي.
+- **قم بتنفيذ** تبديل السياق الذي يحافظ على تدفق المحادثة.
+
+**ميزات الرد الذكي:**
+- **أضف** الوعي بسياق المحادثة (يتذكر الذكاء الاصطناعي الرسائل السابقة).
+- **تنفيذ** اقتراحات ذكية بناءً على موضوع المحادثة  
+- **إنشاء** أزرار رد سريع للأسئلة الشائعة  
+
+> 🎯 **هدف التعلم**: هذه التحديات الإضافية تساعدك على فهم أنماط تطوير الويب المتقدمة وتقنيات دمج الذكاء الاصطناعي المستخدمة في التطبيقات الإنتاجية.
+
+## الملخص والخطوات التالية  
+
+تهانينا! لقد نجحت في بناء مساعد دردشة مدعوم بالذكاء الاصطناعي من البداية. هذا المشروع منحك تجربة عملية مع تقنيات تطوير الويب الحديثة ودمج الذكاء الاصطناعي – مهارات أصبحت ذات قيمة متزايدة في عالم التكنولوجيا اليوم.
+
+### ما الذي أنجزته  
+
+خلال هذه الدرس، أتقنت العديد من التقنيات والمفاهيم الرئيسية:  
+
+**تطوير الخلفية:**  
+- **دمجت** مع GitHub Models API لتفعيل وظائف الذكاء الاصطناعي  
+- **بنيت** API RESTful باستخدام Flask مع معالجة الأخطاء بشكل صحيح  
+- **نفذت** مصادقة آمنة باستخدام متغيرات البيئة  
+- **قمت بتكوين** CORS لطلبات الأصل المتعددة بين الواجهة الأمامية والخلفية  
+
+**تطوير الواجهة الأمامية:**  
+- **أنشأت** واجهة دردشة متجاوبة باستخدام HTML دلالي  
+- **نفذت** JavaScript حديث باستخدام async/await وبنية تعتمد على الفئات  
+- **صممت** واجهة مستخدم جذابة باستخدام CSS Grid، Flexbox، والرسوم المتحركة  
+- **أضفت** ميزات الوصول ومبادئ التصميم المتجاوب  
+
+**دمج كامل بين الواجهة الأمامية والخلفية:**  
+- **وصلت** بين الواجهة الأمامية والخلفية عبر مكالمات API HTTP  
+- **تعاملت** مع تفاعلات المستخدم في الوقت الحقيقي وتدفق البيانات غير المتزامن  
+- **نفذت** معالجة الأخطاء وتقديم ملاحظات للمستخدم عبر التطبيق  
+- **اختبرت** سير العمل الكامل للتطبيق من إدخال المستخدم إلى استجابة الذكاء الاصطناعي  
+
+### النتائج التعليمية الرئيسية  
+
+```mermaid
+mindmap
+  root((AI Chat App Skills))
+    API Integration
+      Authentication
+      Error Handling
+      Async Programming
+    Web Development
+      HTML5 Semantics
+      Modern CSS
+      ES6+ JavaScript
+    User Experience
+      Responsive Design
+      Accessibility
+      Real-time Interaction
+    AI Understanding
+      Prompt Engineering
+      Model Parameters
+      Conversation Flow
+```
+  
+هذا المشروع قدم لك أساسيات بناء تطبيقات مدعومة بالذكاء الاصطناعي، وهو يمثل مستقبل تطوير الويب. الآن تفهم كيفية دمج قدرات الذكاء الاصطناعي في تطبيقات الويب التقليدية، مما يخلق تجارب مستخدم جذابة تبدو ذكية ومتجاوبة.
+
+### التطبيقات المهنية  
+
+المهارات التي طورتها في هذا الدرس قابلة للتطبيق مباشرة في وظائف تطوير البرمجيات الحديثة:  
+
+- **تطوير الويب الكامل** باستخدام أطر عمل حديثة وواجهات برمجية  
+- **دمج الذكاء الاصطناعي** في تطبيقات الويب وتطبيقات الهواتف المحمولة  
+- **تصميم وتطوير واجهات برمجية** لهندسة الخدمات المصغرة  
+- **تطوير واجهات المستخدم** مع التركيز على الوصول والتصميم المتجاوب  
+- **ممارسات DevOps** بما في ذلك تكوين البيئة والنشر  
+
+### مواصلة رحلتك في تطوير الذكاء الاصطناعي  
+
+**الخطوات التعليمية التالية:**  
+- **استكشاف** نماذج الذكاء الاصطناعي وواجهات برمجية أكثر تقدمًا (GPT-4، Claude، Gemini)  
+- **تعلم** تقنيات هندسة التوجيه لتحسين استجابات الذكاء الاصطناعي  
+- **دراسة** تصميم المحادثات ومبادئ تجربة المستخدم للروبوتات  
+- **التحقيق** في أمان الذكاء الاصطناعي، الأخلاقيات، وممارسات تطوير الذكاء الاصطناعي المسؤول  
+- **بناء** تطبيقات أكثر تعقيدًا مع ذاكرة المحادثة والوعي بالسياق  
+
+**أفكار مشاريع متقدمة:**  
+- غرف دردشة متعددة المستخدمين مع إدارة الذكاء الاصطناعي  
+- روبوتات دردشة لخدمة العملاء مدعومة بالذكاء الاصطناعي  
+- مساعدي تعليم خصوصي مع تعلم مخصص  
+- متعاونون في الكتابة الإبداعية بشخصيات ذكاء اصطناعي مختلفة  
+- مساعدي توثيق تقني للمطورين  
+
+## البدء مع GitHub Codespaces  
+
+هل تريد تجربة هذا المشروع في بيئة تطوير سحابية؟ GitHub Codespaces يوفر إعداد تطوير كامل في متصفحك، مثالي لتجربة تطبيقات الذكاء الاصطناعي دون الحاجة إلى إعداد محلي.
+
+### إعداد بيئة التطوير الخاصة بك  
+
+**الخطوة 1: الإنشاء من القالب**  
+- **انتقل** إلى [مستودع Web Dev For Beginners](https://github.com/microsoft/Web-Dev-For-Beginners)  
+- **اضغط** على "Use this template" في الزاوية العلوية اليمنى (تأكد من تسجيل الدخول إلى GitHub)  
+
+![واجهة الإنشاء من القالب تظهر زر "Use this template" الأخضر](../../../translated_images/ar/template.67ad477109d29a2b.webp)  
+
+**الخطوة 2: تشغيل Codespaces**  
+- **افتح** المستودع الذي أنشأته حديثًا  
+- **اضغط** على الزر الأخضر "Code" واختر "Codespaces"  
+- **اختر** "Create codespace on main" لبدء بيئة التطوير  
+
+![واجهة إنشاء Codespace مع خيارات تشغيل بيئة التطوير السحابية](../../../translated_images/ar/codespace.bcecbdf5d2747d3d.webp)  
+
+**الخطوة 3: تكوين البيئة**  
+بمجرد تحميل Codespace، سيكون لديك وصول إلى:  
+- **Python، Node.js مثبتة مسبقًا** وجميع أدوات التطوير اللازمة  
+- **واجهة VS Code** مع إضافات لتطوير الويب  
+- **وصول إلى الطرفية** لتشغيل خوادم الخلفية والواجهة الأمامية  
+- **توجيه المنافذ** لاختبار تطبيقاتك  
+
+**ما يوفره Codespaces:**  
+- **يقضي** على مشاكل إعداد البيئة المحلية والتكوين  
+- **يوفر** بيئة تطوير متسقة عبر الأجهزة المختلفة  
+- **يتضمن** أدوات وإضافات مهيأة مسبقًا لتطوير الويب  
+- **يقدم** تكامل سلس مع GitHub للتحكم في الإصدارات والتعاون  
+
+> 🚀 **نصيحة احترافية**: Codespaces مثالي للتعلم والنمذجة لتطبيقات الذكاء الاصطناعي لأنه يتعامل مع جميع إعدادات البيئة المعقدة تلقائيًا، مما يتيح لك التركيز على البناء والتعلم بدلاً من مشاكل التكوين.
+
+---
+
+**إخلاء المسؤولية**:  
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الرسمي. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.

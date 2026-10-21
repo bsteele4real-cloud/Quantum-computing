@@ -1,0 +1,589 @@
+# مشروع التيراريوم الجزء الأول: مقدمة إلى HTML
+
+```mermaid
+journey
+    title Your HTML Learning Journey
+    section Foundation
+      Create HTML file: 3: Student
+      Add DOCTYPE: 4: Student
+      Structure document: 5: Student
+    section Content
+      Add metadata: 4: Student
+      Include images: 5: Student
+      Organize layout: 5: Student
+    section Semantics
+      Use proper tags: 4: Student
+      Enhance accessibility: 5: Student
+      Build terrarium: 5: Student
+```
+
+![مقدمة إلى HTML](../../../../translated_images/ar/webdev101-html.4389c2067af68e98.webp)
+> رسم توضيحي بواسطة [Tomomi Imura](https://twitter.com/girlie_mac)
+
+HTML، أو لغة ترميز النص التشعبي، هي الأساس لكل موقع ويب قمت بزيارته. فكر في HTML كهيكل عظمي يمنح الصفحات الإلكترونية بنيتها – فهو يحدد مكان المحتوى، وكيف يتم تنظيمه، وما الذي يمثله كل جزء. بينما ستقوم CSS لاحقًا "بتزيين" HTML بالألوان والتصميمات، وستجعل JavaScript الصفحات تفاعلية، فإن HTML يوفر الهيكل الأساسي الذي يجعل كل شيء ممكنًا.
+
+في هذا الدرس، ستقوم بإنشاء هيكل HTML لواجهة تيراريوم افتراضية. هذا المشروع العملي سيعلمك مفاهيم HTML الأساسية أثناء بناء شيء جذاب بصريًا. ستتعلم كيفية تنظيم المحتوى باستخدام العناصر الدلالية، والعمل مع الصور، وإنشاء الأساس لتطبيق ويب تفاعلي.
+
+بنهاية هذا الدرس، سيكون لديك صفحة HTML تعمل وتعرض صور النباتات في أعمدة منظمة، جاهزة للتصميم في الدرس التالي. لا تقلق إذا بدا الأمر بسيطًا في البداية – هذا بالضبط ما يجب أن يكون عليه HTML قبل أن تضيف CSS اللمسات الجمالية.
+
+```mermaid
+mindmap
+  root((HTML Fundamentals))
+    Structure
+      DOCTYPE Declaration
+      HTML Element
+      Head Section
+      Body Content
+    Elements
+      Tags & Attributes
+      Self-closing Tags
+      Nested Elements
+      Block vs Inline
+    Content
+      Text Elements
+      Images
+      Containers (div)
+      Lists
+    Semantics
+      Meaningful Tags
+      Accessibility
+      Screen Readers
+      SEO Benefits
+    Best Practices
+      Proper Nesting
+      Valid Markup
+      Descriptive Alt Text
+      Organized Structure
+```
+
+## اختبار ما قبل المحاضرة
+
+[اختبار ما قبل المحاضرة](https://ff-quizzes.netlify.app/web/quiz/15)
+
+> 📺 **شاهد وتعلم**: تحقق من هذا الفيديو المفيد
+> 
+> [![فيديو أساسيات HTML](https://img.youtube.com/vi/1TvxJKBzhyQ/0.jpg)](https://www.youtube.com/watch?v=1TvxJKBzhyQ)
+
+## إعداد مشروعك
+
+قبل أن نبدأ في كتابة كود HTML، دعنا نُعد مساحة عمل مناسبة لمشروع التيراريوم الخاص بك. إنشاء هيكل ملفات منظم منذ البداية هو عادة مهمة ستفيدك طوال رحلتك في تطوير الويب.
+
+### المهمة: إنشاء هيكل مشروعك
+
+ستقوم بإنشاء مجلد مخصص لمشروع التيراريوم الخاص بك وإضافة أول ملف HTML. إليك طريقتان يمكنك استخدامهما:
+
+**الخيار الأول: باستخدام Visual Studio Code**
+1. افتح Visual Studio Code
+2. انقر على "File" → "Open Folder" أو استخدم `Ctrl+K, Ctrl+O` (Windows/Linux) أو `Cmd+K, Cmd+O` (Mac)
+3. قم بإنشاء مجلد جديد باسم `terrarium` واختره
+4. في لوحة Explorer، انقر على أيقونة "New File"
+5. قم بتسمية ملفك `index.html`
+
+![مستكشف VS Code يظهر إنشاء ملف جديد](../../../../translated_images/ar/vs-code-index.e2986cf919471eb9.webp)
+
+**الخيار الثاني: باستخدام أوامر الطرفية**
+```bash
+mkdir terrarium
+cd terrarium
+touch index.html
+code index.html
+```
+
+**ما الذي تقوم به هذه الأوامر:**
+- **إنشاء** مجلد جديد باسم `terrarium` لمشروعك
+- **التنقل** داخل مجلد التيراريوم 
+- **إنشاء** ملف فارغ باسم `index.html`
+- **فتح** الملف في Visual Studio Code للتعديل
+
+> 💡 **نصيحة احترافية**: اسم الملف `index.html` له أهمية خاصة في تطوير الويب. عندما يزور شخص ما موقعًا إلكترونيًا، تبحث المتصفحات تلقائيًا عن `index.html` كصفحة افتراضية للعرض. هذا يعني أن عنوان URL مثل `https://mysite.com/projects/` سيعرض تلقائيًا ملف `index.html` من مجلد `projects` دون الحاجة إلى تحديد اسم الملف في عنوان URL.
+
+## فهم هيكل مستند HTML
+
+يتبع كل مستند HTML هيكلًا محددًا تحتاجه المتصفحات لفهمه وعرضه بشكل صحيح. فكر في هذا الهيكل كرسالة رسمية – تحتوي على عناصر مطلوبة بترتيب معين تساعد المتصفح (المستلم في هذه الحالة) على معالجة المحتوى بشكل صحيح.
+
+```mermaid
+flowchart TD
+    A["<!DOCTYPE html>"] --> B["<html>"]
+    B --> C["<head>"]
+    C --> D["<title>"]
+    C --> E["<meta charset>"]
+    C --> F["<meta viewport>"]
+    B --> G["<body>"]
+    G --> H["<h1> Heading"]
+    G --> I["<div> Containers"]
+    G --> J["<img> Images"]
+    
+    style A fill:#e1f5fe
+    style B fill:#f3e5f5
+    style C fill:#fff3e0
+    style G fill:#e8f5e8
+```
+
+لنبدأ بإضافة الأساس الضروري الذي يحتاجه كل مستند HTML.
+
+### إعلان DOCTYPE والعنصر الجذر
+
+أول سطرين في أي ملف HTML يعملان كـ "مقدمة" للمستند للمتصفح:
+
+```html
+<!DOCTYPE html>
+<html></html>
+```
+
+**فهم ما يفعله هذا الكود:**
+- **يعلن** نوع المستند كـ HTML5 باستخدام `<!DOCTYPE html>`
+- **ينشئ** العنصر الجذر `<html>` الذي سيحتوي على كل محتوى الصفحة
+- **يحدد** معايير الويب الحديثة لعرض المتصفح بشكل صحيح
+- **يضمن** عرضًا متسقًا عبر المتصفحات والأجهزة المختلفة
+
+> 💡 **نصيحة VS Code**: قم بالمرور فوق أي علامة HTML في VS Code لرؤية معلومات مفيدة من MDN Web Docs، بما في ذلك أمثلة الاستخدام وتفاصيل توافق المتصفح.
+
+> 📚 **تعلم المزيد**: إعلان DOCTYPE يمنع المتصفحات من الدخول في "وضع quirks"، الذي كان يُستخدم لدعم مواقع الويب القديمة جدًا. يستخدم تطوير الويب الحديث الإعلان البسيط `<!DOCTYPE html>` لضمان [عرض متوافق مع المعايير](https://developer.mozilla.org/docs/Web/HTML/Quirks_Mode_and_Standards_Mode).
+
+### 🔄 **توقف تربوي**
+**توقف وتأمل**: قبل المتابعة، تأكد من أنك تفهم:
+- ✅ لماذا يحتاج كل مستند HTML إلى إعلان DOCTYPE
+- ✅ ما الذي يحتويه العنصر الجذر `<html>`
+- ✅ كيف يساعد هذا الهيكل المتصفحات على عرض الصفحات بشكل صحيح
+
+**اختبار ذاتي سريع**: هل يمكنك شرح ما يعنيه "عرض متوافق مع المعايير" بكلماتك الخاصة؟
+
+## إضافة بيانات وصفية أساسية للمستند
+
+قسم `<head>` في مستند HTML يحتوي على معلومات مهمة تحتاجها المتصفحات ومحركات البحث، ولكن لا يراها الزوار مباشرة على الصفحة. فكر فيه كـ "معلومات خلف الكواليس" التي تساعد صفحتك على العمل بشكل صحيح والظهور بشكل صحيح عبر الأجهزة والمنصات المختلفة.
+
+تخبر هذه البيانات الوصفية المتصفحات كيفية عرض صفحتك، وما هي ترميز الأحرف التي يجب استخدامها، وكيفية التعامل مع أحجام الشاشات المختلفة – كل ذلك ضروري لإنشاء صفحات ويب احترافية وسهلة الوصول.
+
+### المهمة: إضافة رأس المستند
+
+أضف قسم `<head>` هذا بين علامات الفتح والإغلاق `<html>`:
+
+```html
+<head>
+	<title>Welcome to my Virtual Terrarium</title>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+</head>
+```
+
+**تفصيل ما يحققه كل عنصر:**
+- **يحدد** عنوان الصفحة الذي يظهر في علامات تبويب المتصفح ونتائج البحث
+- **يحدد** ترميز الأحرف UTF-8 لعرض النص بشكل صحيح عالميًا
+- **يضمن** التوافق مع الإصدارات الحديثة من Internet Explorer
+- **يُعد** التصميم المتجاوب من خلال ضبط نافذة العرض لتتناسب مع عرض الجهاز
+- **يتحكم** في مستوى التكبير الأولي لعرض المحتوى بالحجم الطبيعي
+
+> 🤔 **فكر في هذا**: ماذا سيحدث إذا قمت بتعيين علامة meta للنافذة مثل هذه: `<meta name="viewport" content="width=600">`؟ سيؤدي ذلك إلى إجبار الصفحة على أن تكون دائمًا بعرض 600 بكسل، مما يفسد التصميم المتجاوب! تعرف على المزيد حول [تكوين النافذة بشكل صحيح](https://developer.mozilla.org/docs/Web/HTML/Viewport_meta_tag).
+
+## بناء جسم المستند
+
+عنصر `<body>` يحتوي على كل المحتوى المرئي لصفحتك – كل ما سيراه المستخدمون ويتفاعلون معه. بينما قدم قسم `<head>` تعليمات للمتصفح، يحتوي قسم `<body>` على المحتوى الفعلي: النصوص، الصور، الأزرار، والعناصر الأخرى التي تشكل واجهة المستخدم الخاصة بك.
+
+دعنا نضيف هيكل الجسم ونفهم كيف تعمل علامات HTML معًا لإنشاء محتوى ذو معنى.
+
+### فهم هيكل علامات HTML
+
+تستخدم HTML علامات مزدوجة لتعريف العناصر. تحتوي معظم العلامات على علامة فتح مثل `<p>` وعلامة إغلاق مثل `</p>`، مع محتوى بينهما: `<p>مرحبًا، العالم!</p>`. هذا ينشئ عنصر فقرة يحتوي على النص "مرحبًا، العالم!".
+
+### المهمة: إضافة عنصر الجسم
+
+قم بتحديث ملف HTML الخاص بك ليشمل عنصر `<body>`:
+
+```html
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Welcome to my Virtual Terrarium</title>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+	</head>
+	<body></body>
+</html>
+```
+
+**ما الذي يوفره هذا الهيكل الكامل:**
+- **يُنشئ** إطار عمل مستند HTML5 الأساسي
+- **يتضمن** بيانات وصفية أساسية لعرض المتصفح بشكل صحيح
+- **يُنشئ** جسمًا فارغًا جاهزًا لمحتواك المرئي
+- **يتبع** أفضل الممارسات الحديثة لتطوير الويب
+
+الآن أنت جاهز لإضافة العناصر المرئية للتيراريوم الخاص بك. سنستخدم عناصر `<div>` كحاويات لتنظيم أقسام المحتوى المختلفة، وعناصر `<img>` لعرض صور النباتات.
+
+### العمل مع الصور وحاويات التخطيط
+
+الصور لها خصوصية في HTML لأنها تستخدم علامات "مغلقة ذاتيًا". على عكس العناصر مثل `<p></p>` التي تحيط بالمحتوى، تحتوي علامة `<img>` على كل المعلومات التي تحتاجها داخل العلامة نفسها باستخدام سمات مثل `src` لمسار ملف الصورة و`alt` لإمكانية الوصول.
+
+قبل إضافة الصور إلى HTML الخاص بك، ستحتاج إلى تنظيم ملفات مشروعك بشكل صحيح عن طريق إنشاء مجلد للصور وإضافة الرسومات النباتية.
+
+**أولاً، قم بإعداد الصور:**
+1. قم بإنشاء مجلد باسم `images` داخل مجلد مشروع التيراريوم الخاص بك
+2. قم بتنزيل صور النباتات من [مجلد الحل](../../../../3-terrarium/solution/images) (14 صورة نباتية إجمالاً)
+3. انسخ جميع صور النباتات إلى مجلد `images` الجديد الخاص بك
+
+### المهمة: إنشاء تخطيط عرض النباتات
+
+الآن أضف صور النباتات منظمة في عمودين بين علامات `<body></body>`:
+
+```html
+<div id="page">
+	<div id="left-container" class="container">
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant1" src="../../../../translated_images/ar/plant1.d87946a2ca70cc4316bda6e6c3af7210fbe9ada5539a7885141a9ce0efaf7be3.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant2" src="../../../../translated_images/ar/plant2.8daa1606c9c1ad896bb171212c7d1d882e504b76b8ec3a2d1c337d775cf50dc3.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant3" src="../../../../translated_images/ar/plant3.8b0d484381a2a2a77c5c06ad97ab6ae5b7023da8c6c7678b0183bc0e46ea17a7.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant4" src="../../../../translated_images/ar/plant4.656e16ae1df37be2af5f4e7b5ab6c5decc432c3d3ec2eb98b904ddbecad49db0.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant5" src="../../../../translated_images/ar/plant5.2b41b9355f11ebccd62d327f5f14e56531ecda9c6f970bc89e386ee9f0273bb0.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant6" src="../../../../translated_images/ar/plant6.3d1827d03b6569946be13ae5da1f32947ae56732638a43757a7c616a6adccc5d.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant7" src="../../../../translated_images/ar/plant7.8152c302ac97f621a6c595bdf3939103568f9efc7d3b06a0f02a1ea66f479de0.png" />
+		</div>
+	</div>
+	<div id="right-container" class="container">
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant8" src="../../../../translated_images/ar/plant8.38d6428174ffa850a47cd1b81d528fa528adda7d23f3ae0bb42f4a27356ca5e6.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant9" src="../../../../translated_images/ar/plant9.f0e38d3327c37fc29cd2734d48d20c2cf69300898ece6d46708829e02ce540e3.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant10" src="../../../../translated_images/ar/plant10.b159d6d6e985595f56d86b4b38061b8e7b4c9969c210c199fe967269cf935e7f.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant11" src="../../../../translated_images/ar/plant11.2a03a1c2ec8ea84ef3a80c06cc6883f3960fbb669f2c0b0bd824ba33d7eb7d32.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant12" src="../../../../translated_images/ar/plant12.60e9b53e538fbaf3e5797ebf800acb483baf5639e6cf378292ac2321ab8a5ea9.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant13" src="../../../../translated_images/ar/plant13.07a51543c820bcf57f67a9a6c0acbd6211ff795e2e67a42a9718224534e95fab.png" />
+		</div>
+		<div class="plant-holder">
+			<img class="plant" alt="plant" id="plant14" src="../../../../translated_images/ar/plant14.6e486371ba7d36ba3520d9828887993cb4c3edad8bdd8ff9b1b315717ff8cb63.png" />
+		</div>
+	</div>
+</div>
+```
+
+**خطوة بخطوة، ما الذي يحدث في هذا الكود:**
+- **يُنشئ** حاوية الصفحة الرئيسية بـ `id="page"` لاحتواء كل المحتوى
+- **يُنشئ** حاويتين للعمودين: `left-container` و`right-container`
+- **ينظم** 7 نباتات في العمود الأيسر و7 نباتات في العمود الأيمن
+- **يُغلف** كل صورة نباتية في div باسم `plant-holder` لتحديد موضعها الفردي
+- **يُطبق** أسماء فئات متسقة لتصميم CSS في الدرس التالي
+- **يُعين** معرفات فريدة لكل صورة نباتية لتفاعل JavaScript لاحقًا
+- **يتضمن** مسارات ملفات صحيحة تشير إلى مجلد الصور
+
+> 🤔 **فكر في هذا**: لاحظ أن جميع الصور حاليًا تحتوي على نفس النص البديل "plant". هذا ليس مثاليًا لإمكانية الوصول. سيستمع مستخدمو قارئات الشاشة إلى "plant" مكررًا 14 مرة دون معرفة أي نبات يظهر كل صورة. هل يمكنك التفكير في نص بديل أفضل وأكثر وصفًا لكل صورة؟
+
+> 📝 **أنواع عناصر HTML**: عناصر `<div>` هي "مستوى الكتلة" وتشغل العرض الكامل، بينما عناصر `<span>` هي "مستوى السطر" وتشغل العرض اللازم فقط. ماذا تعتقد سيحدث إذا قمت بتغيير جميع علامات `<div>` إلى علامات `<span>`؟
+
+### 🔄 **توقف تربوي**
+**فهم الهيكل**: خذ لحظة لمراجعة هيكل HTML الخاص بك:
+- ✅ هل يمكنك تحديد الحاويات الرئيسية في تخطيطك؟
+- ✅ هل تفهم لماذا تحتوي كل صورة على معرف فريد؟
+- ✅ كيف تصف الغرض من divs `plant-holder`؟
+
+**فحص بصري**: افتح ملف HTML الخاص بك في المتصفح. يجب أن ترى:
+- قائمة أساسية لصور النباتات
+- صور منظمة في عمودين
+- تخطيط بسيط وغير مصمم
+
+**تذكر**: هذا المظهر البسيط هو بالضبط ما يجب أن يبدو عليه HTML قبل تصميم CSS!
+
+مع إضافة هذا الترميز، ستظهر النباتات على الشاشة، على الرغم من أنها لن تبدو مصقولة بعد – هذا ما ستفعله CSS في الدرس التالي! في الوقت الحالي، لديك أساس HTML قوي ينظم المحتوى بشكل صحيح ويتبع أفضل ممارسات إمكانية الوصول.
+
+## استخدام HTML الدلالي لإمكانية الوصول
+
+HTML الدلالي يعني اختيار عناصر HTML بناءً على معناها وغرضها، وليس فقط مظهرها. عندما تستخدم الترميز الدلالي، فإنك توصل هيكل ومعنى المحتوى الخاص بك إلى المتصفحات ومحركات البحث والتقنيات المساعدة مثل قارئات الشاشة.
+
+```mermaid
+flowchart TD
+    A[Need to add content?] --> B{What type?}
+    B -->|Main heading| C["<h1>"]
+    B -->|Subheading| D["<h2>, <h3>, etc."]
+    B -->|Paragraph| E["<p>"]
+    B -->|List| F["<ul>, <ol>"]
+    B -->|Navigation| G["<nav>"]
+    B -->|Article| H["<article>"]
+    B -->|Section| I["<section>"]
+    B -->|Generic container| J["<div>"]
+    
+    C --> K[Screen readers announce as main title]
+    D --> L[Creates proper heading hierarchy]
+    E --> M[Provides proper text spacing]
+    F --> N[Enables list navigation shortcuts]
+    G --> O[Identifies navigation landmarks]
+    H --> P[Marks standalone content]
+    I --> Q[Groups related content]
+    J --> R[Use only when no semantic tag fits]
+    
+    style C fill:#4caf50
+    style D fill:#4caf50
+    style E fill:#4caf50
+    style F fill:#4caf50
+    style G fill:#2196f3
+    style H fill:#2196f3
+    style I fill:#2196f3
+    style J fill:#ff9800
+```
+
+هذا النهج يجعل مواقع الويب الخاصة بك أكثر سهولة للمستخدمين ذوي الإعاقات ويساعد محركات البحث على فهم المحتوى الخاص بك بشكل أفضل. إنه مبدأ أساسي لتطوير الويب الحديث الذي يخلق تجارب أفضل للجميع.
+
+### إضافة عنوان صفحة دلالي
+
+دعنا نضيف عنوانًا مناسبًا لصفحة التيراريوم الخاصة بك. قم بإدراج هذا السطر مباشرة بعد علامة الفتح `<body>`:
+
+```html
+<h1>My Terrarium</h1>
+```
+
+**لماذا يهم الترميز الدلالي:**
+- **يساعد** قارئات الشاشة على التنقل وفهم هيكل الصفحة
+- **يحسن** تحسين محركات البحث (SEO) من خلال توضيح تسلسل المحتوى
+- **يعزز** إمكانية الوصول للمستخدمين ذوي الإعاقات البصرية أو الاختلافات الإدراكية
+- **يخلق** تجارب مستخدم أفضل عبر جميع الأجهزة والمنصات
+- **يتبع** معايير الويب وأفضل الممارسات للتطوير الاحترافي
+
+**أمثلة على الخيارات الدلالية مقابل غير الدلالية:**
+
+| الغرض | ✅ الخيار الدلالي | ❌ الخيار غير الدلالي |
+|-------|------------------|-----------------------|
+| العنوان الرئيسي | `<h1>العنوان</h1>` | `<div class="big-text">العنوان</div>` |
+| التنقل | `<nav><ul><li></li></ul></nav>` | `<div class="menu"><div></div></div>` |
+| الزر | `<button>اضغط هنا</button>` | `<span onclick="...">اضغط هنا</span>` |
+| محتوى المقالة | `<article><p></p></article>` | `<div class="content"><div></div></div>` |
+
+> 🎥 **شاهدها عمليًا**: شاهد [كيف تتفاعل قارئات الشاشة مع صفحات الويب](https://www.youtube.com/watch?v=OUDV1gqs9GA) لفهم سبب أهمية الترميز الدلالي لإمكانية الوصول. لاحظ كيف يساعد هيكل HTML الصحيح المستخدمين على التنقل بكفاءة.
+
+## إنشاء حاوية التيراريوم
+
+الآن دعنا نضيف هيكل HTML للتيراريوم نفسه – الحاوية الزجاجية حيث سيتم وضع النباتات في النهاية. هذا القسم يوضح مفهومًا مهمًا: يوفر HTML الهيكل، ولكن بدون تصميم CSS، لن تكون هذه العناصر مرئية بعد.
+
+يستخدم ترميز التيراريوم أسماء فئات وصفية ستجعل تصميم CSS بديهيًا وسهل الصيانة في الدرس التالي.
+
+### المهمة: إضافة هيكل التيراريوم
+
+قم بإدراج هذا الترميز فوق علامة `</div>` الأخيرة (قبل علامة الإغلاق لحاوية الصفحة):
+
+```html
+<div id="terrarium">
+	<div class="jar-top"></div>
+	<div class="jar-walls">
+		<div class="jar-glossy-long"></div>
+		<div class="jar-glossy-short"></div>
+	</div>
+	<div class="dirt"></div>
+	<div class="jar-bottom"></div>
+</div>
+```
+
+**فهم هيكل التيراريوم هذا:**
+- **يُنشئ** حاوية تيراريوم رئيسية بمعرف فريد للتصميم
+- **تعريف** عناصر منفصلة لكل مكون بصري (الأعلى، الجدران، التراب، الأسفل)  
+- **يتضمن** عناصر متداخلة لتأثيرات انعكاس الزجاج (العناصر اللامعة)  
+- **يستخدم** أسماء فئات وصفية تشير بوضوح إلى وظيفة كل عنصر  
+- **يُجهز** الهيكل لتنسيق CSS الذي سيُظهر مظهر التيراريوم الزجاجي  
+
+> 🤔 **هل لاحظت شيئًا؟**: على الرغم من أنك أضفت هذا الترميز، إلا أنك لا ترى أي شيء جديد على الصفحة! هذا يوضح تمامًا كيف يوفر HTML الهيكل بينما يوفر CSS المظهر. هذه العناصر `<div>` موجودة ولكن ليس لديها أي تنسيق بصري حتى الآن – سيتم ذلك في الدرس التالي!
+
+```mermaid
+flowchart TD
+    A[HTML Document] --> B[Document Head]
+    A --> C[Document Body]
+    B --> D[Title Element]
+    B --> E[Meta Charset]
+    B --> F[Meta Viewport]
+    C --> G[Main Heading]
+    C --> H[Page Container]
+    H --> I[Left Container with 7 plants]
+    H --> J[Right Container with 7 plants]
+    H --> K[Terrarium Structure]
+    
+    style A fill:#e1f5fe
+    style B fill:#fff3e0
+    style C fill:#e8f5e8
+    style H fill:#f3e5f5
+```
+  
+### 🔄 **مراجعة تعليمية**  
+**إتقان هيكل HTML**: قبل المضي قدمًا، تأكد من أنك تستطيع:  
+- ✅ شرح الفرق بين هيكل HTML والمظهر البصري  
+- ✅ التمييز بين عناصر HTML الدلالية وغير الدلالية  
+- ✅ وصف كيف يمكن أن يفيد الترميز الصحيح إمكانية الوصول  
+- ✅ التعرف على هيكل شجرة المستند بالكامل  
+
+**اختبار فهمك**: حاول فتح ملف HTML الخاص بك في متصفح مع تعطيل JavaScript وإزالة CSS. هذا يظهر لك الهيكل الدلالي النقي الذي أنشأته!
+
+---
+
+## تحدي وكيل GitHub Copilot  
+
+استخدم وضع الوكيل لإكمال التحدي التالي:  
+
+**الوصف:** قم بإنشاء هيكل HTML دلالي لقسم دليل العناية بالنباتات يمكن إضافته إلى مشروع التيراريوم.  
+
+**المهمة:** قم بإنشاء قسم HTML دلالي يتضمن عنوانًا رئيسيًا "دليل العناية بالنباتات"، وثلاثة أقسام فرعية مع عناوين "الري"، "متطلبات الضوء"، و"العناية بالتربة"، يحتوي كل منها على فقرة من معلومات العناية بالنباتات. استخدم علامات HTML الدلالية المناسبة مثل `<section>`، `<h2>`، `<h3>`، و`<p>` لتنظيم المحتوى بشكل مناسب.  
+
+تعرف على المزيد حول [وضع الوكيل](https://code.visualstudio.com/blogs/2025/02/24/introducing-copilot-agent-mode) هنا.
+
+## تحدي استكشاف تاريخ HTML  
+
+**التعرف على تطور الويب**  
+
+لقد تطور HTML بشكل كبير منذ أن أنشأ تيم بيرنرز لي أول متصفح ويب في CERN عام 1990. بعض العلامات القديمة مثل `<marquee>` أصبحت الآن مهملة لأنها لا تعمل بشكل جيد مع معايير الوصول الحديثة ومبادئ التصميم المتجاوب.  
+
+**جرب هذا التمرين:**  
+1. قم مؤقتًا بتغليف عنوان `<h1>` الخاص بك داخل علامة `<marquee>`: `<marquee><h1>تيراريومي</h1></marquee>`  
+2. افتح صفحتك في متصفح ولاحظ تأثير التمرير  
+3. فكر في سبب إهمال هذه العلامة (تلميح: فكر في تجربة المستخدم وإمكانية الوصول)  
+4. قم بإزالة علامة `<marquee>` وارجع إلى الترميز الدلالي  
+
+**أسئلة للتفكير:**  
+- كيف يمكن أن يؤثر عنوان متحرك على المستخدمين ذوي الإعاقات البصرية أو حساسية الحركة؟  
+- ما هي تقنيات CSS الحديثة التي يمكن أن تحقق تأثيرات بصرية مشابهة بشكل أكثر سهولة؟  
+- لماذا من المهم استخدام معايير الويب الحالية بدلاً من العناصر المهملة؟  
+
+استكشف المزيد حول [عناصر HTML المهملة والقديمة](https://developer.mozilla.org/docs/Web/HTML/Element#Obsolete_and_deprecated_elements) لفهم كيف تتطور معايير الويب لتحسين تجربة المستخدم.
+
+## اختبار ما بعد المحاضرة  
+
+[اختبار ما بعد المحاضرة](https://ff-quizzes.netlify.app/web/quiz/16)
+
+## المراجعة والدراسة الذاتية  
+
+**تعميق معرفتك بـ HTML**  
+
+HTML كان أساس الويب لأكثر من 30 عامًا، تطور من لغة ترميز بسيطة للمستندات إلى منصة متطورة لبناء التطبيقات التفاعلية. فهم هذا التطور يساعدك على تقدير معايير الويب الحديثة واتخاذ قرارات تطوير أفضل.  
+
+**مسارات التعلم الموصى بها:**  
+
+1. **تاريخ وتطور HTML**  
+   - ابحث في الجدول الزمني من HTML 1.0 إلى HTML5  
+   - استكشف سبب إهمال بعض العلامات (إمكانية الوصول، ملاءمة الأجهزة المحمولة، سهولة الصيانة)  
+   - تحقق من ميزات HTML الناشئة والمقترحات  
+
+2. **الغوص العميق في HTML الدلالي**  
+   - ادرس القائمة الكاملة لعناصر [HTML5 الدلالية](https://developer.mozilla.org/docs/Web/HTML/Element)  
+   - تدرب على تحديد متى تستخدم `<article>`، `<section>`، `<aside>`، و`<main>`  
+   - تعلم عن سمات ARIA لتحسين إمكانية الوصول  
+
+3. **تطوير الويب الحديث**  
+   - استكشف [بناء مواقع ويب متجاوبة](https://docs.microsoft.com/learn/modules/build-simple-website/?WT.mc_id=academic-77807-sagibbon) على Microsoft Learn  
+   - فهم كيفية دمج HTML مع CSS وJavaScript  
+   - تعلم عن أفضل ممارسات أداء الويب وتحسين محركات البحث  
+
+**أسئلة للتفكير:**  
+- ما هي علامات HTML المهملة التي اكتشفتها، ولماذا تم إزالتها؟  
+- ما هي ميزات HTML الجديدة التي يتم اقتراحها للإصدارات المستقبلية؟  
+- كيف يساهم HTML الدلالي في إمكانية الوصول وتحسين محركات البحث؟  
+
+### ⚡ **ما يمكنك القيام به في الدقائق الخمس القادمة**  
+- [ ] افتح أدوات المطور (F12) وتحقق من هيكل HTML لموقعك المفضل  
+- [ ] أنشئ ملف HTML بسيطًا يحتوي على علامات أساسية: `<h1>`، `<p>`، و`<img>`  
+- [ ] تحقق من صحة HTML الخاص بك باستخدام أداة التحقق من HTML عبر الإنترنت من W3C  
+- [ ] حاول إضافة تعليق إلى HTML الخاص بك باستخدام `<!-- تعليق -->`
+
+### 🎯 **ما يمكنك إنجازه خلال الساعة**  
+- [ ] أكمل اختبار ما بعد الدرس وراجع مفاهيم HTML الدلالية  
+- [ ] قم ببناء صفحة ويب بسيطة عن نفسك باستخدام هيكل HTML صحيح  
+- [ ] جرب مستويات العناوين المختلفة وعلامات تنسيق النص  
+- [ ] أضف صور وروابط لممارسة دمج الوسائط المتعددة  
+- [ ] ابحث عن ميزات HTML5 التي لم تجربها بعد  
+
+### 📅 **رحلتك الأسبوعية مع HTML**  
+- [ ] أكمل مهمة مشروع التيراريوم باستخدام الترميز الدلالي  
+- [ ] أنشئ صفحة ويب قابلة للوصول باستخدام تسميات وأدوار ARIA  
+- [ ] تدرب على إنشاء النماذج باستخدام أنواع الإدخال المختلفة  
+- [ ] استكشف واجهات برمجة تطبيقات HTML5 مثل localStorage أو geolocation  
+- [ ] ادرس أنماط HTML المتجاوبة وتصميم الأولوية للجوال  
+- [ ] راجع أكواد HTML الخاصة بالمطورين الآخرين للحصول على أفضل الممارسات  
+
+### 🌟 **رحلتك الشهرية لإتقان أساسيات الويب**  
+- [ ] قم ببناء موقع ويب للملف الشخصي يعرض إتقانك لـ HTML  
+- [ ] تعلم قوالب HTML باستخدام إطار عمل مثل Handlebars  
+- [ ] ساهم في مشاريع مفتوحة المصدر من خلال تحسين وثائق HTML  
+- [ ] أتقن مفاهيم HTML المتقدمة مثل العناصر المخصصة  
+- [ ] دمج HTML مع أطر CSS ومكتبات JavaScript  
+- [ ] قم بتوجيه الآخرين الذين يتعلمون أساسيات HTML  
+
+## 🎯 جدول زمني لإتقان HTML  
+
+```mermaid
+timeline
+    title HTML Learning Progression
+    
+    section Foundation (5 minutes)
+        Document Structure: DOCTYPE declaration
+                         : HTML root element
+                         : Head vs Body understanding
+        
+    section Metadata (10 minutes)
+        Essential Meta Tags: Character encoding
+                           : Viewport configuration
+                           : Browser compatibility
+        
+    section Content Creation (15 minutes)
+        Image Integration: Proper file paths
+                         : Alt text importance
+                         : Self-closing tags
+        
+    section Layout Organization (20 minutes)
+        Container Strategy: Div elements for structure
+                          : Class and ID naming
+                          : Nested element hierarchy
+        
+    section Semantic Mastery (30 minutes)
+        Meaningful Markup: Heading hierarchy
+                         : Screen reader navigation
+                         : Accessibility best practices
+        
+    section Advanced Concepts (1 hour)
+        HTML5 Features: Modern semantic elements
+                      : ARIA attributes
+                      : Performance considerations
+        
+    section Professional Skills (1 week)
+        Code Organization: File structure patterns
+                         : Maintainable markup
+                         : Team collaboration
+        
+    section Expert Level (1 month)
+        Modern Web Standards: Progressive enhancement
+                            : Cross-browser compatibility
+                            : HTML specification updates
+```
+  
+### 🛠️ ملخص أدوات HTML الخاصة بك  
+
+بعد إكمال هذا الدرس، لديك الآن:  
+- **هيكل المستند**: أساس HTML5 كامل مع DOCTYPE صحيح  
+- **الترميز الدلالي**: علامات ذات معنى تعزز إمكانية الوصول وتحسين محركات البحث  
+- **دمج الصور**: ممارسات تنظيم الملفات والنص البديل بشكل صحيح  
+- **حاويات التخطيط**: استخدام استراتيجي للعناصر div مع أسماء فئات وصفية  
+- **وعي إمكانية الوصول**: فهم التنقل باستخدام قارئات الشاشة  
+- **المعايير الحديثة**: ممارسات HTML5 الحالية ومعرفة العلامات المهملة  
+- **أساس المشروع**: قاعدة صلبة لتنسيق CSS وتفاعل JavaScript  
+
+**الخطوات التالية**: هيكل HTML الخاص بك جاهز لتنسيق CSS! الأساس الدلالي الذي بنيته سيجعل الدرس التالي أسهل بكثير للفهم.
+
+## المهمة  
+
+[تمرن على HTML: قم ببناء نموذج مدونة](assignment.md)  
+
+---
+
+**إخلاء المسؤولية**:  
+تم ترجمة هذا المستند باستخدام خدمة الترجمة بالذكاء الاصطناعي [Co-op Translator](https://github.com/Azure/co-op-translator). بينما نسعى لتحقيق الدقة، يرجى العلم أن الترجمات الآلية قد تحتوي على أخطاء أو عدم دقة. يجب اعتبار المستند الأصلي بلغته الأصلية المصدر الموثوق. للحصول على معلومات حاسمة، يُوصى بالترجمة البشرية الاحترافية. نحن غير مسؤولين عن أي سوء فهم أو تفسير خاطئ ينشأ عن استخدام هذه الترجمة.

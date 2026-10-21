@@ -1,0 +1,26 @@
+# :dollar: Bank építése
+
+Ebben a projektben megtanulhatod, hogyan építs fel egy képzeletbeli bankot. Ezek a leckék útmutatást adnak egy webalkalmazás elrendezéséhez és útvonalainak kialakításához, űrlapok létrehozásához, állapot kezeléséhez, valamint adatok lekéréséhez egy API-ból, amelyből elérheted a bank adatait.
+
+| ![Screen1](../../../translated_images/hu/screen1.baccbba0f1f93364.webp) | ![Screen2](../../../translated_images/hu/screen2.123c82a831a1d14a.webp) |
+|--------------------------------|--------------------------------|
+
+## Leckék
+
+1. [HTML sablonok és útvonalak egy webalkalmazásban](1-template-route/README.md)
+2. [Bejelentkezési és regisztrációs űrlap létrehozása](2-forms/README.md)
+3. [Adatok lekérésének és használatának módszerei](3-data/README.md)
+4. [Állapotkezelés alapfogalmai](4-state-management/README.md)
+
+### Köszönetnyilvánítás
+
+Ezeket a leckéket :hearts:-szal írta [Yohan Lasorsa](https://twitter.com/sinedied).
+
+Ha érdekel, hogyan építsd fel a leckékben használt [szerver API-t](/7-bank-project/api/README.md), kövesd [ezt a videósorozatot](https://aka.ms/NodeBeginner) (különösen a 17–21. videókat).
+
+Ezenkívül megtekintheted [ezt az interaktív Learn oktatóanyagot](https://aka.ms/learn/express-api).
+
+---
+
+**Felelősség kizárása**:  
+Ez a dokumentum az AI fordítási szolgáltatás [Co-op Translator](https://github.com/Azure/co-op-translator) segítségével lett lefordítva. Bár törekszünk a pontosságra, kérjük, vegye figyelembe, hogy az automatikus fordítások hibákat vagy pontatlanságokat tartalmazhatnak. Az eredeti dokumentum az eredeti nyelvén tekintendő hiteles forrásnak. Kritikus információk esetén javasolt professzionális emberi fordítást igénybe venni. Nem vállalunk felelősséget semmilyen félreértésért vagy téves értelmezésért, amely a fordítás használatából eredhet.

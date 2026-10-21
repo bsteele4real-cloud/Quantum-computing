@@ -1,0 +1,286 @@
+# Програмування на основі подій - Створення гри для набору тексту
+
+```mermaid
+journey
+    title Your Typing Game Development Journey
+    section Foundation
+      Plan game structure: 3: Student
+      Design user interface: 4: Student
+      Setup HTML elements: 4: Student
+    section Functionality
+      Handle user input: 4: Student
+      Track timing: 5: Student
+      Calculate accuracy: 5: Student
+    section Features
+      Add visual feedback: 5: Student
+      Implement game logic: 5: Student
+      Polish experience: 5: Student
+```
+
+## Вступ
+
+Ось те, що кожен розробник знає, але рідко говорить про це: швидкий набір тексту — це суперсила! 🚀 Подумайте про це — чим швидше ви можете перенести свої ідеї з мозку до редактора коду, тим більше ваша творчість може розквітати. Це як мати прямий канал між вашими думками та екраном.
+
+```mermaid
+pie title Game Features
+    "Real-time Feedback" : 25
+    "Performance Tracking" : 20
+    "Interactive UI" : 20
+    "Timer System" : 15
+    "Quote Management" : 10
+    "Results Display" : 10
+```
+
+Хочете дізнатися один із найкращих способів покращити цю навичку? Ви вгадали — ми будемо створювати гру!
+
+```mermaid
+flowchart LR
+    A[Player starts game] --> B[Random quote displayed]
+    B --> C[Player types characters]
+    C --> D{Character correct?}
+    D -->|Yes| E[Green highlight]
+    D -->|No| F[Red highlight]
+    E --> G[Update accuracy]
+    F --> G
+    G --> H{Quote complete?}
+    H -->|No| C
+    H -->|Yes| I[Calculate WPM]
+    I --> J[Display results]
+    J --> K[Play again?]
+    K -->|Yes| B
+    K -->|No| L[Game over]
+    
+    style A fill:#e1f5fe
+    style D fill:#fff3e0
+    style E fill:#e8f5e8
+    style F fill:#ffebee
+    style I fill:#f3e5f5
+```
+
+> Давайте разом створимо круту гру для набору тексту!
+
+Готові застосувати всі ті навички JavaScript, HTML і CSS, які ви вивчали? Ми створимо гру для набору тексту, яка буде кидати вам виклик випадковими цитатами від легендарного детектива [Шерлока Холмса](https://en.wikipedia.org/wiki/Sherlock_Holmes). Гра буде відстежувати, як швидко та точно ви можете набирати текст — і повірте, це більш захоплююче, ніж здається!
+
+```mermaid
+mindmap
+  root((Typing Game Development))
+    User Interface
+      Input Elements
+      Visual Feedback
+      Responsive Design
+      Accessibility
+    Game Logic
+      Quote Selection
+      Timer Management
+      Accuracy Tracking
+      Score Calculation
+    Event Handling
+      Keyboard Input
+      Button Clicks
+      Real-time Updates
+      Game State Changes
+    Performance Metrics
+      Words Per Minute
+      Character Accuracy
+      Error Tracking
+      Progress Display
+    User Experience
+      Immediate Feedback
+      Clear Instructions
+      Engaging Content
+      Achievement System
+```
+
+![demo](../../../4-typing-game/images/demo.gif)
+
+## Що потрібно знати
+
+```mermaid
+flowchart TD
+    A[User Action] --> B{Event Type?}
+    B -->|Key Press| C[Keyboard Event]
+    B -->|Button Click| D[Mouse Event]
+    B -->|Timer| E[Time Event]
+    
+    C --> F[Check Character]
+    D --> G[Start/Reset Game]
+    E --> H[Update Timer]
+    
+    F --> I{Correct?}
+    I -->|Yes| J[Highlight Green]
+    I -->|No| K[Highlight Red]
+    
+    J --> L[Update Score]
+    K --> L
+    L --> M[Check Game State]
+    
+    G --> N[Generate New Quote]
+    H --> O[Display Time]
+    
+    M --> P{Game Complete?}
+    P -->|Yes| Q[Show Results]
+    P -->|No| R[Continue Game]
+    
+    style A fill:#e1f5fe
+    style F fill:#e8f5e8
+    style I fill:#fff3e0
+    style Q fill:#f3e5f5
+```
+
+Перед тим як почати, переконайтеся, що ви комфортно почуваєтеся з цими концепціями (не хвилюйтеся, якщо вам потрібне швидке повторення — з кожним таке буває!):
+
+- Створення текстових полів вводу та кнопок
+- CSS і налаштування стилів за допомогою класів  
+- Основи JavaScript
+  - Створення масиву
+  - Генерація випадкового числа
+  - Отримання поточного часу
+
+Якщо щось із цього здається трохи забутим, це абсолютно нормально! Іноді найкращий спосіб закріпити знання — це зануритися в проєкт і розібратися в процесі.
+
+### 🔄 **Педагогічна перевірка**
+**Оцінка основи**: Перед початком розробки переконайтеся, що ви розумієте:
+- ✅ Як працюють HTML-форми та елементи вводу
+- ✅ CSS-класи та динамічне стилювання
+- ✅ Слухачі подій і обробники в JavaScript
+- ✅ Маніпуляція масивами та випадковий вибір
+- ✅ Вимірювання часу та розрахунки
+
+**Швидкий самотест**: Чи можете ви пояснити, як ці концепції працюють разом в інтерактивній грі?
+- **Події** активуються, коли користувачі взаємодіють з елементами
+- **Обробники** обробляють ці події та оновлюють стан гри
+- **CSS** забезпечує візуальний зворотний зв'язок для дій користувача
+- **Час** дозволяє вимірювати продуктивність і прогрес гри
+
+```mermaid
+quadrantChart
+    title Typing Game Skills Development
+    x-axis Beginner --> Expert
+    y-axis Static --> Interactive
+    quadrant-1 Advanced Games
+    quadrant-2 Real-time Apps
+    quadrant-3 Basic Pages
+    quadrant-4 Interactive Sites
+    
+    HTML Forms: [0.3, 0.2]
+    CSS Styling: [0.4, 0.3]
+    Event Handling: [0.7, 0.8]
+    Game Logic: [0.8, 0.9]
+    Performance Tracking: [0.9, 0.7]
+```
+
+## Давайте створимо це!
+
+[Створення гри для набору тексту за допомогою програмування на основі подій](./typing-game/README.md)
+
+### ⚡ **Що можна зробити за наступні 5 хвилин**
+- [ ] Відкрийте консоль браузера та спробуйте слухати події клавіатури за допомогою `addEventListener`
+- [ ] Створіть просту HTML-сторінку з полем вводу та протестуйте виявлення набору тексту
+- [ ] Попрактикуйте маніпуляцію рядками, порівнюючи набраний текст із цільовим текстом
+- [ ] Експериментуйте з `setTimeout`, щоб зрозуміти функції часу
+
+### 🎯 **Що можна досягти за цю годину**
+- [ ] Завершіть тест після уроку та зрозумійте програмування на основі подій
+- [ ] Створіть базову версію гри для набору тексту з перевіркою слів
+- [ ] Додайте візуальний зворотний зв'язок для правильного та неправильного набору тексту
+- [ ] Реалізуйте просту систему оцінювання на основі швидкості та точності
+- [ ] Стилізуйте свою гру за допомогою CSS, щоб зробити її привабливою
+
+### 📅 **Ваш тижневий розвиток гри**
+- [ ] Завершіть повну гру для набору тексту з усіма функціями та доопрацюванням
+- [ ] Додайте рівні складності з різною складністю слів
+- [ ] Реалізуйте відстеження статистики користувача (WPM, точність з часом)
+- [ ] Створіть звукові ефекти та анімації для кращого користувацького досвіду
+- [ ] Зробіть свою гру адаптивною для мобільних пристроїв із сенсорним управлінням
+- [ ] Поділіться своєю грою онлайн та отримайте відгуки від користувачів
+
+### 🌟 **Ваш місячний інтерактивний розвиток**
+- [ ] Створіть кілька ігор, досліджуючи різні шаблони взаємодії
+- [ ] Дізнайтеся про цикли гри, управління станом і оптимізацію продуктивності
+- [ ] Внесіть свій вклад у проєкти з відкритим кодом у розробці ігор
+- [ ] Освойте складні концепції часу та плавні анімації
+- [ ] Створіть портфоліо, яке демонструє різні інтерактивні застосунки
+- [ ] Наставляйте інших, хто цікавиться розробкою ігор та взаємодією з користувачем
+
+## 🎯 Ваш таймлайн майстерності гри для набору тексту
+
+```mermaid
+timeline
+    title Game Development Learning Progression
+    
+    section Setup (10 minutes)
+        Project Structure: HTML foundation
+                         : CSS styling setup
+                         : JavaScript file creation
+        
+    section User Interface (20 minutes)
+        Interactive Elements: Input fields
+                            : Button controls
+                            : Display areas
+                            : Responsive layout
+        
+    section Event Handling (25 minutes)
+        User Interaction: Keyboard events
+                        : Mouse events
+                        : Real-time feedback
+                        : State management
+        
+    section Game Logic (30 minutes)
+        Core Functionality: Quote generation
+                          : Character comparison
+                          : Accuracy calculation
+                          : Timer implementation
+        
+    section Performance Tracking (35 minutes)
+        Metrics & Analytics: WPM calculation
+                           : Error tracking
+                           : Progress visualization
+                           : Results display
+        
+    section Polish & Enhancement (45 minutes)
+        User Experience: Visual feedback
+                       : Sound effects
+                       : Animations
+                       : Accessibility features
+        
+    section Advanced Features (1 week)
+        Extended Functionality: Difficulty levels
+                              : Leaderboards
+                              : Custom quotes
+                              : Multiplayer options
+        
+    section Professional Skills (1 month)
+        Game Development: Performance optimization
+                        : Code architecture
+                        : Testing strategies
+                        : Deployment patterns
+```
+
+### 🛠️ Резюме вашого інструментарію для розробки гри
+
+Після завершення цього проєкту ви освоїте:
+- **Програмування на основі подій**: Чутливі інтерфейси, які реагують на ввід
+- **Зворотний зв'язок у реальному часі**: Миттєві візуальні та продуктивні оновлення
+- **Вимірювання продуктивності**: Точні системи часу та оцінювання
+- **Управління станом гри**: Контроль за потоком застосунку та досвідом користувача
+- **Інтерактивний дизайн**: Створення захоплюючих, затягують користувацьких досвідів
+- **Сучасні веб-API**: Використання можливостей браузера для багатих взаємодій
+- **Шаблони доступності**: Інклюзивний дизайн для всіх користувачів
+
+**Застосування в реальному світі**: Ці навички безпосередньо застосовуються до:
+- **Веб-застосунків**: Будь-який інтерактивний інтерфейс або панель управління
+- **Освітнього програмного забезпечення**: Платформи навчання та інструменти оцінки навичок
+- **Інструментів продуктивності**: Текстові редактори, IDE та програмне забезпечення для співпраці
+- **Ігрової індустрії**: Браузерні ігри та інтерактивні розваги
+- **Мобільної розробки**: Інтерфейси на основі сенсорного управління та обробки жестів
+
+**Наступний рівень**: Ви готові досліджувати розширені фреймворки для ігор, системи реального часу для багатокористувацьких ігор або складні інтерактивні застосунки!
+
+## Авторство
+
+Написано з ♥️ [Крістофером Гаррісоном](http://www.twitter.com/geektrainer)
+
+---
+
+**Відмова від відповідальності**:  
+Цей документ був перекладений за допомогою сервісу автоматичного перекладу [Co-op Translator](https://github.com/Azure/co-op-translator). Хоча ми прагнемо до точності, будь ласка, майте на увазі, що автоматичні переклади можуть містити помилки або неточності. Оригінальний документ на його рідній мові слід вважати авторитетним джерелом. Для критичної інформації рекомендується професійний людський переклад. Ми не несемо відповідальності за будь-які непорозуміння або неправильні тлумачення, що виникають внаслідок використання цього перекладу.
