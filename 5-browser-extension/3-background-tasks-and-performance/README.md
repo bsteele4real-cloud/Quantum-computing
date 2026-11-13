@@ -259,29 +259,30 @@ function calculateColor(value) {
 	// Corresponding colors from green (clean) to dark brown (high carbon)
 	const colors = ['#2AA364', '#F5EB4D', '#9E4229', '#381D02', '#381D02'];
 
-	// Find the closest scale value to our input
-	const closestNum = co2Scale.sort((a, b) => {
-		return Math.abs(a - value) - Math.abs(b - value);
-	})[0];
-	
-	console.log(`${value} is closest to ${closestNum}`);
-	
-	// Find the index for color mapping
-	const num = (element) => element > closestNum;
-	const scaleIndex = co2Scale.findIndex(num);
+	// Walk the scale in its original order. Sorting it in place would
+	// scramble the indexes, so colors[index] would no longer match co2Scale[index].
+	let closestIndex = 0;
+	let closestDistance = Infinity;
+	co2Scale.forEach((mark, index) => {
+		const distance = Math.abs(mark - value);
+		if (distance < closestDistance) {
+			closestDistance = distance;
+			closestIndex = index;
+		}
+	});
 
-	const closestColor = colors[scaleIndex];
-	console.log(scaleIndex, closestColor);
+	const closestColor = colors[closestIndex];
+	console.log(`${value} is closest to ${co2Scale[closestIndex]} (${closestColor})`);
 
 	// Send color update message to background script
 	chrome.runtime.sendMessage({ action: 'updateIcon', value: { color: closestColor } });
 }
 ```
 
-**Let's break down this clever little function:**
+**Let's break down this function:**
 - **Sets up** two arrays - one for CO2 levels, another for colors (green = clean, brown = dirty!)
-- **Finds** the closest match to our actual CO2 value using some neat array sorting
-- **Grabs** the matching color using the findIndex() method
+- **Finds** the closest mark without reordering the scale, so each color stays paired with its level
+- **Keeps** the earlier mark when two marks are equally close
 - **Sends** a message to Chrome's background script with our chosen color
 - **Uses** template literals (those backticks) for cleaner string formatting
 - **Keeps** everything organized with const declarations

@@ -49,10 +49,8 @@ function toCurrency(amount, currency) {
 }
 
 function toDate(dateStr) {
-  // Expect yyyy-mm-dd; fallback to today if invalid
-  const d = dateStr ? new Date(dateStr) : new Date();
-  if (Number.isNaN(d.getTime())) return new Date();
-  return d;
+  // yyyy-mm-dd is a local calendar day. See dates.js.
+  return parseCalendarDate(dateStr);
 }
 
 function formatDate(dateStr) {

@@ -297,12 +297,12 @@
     const special = keys.has('Shift');
 
     const accel = player.speed;
-    player.vx = (right ? 1 : 0) - (left ? 1 : 0);
-    player.vy = (down ? 1 : 0) - (up ? 1 : 0);
-
-    const mag = Math.hypot(player.vx, player.vy) || 1;
-    player.vx = (player.vx / mag) * accel;
-    player.vy = (player.vy / mag) * accel;
+    const vxInput = (right ? 1 : 0) - (left ? 1 : 0);
+    const vyInput = (down ? 1 : 0) - (up ? 1 : 0);
+    const motion = stepPlayerMotion(vxInput, vyInput, accel, player.angle);
+    player.vx = motion.vx;
+    player.vy = motion.vy;
+    player.angle = motion.angle;
 
     player.x += player.vx * dt;
     player.y += player.vy * dt;
@@ -310,11 +310,6 @@
     // Boundaries
     player.x = clamp(player.x, player.r + 4, BASE_WIDTH - player.r - 4);
     player.y = clamp(player.y, player.r + 4, BASE_HEIGHT - player.r - 4);
-
-    // Aim angle toward movement if moving
-    if (mag > 1) {
-      player.angle = Math.atan2(player.vy, player.vx);
-    }
 
     // Firing
     state.fireCooldown -= dt;

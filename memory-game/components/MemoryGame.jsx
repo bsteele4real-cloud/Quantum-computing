@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useRef } from "react";
+import { clickCard, clearMismatch, isValidGridSize } from "../lib/memory-rules.mjs";
 
 // Fisher-Yates shuffle for unbiased randomization
 function fisherYatesShuffle(array) {
@@ -22,18 +23,20 @@ const MemoryGame = () => {
   const [error, setError] = useState("");
 
   const [won, setWon] = useState(false);
+  const mismatchTimer = useRef(null);
 
   const handleGridSize = (e) => {
-    const size = parseInt(e.target.value);
-    if (2 <= size && size <= 10 && (size % 2 === 0)) {
+    const size = parseInt(e.target.value, 10);
+    if (isValidGridSize(size)) {
       setGridSize(size);
-      setError(""); 
+      setError("");
     } else {
       setError("Please enter a grid size where size is even (e.g., 2, 4, 6, 8, 10)");
     }
   };
 
   const initializeGame = useCallback(() => {
+    clearTimeout(mismatchTimer.current);
     const totalCards = gridSize * gridSize;
     const pairCount = totalCards / 2;
 
@@ -54,40 +57,28 @@ const MemoryGame = () => {
 
   useEffect(() => {
     initializeGame();
+    return () => clearTimeout(mismatchTimer.current);
   }, [initializeGame]);
 
-  const handleMatch = (secondId) => {
-    const [firstId] = flipped;
-
-    if (array[firstId].number === array[secondId].number) {
-      setSelectedPairs([...selectedPairs, firstId, secondId]);
-      setFlipped([]);
-      setDisabled(false);
-    } else {
-      setTimeout(() => {
-        setDisabled(false);
-        setFlipped([]);
-      }, 1000);
-    }
-  };
-
   const handleClick = (id) => {
-    if (disabled || won) return;
+    const next = clickCard(
+      { cards: array, flipped, selectedPairs, disabled, won },
+      id
+    );
+    if (next === undefined || next === null) return;
 
-    if (flipped.length === 0) {
-      setFlipped([id]);
-      return;
-    }
+    setFlipped(next.flipped);
+    setSelectedPairs(next.selectedPairs);
+    setDisabled(next.disabled);
+    setWon(next.won);
 
-    if (flipped.length === 1) {
-      setDisabled(true);
-      if (id !== flipped[0]) {
-        setFlipped([...flipped, id]);
-        handleMatch(id);
-      } else {
-        setFlipped([]);
-        setDisabled(false);
-      }
+    if (next.disabled && next.flipped.length === 2) {
+      clearTimeout(mismatchTimer.current);
+      mismatchTimer.current = setTimeout(() => {
+        const cleared = clearMismatch(next);
+        setFlipped(cleared.flipped);
+        setDisabled(cleared.disabled);
+      }, 1000);
     }
   };
 

@@ -8,7 +8,7 @@
 		"node": ">=18.0.0"
 	},
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"test": "node --test src/carbon-color.test.js",
 		"watch": "webpack --watch",
 		"build": "webpack"
 	},

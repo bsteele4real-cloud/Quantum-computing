@@ -50,12 +50,15 @@ const highlightWord = (index) => {
 // Game start
 const startGame = () => {
   const quote = getRandomQuote();
-  words = quote.split(" ");
-  wordIndex = 0;
+  const fresh = TypingLogic.createTypingState(quote);
+  words = fresh.words;
+  wordIndex = fresh.wordIndex;
   renderQuote(quote);
 
   messageElement.textContent = messages.start;
-  typedValueElement.value = "";
+  typedValueElement.value = fresh.input;
+  typedValueElement.disabled = fresh.disabled;
+  typedValueElement.classList.remove("error");
   typedValueElement.focus();
 
   startTime = Date.now();
@@ -63,26 +66,25 @@ const startGame = () => {
 
 // Typing logic
 const handleTyping = () => {
-  const currentWord = words[wordIndex];
-  const typedValue = typedValueElement.value;
+  if (!words.length || typedValueElement.disabled) return;
 
-  if (typedValue === currentWord && wordIndex === words.length - 1) {
-    // Game finished
+  const next = TypingLogic.reduceTyping(
+    { words, wordIndex, finished: false },
+    typedValueElement.value
+  );
+  wordIndex = next.wordIndex;
+  typedValueElement.value = next.input;
+  typedValueElement.disabled = next.disabled;
+  typedValueElement.classList.toggle("error", next.error);
+  highlightWord(wordIndex);
+
+  if (next.finished) {
     const elapsedTime = (Date.now() - startTime) / 1000;
     messageElement.textContent = messages.success(elapsedTime);
-    typedValueElement.disabled = true;
-  } else if (typedValue.endsWith(" ") && typedValue.trim() === currentWord) {
-    // Word completed
-    typedValueElement.value = "";
-    wordIndex++;
-    highlightWord(wordIndex);
-  } else if (currentWord.startsWith(typedValue)) {
-    // Correct so far
-    typedValueElement.classList.remove("error");
-  } else {
-    // Error
-    typedValueElement.classList.add("error");
+  } else if (next.error) {
     messageElement.textContent = messages.error;
+  } else {
+    messageElement.textContent = messages.start;
   }
 };
 
