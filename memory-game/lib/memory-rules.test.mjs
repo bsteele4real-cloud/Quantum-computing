@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { clickCard, clearMismatch, isValidGridSize } from './memory-rules.mjs';
+import { clickCard, clearMismatch, isValidGridSize, shouldStartMismatchTimer } from './memory-rules.mjs';
 
 const cards = [
   { id: 0, number: 1 },
@@ -32,19 +32,20 @@ test('matching every pair wins, and matched cards cannot be counted twice', () =
 });
 
 test('a mismatch locks the board until it is cleared', () => {
-  let state = fresh();
-  state = clickCard(state, 0);
-  state = clickCard(state, 2);
-  assert.deepEqual(state.flipped, [0, 2]);
-  assert.equal(state.disabled, true);
-  assert.equal(state.won, false);
+  const opened = clickCard(fresh(), 0);
+  const locked = clickCard(opened, 2);
+  assert.equal(shouldStartMismatchTimer(opened, locked), true);
+  assert.deepEqual(locked.flipped, [0, 2]);
+  assert.equal(locked.disabled, true);
+  assert.equal(locked.won, false);
 
-  state = clickCard(state, 1);
-  assert.deepEqual(state.flipped, [0, 2]);
+  const ignored = clickCard(locked, 1);
+  assert.equal(ignored, locked);
+  assert.equal(shouldStartMismatchTimer(locked, ignored), false);
 
-  state = clearMismatch(state);
-  assert.deepEqual(state.flipped, []);
-  assert.equal(state.disabled, false);
+  const cleared = clearMismatch(locked);
+  assert.deepEqual(cleared.flipped, []);
+  assert.equal(cleared.disabled, false);
 });
 
 test('grid size must be an even integer from 2 to 10', () => {

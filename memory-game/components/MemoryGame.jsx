@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback, useRef } from "react";
-import { clickCard, clearMismatch, isValidGridSize } from "../lib/memory-rules.mjs";
+import { clickCard, clearMismatch, isValidGridSize, shouldStartMismatchTimer } from "../lib/memory-rules.mjs";
 
 // Fisher-Yates shuffle for unbiased randomization
 function fisherYatesShuffle(array) {
@@ -61,18 +61,18 @@ const MemoryGame = () => {
   }, [initializeGame]);
 
   const handleClick = (id) => {
-    const next = clickCard(
-      { cards: array, flipped, selectedPairs, disabled, won },
-      id
-    );
-    if (next === undefined || next === null) return;
+    const current = { cards: array, flipped, selectedPairs, disabled, won };
+    const next = clickCard(current, id);
+    // Ignored clicks return the same object. Restarting the timer from those
+    // clicks would keep a mismatch locked for as long as the player clicks.
+    if (!next || next === current) return;
 
     setFlipped(next.flipped);
     setSelectedPairs(next.selectedPairs);
     setDisabled(next.disabled);
     setWon(next.won);
 
-    if (next.disabled && next.flipped.length === 2) {
+    if (shouldStartMismatchTimer(current, next)) {
       clearTimeout(mismatchTimer.current);
       mismatchTimer.current = setTimeout(() => {
         const cleared = clearMismatch(next);

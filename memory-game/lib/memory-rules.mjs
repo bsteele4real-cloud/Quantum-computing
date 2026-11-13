@@ -32,3 +32,11 @@ export function clickCard(state, id) {
 export function clearMismatch(state) {
   return { ...state, flipped: [], disabled: false };
 }
+
+// A click that is ignored (the board is already locked, or the card is already
+// matched) returns the same state object. Only a new mismatch should start the
+// reveal timer. Restarting it on every click keeps the board locked.
+export function shouldStartMismatchTimer(previous, next) {
+  if (!next || next === previous) return false;
+  return Boolean(next.disabled && next.flipped.length === 2);
+}
