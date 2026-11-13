@@ -1,0 +1,10 @@
+# Weekly link reports were mostly duplicates of the same pages.
+# Refs #5, #6, #7.
+# Translated copies repeat every English link, and several hosts
+# answer this checker with 403 even when a browser can open the page.
+exclude_path = ["translations", "translated_images"]
+
+accept = [200, 206, 403, 429]
+
+timeout = 20
+max_concurrency = 8

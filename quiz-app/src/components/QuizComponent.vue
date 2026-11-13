@@ -62,26 +62,10 @@
   </template>
   
   <script>
-
-  function getFileByLocale(locale) {
-    // loop keys in messages, if key is the start of locale, return that file
-    let file = {
-        complete: "Complete",
-        error: "Error",
-        quizzes: [],
-        title: "Default Quiz",
-    };
-    for (let key in messages) {
-      if (locale.startsWith(key)) {
-        file = messages[key];
-        break;
-      }
-    }
-    return file;
-  }
-
   import messages from "@/assets/translations";
-  let locale = navigator.language || navigator.userLanguage;
+  import { selectMessageFile } from "@/assets/translations/locale";
+
+  let locale = navigator.language || navigator.userLanguage || "en";
   console.log("locale", locale);
   console.log("messages", messages);
   
@@ -95,7 +79,7 @@
         error: false,
         route: "",
         locale: "",
-        file: getFileByLocale(locale),
+        file: selectMessageFile(messages, locale),
       };
     },
     computed: {
@@ -105,7 +89,9 @@
     },
     created() {
       this.route = this.$route.params.id;
-      this.locale = this.$route.query.loc;
+      const loc = this.$route.query.loc || locale;
+      this.locale = loc;
+      this.file = selectMessageFile(messages, loc);
     },
     methods: {
       handleAnswerClick(isCorrect) {

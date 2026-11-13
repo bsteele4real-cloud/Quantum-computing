@@ -5,7 +5,7 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "npx http-server -c-1 -p 5000",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "node --test movement.test.js"
 	},
 	"keywords": [],
 	"author": "",

@@ -22,31 +22,15 @@
   
   <script>
   import messages from "@/assets/translations";
-  
-  function getFileByLocale(locale) {
-    // loop keys in messages, if key is the start of locale, return that file
-    let file = {
-        complete: "Complete",
-        error: "Error",
-        quizzes: [],
-        title: "Default Quiz",
-    };
-    for (let key in messages) {
-      if (locale.startsWith(key)) {
-        file = messages[key];
-        break;
-      }
-    }
-    return file;
-  }
+  import { selectMessageFile } from "@/assets/translations/locale";
 
-  let locale = navigator.language || navigator.userLanguage;
+  let locale = navigator.language || navigator.userLanguage || "en";
 
   export default {
     name: "QuizzesComponent",
     data() {
       return {
-        file: getFileByLocale(locale),
+        file: selectMessageFile(messages, locale),
       };
     },
     computed: {
