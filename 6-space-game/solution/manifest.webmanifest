@@ -1,0 +1,8 @@
+{
+  "name": "Space Game",
+  "short_name": "Space",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#070a1a",
+  "theme_color": "#0b1023"
+}
