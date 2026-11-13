@@ -1,4 +1,3 @@
-/* global fetch */
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { createServer } = require('./server');

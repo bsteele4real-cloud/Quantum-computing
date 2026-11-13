@@ -20,7 +20,7 @@ jobs:
         with:
           fail: false
           # .lychee.toml skips translated copies and bot 403s. Refs #5, #6, #7.
-          args: --config .lychee.toml --verbose --no-progress './**/*.md' './**/*.html'
+          args: --config .lychee.toml --root-dir ${{ github.workspace }} --verbose --no-progress './**/*.md' './**/*.html'
 
       - name: Create Issue From File
         if: steps.lychee.outputs.exit_code != 0

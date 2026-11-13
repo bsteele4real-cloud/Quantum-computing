@@ -14,7 +14,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
 
   <!-- Font Awesome 6 (Free) via cdnjs -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-bWn0gM3Yx6w5OV6v4p+WB6l3Zl9sJ2jQ4kN0N1bK2qgkvI6l3F8Vd6k1oB7f/0g0a9Qyxgkq+K6X1JQmJv9zYg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer">
 
   <!-- Optional PWA hooks (files to be created later) -->
   <link rel="manifest" href="manifest.webmanifest">
@@ -410,16 +410,10 @@ footer {
       <label for="spriteUpload">Upload sprite images</label>
       <input id="spriteUpload" type="file" accept="image/*" multiple>
 
-      <!-- Preloadable audio (sources to be provided) -->
-      <audio id="sfxShoot" preload="auto">
-        <source src="assets/audio/shoot.mp3" type="audio/mpeg">
-      </audio>
-      <audio id="sfxExplosion" preload="auto">
-        <source src="assets/audio/explosion.mp3" type="audio/mpeg">
-      </audio>
-      <audio id="bgMusic" preload="auto" loop>
-        <source src="assets/audio/music.mp3" type="audio/mpeg">
-      </audio>
+      <!-- Audio elements are ready. Add a <source> when the sound files are part of the lesson. -->
+      <audio id="sfxShoot" preload="none"></audio>
+      <audio id="sfxExplosion" preload="none"></audio>
+      <audio id="bgMusic" preload="none" loop></audio>
     </section>
 
     <!-- Leaderboard -->

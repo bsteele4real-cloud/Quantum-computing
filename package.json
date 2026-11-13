@@ -6,7 +6,7 @@
 	"scripts": {
 		"convert": "node_modules/.bin/docsify-to-pdf",
 		"pretest": "npm --prefix 7-bank-project/api ci",
-		"test": "node --test 7-bank-project/api/server.test.js 7-bank-project/solution/dates.test.js 4-typing-game/solution/typing-logic.test.js 4-typing-game/solution/clock.test.js 4-typing-game/solution/index-html.test.js 5-browser-extension/solution/src/carbon-color.test.js 6-space-game/solution/movement.test.js quiz-app/src/assets/translations/locale.test.js memory-game/lib/memory-rules.test.mjs tests/docs-links.test.js tests/bank-lockfile.test.js"
+		"test": "node --test 7-bank-project/api/server.test.js 7-bank-project/solution/dates.test.js 4-typing-game/solution/typing-logic.test.js 4-typing-game/solution/clock.test.js 4-typing-game/solution/index-html.test.js 5-browser-extension/solution/src/carbon-color.test.js 6-space-game/solution/movement.test.js quiz-app/src/assets/translations/locale.test.js memory-game/lib/memory-rules.test.mjs tests/docs-links.test.js tests/bank-lockfile.test.js tests/static-assets.test.js tests/docs-site.test.js 9-chat-project/solution/frontend/url.test.js"
 	},
 	"repository": {
 		"type": "git",

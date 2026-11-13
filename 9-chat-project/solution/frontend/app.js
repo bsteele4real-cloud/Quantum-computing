@@ -6,8 +6,8 @@
   const form = document.getElementById('composer');
   const input = document.getElementById('input');
   const sendBtn = document.getElementById('send');
-  const BASE_URL = "https://automatic-space-funicular-954qxp96rgcqjq-5000.app.github.dev/"; 
-  const API_ENDPOINT = `${BASE_URL}/hello`; // adjust if your backend runs elsewhere
+  const BASE_URL = "https://automatic-space-funicular-954qxp96rgcqjq-5000.app.github.dev/";
+  const API_ENDPOINT = joinUrl(BASE_URL, '/hello'); // adjust if your backend runs elsewhere
 
   function escapeHtml(str){
     if(!str) return '';
@@ -53,7 +53,16 @@
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message: text })
     });
-    if(!res.ok) throw new Error('Network response was not ok');
+    if(!res.ok) {
+      let detail = 'Network response was not ok';
+      try {
+        const errBody = await res.json();
+        if (errBody && errBody.detail) detail = errBody.detail;
+      } catch (parseError) {
+        // Keep the status error when the body is not JSON.
+      }
+      throw new Error(detail);
+    }
     let json =  await res.json();
     return json.response;
   }

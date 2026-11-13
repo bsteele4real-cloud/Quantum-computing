@@ -12,9 +12,9 @@ Select an API from this curated [list of free public APIs](https://github.com/pu
 **Popular options for beginners:**
 - **Entertainment**: [Dog CEO API](https://dog.ceo/dog-api/) for random dog pictures
 - **Weather**: [OpenWeatherMap](https://openweathermap.org/api) for current weather data
-- **Quotes**: [Quotable API](https://quotable.io/) for inspirational quotes
+- **Quotes**: [ZenQuotes](https://zenquotes.io/) for inspirational quotes
 - **News**: [NewsAPI](https://newsapi.org/) for current headlines
-- **Fun Facts**: [Numbers API](http://numbersapi.com/) for interesting number facts
+- **Fun Facts**: [Nummers API](https://nummers.eu/api) for interesting number facts
 
 ### Step 2: Plan Your Extension
 Before coding, answer these planning questions:
