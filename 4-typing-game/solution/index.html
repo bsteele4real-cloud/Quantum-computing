@@ -51,7 +51,7 @@
         </div>
 
         <p id="quote"></p>
-        <p id="message"></p>
+        <p id="message" role="status" aria-live="polite"></p>
         <div>
             <label for="typed-value" class="hidden-label">Current word</label>
             <input type="text" aria-label="current word" id="typed-value" placeholder="Type here..." />
@@ -73,7 +73,7 @@
             }
 
             updateDateTime();
-            setInterval(updateDateTime, 60000);
+            setInterval(updateDateTime, 1000);
         </script>
     </body>
 </html>
