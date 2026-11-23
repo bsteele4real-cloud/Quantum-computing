@@ -16,3 +16,10 @@ test('the typing page has a single body and loads the game scripts in order', ()
   assert.ok(dateAt > 0 && dateAt < bodyEnd);
   assert.ok(logicAt > 0 && logicAt < gameAt && gameAt < bodyEnd);
 });
+
+test('the typing page announces game messages and refreshes the clock every second', () => {
+  const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
+  assert.match(html, /id="message"[^>]*aria-live="polite"/);
+  assert.match(html, /setInterval\(updateDateTime,\s*1000\)/);
+  assert.doesNotMatch(html, /setInterval\(updateDateTime,\s*60000\)/);
+});

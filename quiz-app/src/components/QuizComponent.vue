@@ -64,12 +64,9 @@
   <script>
   import messages from "@/assets/translations";
   import { selectMessageFile } from "@/assets/translations/locale";
+  import { isCorrectAnswer } from "@/assets/translations/answers";
 
   let locale = navigator.language || navigator.userLanguage || "en";
-  console.log("locale", locale);
-  console.log("messages", messages);
-  
-  
   export default {
     name: "QuizComponent",
     data() {
@@ -97,7 +94,7 @@
       handleAnswerClick(isCorrect) {
         this.error = false;
         let nextQuestion = this.currentQuestion + 1;
-        if (isCorrect == "true") {
+        if (isCorrectAnswer(isCorrect)) {
           //always 3 questions per quiz
           if (nextQuestion < 3) {
             this.currentQuestion = nextQuestion;
