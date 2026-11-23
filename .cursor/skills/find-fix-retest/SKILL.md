@@ -83,3 +83,11 @@ lychee --config .lychee.toml --root-dir "$PWD" --no-progress './**/*.md' './**/*
 3. Load a local env file only when the dotenv library is installed. A missing library must not crash import when the variable is already in the process environment.
 4. CORS uses an explicit origin list from an environment variable, with a small default of local dev origins. If the list contains `*`, set credentials off. Never send a wildcard origin together with credentials. Turn credentials on only for an explicit list, and only when a separate flag asks for them.
 5. Test with the variable unset: import succeeds, the health route returns 200, the protected route returns 503 and names the variable, and credentials are off whenever `*` is in the origin list.
+
+## Sample-app pitfalls found in later rounds
+
+1. Re-run `npm audit fix` (never `--force`) even if an earlier pass left findings. A same-major nested bump can become available later. Here, `@typescript-eslint/*` 8.72.2 moved to 8.73.0 and cleared a `minimatch` advisory without changing `package.json` or bumping `eslint-config-next`. If a major toolchain bump is still the only path, skip it when install fails on peers or the audit count rises.
+2. Do not leave a personal Codespace host (`*.app.github.dev`) in a sample frontend. Default `BASE_URL` to the lesson's local API (`http://localhost:5000`) and test that the leftover host is gone.
+3. A dialog that uses both the `hidden` attribute and a `.show` class can stay invisible: some browsers style `[hidden]` with `display: none !important`, which beats `.show { display: flex }`. Clear `hidden` when opening and set it when closing. Bind dismiss handlers once, and wire every `[data-dismiss]` control, not only the first match (the backdrop is often first, so Cancel never gets a listener).
+4. Curriculum quiz files may store `isCorrect` as a boolean or as the strings `"true"` and `"false"`. `true == "true"` is false in JavaScript. Use a helper that accepts both, and add a unit test. After editing translation JSON, parse the file: unescaped quotes in a question string make the whole file invalid.
+5. Header buttons that exist in the markup (theme toggle, clear chat) must be wired in the solution, or students copy a dead control. Prefer a small helper the test runner can import.
