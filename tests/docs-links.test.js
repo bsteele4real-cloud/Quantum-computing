@@ -27,10 +27,43 @@ test('English lessons link to the current Konsole and Narrator docs', () => {
 test('the link checker skips translated copies and bot 403 responses', () => {
   const config = fs.readFileSync(path.join(root, '.lychee.toml'), 'utf8');
   const workflow = fs.readFileSync(path.join(root, '.github/workflows/links.yml'), 'utf8');
-  assert.match(config, /exclude_path = \["translations", "translated_images"\]/);
+  assert.match(config, /translations/);
+  assert.match(config, /translated_images/);
+  assert.match(config, /node_modules/);
   assert.match(config, /403/);
+  assert.match(config, /exclude_loopback = true/);
   assert.match(workflow, /lycheeverse\/lychee-action/);
   assert.match(workflow, /--config \.lychee\.toml/);
+  assert.match(workflow, /--root-dir/);
+});
+
+test('English pages replace the remaining 404s from the link reports', () => {
+  const readme = fs.readFileSync(path.join(root, 'README.md'), 'utf8');
+  assert.match(readme, /https:\/\/github\.com\/microsoft\/Web-Dev-For-Beginners\)/);
+  assert.doesNotMatch(readme, /Web-Dev-For-Beginners\/stargazers/);
+  assert.doesNotMatch(readme, /Web-Dev-For-Beginners\/watchers/);
+  assert.match(readme, /https:\/\/github\.com\/microsoft\/IoT-For-Beginners/);
+  assert.doesNotMatch(readme, /aka\.ms\/iot-beginners/);
+
+  const forms = fs.readFileSync(path.join(root, '7-bank-project/2-forms/README.md'), 'utf8');
+  assert.match(forms, /https:\/\/codepen\.io\//);
+  assert.doesNotMatch(forms, /https:\/\/codepen\.com/);
+
+  const chat = fs.readFileSync(path.join(root, '9-chat-project/README.md'), 'utf8');
+  assert.match(
+    chat,
+    /https:\/\/docs\.github\.com\/en\/github-models\/use-github-models\/prototyping-with-ai-models/
+  );
+  assert.doesNotMatch(chat, /gpt-4o-mini\/playground/);
+
+  const assignment = fs.readFileSync(
+    path.join(root, '5-browser-extension/2-forms-browsers-local-storage/assignment.md'),
+    'utf8'
+  );
+  assert.match(assignment, /https:\/\/nummers\.eu\/api/);
+  assert.match(assignment, /https:\/\/zenquotes\.io\//);
+  assert.doesNotMatch(assignment, /numbersapi\.com/);
+  assert.doesNotMatch(assignment, /quotable\.io/);
 });
 
 test('the carbon lesson no longer sorts the color scale in place', () => {

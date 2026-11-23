@@ -2,7 +2,8 @@
 # Refs #5, #6, #7.
 # Translated copies repeat every English link, and several hosts
 # answer this checker with 403 even when a browser can open the page.
-exclude_path = ["translations", "translated_images"]
+exclude_path = ["translations", "translated_images", "node_modules", ".next", "dist"]
+exclude_loopback = true
 
 accept = [200, 206, 403, 429]
 

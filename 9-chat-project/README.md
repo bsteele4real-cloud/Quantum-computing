@@ -24,7 +24,7 @@ flowchart LR
     D --> E[See AI responses]
 ```
 
-- **Minute 1**: Visit [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) and create a personal access token
+- **Minute 1**: Visit the [GitHub Models playground guide](https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models) and create a personal access token
 - **Minute 2**: Test AI interactions directly in the playground interface
 - **Minute 3**: Click "Code" tab and copy the Python snippet
 - **Minute 4**: Run the code locally with your token: `GITHUB_TOKEN=your_token python test.py`
@@ -130,7 +130,7 @@ graph LR
     B --> A
 ```
 
-We'll use GitHub Models for our backend integration, which provides access to professional-grade AI capabilities through a developer-friendly interface. The [GitHub Models Playground](https://github.com/marketplace/models/azure-openai/gpt-4o-mini/playground) serves as a testing environment where you can experiment with different AI models and understand their capabilities before implementing them in code.
+We'll use GitHub Models for our backend integration, which provides access to professional-grade AI capabilities through a developer-friendly interface. The [GitHub Models playground guide](https://docs.github.com/en/github-models/use-github-models/prototyping-with-ai-models) is the testing environment where you can experiment with different AI models and understand their capabilities before implementing them in code.
 
 ## 🧠 AI Application Development Ecosystem
 
@@ -699,6 +699,7 @@ Let's build our API step by step. Create a file called `api.py` with the followi
 
 ```python
 # api.py
+import os
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -716,11 +717,24 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# Configure CORS
+# Allow the local lesson pages. Set CORS_ORIGINS to a comma-separated list.
+# A "*" entry always leaves credentials off.
+_raw_origins = os.environ.get(
+    "CORS_ORIGINS",
+    "http://localhost:8000,http://127.0.0.1:8000",
+)
+allowed_origins = [origin.strip() for origin in _raw_origins.split(",") if origin.strip()]
+allow_credentials = (
+    "*" not in allowed_origins
+    and os.environ.get("CORS_ALLOW_CREDENTIALS", "").strip().lower() in {"1", "true", "yes", "on"}
+)
+if "*" in allowed_origins:
+    allowed_origins = ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Configure appropriately for production
-    allow_credentials=True,
+    allow_origins=allowed_origins,
+    allow_credentials=allow_credentials,
     allow_methods=["*"],
     allow_headers=["*"],
 )

@@ -362,7 +362,7 @@
       let hit = false;
       for (let j = bullets.length - 1; j >= 0; j--) {
         const b = bullets[j];
-        if (dist2(e.x, e.y, b.x, b.y) < (e.r + b.r) * (e.r + b.r)) {
+        if (circlesOverlap(e.x, e.y, e.r, b.x, b.y, b.r)) {
           bullets.splice(j, 1);
           hit = true;
           break;
@@ -377,7 +377,7 @@
       }
 
       // Player collision
-      if (dist2(e.x, e.y, player.x, player.y) < (e.r + player.r) * (e.r + player.r)) {
+      if (circlesOverlap(e.x, e.y, e.r, player.x, player.y, player.r)) {
         state.shield -= 25;
         explode(player.x, player.y, 16, 'player');
         sfxExplosion?.cloneNode(true)?.play?.().catch(()=>{});
@@ -585,12 +585,7 @@
     state.running = false;
     // Persist score
     try {
-      const key = 'spaceGameScores';
-      const list = JSON.parse(localStorage.getItem(key) || '[]');
-      list.push({ initials: 'YOU', score: state.score, t: Date.now() });
-      list.sort((a, b) => b.score - a.score);
-      localStorage.setItem(key, JSON.stringify(list.slice(0, 10)));
-      renderScores(list.slice(0, 10));
+      renderScores(writeScoreList(localStorage, state.score));
     } catch {
       // ignore
     }
@@ -604,7 +599,7 @@
     ol.innerHTML = '';
     list.forEach(item => {
       const li = document.createElement('li');
-      const pretty = item.score.toLocaleString();
+      const pretty = Number(item.score).toLocaleString();
       li.dataset.initials = item.initials || 'YOU';
       li.dataset.score = String(item.score);
       li.textContent = `${li.dataset.initials} — ${pretty}`;
@@ -633,9 +628,7 @@
 
   // Initial scores render
   try {
-    const key = 'spaceGameScores';
-    const list = JSON.parse(localStorage.getItem(key) || '[]');
-    renderScores(list.slice(0, 10));
+    renderScores(readScoreList(localStorage));
   } catch {
     // ignore
   }

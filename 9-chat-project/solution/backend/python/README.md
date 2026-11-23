@@ -12,8 +12,12 @@ source ./venv/bin/activate
 ## Install dependencies
 
 ```sh
-pip install openai fastapi uvicorn python-dotenv
+pip install openai fastapi uvicorn python-dotenv httpx
 ```
+
+`httpx` is only needed to run `python -m unittest test_api.py`.
+
+The server starts without `GITHUB_TOKEN`. `/health` stays available. `/hello` responds with HTTP 503 and names the missing variable. Put allowed browser origins in `CORS_ORIGINS` (comma-separated). The default list is the local lesson pages on ports 8000, 3000, and 5500. A `*` origin leaves credentials off. Set `CORS_ALLOW_CREDENTIALS=true` only with an explicit origin list.
 
 ## Run API
 
