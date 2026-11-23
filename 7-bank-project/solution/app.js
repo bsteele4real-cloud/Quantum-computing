@@ -117,10 +117,12 @@ async function createAccount(accountJson) {
       if (findAccount(user)) return resolve({ error: 'User already exists' });
 
       const currency = String(data.currency || 'INR').trim();
+      const parsedBalance = parseBalance(data.balance);
+      if (!parsedBalance.ok) return resolve({ error: parsedBalance.error });
       const newAcc = {
         user,
         description: String(data.description || ''),
-        balance: Number(data.balance || 0) || 0,
+        balance: parsedBalance.value,
         currency: isIsoCurrency(currency) ? currency.toUpperCase() : currency,
         transactions: []
       };
@@ -274,7 +276,9 @@ async function register() {
   data.user = String(data.user || '').trim();
   data.currency = String(data.currency || '').trim();
   data.description = String(data.description || '').trim();
-  data.balance = Number(data.balance || 0) || 0;
+  const parsedBalance = parseBalance(data.balance);
+  if (!parsedBalance.ok) return updateElement('registerError', parsedBalance.error);
+  data.balance = parsedBalance.value;
 
   const jsonData = JSON.stringify(data);
   const result = await createAccount(jsonData);
@@ -358,7 +362,7 @@ function updateDashboard() {
 function addTransaction() {
   const dialog = qs('transactionDialog');
   if (!dialog) return;
-  dialog.classList.add('show');
+  setDialogOpen(dialog, true);
 
   // Reset form and set today
   const form = qs('transactionForm');
@@ -367,17 +371,6 @@ function addTransaction() {
     form.date.valueAsDate = new Date();
     // Move focus to first field
     form.date.focus();
-  }
-
-  // Close handlers
-  const backdrop = dialog.querySelector('[data-dismiss]') || dialog;
-  backdrop.addEventListener('click', onDialogDismissClick);
-  dialog.addEventListener('keydown', onDialogKeydown);
-}
-
-function onDialogDismissClick(e) {
-  if (e.target?.hasAttribute?.('data-dismiss')) {
-    cancelTransaction();
   }
 }
 
@@ -440,8 +433,7 @@ function clearFormError(id) {
 function cancelTransaction() {
   const dialog = qs('transactionDialog');
   if (!dialog) return;
-  dialog.classList.remove('show');
-  dialog.removeEventListener('keydown', onDialogKeydown);
+  setDialogOpen(dialog, false);
   const opener = document.querySelector('button[onclick="addTransaction()"]');
   if (opener) opener.focus();
 }
@@ -472,11 +464,22 @@ function attachGlobalHandlers() {
     txForm.__wired = true;
     txForm.addEventListener('submit', (e) => { e.preventDefault(); confirmTransaction(); });
   }
-  const cancelBtn = document.querySelector('#transactionDialog [data-dismiss]');
-  if (cancelBtn && !cancelBtn.__wired) {
-    cancelBtn.__wired = true;
-    cancelBtn.addEventListener('click', cancelTransaction);
+  document.querySelectorAll('#transactionDialog [data-dismiss]').forEach((el) => {
+    if (el.__wired) return;
+    el.__wired = true;
+    el.addEventListener('click', cancelTransaction);
+  });
+  const txDialog = qs('transactionDialog');
+  if (txDialog && !txDialog.__keydownWired) {
+    txDialog.__keydownWired = true;
+    txDialog.addEventListener('keydown', onDialogKeydown);
   }
+  const themeBtn = qs('themeToggle');
+  if (themeBtn && !themeBtn.__wired) {
+    themeBtn.__wired = true;
+    themeBtn.addEventListener('click', () => toggleTheme(document, localStorage));
+  }
+  if (themeBtn) applyTheme(preferredTheme(localStorage), document, localStorage);
 }
 
 // ---------------------------------------------------------------------------
@@ -484,6 +487,8 @@ function attachGlobalHandlers() {
 // ---------------------------------------------------------------------------
 
 function init() {
+  applyTheme(preferredTheme(localStorage), document, localStorage);
+
   // Schema migration
   migrateSchema();
 
