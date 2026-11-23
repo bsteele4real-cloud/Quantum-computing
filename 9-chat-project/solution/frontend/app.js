@@ -6,7 +6,7 @@
   const form = document.getElementById('composer');
   const input = document.getElementById('input');
   const sendBtn = document.getElementById('send');
-  const BASE_URL = "https://automatic-space-funicular-954qxp96rgcqjq-5000.app.github.dev/";
+  const BASE_URL = "http://localhost:5000";
   const API_ENDPOINT = joinUrl(BASE_URL, '/hello'); // adjust if your backend runs elsewhere
 
   function escapeHtml(str){
@@ -100,4 +100,35 @@
 
   // Small welcome message
   appendMessage('ai', 'Hello! I\'m your AI assistant. Ask me anything.');
+
+  const appEl = document.getElementById('app');
+  const themeToggle = document.getElementById('themeToggle');
+  const clearChat = document.getElementById('clearChat');
+
+  function applyTheme(theme) {
+    const next = theme === 'light' ? 'light' : 'dark';
+    if (appEl) appEl.setAttribute('data-theme', next);
+    document.body.setAttribute('data-theme', next);
+    if (themeToggle) {
+      themeToggle.setAttribute('aria-pressed', next === 'light' ? 'true' : 'false');
+      themeToggle.setAttribute('aria-label', next === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+    }
+  }
+
+  if (themeToggle) {
+    themeToggle.addEventListener('click', () => {
+      const current = appEl && appEl.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+      applyTheme(current === 'light' ? 'dark' : 'light');
+    });
+    applyTheme(appEl && appEl.getAttribute('data-theme'));
+  }
+
+  if (clearChat) {
+    clearChat.addEventListener('click', () => {
+      if (!messagesEl) return;
+      messagesEl.replaceChildren();
+      appendMessage('ai', 'Chat cleared. Ask me anything.');
+    });
+  }
+
 })();

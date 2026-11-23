@@ -99,43 +99,64 @@ const MemoryGame = () => {
       <div className="mb-4">
         <label htmlFor="gridSize">Grid Size: (max 10)</label>
         <input
+          id="gridSize"
           type="number"
           className="w-[50px] ml-3 rounded border-2 px-1.5 py-1"
           min="2"
           max="10"
+          step="2"
           value={gridSize}
           onChange={handleGridSize}
+          aria-invalid={Boolean(error)}
+          aria-describedby={error ? "gridSizeError" : undefined}
         />
         {error && (
-          <div className="text-sm text-red-500 mt-2">{error}</div>
+          <div id="gridSizeError" className="text-sm text-red-500 mt-2" role="alert">
+            {error}
+          </div>
         )}
       </div>
       {/* Cards */}
       <div
         className="grid gap-2 mb-4"
+        role="group"
+        aria-label="Memory cards"
         style={{
           gridTemplateColumns: `repeat(${gridSize}, minmax(0,1fr))`,
           width: `min(100%,${gridSize * 5.5}rem)`,
         }}
       >
-        {array.map((card) => (
-          <div
-            key={card.id}
-            onClick={() => handleClick(card.id)}
-            className={`aspect-square flex items-center justify-center text-xl transition-all duration-300 font-bold rounded-lg cursor-pointer ${
-              isFlipped(card.id)
-                ? isSelectedPairs(card.id)
-                  ? "bg-green-500 text-white"
-                  : "bg-blue-500 text-white"
-                : "bg-gray-300 text-gray-400"
-            }`}
-          >
-            {isFlipped(card.id) ? card.number : "?"}
-          </div>
-        ))}
+        {array.map((card) => {
+          const flippedCard = isFlipped(card.id);
+          const matchedCard = isSelectedPairs(card.id);
+          const label = matchedCard
+            ? `Card ${card.id + 1}, matched ${card.number}`
+            : flippedCard
+              ? `Card ${card.id + 1}, ${card.number}`
+              : `Card ${card.id + 1}, hidden`;
+          return (
+            <button
+              key={card.id}
+              type="button"
+              onClick={() => handleClick(card.id)}
+              disabled={disabled || matchedCard}
+              aria-label={label}
+              aria-pressed={flippedCard}
+              className={`aspect-square flex items-center justify-center text-xl transition-all duration-300 font-bold rounded-lg border-0 p-0 cursor-pointer disabled:cursor-not-allowed ${
+                flippedCard
+                  ? matchedCard
+                    ? "bg-green-500 text-white"
+                    : "bg-blue-500 text-white"
+                  : "bg-gray-300 text-gray-400"
+              }`}
+            >
+              {flippedCard ? card.number : "?"}
+            </button>
+          );
+        })}
       </div>
       {/* Result */}
-      <div className="text-2xl text-green-500 font-bold">
+      <div className="text-2xl text-green-500 font-bold" role="status" aria-live="polite">
         {won ? "You Won!" : ""}
       </div>
 
